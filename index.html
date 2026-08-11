@@ -1,42 +1,472 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Brian Mejia-Lopez | Portfolio</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
-</head>
-<body>
+/* ============================================
+   TOKENS
+   ============================================ */
+:root {
+  --paper: #F3EFE6;
+  --paper-dim: #EAE4D6;
+  --ink: #1B2430;
+  --navy: #142036;
+  --navy-deep: #0D1626;
+  --brass: #AD8A4E;
+  --brass-light: #C9A968;
+  --teal: #3A6B63;
+  --line: rgba(27, 36, 48, 0.16);
+  --line-on-navy: rgba(243, 239, 230, 0.18);
 
-<header class="site-header">
-  <div class="wrap header-inner">
-    <span class="mark">BM</span>
-    <nav class="nav">
-      <a href="#bridge">The Bridge</a>
-      <a href="#resume">Resume</a>
-      <a href="#work">Work</a>
-      <a href="#market">Market View</a>
-      <a href="#contact">Contact</a>
-    </nav>
-  </div>
-</header>
+  --display: "Fraunces", Georgia, serif;
+  --body: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+  --mono: "IBM Plex Mono", "Courier New", monospace;
 
-<main>
+  --wrap: 1080px;
+}
 
-  <!-- HERO -->
-  <section class="hero wrap">
-    <p class="eyebrow">Hybrid Track — Business &amp; Finance</p>
-    <h1>Brian Mejia-Lopez</h1>
-    <p class="hero-sub">
-      I bridge [your previous field/role] with a target in business &amp; finance —
-      carrying forward [core transferable strength] while building toward
-      [specific finance goal, e.g. corporate development / investment analysis].
-    </p>
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
 
-    <div class="video-frame">
-      <div class="video-frame-inner">
-        <!-- Replace src below with your uploaded video/link (YouTube, Loom, Vimeo, etc.) -->
-        <iframe
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 16px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+.wrap {
+  max-width: var(--wrap);
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+a { color: inherit; }
+a:focus-visible, button:focus-visible {
+  outline: 2px solid var(--brass);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { animation: none !important; transition: none !important; }
+}
+
+/* ============================================
+   HEADER / NAV
+   ============================================ */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--navy-deep);
+  border-bottom: 1px solid var(--line-on-navy);
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+
+.mark {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 1.25rem;
+  color: var(--paper);
+  letter-spacing: 0.02em;
+}
+
+.nav {
+  display: flex;
+  gap: 28px;
+}
+
+.nav a {
+  color: var(--paper);
+  text-decoration: none;
+  font-size: 0.88rem;
+  letter-spacing: 0.02em;
+  opacity: 0.75;
+  transition: opacity 0.15s ease;
+}
+
+.nav a:hover { opacity: 1; color: var(--brass-light); }
+
+@media (max-width: 640px) {
+  .nav { gap: 14px; flex-wrap: wrap; justify-content: flex-end; }
+  .nav a { font-size: 0.78rem; }
+}
+
+/* ============================================
+   SHARED SECTION STYLING
+   ============================================ */
+section {
+  padding: 88px 0;
+  scroll-margin-top: 80px;
+}
+
+.eyebrow {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--brass);
+  margin: 0 0 14px;
+}
+
+h2 {
+  font-family: var(--display);
+  font-size: clamp(1.8rem, 3.2vw, 2.6rem);
+  font-weight: 500;
+  margin: 0 0 18px;
+}
+
+.section-lede {
+  max-width: 640px;
+  color: rgba(27, 36, 48, 0.75);
+  font-size: 1.05rem;
+  margin: 0 0 48px;
+}
+
+/* ============================================
+   HERO
+   ============================================ */
+.hero {
+  background: var(--navy);
+  background-image: radial-gradient(ellipse at top right, rgba(173,138,78,0.14), transparent 55%);
+  color: var(--paper);
+  padding-top: 100px;
+  padding-bottom: 100px;
+  max-width: 100%;
+}
+
+.hero .eyebrow { color: var(--brass-light); }
+
+.hero h1 {
+  font-family: var(--display);
+  font-size: clamp(2.6rem, 6vw, 4.6rem);
+  font-weight: 600;
+  line-height: 1.02;
+  margin: 0 0 24px;
+  letter-spacing: -0.01em;
+}
+
+.hero-sub {
+  max-width: 620px;
+  font-size: 1.15rem;
+  color: rgba(243, 239, 230, 0.82);
+  margin: 0 0 56px;
+}
+
+.video-frame { max-width: 720px; }
+
+.video-frame-inner {
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%;
+  background: var(--navy-deep);
+  border: 1px solid var(--line-on-navy);
+  overflow: hidden;
+}
+
+.video-frame-inner iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.video-caption {
+  font-family: var(--mono);
+  font-size: 0.82rem;
+  color: rgba(243, 239, 230, 0.55);
+  margin: 14px 0 0;
+}
+
+/* ============================================
+   THE BRIDGE — signature section
+   ============================================ */
+.bridge { background: var(--paper); }
+
+.bridge-grid {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 40px;
+  align-items: start;
+}
+
+.ledger h3 {
+  font-family: var(--display);
+  font-size: 1.3rem;
+  font-weight: 500;
+  margin: 0 0 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--line);
+}
+
+.ledger-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.ledger-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  padding: 14px 0;
+  border-bottom: 1px dashed var(--line);
+}
+
+.ledger-list li:last-child { border-bottom: none; }
+
+.lline {
+  font-weight: 500;
+  font-size: 0.98rem;
+}
+
+.ldetail {
+  font-family: var(--mono);
+  font-size: 0.82rem;
+  color: rgba(27, 36, 48, 0.6);
+  text-align: right;
+  flex-shrink: 0;
+  max-width: 46%;
+}
+
+/* the bridge span connecting the two ledgers */
+.bridge-span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 44px;
+}
+
+.bridge-deck {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  padding-left: 22px;
+  border-left: 2px dashed var(--teal);
+}
+
+.bridge-deck::before {
+  content: "";
+  position: absolute;
+  left: -6px;
+  top: -18px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--teal);
+}
+
+.bridge-deck::after {
+  content: "";
+  position: absolute;
+  left: -6px;
+  bottom: -18px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--teal);
+}
+
+.deck-item {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.02em;
+  color: var(--teal);
+  background: rgba(58, 107, 99, 0.08);
+  border: 1px solid rgba(58, 107, 99, 0.3);
+  padding: 8px 14px;
+  border-radius: 3px;
+  white-space: nowrap;
+}
+
+@media (max-width: 800px) {
+  .bridge-grid {
+    grid-template-columns: 1fr;
+  }
+  .bridge-span {
+    padding: 12px 0 12px 0;
+    justify-content: flex-start;
+  }
+  .bridge-deck {
+    flex-direction: row;
+    flex-wrap: wrap;
+    border-left: none;
+    border-top: 2px dashed var(--teal);
+    padding-left: 0;
+    padding-top: 22px;
+  }
+  .bridge-deck::before { left: -18px; top: -6px; }
+  .bridge-deck::after { left: auto; right: -6px; top: -6px; bottom: auto; }
+  .deck-item { white-space: normal; }
+}
+
+/* ============================================
+   RESUME
+   ============================================ */
+.resume { background: var(--paper-dim); }
+
+.resume-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  padding: 28px 32px;
+  margin-bottom: 28px;
+}
+
+.btn {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  letter-spacing: 0.03em;
+  text-decoration: none;
+  color: var(--paper);
+  background: var(--navy);
+  padding: 12px 22px;
+  border: 1px solid var(--navy);
+  transition: background 0.15s ease, color 0.15s ease;
+  flex-shrink: 0;
+}
+
+.btn:hover { background: var(--brass); border-color: var(--brass); }
+
+.resume-preview {
+  border: 1px solid var(--line);
+  background: var(--paper);
+}
+
+/* ============================================
+   WORK EVIDENCE
+   ============================================ */
+.work { background: var(--paper); }
+
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+
+@media (max-width: 860px) {
+  .project-grid { grid-template-columns: 1fr; }
+}
+
+.project-card {
+  border: 1px solid var(--line);
+  padding: 28px 26px;
+  background: var(--paper-dim);
+}
+
+.project-num {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  color: var(--brass);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin: 0 0 10px;
+}
+
+.project-card h3 {
+  font-family: var(--display);
+  font-size: 1.25rem;
+  font-weight: 500;
+  margin: 0 0 16px;
+}
+
+.project-field {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(27, 36, 48, 0.5);
+  margin: 14px 0 4px;
+}
+
+.project-card p:not(.project-field):not(.project-num) {
+  margin: 0 0 4px;
+  font-size: 0.94rem;
+}
+
+/* ============================================
+   MARKET VIEW
+   ============================================ */
+.market { background: var(--navy); color: var(--paper); }
+.market .eyebrow { color: var(--brass-light); }
+.market h2 { color: var(--paper); }
+.market .section-lede { color: rgba(243, 239, 230, 0.7); }
+
+.ticker-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--line-on-navy);
+  border: 1px solid var(--line-on-navy);
+}
+
+@media (max-width: 860px) {
+  .ticker-row { grid-template-columns: 1fr; }
+}
+
+.ticker-item {
+  background: var(--navy);
+  padding: 26px 24px;
+}
+
+.ticker-label {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin: 0 0 12px;
+}
+
+.ticker-text {
+  font-family: var(--display);
+  font-size: 1.1rem;
+  margin: 0 0 10px;
+}
+
+.ticker-note {
+  font-size: 0.9rem;
+  color: rgba(243, 239, 230, 0.65);
+  margin: 0;
+}
+
+/* ============================================
+   CONTACT / FOOTER
+   ============================================ */
+.contact { background: var(--paper-dim); }
+
+.contact .section-lede {
+  font-size: 1.1rem;
+  margin-bottom: 0;
+}
+
+.contact a {
+  text-decoration: none;
+  border-bottom: 1px solid var(--brass);
+}
+
+.site-footer {
+  padding: 32px;
+  text-align: center;
+}
+
+.site-footer p {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  color: rgba(27, 36, 48, 0.5);
+  margin: 0;
+}
