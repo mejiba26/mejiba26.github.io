@@ -17,7 +17,7 @@
   --body: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, sans-serif;
   --mono: "IBM Plex Mono", "Courier New", monospace;
 
-  --wrap: 1120px;
+  --wrap: 1440px;
 }
 
 * { box-sizing: border-box; }
