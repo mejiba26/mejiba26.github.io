@@ -106,12 +106,26 @@ a:focus-visible, button:focus-visible {
    SHARED SECTION STYLING
    ============================================ */
 section {
-  padding: 170px 0;
+  padding: 200px 0;
   scroll-margin-top: 90px;
+  position: relative;
+}
+
+/* subtle divider line between sections */
+section + section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 1px;
+  background: var(--brass);
+  opacity: 0.35;
 }
 
 @media (max-width: 640px) {
-  section { padding: 100px 0; }
+  section { padding: 120px 0; }
 }
 
 .eyebrow {
