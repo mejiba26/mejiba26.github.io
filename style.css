@@ -173,10 +173,15 @@ h2 {
    ============================================ */
 .hero {
   background: var(--navy);
-  background-image: radial-gradient(ellipse at top right, rgba(173,138,78,0.14), transparent 55%);
+  background-image:
+    radial-gradient(ellipse at top right, rgba(173,138,78,0.14), transparent 55%),
+    url("hero-chart.svg");
+  background-repeat: no-repeat, no-repeat;
+  background-position: top right, bottom right;
+  background-size: auto, 55% auto;
   color: var(--paper);
-  padding-top: 140px;
-  padding-bottom: 130px;
+  padding-top: 100px;
+  padding-bottom: 100px;
   max-width: 100%;
 }
 
@@ -231,30 +236,56 @@ h2 {
 }
 
 .hero-top {
-  display: grid;
-  grid-template-columns: 1.7fr 1fr;
-  gap: 56px;
-  align-items: start;
+  position: relative;
+  min-height: 640px;
+  display: flex;
+  align-items: flex-end;
+  padding: 48px 0;
   margin-bottom: 64px;
-}
-
-.hero-photo {
-  max-width: 260px;
-  margin-left: auto;
-}
-
-.hero-photo img {
-  width: 100%;
-  aspect-ratio: 4 / 5;
-  object-fit: cover;
-  object-position: center 15%;
-  border: 1px solid var(--line-on-navy);
+  overflow: hidden;
   border-radius: 4px;
+}
+
+.hero-photo-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.hero-photo-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
   display: block;
 }
 
+.hero-photo-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg,
+    var(--navy) 0%,
+    var(--navy) 30%,
+    rgba(20, 32, 54, 0.7) 46%,
+    rgba(20, 32, 54, 0.2) 68%,
+    transparent 88%);
+}
+
+.hero-text {
+  position: relative;
+  z-index: 1;
+  max-width: 620px;
+}
+
 .hero-photo-panel {
-  margin-top: 20px;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  width: 280px;
+  margin: 28px;
+  background: rgba(13, 22, 38, 0.85);
   border: 1px solid var(--line-on-navy);
   border-radius: 4px;
   padding: 20px;
@@ -300,12 +331,31 @@ h2 {
   margin: 0;
 }
 
-@media (max-width: 800px) {
+@media (max-width: 900px) {
   .hero-top {
-    grid-template-columns: 1fr;
-    gap: 32px;
+    flex-direction: column;
+    align-items: stretch;
+    min-height: 0;
+    padding: 0;
   }
-  .hero-photo { order: -1; max-width: 220px; margin: 0 auto; }
+  .hero-photo-bg {
+    position: relative;
+    height: 320px;
+    order: -1;
+    margin-bottom: 28px;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .hero-photo-bg::after {
+    background: linear-gradient(180deg, transparent 40%, var(--navy) 100%);
+  }
+  .hero-text { max-width: 100%; }
+  .hero-photo-panel {
+    position: relative;
+    right: auto; bottom: auto;
+    width: 100%;
+    margin: 20px 0 0;
+  }
 }
 
 .hero-cta {
