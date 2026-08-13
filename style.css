@@ -232,30 +232,107 @@ h2 {
 
 .hero-top {
   display: grid;
-  grid-template-columns: 1.3fr 1fr;
+  grid-template-columns: 1.7fr 1fr;
   gap: 56px;
-  align-items: center;
+  align-items: start;
   margin-bottom: 64px;
+}
+
+.hero-photo {
+  max-width: 260px;
+  margin-left: auto;
 }
 
 .hero-photo img {
   width: 100%;
   aspect-ratio: 4 / 5;
   object-fit: cover;
+  object-position: center 15%;
   border: 1px solid var(--line-on-navy);
   border-radius: 4px;
   display: block;
 }
 
-.hero-text .stat-strip { margin: 0; }
+.hero-photo-panel {
+  margin-top: 20px;
+  border: 1px solid var(--line-on-navy);
+  border-radius: 4px;
+  padding: 20px;
+}
+
+.panel-label {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--brass-light);
+  margin: 0 0 12px;
+}
+
+.panel-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--line-on-navy);
+  margin-bottom: 16px;
+}
+
+.panel-num {
+  font-family: var(--display);
+  font-size: 1.6rem;
+  color: var(--brass-light);
+  margin: 0 0 6px;
+  line-height: 1;
+}
+
+.panel-desc {
+  font-size: 0.74rem;
+  line-height: 1.4;
+  color: rgba(243, 239, 230, 0.7);
+  margin: 0;
+}
+
+.panel-approach-text {
+  font-size: 0.82rem;
+  line-height: 1.5;
+  color: rgba(243, 239, 230, 0.85);
+  margin: 0;
+}
 
 @media (max-width: 800px) {
   .hero-top {
     grid-template-columns: 1fr;
     gap: 32px;
   }
-  .hero-photo { order: -1; max-width: 280px; }
+  .hero-photo { order: -1; max-width: 220px; margin: 0 auto; }
 }
+
+.hero-cta {
+  display: flex;
+  gap: 14px;
+  margin: 0 0 40px;
+  flex-wrap: wrap;
+}
+
+.btn-brass {
+  background: var(--brass);
+  border-color: var(--brass);
+  color: var(--navy-deep);
+  font-weight: 500;
+}
+
+.btn-brass:hover { background: var(--brass-light); border-color: var(--brass-light); }
+
+.btn-outline {
+  background: transparent;
+  border: 1px solid var(--line-on-navy);
+  color: var(--paper);
+}
+
+.btn-outline:hover { border-color: var(--brass-light); color: var(--brass-light); }
+
+.hero-text .stat-strip { margin: 0; }
 
 .stat-strip {
   display: flex;
