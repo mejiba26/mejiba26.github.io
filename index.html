@@ -51,13 +51,28 @@
 
   <!-- HERO -->
   <section class="hero wrap">
-    <p class="eyebrow">Hybrid Track — Business &amp; Finance</p>
-    <h1>Brian Mejia-Lopez</h1>
-    <p class="hero-sub">
-      Five years of evaluating companies from both sides — what they're worth, and
-      how they trade — meets a year of licensed, client-facing experience. Together
-      they point toward a career as a markets analyst.
-    </p>
+    <div class="hero-top">
+
+      <div class="hero-text">
+        <p class="eyebrow">Hybrid Track — Business &amp; Finance</p>
+        <h1>Brian Mejia-Lopez</h1>
+        <p class="hero-sub">
+          Five years of evaluating companies from both sides — what they're worth, and
+          how they trade — meets a year of licensed, client-facing experience. Together
+          they point toward a career as a markets analyst.
+        </p>
+        <ul class="stat-strip">
+          <li>Trading my own book since 2020</li>
+          <li>MSBA candidate, Wake Forest — May 2027</li>
+          <li>Models built to be questioned</li>
+        </ul>
+      </div>
+
+      <div class="hero-photo">
+        <img src="headshot.jpg" alt="Brian Mejia-Lopez">
+      </div>
+
+    </div>
 
     <div class="video-frame">
       <div class="video-frame-inner">
@@ -83,7 +98,7 @@
       point toward one thing: analyzing markets for a living.
     </p>
 
-    <div class="bridge-grid">
+    <div class="bridge-grid reveal">
 
       <div class="ledger ledger-past">
         <h3>Where I've Been</h3>
@@ -120,7 +135,7 @@
     <h2>Resume</h2>
     <p class="section-lede">Updated August 2026. Full detail on request — the short version lives below.</p>
 
-    <div class="resume-card">
+    <div class="resume-card reveal">
       <div class="resume-card-text">
         <p><strong>Brian Mejia-Lopez</strong></p>
         <p>Finance and Economics graduate pursuing an MSBA at Wake Forest University, building a career as a markets analyst.</p>
@@ -128,7 +143,7 @@
       <a class="btn" href="resume.pdf" download>Download PDF</a>
     </div>
 
-    <div class="resume-preview">
+    <div class="resume-preview reveal">
       <iframe src="resume.pdf" title="Brian Mejia-Lopez Resume" width="100%" height="600px" style="border:0;"></iframe>
     </div>
   </section>
@@ -141,7 +156,7 @@
 
     <div class="project-grid">
 
-      <article class="project-card">
+      <article class="project-card reveal">
         <p class="project-num">Item 01</p>
         <h3>RTX Corporation Equity Valuation</h3>
         <p class="project-field">Context</p>
@@ -152,7 +167,7 @@
         <p>Produced a complete investment thesis with a defensible price target, applying the same framework used in professional equity research.</p>
       </article>
 
-      <article class="project-card">
+      <article class="project-card reveal">
         <p class="project-num">Item 02</p>
         <h3>Housing Price Regression Model</h3>
         <p class="project-field">Context</p>
@@ -163,7 +178,7 @@
         <p>Final model explains 68% of price variation (R² = 0.680); bathrooms and hot water heating emerged as the two strongest price drivers, adding roughly $1.02M and $862K respectively.</p>
       </article>
 
-      <article class="project-card">
+      <article class="project-card reveal">
         <p class="project-num">Item 03</p>
         <h3>Independent Futures Trading</h3>
         <p class="project-field">Context</p>
@@ -183,22 +198,39 @@
     <h2>Market View</h2>
     <p class="section-lede">Three things I'm tracking right now, and why they matter to the roles I want.</p>
 
-    <div class="ticker-row">
+    <div class="ticker-row reveal">
       <div class="ticker-item">
         <p class="ticker-label">Trend</p>
         <p class="ticker-text">Fed rate policy &amp; equity valuations</p>
-        <p class="ticker-note">Rate expectations move straight into every DCF I build — a shift in the discount rate changes what a company is actually worth, before the stock even moves.</p>
+        <p class="ticker-note">The Fed has held its target range at 3.50–3.75% through 2026, with futures markets pricing the effective rate near 4% by year-end. Rate expectations move straight into every DCF I build — a shift in the discount rate changes what a company is actually worth, before the stock even moves.</p>
       </div>
       <div class="ticker-item">
         <p class="ticker-label">Trend</p>
         <p class="ticker-text">Earnings season: valuation checkpoint &amp; trading catalyst</p>
-        <p class="ticker-note">Earnings updates my fundamental view of a company and creates the volatility I look to trade — research and trading meet at the same moment.</p>
+        <p class="ticker-note">The BLS projects 6% growth in financial analyst roles through 2034 — demand tracks how often companies need their numbers re-examined. On the trading side, earnings prints are some of the highest-volatility moments I watch in NQ and ES. Research and trading meet at the same moment: the numbers update my fundamental view, and the reaction is what I'm positioned for.</p>
       </div>
       <div class="ticker-item">
         <p class="ticker-label">Trend</p>
         <p class="ticker-text">Sector rotation</p>
-        <p class="ticker-note">Money moving between tech, energy, and financials on rate and macro conditions reshapes both which companies look attractive to own and which ones are moving enough to trade.</p>
+        <p class="ticker-note">Energy and financials have led the S&amp;P 500 through mid-2026 while tech cooled on AI-valuation concerns — a real-time example of capital moving on rate and macro conditions. That rotation reshapes both which companies look attractive to own and which ones are moving enough to trade.</p>
       </div>
+    </div>
+
+    <div class="tradingview-widget-container" style="margin-top: 40px;">
+      <div class="tradingview-widget-container__widget"></div>
+      <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
+      {
+      "symbols": [
+        { "proName": "CME_MINI:NQ1!", "title": "Nasdaq 100 Futures" },
+        { "proName": "CME_MINI:ES1!", "title": "S&P 500 Futures" }
+      ],
+      "showSymbolLogo": true,
+      "colorTheme": "dark",
+      "isTransparent": true,
+      "displayMode": "adaptive",
+      "locale": "en"
+      }
+      </script>
     </div>
   </section>
 
@@ -220,6 +252,19 @@
 <footer class="site-footer wrap">
   <p>&copy; 2026 Brian Mejia-Lopez</p>
 </footer>
+
+<script>
+  const revealEls = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  revealEls.forEach(el => observer.observe(el));
+</script>
 
 </body>
 </html>
