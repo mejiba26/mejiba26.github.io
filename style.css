@@ -121,7 +121,7 @@ a:focus-visible, button:focus-visible {
    SHARED SECTION STYLING
    ============================================ */
 section {
-  padding: 140px 0;
+  padding: 110px 0;
   scroll-margin-top: 90px;
   position: relative;
 }
@@ -140,7 +140,7 @@ section + section::before {
 }
 
 @media (max-width: 640px) {
-  section { padding: 80px 0; }
+  section { padding: 72px 0; }
 }
 
 .eyebrow {
@@ -252,6 +252,20 @@ h2 {
   margin-left: auto;
   position: relative;
   z-index: 1;
+}
+
+/* Fix 1: soft navy halo so the candlestick chart fades out
+   before it reaches the photo, instead of colliding with it */
+.hero-side::before {
+  content: "";
+  position: absolute;
+  top: -40px;
+  left: -40px;
+  right: -40px;
+  bottom: -40px;
+  background: radial-gradient(ellipse at center, var(--navy) 45%, transparent 75%);
+  z-index: -1;
+  pointer-events: none;
 }
 
 .hero-photo img {
@@ -429,12 +443,24 @@ h2 {
   color: rgba(27, 36, 48, 0.6);
 }
 
-/* the bridge span connecting the two ledgers */
+/* Fix 4: the bridge span connecting the two ledgers now has a
+   labeled connector instead of unexplained dots + dashed line */
 .bridge-span {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding-top: 52px;
+  padding-top: 40px;
+}
+
+.bridge-connector-label {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin: 0 0 16px;
+  text-align: center;
 }
 
 .bridge-deck {
@@ -444,28 +470,6 @@ h2 {
   gap: 32px;
   padding-left: 28px;
   border-left: 2px dashed var(--teal);
-}
-
-.bridge-deck::before {
-  content: "";
-  position: absolute;
-  left: -6px;
-  top: -22px;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: var(--teal);
-}
-
-.bridge-deck::after {
-  content: "";
-  position: absolute;
-  left: -6px;
-  bottom: -22px;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: var(--teal);
 }
 
 .deck-item {
@@ -486,7 +490,7 @@ h2 {
   }
   .bridge-span {
     padding: 20px 0;
-    justify-content: flex-start;
+    align-items: flex-start;
   }
   .bridge-deck {
     flex-direction: row;
@@ -497,8 +501,6 @@ h2 {
     padding-top: 28px;
     gap: 14px;
   }
-  .bridge-deck::before { left: -18px; top: -6px; }
-  .bridge-deck::after { left: auto; right: -6px; top: -6px; bottom: auto; }
   .deck-item { white-space: normal; }
 }
 
@@ -659,16 +661,45 @@ h2 {
 /* ============================================
    CONTACT / FOOTER
    ============================================ */
-.contact { background: var(--paper-dim); }
+.contact {
+  background: var(--paper-dim);
+  padding-top: 90px;
+  padding-bottom: 90px;
+}
 
 .contact .section-lede {
   font-size: 1.15rem;
   margin-bottom: 0;
 }
 
-.contact a {
+/* Fix 3: stronger closing CTA — buttons instead of plain text links */
+.contact-links {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: 32px;
+}
+
+.contact-links a {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  letter-spacing: 0.03em;
   text-decoration: none;
-  border-bottom: 1px solid var(--brass);
+  padding: 14px 26px;
+  border-radius: 3px;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.hero-btn-outline-dark {
+  background: transparent;
+  border: 1px solid var(--line);
+  color: var(--ink) !important;
+}
+
+.hero-btn-outline-dark:hover {
+  border-color: var(--brass);
+  color: var(--brass) !important;
 }
 
 .site-footer {
