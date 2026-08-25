@@ -10,6 +10,7 @@
   --brass: #AD8A4E;
   --brass-light: #C9A968;
   --teal: #3A6B63;
+  --teal-light: #8FC4B8;
   --line: rgba(27, 36, 48, 0.16);
   --line-on-navy: rgba(243, 239, 230, 0.18);
 
@@ -200,6 +201,8 @@ h2 {
   letter-spacing: -0.01em;
 }
 
+.hero h1 .accent { color: var(--brass-light); }
+
 .hero-sub {
   max-width: 640px;
   font-size: 1.2rem;
@@ -208,7 +211,7 @@ h2 {
   margin: 0 0 72px;
 }
 
-.video-frame { max-width: 740px; }
+.video-frame { max-width: 860px; margin: 0 auto; }
 
 .video-frame-inner {
   position: relative;
@@ -368,26 +371,71 @@ h2 {
 
 .hero-btn-outline:hover { border-color: var(--brass-light); color: var(--brass-light) !important; }
 
-.hero-text .stat-strip { margin: 0; }
-
-.stat-strip {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  list-style: none;
-  padding: 0;
+.highlight-bar {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border: 1px solid var(--line-on-navy);
+  border-radius: 4px;
+  overflow: hidden;
+  background: rgba(13, 22, 38, 0.45);
+  margin: 0;
 }
 
-.stat-strip li {
+.highlight-item {
+  padding: 18px 22px;
+  border-right: 1px solid var(--line-on-navy);
+}
+
+.highlight-item:last-child { border-right: none; }
+
+.highlight-label {
   font-family: var(--mono);
-  font-size: 0.78rem;
-  letter-spacing: 0.02em;
-  color: var(--brass-light);
-  background: rgba(201, 169, 104, 0.08);
-  border: 1px solid rgba(201, 169, 104, 0.35);
-  padding: 8px 16px;
-  border-radius: 3px;
+  font-size: 0.66rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin: 0 0 8px;
 }
+
+.highlight-item:nth-child(1) .highlight-label { color: var(--brass-light); }
+.highlight-item:nth-child(2) .highlight-label { color: var(--teal-light); }
+.highlight-item:nth-child(3) .highlight-label { color: var(--brass-light); }
+
+.highlight-value {
+  font-family: var(--body);
+  font-weight: 600;
+  font-size: 0.92rem;
+  line-height: 1.4;
+  color: var(--paper);
+  margin: 0;
+}
+
+@media (max-width: 700px) {
+  .highlight-bar { grid-template-columns: 1fr; }
+  .highlight-item {
+    border-right: none;
+    border-bottom: 1px solid var(--line-on-navy);
+  }
+  .highlight-item:last-child { border-bottom: none; }
+}
+
+/* ============================================
+   INTRODUCTION — video gets its own moment
+   ============================================ */
+.intro {
+  background: var(--navy-deep);
+  color: var(--paper);
+  text-align: center;
+}
+
+.intro .eyebrow { color: var(--brass-light); }
+.intro h2 { color: var(--paper); }
+.intro .section-lede {
+  color: rgba(243, 239, 230, 0.72);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.intro .video-frame { text-align: left; }
 
 /* ============================================
    THE BRIDGE — signature section
