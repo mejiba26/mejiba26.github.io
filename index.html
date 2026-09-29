@@ -43,7 +43,7 @@
       <a href="#resume">Resume</a>
       <a href="#work">Work</a>
       <a href="#market">Market View</a>
-      <a href="#notes">Market Notes</a>
+      <!-- <a href="#notes">Market Notes</a>  (turn back on with the first post) -->
       <a href="#contact">Contact</a>
     </nav>
   </div>
@@ -93,7 +93,7 @@
           <div class="panel-stats">
             <div>
               <p class="panel-num">6</p>
-              <p class="panel-desc">years trading equities &amp; futures independently <span class="placeholder">[CONFIRM: equities and futures, or futures only?]</span></p>
+              <p class="panel-desc">years trading equities &amp; futures independently</p>
             </div>
             <div>
               <p class="panel-num">3</p>
@@ -144,7 +144,7 @@
       <div class="ledger ledger-past">
         <h3>Where I've Been</h3>
         <ul class="ledger-list">
-          <li><span class="lline">Independent Equity &amp; Futures Trader (2020 to Present) <span class="placeholder">[CONFIRM: equities and futures, or futures only?]</span></span><span class="ldetail">Fundamental valuation paired with price action trading, 2 to 5% risk per position</span></li>
+          <li><span class="lline">Independent Equity &amp; Futures Trader (2020 to Present)</span><span class="ldetail">Fundamental valuation paired with price action trading, 2 to 5% risk per position</span></li>
           <li><span class="lline">Client Services Rep, State Farm (2025 to 2026)</span><span class="ldetail">Licensed NC agent, advised &amp; retained clients</span></li>
           <li><span class="lline">Service Assistant, Ruth's Chris (2023 to 2025)</span><span class="ldetail">Ran 250+ covers/shift, trained new hires</span></li>
         </ul>
@@ -175,13 +175,12 @@
   <section id="resume" class="resume wrap">
     <p class="eyebrow">02 — Documentation</p>
     <h2>Resume</h2>
-    <p class="section-lede">Full detail on request. The short version lives below.</p>
+    <p class="section-lede">Updated September 2026. Full detail on request. The short version lives below.</p>
 
     <div class="resume-card reveal">
       <div class="resume-card-text">
         <p><strong>Brian Mejia-Lopez</strong></p>
         <p>Finance and Economics graduate pursuing an MSBA at Wake Forest University, building a career as a markets analyst.</p>
-        <p class="placeholder">[ADD: resume.pdf, updated (Month Year)]</p>
       </div>
       <a class="btn" href="resume.pdf" download>Download PDF</a>
     </div>
@@ -207,12 +206,12 @@
         <p class="project-field">Context</p>
         <p>Independent equity research on a large cap defense contractor, built to answer one question: what is RTX actually worth per share?</p>
         <p class="project-field">My role</p>
-        <p>Built a DCF at a 6.15% WACC with sensitivity analysis, then cross checked it against peer P/E and EV/EBITDA multiples. Benchmarked RTX against Boeing and Lockheed Martin on profitability, liquidity, and leverage. RTX's 19.21% gross margin was the strongest in the peer set.</p>
+        <p>Built a DCF at a 6.15% WACC with a sensitivity grid across WACC and terminal growth, then cross checked it against peer P/E and EV/EBITDA multiples (Lockheed Martin, General Dynamics, Northrop Grumman). Benchmarked RTX against Boeing and Lockheed Martin on profitability, liquidity, and leverage. RTX's 19.21% gross margin was the strongest in the peer set.</p>
         <p class="project-field">Outcome</p>
-        <p>Fair value of $125 to $133 per share vs. $122 at the time of analysis, so modestly undervalued.</p>
+        <p>Fair value of $125 to $133 per share (DCF about $128, adjusted P/E about $125, EV/EBITDA about $133) vs. $122 at the time of analysis, so modestly undervalued.</p>
         <p class="project-field">What changed</p>
-        <p>Models built to be questioned, including my own. I used Claude to audit my original 2024 model, caught two errors, and rebuilt it. My estimate dropped from $175 to $128 per share, and I documented every change in a new appendix.</p>
-        <p class="project-link"><a href="#" class="placeholder-link">Read the paper ↗</a> <span class="placeholder">[ADD: link to paper PDF]</span></p>
+        <p>Models built to be questioned, including my own. I used Claude to audit my original 2024 model and rebuilt it. The two biggest fixes: my discount rate rested on a 1.22% equity risk premium, and I subtracted total liabilities instead of net debt. My DCF estimate dropped from $175 to $128 per share, and every change is documented in a new Revision Notes appendix.</p>
+        <p class="project-link"><a href="rtx-valuation.pdf" target="_blank" rel="noopener">Read the paper (PDF) ↗</a></p>
       </article>
 
       <!-- Project 02 -->
@@ -234,20 +233,18 @@
       <article id="portfolio" class="project-card reveal">
         <p class="project-num">Project 03</p>
         <h3>iShares Multi-Asset Portfolio Model</h3>
-        <p class="project-meta">In progress</p>
+        <p class="project-meta">Mar 2008 to Aug 2026, out of sample</p>
         <p class="project-field">Context</p>
         <p>A Python walk forward backtest of five allocation strategies (60/40, equal weight, inverse volatility, minimum variance, and max Sharpe with a 40% cap) across nine iShares ETFs: IVV, IJR, EFA, EEM, AGG, TLT, TIP, LQD, IAU.</p>
         <p class="project-field">My role</p>
         <p>Each month, weights use only the prior 36 months of data. Costs are 10 bps on turnover. Stress tests cover the 2008 crisis, the COVID crash, and the 2022 rate shock.</p>
         <p class="project-field">Outcome</p>
-        <p class="placeholder">[ADD: key result]</p>
+        <p>After costs, the plain 60/40 beat every other strategy: 8.4% a year with a 0.72 Sharpe, vs. 7.3% and 0.64 for Max Sharpe, the best of the rest. The optimizers earned their keep in crashes. In the 2008 crisis, Min Variance lost 1.2% and Max Sharpe 3.9%, vs. 29.6% for 60/40. But in the 2022 rate shock, when stocks and bonds fell together, every strategy lost between 13.9% and 15.9%, so diversification didn't help. Max Sharpe also traded heavily, with annual turnover of about 244% (buys plus sells).</p>
         <div class="project-figs">
-          <!-- When ready, replace each div below with: <img src="growth.png" alt="Growth of $1 by strategy"> -->
-          <div class="img-slot">[ADD: growth.png]</div>
-          <!-- <img src="drawdowns.png" alt="Drawdowns by strategy"> -->
-          <div class="img-slot">[ADD: drawdowns.png]</div>
+          <a href="growth.png" target="_blank" rel="noopener"><img src="growth.png" alt="Growth of $10,000 by strategy, March 2008 to August 2026, after costs"></a>
+          <a href="drawdowns.png" target="_blank" rel="noopener"><img src="drawdowns.png" alt="Drawdown from prior peak by strategy"></a>
         </div>
-        <p class="project-link"><a href="#" class="placeholder-link">View on GitHub ↗</a> <span class="placeholder">[ADD: GitHub repo link]</span></p>
+        <p class="project-link"><span class="link-soon">Code coming soon</span></p>
       </article>
 
       <!-- Project 04 -->
@@ -284,19 +281,25 @@
       <div class="ticker-item">
         <p class="ticker-label">Trend</p>
         <p class="ticker-text">Earnings season: valuation checkpoint &amp; trading catalyst</p>
-        <p class="ticker-note"><span class="placeholder">[ADD: one company or sector result from this earnings season and what it told me]</span> On the trading side, earnings prints are some of the highest volatility moments I watch in NQ and ES. Research and trading meet at the same moment: the numbers update my fundamental view, and the reaction is what I'm positioned for.</p>
+        <p class="ticker-note">Coca-Cola's Q2 (reported July 28) grew organic revenue 6%, and more of that came from volume (unit cases up 5%) than from price/mix (up 2%). Comparable EPS rose 11% to $0.97, and management raised full year guidance to about 5% organic revenue growth and 9 to 10% comparable EPS growth. What it told me: growth that comes from people buying more holds up better than growth from raising prices, so it deserves more weight when I project revenue. On the trading side, earnings prints are some of the highest volatility moments I watch in NQ and ES. Research and trading meet at the same moment: the numbers update my fundamental view, and the reaction is what I'm positioned for.</p>
       </div>
       <div class="ticker-item">
         <p class="ticker-label">Trend</p>
         <p class="ticker-text">Sector rotation</p>
-        <p class="ticker-note">Energy and financials have led the S&amp;P 500 while tech cooled on AI valuation concerns <span class="placeholder">[CONFIRM: is this still accurate as of this month?]</span>. It's a real time example of capital moving on rate and macro conditions. That rotation reshapes both which companies look attractive to own and which ones are moving enough to trade.</p>
+        <p class="ticker-note">Which S&amp;P 500 sectors are leading and lagging over the last three months, pulled from the SPDR sector ETFs and refreshed every weekday.</p>
+        <div id="sector-live" class="sector-live" aria-live="polite">
+          <p class="sector-status">Loading latest sector data…</p>
+        </div>
+        <p class="ticker-note">Rotation like this is capital moving on rate and macro conditions. It reshapes both which companies look attractive to own and which ones are moving enough to trade.</p>
       </div>
     </div>
 
   </section>
 
   <!-- MARKET NOTES -->
-  <section id="notes" class="notes wrap">
+  <!-- Hidden until the first post is ready: remove "hidden" below, turn the nav link back on,
+       and change the Contact eyebrow back to 06. -->
+  <section id="notes" class="notes wrap" hidden>
     <p class="eyebrow">05 — Market Notes</p>
     <h2>Market Notes</h2>
     <p class="section-lede">A short post each month: one macro read, one stock idea, and what my portfolio model is holding. Newest first.</p>
@@ -343,7 +346,7 @@
 
   <!-- CONTACT -->
   <section id="contact" class="contact wrap">
-    <p class="eyebrow">06 — Get in Touch</p>
+    <p class="eyebrow">05 — Get in Touch</p>
     <h2>Let's talk</h2>
     <p class="section-lede">Open to full-time markets analyst and equity research roles starting Summer 2027. Happy to talk sooner.</p>
     <div class="contact-links">
@@ -370,6 +373,33 @@
     });
   }, { threshold: 0.15 });
   revealEls.forEach(el => observer.observe(el));
+</script>
+
+<script>
+  // Sector rotation: reads data/sectors.json (rebuilt each weekday by
+  // .github/workflows/update-sectors.yml) and shows the top and bottom three.
+  (function () {
+    const box = document.getElementById('sector-live');
+    if (!box) return;
+    const fmt = n => (n > 0 ? '+' : '') + n.toFixed(1) + '%';
+    const esc = t => String(t).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+    const row = d => `<li><span class="sector-name">${esc(d.name)} <span class="sector-tkr">${esc(d.ticker)}</span></span><span class="sector-ret ${d.r3m >= 0 ? 'up' : 'down'}">${fmt(d.r3m)}</span></li>`;
+
+    fetch('data/sectors.json', { cache: 'no-cache' })
+      .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
+      .then(data => {
+        const s = data.sectors;
+        if (!s || s.length < 6) throw new Error('bad data');
+        const asOf = new Date(data.as_of + 'T12:00:00').toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+        box.innerHTML = `
+          <p class="sector-head">Leading (3 mo)</p><ul class="sector-list">${s.slice(0, 3).map(row).join('')}</ul>
+          <p class="sector-head">Lagging (3 mo)</p><ul class="sector-list">${s.slice(-3).reverse().map(row).join('')}</ul>
+          <p class="sector-meta">S&amp;P 500 (SPY) ${fmt(data.benchmark.r3m)} over the same window. Data as of ${asOf}.</p>`;
+      })
+      .catch(() => {
+        box.innerHTML = '<p class="sector-status">Live sector data is unavailable right now.</p>';
+      });
+  })();
 </script>
 
 </body>

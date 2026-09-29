@@ -17,17 +17,19 @@ I've been trading futures independently since 2020, which shaped how I think abo
 - **The Bridge:** career narrative connecting past experience to target roles
 - **Resume:** downloadable PDF
 - **Projects**
-  - [RTX Corporation Equity Valuation](https://mejiba26.github.io/#rtx): DCF with sensitivity analysis, peer multiples, and a documented model audit
+  - [RTX Corporation Equity Valuation](https://mejiba26.github.io/#rtx): DCF with sensitivity analysis, peer P/E and EV/EBITDA cross-checks, and a documented model audit ([paper](rtx-valuation.pdf))
   - [ECG Patient Matching Model](https://mejiba26.github.io/#ecg): Wake Forest School of Medicine Build-A-Thon, Siamese CNN ensemble in TensorFlow/Keras
   - [iShares Multi-Asset Portfolio Model](https://mejiba26.github.io/#portfolio): walk forward backtest of five allocation strategies (in progress)
   - [Independent Futures Trading and Python Market Tools](https://mejiba26.github.io/#futures): MNQ/MES trading with defined risk, plus Python screening and backtesting tools
   - Coursework: housing price regression model
-- **Market View:** trends I'm actively tracking and why they matter, with an "as of" date
-- **Market Notes:** a short monthly post covering one macro view, one stock idea, and what my portfolio model holds
+- **Market View:** trends I'm actively tracking and why they matter, with an "as of" date. The sector rotation card updates itself from live ETF data.
+- **Market Notes** (first post coming soon): a short monthly post covering one macro view, one stock idea, and what my portfolio model holds
 
 ## Built with
 
 HTML and CSS, no framework. Hosted on GitHub Pages.
+
+Sector data comes from `scripts/update_sectors.py` (Python, yfinance), which a GitHub Actions workflow runs every weekday after the close. It writes `data/sectors.json`, and the page reads that file when it loads.
 
 ## Contact
 
