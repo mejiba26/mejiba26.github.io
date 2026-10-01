@@ -1,0 +1,92 @@
+{
+  "as_of": "2026-09-29",
+  "generated_utc": "2026-10-01T01:21:10Z",
+  "source": "Yahoo Finance via yfinance, adjusted closes (total return)",
+  "sorted_by": "r3m",
+  "benchmark": {
+    "ticker": "SPY",
+    "name": "S&P 500",
+    "r1m": -0.42,
+    "r3m": 2.59,
+    "ytd": 12.94
+  },
+  "sectors": [
+    {
+      "ticker": "XLE",
+      "name": "Energy",
+      "r1m": -1.24,
+      "r3m": 16.56,
+      "ytd": 40.37
+    },
+    {
+      "ticker": "XLV",
+      "name": "Health Care",
+      "r1m": 0.13,
+      "r3m": 8.02,
+      "ytd": 11.66
+    },
+    {
+      "ticker": "XLC",
+      "name": "Communication Services",
+      "r1m": -1.02,
+      "r3m": 4.39,
+      "ytd": -4.45
+    },
+    {
+      "ticker": "XLK",
+      "name": "Technology",
+      "r1m": 4.87,
+      "r3m": 2.21,
+      "ytd": 35.58
+    },
+    {
+      "ticker": "XLF",
+      "name": "Financials",
+      "r1m": -6.71,
+      "r3m": 1.1,
+      "ytd": -0.18
+    },
+    {
+      "ticker": "XLP",
+      "name": "Consumer Staples",
+      "r1m": -3.58,
+      "r3m": -0.82,
+      "ytd": 7.4
+    },
+    {
+      "ticker": "XLB",
+      "name": "Materials",
+      "r1m": -7.25,
+      "r3m": -2.96,
+      "ytd": 9.66
+    },
+    {
+      "ticker": "XLRE",
+      "name": "Real Estate",
+      "r1m": -6.28,
+      "r3m": -5.32,
+      "ytd": 4.92
+    },
+    {
+      "ticker": "XLY",
+      "name": "Consumer Discretionary",
+      "r1m": -6.67,
+      "r3m": -6.73,
+      "ytd": -8.02
+    },
+    {
+      "ticker": "XLI",
+      "name": "Industrials",
+      "r1m": -4.27,
+      "r3m": -8.45,
+      "ytd": 9.9
+    },
+    {
+      "ticker": "XLU",
+      "name": "Utilities",
+      "r1m": -6.38,
+      "r3m": -11.77,
+      "ytd": -5.04
+    }
+  ]
+}
