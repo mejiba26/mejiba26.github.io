@@ -1,8 +1,9 @@
 {
   "as_of": "2026-10-09",
-  "generated_utc": "2026-10-19T17:15:11Z",
+  "generated_utc": "2026-10-19T17:31:14Z",
   "source": "U.S. Energy Information Administration, Open Data API v2",
   "note": "Weekly stocks and production from the Weekly Petroleum Status Report; prices are spot closes.",
+  "percentile_note": "rank is the percentile of the current value within the trailing 5 years of that same series, ties counted at half weight. Derived metrics are ranked against their own history.",
   "stocks": {
     "crude_ex_spr": {
       "series_id": "WCESTUS1",
@@ -11,6 +12,16 @@
       "period": "2026-10-09",
       "value": 415577.0,
       "change": -8557.0,
+      "percentile": {
+        "rank": 12.1,
+        "n": 261,
+        "years": 5,
+        "window_start": "2021-10-15",
+        "window_end": "2026-10-09",
+        "min": 404508.0,
+        "median": 427658.0,
+        "max": 481180.0
+      },
       "five_year": {
         "min": 419748,
         "max": 437357,
@@ -47,7 +58,17 @@
       "units": "thousand barrels",
       "period": "2026-10-09",
       "value": 26607.0,
-      "change": 1862.0
+      "change": 1862.0,
+      "percentile": {
+        "rank": 60.0,
+        "n": 261,
+        "years": 5,
+        "window_start": "2021-10-15",
+        "window_end": "2026-10-09",
+        "min": 18599.0,
+        "median": 25284.0,
+        "max": 43244.0
+      }
     },
     "distillate": {
       "series_id": "WDISTUS1",
@@ -56,8 +77,33 @@
       "period": "2026-10-09",
       "value": 102611.0,
       "change": -2527.0,
-      "days_of_cover": 23.7,
-      "days_of_cover_period": "2026-10-09"
+      "percentile": {
+        "rank": 2.1,
+        "n": 261,
+        "years": 5,
+        "window_start": "2021-10-15",
+        "window_end": "2026-10-09",
+        "min": 100799.0,
+        "median": 115777.0,
+        "max": 134753.0
+      },
+      "days_of_cover": {
+        "label": "Distillate days of cover",
+        "units": "days",
+        "period": "2026-10-09",
+        "value": 23.7,
+        "percentile": {
+          "rank": 0.2,
+          "n": 261,
+          "years": 5,
+          "window_start": "2021-10-15",
+          "window_end": "2026-10-09",
+          "min": 23.7,
+          "median": 30.2,
+          "max": 47.3
+        },
+        "change": -5.1
+      }
     }
   },
   "production": {
@@ -67,7 +113,17 @@
       "units": "thousand barrels per day",
       "period": "2026-10-09",
       "value": 13679.0,
-      "change": -300.0
+      "change": -300.0,
+      "percentile": {
+        "rank": 85.2,
+        "n": 261,
+        "years": 5,
+        "window_start": "2021-10-15",
+        "window_end": "2026-10-09",
+        "min": 11300.0,
+        "median": 13200.0,
+        "max": 13979.0
+      }
     }
   },
   "prices": {
@@ -77,7 +133,17 @@
       "units": "dollars per barrel",
       "period": "2026-10-14",
       "value": 101.91,
-      "change": 1.05
+      "change": 1.05,
+      "percentile": {
+        "rank": 91.7,
+        "n": 1247,
+        "years": 5,
+        "window_start": "2021-10-14",
+        "window_end": "2026-10-14",
+        "min": 55.44,
+        "median": 78.2,
+        "max": 123.64
+      }
     },
     "brent": {
       "series_id": "RBRTE",
@@ -85,7 +151,17 @@
       "units": "dollars per barrel",
       "period": "2026-10-14",
       "value": 126.55,
-      "change": 0.77
+      "change": 0.77,
+      "percentile": {
+        "rank": 98.5,
+        "n": 1260,
+        "years": 5,
+        "window_start": "2021-10-14",
+        "window_end": "2026-10-14",
+        "min": 59.93,
+        "median": 82.13,
+        "max": 138.21
+      }
     },
     "ulsd": {
       "series_id": "EER_EPD2DXL0_PF4_Y35NY_DPG",
@@ -93,7 +169,17 @@
       "units": "dollars per gallon",
       "period": "2026-10-14",
       "value": 5.066,
-      "change": -0.048
+      "change": -0.048,
+      "percentile": {
+        "rank": 98.8,
+        "n": 1244,
+        "years": 5,
+        "window_start": "2021-10-14",
+        "window_end": "2026-10-14",
+        "min": 1.972,
+        "median": 2.654,
+        "max": 5.365
+      }
     }
   },
   "spreads": {
@@ -101,13 +187,35 @@
       "label": "Diesel crack (ULSD - WTI)",
       "units": "dollars per barrel",
       "period": "2026-10-14",
-      "value": 110.86
+      "value": 110.86,
+      "percentile": {
+        "rank": 97.9,
+        "n": 1243,
+        "years": 5,
+        "window_start": "2021-10-14",
+        "window_end": "2026-10-14",
+        "min": 15.88,
+        "median": 36.85,
+        "max": 124.55
+      },
+      "change": -3.07
     },
     "brent_wti": {
       "label": "Brent - WTI",
       "units": "dollars per barrel",
       "period": "2026-10-14",
-      "value": 24.64
+      "value": 24.64,
+      "percentile": {
+        "rank": 99.0,
+        "n": 1223,
+        "years": 5,
+        "window_start": "2021-10-14",
+        "window_end": "2026-10-14",
+        "min": -2.45,
+        "median": 4.51,
+        "max": 37.62
+      },
+      "change": -0.28
     }
   }
 }

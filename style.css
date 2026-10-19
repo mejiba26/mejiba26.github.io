@@ -1162,3 +1162,15 @@ h2 {
   .energy-grid { grid-template-columns: 1fr; }
   .energy-hero-v { font-size: 1.6rem; }
 }
+
+/* Percentile line: an all-weeks ranking, deliberately quieter than the
+   value and the week over week change above it. */
+.energy-p {
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.04em;
+  color: rgba(243, 239, 230, 0.42);
+  margin: 3px 0 0;
+}
+
+.energy-hero .energy-p { margin-top: 6px; }

@@ -442,14 +442,32 @@
     const signed = n => (num(n) > 0 ? '+' : '') + Math.round(n).toLocaleString('en-US');
     const money = (n, places) => '$' + num(n).toFixed(places === undefined ? 2 : places);
     const dir = n => (num(n) >= 0 ? 'up' : 'down');
+    const ord = n => {
+      const suf = ['th', 'st', 'nd', 'rd'], v = n % 100;
+      return n + (suf[(v - 20) % 10] || suf[v] || suf[0]);
+    };
 
-    // A stat tile: label, value with its unit, and an optional change line.
-    const tile = (label, value, unit, change, changeText) => `
+    // The percentile is an all-weeks ranking over five years. The band bar on
+    // the headline is a same-week comparison. They answer different questions
+    // and can point opposite ways, so both say in the label which they are.
+    // Rounding 0.2 would print "0th" and 99.7 "100th", both of which read as
+    // errors rather than as extremes, so the ends are clamped instead.
+    const rankText = r => (r < 1 ? '<1st' : r > 99 ? '>99th' : ord(Math.round(r)));
+    const rankLine = p => (p && typeof p.rank === 'number' && isFinite(p.rank))
+      ? `<p class="energy-p">${esc(rankText(p.rank) + ' pct, all weeks, ' + (p.years || 5) + 'yr')}</p>`
+      : '';
+    const rankShort = p => (p && typeof p.rank === 'number' && isFinite(p.rank))
+      ? ` (${rankText(p.rank)} pct)` : '';
+
+    // A stat tile: label, value with its unit, an optional change line, and
+    // where the value sits in its own trailing five years.
+    const tile = (label, value, unit, change, changeText, pctl) => `
       <li class="energy-cell">
         <p class="energy-k">${esc(label)}</p>
         <p class="energy-v">${esc(value)}${unit ? ` <span class="energy-u">${esc(unit)}</span>` : ''}</p>
         ${change === null ? '' :
           `<p class="energy-d ${dir(change)}">${esc(changeText)}</p>`}
+        ${rankLine(pctl)}
       </li>`;
 
     fetch('data/energy.json', { cache: 'no-cache' })
@@ -465,6 +483,7 @@
         const band = crude.five_year;
         const cushing = d.stocks.cushing;
         const dist = d.stocks.distillate;
+        const cover = dist.days_of_cover;
         const prod = d.production.crude;
         const px = d.prices;
 
@@ -506,24 +525,31 @@
             <p class="energy-verdict">${esc(
               Math.abs(num(band.vs_avg_pct)).toFixed(1) + '% '
               + (band.vs_avg_pct < 0 ? 'below' : 'above')
-              + ' the five year average, ' + placing)}</p>
+              + ' the five year average for this week, ' + placing)}</p>
+            ${rankLine(crude.percentile)}
           </div>
 
           <ul class="energy-grid">
             ${tile('Cushing stocks', commas(cushing.value), 'thousand bbl',
-                   cushing.change, signed(cushing.change) + ' w/w')}
+                   cushing.change, signed(cushing.change) + ' w/w', cushing.percentile)}
             ${tile('US field production', commas(prod.value), 'thousand bbl/d',
-                   prod.change, signed(prod.change) + ' w/w')}
+                   prod.change, signed(prod.change) + ' w/w', prod.percentile)}
             ${tile('Distillate stocks', commas(dist.value), 'thousand bbl',
-                   dist.change, signed(dist.change) + ' w/w')}
-            ${tile('Distillate days of cover', num(dist.days_of_cover).toFixed(1), 'days', null)}
-            ${tile('Diesel crack, ULSD over WTI', money(d.spreads.diesel_crack.value), 'per bbl', null)}
-            ${tile('Brent over WTI', money(d.spreads.brent_wti.value), 'per bbl', null)}
+                   dist.change, signed(dist.change) + ' w/w', dist.percentile)}
+            ${tile('Distillate days of cover', num(cover.value).toFixed(1), 'days',
+                   null, null, cover.percentile)}
+            ${tile('Diesel crack, ULSD over WTI', money(d.spreads.diesel_crack.value),
+                   'per bbl', null, null, d.spreads.diesel_crack.percentile)}
+            ${tile('Brent over WTI', money(d.spreads.brent_wti.value),
+                   'per bbl', null, null, d.spreads.brent_wti.percentile)}
           </ul>
 
-          <p class="sector-meta">Spot ${esc(px.wti.period)}: WTI (EIA spot) ${money(px.wti.value)} ·
-            Brent (EIA spot) ${money(px.brent.value)} · NY Harbor ULSD ${money(px.ulsd.value, 3)}/gal.
-            Source: U.S. Energy Information Administration.</p>`;
+          <p class="sector-meta">Spot ${esc(px.wti.period)}:
+            WTI (EIA spot) ${money(px.wti.value)}${rankShort(px.wti.percentile)} ·
+            Brent (EIA spot) ${money(px.brent.value)}${rankShort(px.brent.percentile)} ·
+            NY Harbor ULSD ${money(px.ulsd.value, 3)}/gal${rankShort(px.ulsd.percentile)}.
+            Percentiles are all weeks over five years. Source: U.S. Energy
+            Information Administration.</p>`;
 
         document.getElementById('energy-asof').textContent =
           asOf.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
