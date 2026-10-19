@@ -31,6 +31,8 @@ HTML and CSS, no framework. Hosted on GitHub Pages.
 
 Sector data comes from `scripts/update_sectors.py` (Python, yfinance), which a GitHub Actions workflow runs every weekday after the close. It writes `data/sectors.json`, and the page reads that file when it loads.
 
+Energy data comes from `scripts/update_eia.py` (Python, standard library only), which pulls crude and distillate stocks, crude production and WTI/Brent/ULSD spot prices from the EIA Open Data API. A workflow runs it Wednesdays after the Weekly Petroleum Status Report and writes `data/energy.json`. It needs an `EIA_API_KEY` ([free](https://www.eia.gov/opendata/register.php)), set as a repository secret for Actions and as an environment variable to run it locally. `python scripts/update_eia.py --verify` checks every series still returns data without rewriting the file.
+
 ## Contact
 
 - Email: Brian_m25@yahoo.com

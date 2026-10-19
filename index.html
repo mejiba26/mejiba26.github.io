@@ -294,6 +294,20 @@
       </div>
     </div>
 
+    <!-- Energy market: filled by the script at the bottom of this file from
+         data/energy.json, rebuilt Wednesdays by
+         .github/workflows/update-energy.yml. Starts hidden on purpose and is
+         only revealed once that file is present, complete and fresh, so a
+         missing or stale feed shows nothing rather than a blank card. -->
+    <div id="energy-live" class="energy reveal" hidden>
+      <div class="energy-top">
+        <p class="ticker-label">Energy market</p>
+        <p class="energy-asof">Week ending <span id="energy-asof"></span></p>
+      </div>
+      <p class="ticker-note energy-lede">Crude and refined product balances from the EIA Weekly Petroleum Status Report, with spot prices from the same source. Where inventories sit against the five year range is how I read whether a price move is supply driven or sentiment.</p>
+      <div id="energy-body"></div>
+    </div>
+
   </section>
 
   <!-- MARKET NOTES -->
@@ -399,6 +413,127 @@
       .catch(() => {
         box.innerHTML = '<p class="sector-status">Live sector data is unavailable right now.</p>';
       });
+  })();
+</script>
+
+<script>
+  // Energy market: reads data/energy.json (rebuilt Wednesdays by
+  // .github/workflows/update-energy.yml). The card ships hidden and is only
+  // unhidden once the file parses, every figure it shows is a real number,
+  // and the data is recent enough to be worth showing. Anything else leaves
+  // it hidden, so the page never renders a zero or a half empty card.
+  (function () {
+    const box = document.getElementById('energy-live');
+    const body = document.getElementById('energy-body');
+    if (!box || !body) return;
+
+    // EIA data is a week ending Friday published the next Wednesday, so it is
+    // normally 5 to 12 days old. Past 16 days a release has been missed.
+    const STALE_DAYS = 16;
+
+    // Throws on anything that is not a real number, which aborts the whole
+    // render rather than printing "undefined" or "NaN" into the page.
+    const num = v => {
+      if (typeof v !== 'number' || !isFinite(v)) throw new Error('bad value');
+      return v;
+    };
+    const esc = t => String(t).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+    const commas = n => Math.round(num(n)).toLocaleString('en-US');
+    const signed = n => (num(n) > 0 ? '+' : '') + Math.round(n).toLocaleString('en-US');
+    const money = (n, places) => '$' + num(n).toFixed(places === undefined ? 2 : places);
+    const dir = n => (num(n) >= 0 ? 'up' : 'down');
+
+    // A stat tile: label, value with its unit, and an optional change line.
+    const tile = (label, value, unit, change, changeText) => `
+      <li class="energy-cell">
+        <p class="energy-k">${esc(label)}</p>
+        <p class="energy-v">${esc(value)}${unit ? ` <span class="energy-u">${esc(unit)}</span>` : ''}</p>
+        ${change === null ? '' :
+          `<p class="energy-d ${dir(change)}">${esc(changeText)}</p>`}
+      </li>`;
+
+    fetch('data/energy.json', { cache: 'no-cache' })
+      .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
+      .then(d => {
+        const asOf = new Date(d.as_of + 'T12:00:00');
+        if (isNaN(asOf.getTime())) throw new Error('bad date');
+        if ((Date.now() - asOf.getTime()) / 86400000 > STALE_DAYS) {
+          throw new Error('stale');
+        }
+
+        const crude = d.stocks.crude_ex_spr;
+        const band = crude.five_year;
+        const cushing = d.stocks.cushing;
+        const dist = d.stocks.distillate;
+        const prod = d.production.crude;
+        const px = d.prices;
+
+        // Scale the track so the marker always lands inside it, even when the
+        // latest reading sits outside the five year range (which it can).
+        const lo = Math.min(num(band.min), num(crude.value));
+        const hi = Math.max(num(band.max), num(crude.value));
+        const pad = (hi - lo) * 0.12 || 1;
+        const a = lo - pad, b = hi + pad;
+        const at = v => ((v - a) / (b - a)) * 100;
+
+        const placing = band.in_band
+          ? 'inside the five year range'
+          : (crude.value < band.min ? 'below the five year range'
+                                    : 'above the five year range');
+        const bandLabel =
+          `${commas(crude.value)} thousand barrels, ${placing} of `
+          + `${commas(band.min)} to ${commas(band.max)} for this week of the year.`;
+
+        body.innerHTML = `
+          <div class="energy-hero">
+            <p class="energy-k">Commercial crude stocks, excluding SPR</p>
+            <p class="energy-hero-v">${commas(crude.value)}
+              <span class="energy-u">thousand bbl</span>
+              <span class="energy-d ${dir(crude.change)}">${signed(crude.change)} w/w</span>
+            </p>
+            <div class="energy-band" role="img" aria-label="${esc(bandLabel)}">
+              <div class="energy-track">
+                <div class="energy-range" style="left:${at(band.min).toFixed(2)}%;width:${(at(band.max) - at(band.min)).toFixed(2)}%"></div>
+                <div class="energy-avg" style="left:${at(band.avg).toFixed(2)}%"></div>
+                <div class="energy-mark" style="left:${at(crude.value).toFixed(2)}%"></div>
+              </div>
+              <p class="energy-scale">
+                <span>${commas(band.min)}</span>
+                <span>5 yr range, same week</span>
+                <span>${commas(band.max)}</span>
+              </p>
+            </div>
+            <p class="energy-verdict">${esc(
+              Math.abs(num(band.vs_avg_pct)).toFixed(1) + '% '
+              + (band.vs_avg_pct < 0 ? 'below' : 'above')
+              + ' the five year average, ' + placing)}</p>
+          </div>
+
+          <ul class="energy-grid">
+            ${tile('Cushing stocks', commas(cushing.value), 'thousand bbl',
+                   cushing.change, signed(cushing.change) + ' w/w')}
+            ${tile('US field production', commas(prod.value), 'thousand bbl/d',
+                   prod.change, signed(prod.change) + ' w/w')}
+            ${tile('Distillate stocks', commas(dist.value), 'thousand bbl',
+                   dist.change, signed(dist.change) + ' w/w')}
+            ${tile('Distillate days of cover', num(dist.days_of_cover).toFixed(1), 'days', null)}
+            ${tile('Diesel crack, ULSD over WTI', money(d.spreads.diesel_crack.value), 'per bbl', null)}
+            ${tile('Brent over WTI', money(d.spreads.brent_wti.value), 'per bbl', null)}
+          </ul>
+
+          <p class="sector-meta">Spot ${esc(px.wti.period)}: WTI (EIA spot) ${money(px.wti.value)} ·
+            Brent (EIA spot) ${money(px.brent.value)} · NY Harbor ULSD ${money(px.ulsd.value, 3)}/gal.
+            Source: U.S. Energy Information Administration.</p>`;
+
+        document.getElementById('energy-asof').textContent =
+          asOf.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+        box.hidden = false;
+        // The reveal observer ran at load, when this card was still hidden and
+        // had no box to intersect, so it never got is-visible. Without this the
+        // card unhides at opacity 0 and stays invisible.
+        box.classList.add('is-visible');
+      })
+      .catch(() => { box.hidden = true; });
   })();
 </script>
 

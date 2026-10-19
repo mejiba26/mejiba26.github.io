@@ -1007,3 +1007,158 @@ h2 {
   color: rgba(243, 239, 230, 0.5);
   margin: 10px 0 0;
 }
+
+/* ============================================
+   MARKET VIEW: live energy market card
+   ============================================ */
+.energy {
+  margin-top: 24px;
+  padding: 36px 32px;
+  background: var(--navy);
+  border: 1px solid var(--line-on-navy);
+  border-radius: 4px;
+}
+
+.energy-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.energy-top .ticker-label { margin-bottom: 0; }
+
+.energy-asof {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--teal-light);
+  margin: 0;
+}
+
+.energy-lede { margin: 14px 0 0; max-width: 78ch; }
+
+.energy-k {
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--brass-light);
+  margin: 0 0 6px;
+}
+
+.energy-u {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: rgba(243, 239, 230, 0.45);
+}
+
+.energy-d { font-family: var(--mono); font-size: 0.8rem; margin: 0; }
+.energy-d.up { color: var(--teal-light); }
+.energy-d.down { color: #E0957A; }
+
+/* Headline: crude stocks against the five year range */
+.energy-hero { margin-top: 28px; }
+
+.energy-hero-v {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 10px;
+  font-family: var(--display);
+  font-size: 1.9rem;
+  line-height: 1.2;
+  color: var(--paper);
+  margin: 0;
+}
+
+.energy-band { margin: 20px 0 12px; max-width: 540px; }
+
+.energy-track {
+  position: relative;
+  height: 8px;
+  border-radius: 4px;
+  background: rgba(243, 239, 230, 0.10);
+}
+
+.energy-range {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  border-radius: 4px;
+  background: rgba(143, 196, 184, 0.30);
+}
+
+.energy-avg {
+  position: absolute;
+  top: -3px;
+  width: 1px;
+  height: 14px;
+  background: rgba(243, 239, 230, 0.45);
+}
+
+/* 2px surface ring so the marker stays legible over the range fill */
+.energy-mark {
+  position: absolute;
+  top: 50%;
+  width: 10px;
+  height: 10px;
+  margin: -5px 0 0 -5px;
+  border-radius: 50%;
+  background: var(--brass-light);
+  box-shadow: 0 0 0 2px var(--navy);
+}
+
+.energy-scale {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  color: rgba(243, 239, 230, 0.45);
+  margin: 8px 0 0;
+}
+
+.energy-verdict {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: rgba(243, 239, 230, 0.75);
+  margin: 0;
+}
+
+/* Stat tiles, same seam treatment as .ticker-row */
+.energy-grid {
+  list-style: none;
+  margin: 26px 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--line-on-navy);
+  border: 1px solid var(--line-on-navy);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.energy-cell { background: var(--navy); padding: 18px 20px; }
+
+.energy-v {
+  font-family: var(--display);
+  font-size: 1.15rem;
+  line-height: 1.3;
+  color: var(--paper);
+  margin: 0 0 4px;
+}
+
+.energy .sector-meta { margin-top: 18px; }
+
+@media (max-width: 860px) {
+  .energy-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 560px) {
+  .energy { padding: 28px 22px; }
+  .energy-grid { grid-template-columns: 1fr; }
+  .energy-hero-v { font-size: 1.6rem; }
+}
