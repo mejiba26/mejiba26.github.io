@@ -1,6 +1,6 @@
 {
   "as_of": "2026-10-09",
-  "generated_utc": "2026-10-19T17:31:14Z",
+  "generated_utc": "2026-10-19T18:04:50Z",
   "source": "U.S. Energy Information Administration, Open Data API v2",
   "note": "Weekly stocks and production from the Weekly Petroleum Status Report; prices are spot closes.",
   "percentile_note": "rank is the percentile of the current value within the trailing 5 years of that same series, ties counted at half weight. Derived metrics are ranked against their own history.",

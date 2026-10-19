@@ -28,6 +28,12 @@ jobs:
           EIA_API_KEY: ${{ secrets.EIA_API_KEY }}
         run: python scripts/update_eia.py
 
+      # Scaffolds notes/draft-YYYY-MM-DD.md from the data just written. It
+      # will not overwrite a draft that already exists, so a second run on
+      # the same day cannot destroy prose written into one.
+      - name: Draft this week's note
+        run: python scripts/draft_note.py
+
       - name: Commit if the data changed
         run: |
           git config user.name "github-actions[bot]"
@@ -35,10 +41,10 @@ jobs:
           # eia_history.json is the five year cache. It is committed so the
           # next run only has to fetch the tail instead of refetching five
           # years of all eight series against a slow API.
-          git add data/energy.json data/eia_history.json
+          git add data/energy.json data/eia_history.json notes/
           if git diff --cached --quiet; then
             echo "No change in energy data."
           else
-            git commit -m "Update energy data"
+            git commit -m "Update energy data and draft this week's note"
             git push
           fi
