@@ -1,6 +1,6 @@
 {
   "as_of": "2026-10-09",
-  "generated_utc": "2026-10-19T16:04:03Z",
+  "generated_utc": "2026-10-19T17:15:11Z",
   "source": "U.S. Energy Information Administration, Open Data API v2",
   "note": "Weekly stocks and production from the Weekly Petroleum Status Report; prices are spot closes.",
   "stocks": {
