@@ -1,6 +1,6 @@
 {
-  "as_of": "2026-10-09",
-  "generated_utc": "2026-10-19T18:04:50Z",
+  "as_of": "2026-10-16",
+  "generated_utc": "2026-10-21T20:26:17Z",
   "source": "U.S. Energy Information Administration, Open Data API v2",
   "note": "Weekly stocks and production from the Weekly Petroleum Status Report; prices are spot closes.",
   "percentile_note": "rank is the percentile of the current value within the trailing 5 years of that same series, ties counted at half weight. Derived metrics are ranked against their own history.",
@@ -9,45 +9,45 @@
       "series_id": "WCESTUS1",
       "name": "U.S. Ending Stocks excluding SPR of Crude Oil",
       "units": "thousand barrels",
-      "period": "2026-10-09",
-      "value": 415577.0,
-      "change": -8557.0,
+      "period": "2026-10-16",
+      "value": 412517.0,
+      "change": -3060.0,
       "percentile": {
-        "rank": 12.1,
+        "rank": 5.2,
         "n": 261,
         "years": 5,
-        "window_start": "2021-10-15",
-        "window_end": "2026-10-09",
+        "window_start": "2021-10-22",
+        "window_end": "2026-10-16",
         "min": 404508.0,
         "median": 427658.0,
         "max": 481180.0
       },
       "five_year": {
-        "min": 419748,
-        "max": 437357,
-        "avg": 425597,
-        "vs_avg_pct": -2.4,
+        "min": 421120,
+        "max": 439945,
+        "avg": 428145,
+        "vs_avg_pct": -3.7,
         "in_band": false,
         "years": [
           {
-            "period": "2025-10-10",
-            "value": 423785
+            "period": "2025-10-17",
+            "value": 422824
           },
           {
-            "period": "2024-10-11",
-            "value": 420550
+            "period": "2024-10-18",
+            "value": 426024
           },
           {
-            "period": "2023-10-13",
-            "value": 419748
+            "period": "2023-10-20",
+            "value": 421120
           },
           {
-            "period": "2022-10-14",
-            "value": 437357
+            "period": "2022-10-21",
+            "value": 439945
           },
           {
-            "period": "2021-10-15",
-            "value": 426544
+            "period": "2021-10-22",
+            "value": 430812
           }
         ]
       }
@@ -56,15 +56,15 @@
       "series_id": "W_EPC0_SAX_YCUOK_MBBL",
       "name": "Cushing, OK Ending Stocks excluding SPR of Crude Oil",
       "units": "thousand barrels",
-      "period": "2026-10-09",
-      "value": 26607.0,
-      "change": 1862.0,
+      "period": "2026-10-16",
+      "value": 27594.0,
+      "change": 987.0,
       "percentile": {
-        "rank": 60.0,
+        "rank": 63.8,
         "n": 261,
         "years": 5,
-        "window_start": "2021-10-15",
-        "window_end": "2026-10-09",
+        "window_start": "2021-10-22",
+        "window_end": "2026-10-16",
         "min": 18599.0,
         "median": 25284.0,
         "max": 43244.0
@@ -74,35 +74,35 @@
       "series_id": "WDISTUS1",
       "name": "U.S. Ending Stocks of Distillate Fuel Oil",
       "units": "thousand barrels",
-      "period": "2026-10-09",
-      "value": 102611.0,
-      "change": -2527.0,
+      "period": "2026-10-16",
+      "value": 104286.0,
+      "change": 1675.0,
       "percentile": {
-        "rank": 2.1,
+        "rank": 7.1,
         "n": 261,
         "years": 5,
-        "window_start": "2021-10-15",
-        "window_end": "2026-10-09",
+        "window_start": "2021-10-22",
+        "window_end": "2026-10-16",
         "min": 100799.0,
-        "median": 115777.0,
+        "median": 115765.0,
         "max": 134753.0
       },
       "days_of_cover": {
         "label": "Distillate days of cover",
         "units": "days",
-        "period": "2026-10-09",
-        "value": 23.7,
+        "period": "2026-10-16",
+        "value": 27.9,
         "percentile": {
-          "rank": 0.2,
+          "rank": 23.2,
           "n": 261,
           "years": 5,
-          "window_start": "2021-10-15",
-          "window_end": "2026-10-09",
+          "window_start": "2021-10-22",
+          "window_end": "2026-10-16",
           "min": 23.7,
           "median": 30.2,
           "max": 47.3
         },
-        "change": -5.1
+        "change": 4.2
       }
     }
   },
@@ -111,15 +111,15 @@
       "series_id": "WCRFPUS2",
       "name": "U.S. Field Production of Crude Oil",
       "units": "thousand barrels per day",
-      "period": "2026-10-09",
-      "value": 13679.0,
-      "change": -300.0,
+      "period": "2026-10-16",
+      "value": 13269.0,
+      "change": -410.0,
       "percentile": {
-        "rank": 85.2,
+        "rank": 53.4,
         "n": 261,
         "years": 5,
-        "window_start": "2021-10-15",
-        "window_end": "2026-10-09",
+        "window_start": "2021-10-22",
+        "window_end": "2026-10-16",
         "min": 11300.0,
         "median": 13200.0,
         "max": 13979.0
@@ -131,15 +131,15 @@
       "series_id": "RWTC",
       "name": "Cushing, OK WTI Spot Price FOB",
       "units": "dollars per barrel",
-      "period": "2026-10-14",
-      "value": 101.91,
-      "change": 1.05,
+      "period": "2026-10-20",
+      "value": 107.89,
+      "change": -2.12,
       "percentile": {
-        "rank": 91.7,
+        "rank": 95.5,
         "n": 1247,
         "years": 5,
-        "window_start": "2021-10-14",
-        "window_end": "2026-10-14",
+        "window_start": "2021-10-20",
+        "window_end": "2026-10-20",
         "min": 55.44,
         "median": 78.2,
         "max": 123.64
@@ -149,15 +149,15 @@
       "series_id": "RBRTE",
       "name": "Europe Brent Spot Price FOB",
       "units": "dollars per barrel",
-      "period": "2026-10-14",
-      "value": 126.55,
-      "change": 0.77,
+      "period": "2026-10-20",
+      "value": 115.22,
+      "change": -3.6,
       "percentile": {
-        "rank": 98.5,
+        "rank": 93.1,
         "n": 1260,
         "years": 5,
-        "window_start": "2021-10-14",
-        "window_end": "2026-10-14",
+        "window_start": "2021-10-20",
+        "window_end": "2026-10-20",
         "min": 59.93,
         "median": 82.13,
         "max": 138.21
@@ -167,17 +167,17 @@
       "series_id": "EER_EPD2DXL0_PF4_Y35NY_DPG",
       "name": "New York Harbor Ultra-Low Sulfur No 2 Diesel Spot Price",
       "units": "dollars per gallon",
-      "period": "2026-10-14",
-      "value": 5.066,
-      "change": -0.048,
+      "period": "2026-10-20",
+      "value": 5.265,
+      "change": 0.092,
       "percentile": {
-        "rank": 98.8,
+        "rank": 99.5,
         "n": 1244,
         "years": 5,
-        "window_start": "2021-10-14",
-        "window_end": "2026-10-14",
+        "window_start": "2021-10-20",
+        "window_end": "2026-10-20",
         "min": 1.972,
-        "median": 2.654,
+        "median": 2.659,
         "max": 5.365
       }
     }
@@ -186,36 +186,36 @@
     "diesel_crack": {
       "label": "Diesel crack (ULSD - WTI)",
       "units": "dollars per barrel",
-      "period": "2026-10-14",
-      "value": 110.86,
+      "period": "2026-10-20",
+      "value": 113.24,
       "percentile": {
-        "rank": 97.9,
+        "rank": 98.1,
         "n": 1243,
         "years": 5,
-        "window_start": "2021-10-14",
-        "window_end": "2026-10-14",
+        "window_start": "2021-10-20",
+        "window_end": "2026-10-20",
         "min": 15.88,
-        "median": 36.85,
+        "median": 36.97,
         "max": 124.55
       },
-      "change": -3.07
+      "change": 5.98
     },
     "brent_wti": {
       "label": "Brent - WTI",
       "units": "dollars per barrel",
-      "period": "2026-10-14",
-      "value": 24.64,
+      "period": "2026-10-20",
+      "value": 7.33,
       "percentile": {
-        "rank": 99.0,
+        "rank": 86.0,
         "n": 1223,
         "years": 5,
-        "window_start": "2021-10-14",
-        "window_end": "2026-10-14",
+        "window_start": "2021-10-20",
+        "window_end": "2026-10-20",
         "min": -2.45,
-        "median": 4.51,
+        "median": 4.53,
         "max": 37.62
       },
-      "change": -0.28
+      "change": -1.48
     }
   }
 }
