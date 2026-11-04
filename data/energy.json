@@ -1,6 +1,6 @@
 {
-  "as_of": "2026-10-23",
-  "generated_utc": "2026-10-28T21:24:33Z",
+  "as_of": "2026-10-30",
+  "generated_utc": "2026-11-04T22:16:41Z",
   "source": "U.S. Energy Information Administration, Open Data API v2",
   "note": "Weekly stocks and production from the Weekly Petroleum Status Report; prices are spot closes.",
   "percentile_note": "rank is the percentile of the current value within the trailing 5 years of that same series, ties counted at half weight. Derived metrics are ranked against their own history.",
@@ -9,45 +9,45 @@
       "series_id": "WCESTUS1",
       "name": "U.S. Ending Stocks excluding SPR of Crude Oil",
       "units": "thousand barrels",
-      "period": "2026-10-23",
-      "value": 410625.0,
-      "change": -1892.0,
+      "period": "2026-10-30",
+      "value": 409760.0,
+      "change": -865.0,
       "percentile": {
-        "rank": 2.5,
+        "rank": 1.7,
         "n": 261,
         "years": 5,
-        "window_start": "2021-10-29",
-        "window_end": "2026-10-23",
+        "window_start": "2021-11-05",
+        "window_end": "2026-10-30",
         "min": 404508.0,
-        "median": 427581.0,
+        "median": 427503.0,
         "max": 481180.0
       },
       "five_year": {
-        "min": 415966,
-        "max": 436830,
-        "avg": 426860,
-        "vs_avg_pct": -3.8,
+        "min": 421168,
+        "max": 440755,
+        "avg": 432089,
+        "vs_avg_pct": -5.2,
         "in_band": false,
         "years": [
           {
-            "period": "2025-10-24",
-            "value": 415966
+            "period": "2025-10-31",
+            "value": 421168
           },
           {
-            "period": "2024-10-25",
-            "value": 425509
+            "period": "2024-11-01",
+            "value": 427658
           },
           {
-            "period": "2023-10-27",
-            "value": 421893
+            "period": "2023-11-03",
+            "value": 435762
           },
           {
-            "period": "2022-10-28",
-            "value": 436830
+            "period": "2022-11-04",
+            "value": 440755
           },
           {
-            "period": "2021-10-29",
-            "value": 434102
+            "period": "2021-11-05",
+            "value": 435104
           }
         ]
       }
@@ -56,15 +56,15 @@
       "series_id": "W_EPC0_SAX_YCUOK_MBBL",
       "name": "Cushing, OK Ending Stocks excluding SPR of Crude Oil",
       "units": "thousand barrels",
-      "period": "2026-10-23",
-      "value": 26970.0,
-      "change": -624.0,
+      "period": "2026-10-30",
+      "value": 27250.0,
+      "change": 280.0,
       "percentile": {
-        "rank": 60.7,
+        "rank": 61.1,
         "n": 261,
         "years": 5,
-        "window_start": "2021-10-29",
-        "window_end": "2026-10-23",
+        "window_start": "2021-11-05",
+        "window_end": "2026-10-30",
         "min": 18599.0,
         "median": 25284.0,
         "max": 43244.0
@@ -74,35 +74,35 @@
       "series_id": "WDISTUS1",
       "name": "U.S. Ending Stocks of Distillate Fuel Oil",
       "units": "thousand barrels",
-      "period": "2026-10-23",
-      "value": 102824.0,
-      "change": -1462.0,
+      "period": "2026-10-30",
+      "value": 99259.0,
+      "change": -3565.0,
       "percentile": {
-        "rank": 2.9,
+        "rank": 0.2,
         "n": 261,
         "years": 5,
-        "window_start": "2021-10-29",
-        "window_end": "2026-10-23",
-        "min": 100799.0,
-        "median": 115743.0,
+        "window_start": "2021-11-05",
+        "window_end": "2026-10-30",
+        "min": 99259.0,
+        "median": 115551.0,
         "max": 134753.0
       },
       "days_of_cover": {
         "label": "Distillate days of cover",
         "units": "days",
-        "period": "2026-10-23",
-        "value": 24.4,
+        "period": "2026-10-30",
+        "value": 22.4,
         "percentile": {
-          "rank": 1.3,
+          "rank": 0.2,
           "n": 261,
           "years": 5,
-          "window_start": "2021-10-29",
-          "window_end": "2026-10-23",
-          "min": 23.7,
-          "median": 30.2,
+          "window_start": "2021-11-05",
+          "window_end": "2026-10-30",
+          "min": 22.4,
+          "median": 30.1,
           "max": 47.3
         },
-        "change": -3.5
+        "change": -2.1
       }
     }
   },
@@ -111,18 +111,18 @@
       "series_id": "WCRFPUS2",
       "name": "U.S. Field Production of Crude Oil",
       "units": "thousand barrels per day",
-      "period": "2026-10-23",
-      "value": 13992.0,
-      "change": 723.0,
+      "period": "2026-10-30",
+      "value": 14003.0,
+      "change": 11.0,
       "percentile": {
         "rank": 99.8,
         "n": 261,
         "years": 5,
-        "window_start": "2021-10-29",
-        "window_end": "2026-10-23",
+        "window_start": "2021-11-05",
+        "window_end": "2026-10-30",
         "min": 11400.0,
         "median": 13200.0,
-        "max": 13992.0
+        "max": 14003.0
       }
     }
   },
@@ -131,15 +131,15 @@
       "series_id": "RWTC",
       "name": "Cushing, OK WTI Spot Price FOB",
       "units": "dollars per barrel",
-      "period": "2026-10-27",
-      "value": 103.37,
-      "change": -1.88,
+      "period": "2026-11-03",
+      "value": 99.64,
+      "change": -0.42,
       "percentile": {
-        "rank": 92.2,
+        "rank": 89.1,
         "n": 1247,
         "years": 5,
-        "window_start": "2021-10-27",
-        "window_end": "2026-10-27",
+        "window_start": "2021-11-03",
+        "window_end": "2026-11-03",
         "min": 55.44,
         "median": 78.2,
         "max": 123.64
@@ -149,15 +149,15 @@
       "series_id": "RBRTE",
       "name": "Europe Brent Spot Price FOB",
       "units": "dollars per barrel",
-      "period": "2026-10-27",
-      "value": 123.1,
-      "change": -5.02,
+      "period": "2026-11-03",
+      "value": 107.03,
+      "change": -0.36,
       "percentile": {
-        "rank": 97.0,
+        "rank": 87.3,
         "n": 1260,
         "years": 5,
-        "window_start": "2021-10-27",
-        "window_end": "2026-10-27",
+        "window_start": "2021-11-03",
+        "window_end": "2026-11-03",
         "min": 59.93,
         "median": 82.13,
         "max": 138.21
@@ -167,17 +167,17 @@
       "series_id": "EER_EPD2DXL0_PF4_Y35NY_DPG",
       "name": "New York Harbor Ultra-Low Sulfur No 2 Diesel Spot Price",
       "units": "dollars per gallon",
-      "period": "2026-10-27",
-      "value": 4.687,
-      "change": -0.146,
+      "period": "2026-11-03",
+      "value": 4.823,
+      "change": 0.146,
       "percentile": {
-        "rank": 95.5,
+        "rank": 96.3,
         "n": 1244,
         "years": 5,
-        "window_start": "2021-10-27",
-        "window_end": "2026-10-27",
+        "window_start": "2021-11-03",
+        "window_end": "2026-11-03",
         "min": 1.972,
-        "median": 2.667,
+        "median": 2.673,
         "max": 5.365
       }
     }
@@ -186,36 +186,36 @@
     "diesel_crack": {
       "label": "Diesel crack (ULSD - WTI)",
       "units": "dollars per barrel",
-      "period": "2026-10-27",
-      "value": 93.48,
+      "period": "2026-11-03",
+      "value": 102.93,
       "percentile": {
-        "rank": 92.9,
+        "rank": 95.7,
         "n": 1243,
         "years": 5,
-        "window_start": "2021-10-27",
-        "window_end": "2026-10-27",
+        "window_start": "2021-11-03",
+        "window_end": "2026-11-03",
         "min": 15.88,
-        "median": 37.32,
+        "median": 37.43,
         "max": 124.55
       },
-      "change": -4.25
+      "change": 6.55
     },
     "brent_wti": {
       "label": "Brent - WTI",
       "units": "dollars per barrel",
-      "period": "2026-10-27",
-      "value": 19.73,
+      "period": "2026-11-03",
+      "value": 7.39,
       "percentile": {
-        "rank": 97.7,
+        "rank": 85.5,
         "n": 1223,
         "years": 5,
-        "window_start": "2021-10-27",
-        "window_end": "2026-10-27",
+        "window_start": "2021-11-03",
+        "window_end": "2026-11-03",
         "min": -2.45,
-        "median": 4.54,
+        "median": 4.55,
         "max": 37.62
       },
-      "change": -3.14
+      "change": 0.06
     }
   }
 }
