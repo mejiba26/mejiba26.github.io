@@ -1,57 +1,43 @@
 {
-  "as_of": "2026-11-05",
-  "generated_utc": "2026-11-06T02:36:27Z",
+  "as_of": "2026-11-06",
+  "generated_utc": "2026-11-07T02:03:53Z",
   "source": "Yahoo Finance via yfinance, adjusted closes (total return)",
   "sorted_by": "r3m",
   "benchmark": {
     "ticker": "SPY",
     "name": "S&P 500",
-    "r1m": -5.69,
-    "r3m": -4.97,
-    "ytd": 8.33
+    "r1m": -4.99,
+    "r3m": -4.65,
+    "ytd": 8.67
   },
   "sectors": [
     {
       "ticker": "XLV",
       "name": "Health Care",
-      "r1m": 9.54,
-      "r3m": 12.03,
-      "ytd": 20.93
+      "r1m": 9.9,
+      "r3m": 10.13,
+      "ytd": 20.86
     },
     {
       "ticker": "XLP",
       "name": "Consumer Staples",
-      "r1m": 11.69,
-      "r3m": 7.91,
-      "ytd": 19.73
+      "r1m": 7.98,
+      "r3m": 6.74,
+      "ytd": 18.2
     },
     {
       "ticker": "XLE",
       "name": "Energy",
-      "r1m": -2.73,
-      "r3m": 7.82,
-      "ytd": 40.58
-    },
-    {
-      "ticker": "XLF",
-      "name": "Financials",
-      "r1m": 6.98,
-      "r3m": 0.18,
-      "ytd": 6.27
+      "r1m": -5.55,
+      "r3m": 3.0,
+      "ytd": 40.55
     },
     {
       "ticker": "XLU",
       "name": "Utilities",
-      "r1m": 5.22,
-      "r3m": 0.02,
-      "ytd": 3.55
-    },
-    {
-      "ticker": "XLB",
-      "name": "Materials",
-      "r1m": 6.84,
-      "r3m": -0.55,
-      "ytd": 16.87
+      "r1m": 5.02,
+      "r3m": 0.74,
+      "ytd": 3.14
     },
     {
       "ticker": "XLRE",
@@ -61,11 +47,25 @@
       "ytd": 12.43
     },
     {
+      "ticker": "XLF",
+      "name": "Financials",
+      "r1m": 5.4,
+      "r3m": -0.77,
+      "ytd": 5.64
+    },
+    {
       "ticker": "XLY",
       "name": "Consumer Discretionary",
-      "r1m": 5.64,
-      "r3m": -1.64,
-      "ytd": -0.87
+      "r1m": 5.25,
+      "r3m": -1.53,
+      "ytd": -0.92
+    },
+    {
+      "ticker": "XLB",
+      "name": "Materials",
+      "r1m": 5.44,
+      "r3m": -1.86,
+      "ytd": 16.02
     },
     {
       "ticker": "XLC",
@@ -75,18 +75,18 @@
       "ytd": -10.56
     },
     {
-      "ticker": "XLI",
-      "name": "Industrials",
-      "r1m": -3.2,
-      "r3m": -12.03,
-      "ytd": 5.57
-    },
-    {
       "ticker": "XLK",
       "name": "Technology",
-      "r1m": -19.37,
-      "r3m": -13.51,
-      "ytd": 13.19
+      "r1m": -16.71,
+      "r3m": -11.48,
+      "ytd": 14.84
+    },
+    {
+      "ticker": "XLI",
+      "name": "Industrials",
+      "r1m": -3.4,
+      "r3m": -11.64,
+      "ytd": 5.7
     }
   ]
 }
