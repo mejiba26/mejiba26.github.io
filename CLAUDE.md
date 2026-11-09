@@ -83,6 +83,26 @@ cover, the diesel crack (ULSD versus WTI), and the Brent–WTI spread.
 Pull prices from EIA as well, so the whole card has a single upstream
 dependency.
 
+## Paper trading (LOCKED)
+
+Simulated swing trading of aerospace and defense and oil names. It is a simulation: no real money, no broker connection, nothing here is investment advice.
+
+Files:
+- docs/paper-trading-spec.md is the pre registered rule set, locked in commit e22e6cb with START_DATE 2026-11-16.
+- scripts/paper_trade.py is the simulator. update-paper.yml runs it weekdays.
+- data/paper/ holds ledger.csv, equity.json and state.json.
+
+Rules that must not be broken:
+- Never change a rule value in the body of the spec. Corrections go in a dated amendment at the bottom, as a separate commit, and the locked text stays as it was.
+- Constants in scripts/paper_trade.py must match the spec. START_DATE must match.
+- Never edit, delete or rewrite anything in data/paper/ by hand. It is append only. No backfill of dates before the lock.
+- Never change rules mid test. A rule change is a new version with a new start date and a new spec.
+- If a new entry definition or variant is tested, add it to the trial log in the spec through an amendment. Report signal counts, not performance, when choosing between variants.
+- Replays are for debugging only. They write to a scratch folder, are labeled TEST REPLAY, NOT A TRACK RECORD, and are never shown on the site as results.
+- Any machine learning challenger must be tested walk forward and out of sample against the baseline, and results are published whether or not it wins. No LLM makes trade decisions in version 1.
+
+Site section (when built): follow the failure behavior above. Hide it if data is missing, malformed or stale. Show the START_DATE, an as of date, the simulation disclaimer, planned risk next to realized worst loss, and link the ledger and the locked spec commit.
+
 ## Verify, don't assume
 
 Before reporting a data task complete: run the script, confirm the JSON is
