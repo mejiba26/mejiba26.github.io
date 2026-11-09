@@ -141,3 +141,16 @@ The disclosure that matters: the first two items below were run as full replays 
 ## Amendments
 
 Pre lock edits (2026-11-09, before START_DATE was set, made directly to v1): the entry pullback rule was replaced (RSI removed, 1.5 ATR below the 10 day high added); the benchmark start was moved from the first fill to START_DATE; the DIV ledger rows, `state.json`, whole share rounding, the implementation rules, the trial log and the falsification section were added. Nothing after the lock goes here except dated amendments.
+
+### Amendment 1 (2026-11-09, before START_DATE)
+
+This amendment supersedes the statements named below. The locked body above is unchanged. No rule value changes.
+
+1. **Sizing** (supersedes the Sizing bullet in Implementation rules). Equity used for sizing is marked at the prior close, adjusted for any exits filled at that same open. This matches `scripts/paper_trade.py`.
+2. **Known limits, gap bullet** (supersedes it). Under the final entry rule, in a replay of 2021-01-04 to 2026-11-06, the worst realized single trade losses were 1.40 percent (Safe), 2.83 percent (Medium) and 4.72 percent (High) of equity. That is 2.4 to 2.8 times planned risk. The losses came from gaps through the stop and from trend break exits, which have no loss floor.
+3. **Known limits, stop bullet** (supersedes it). Under the final rule the stop fired 9 times per tier in that replay, out of 114 to 120 exits per tier.
+4. **Trial log disclosure** (adds to it). Before the lock, exit reason counts and worst single trade losses under the final rule were seen. No returns, equity curves or win rates under the final rule were seen.
+5. **Falsification definitions** (adds to Falsification criteria; the criteria themselves are unchanged):
+   - A closed trade is a ticker and entry fill date, counted as closed once every tier that entered it has exited.
+   - Profit factor is computed on the High tier as gross winning trade profit divided by gross losing trade loss, after costs, excluding `DIV` rows.
+   - Return versus ITA is total return including dividends: High tier equity against the ITA benchmark series, on the same as of date.
