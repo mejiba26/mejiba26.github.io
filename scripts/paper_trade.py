@@ -22,6 +22,7 @@ import json
 import math
 import os
 import sys
+import time
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
@@ -53,6 +54,7 @@ TIERS = {
 # ---- Defaults the spec leaves open (flagged for review) ---------------------
 MOM_LOOKBACK = 252      # DEFAULT: 12m momentum = close / close 252 bars ago - 1 (user-specified ranking)
 WARMUP_DAYS = 800       # DEFAULT: calendar days of history fetched before the first processed day
+DOWNLOAD_TRIES, DOWNLOAD_WAIT_S = 3, 5   # download mechanics only, not a rule
 
 PORTS = list(TIERS)
 BENCHES = ["ITA", "SPY", "EQW"]
@@ -209,12 +211,34 @@ def step(state, d, i, px, ind, divs, ledger, notes):
 
 
 # ---------------------------------------------------------------- data + io
+def missing_tickers(raw, tickers):
+    """Tickers with no usable Close data in a yfinance download (all of them if it is empty)."""
+    if raw is None or raw.empty:
+        return list(tickers)
+    close = raw["Close"]
+    return [t for t in tickers if t not in close or close[t].dropna().empty]
+
+
 def fetch(start: pd.Timestamp, end=None):
     tickers = UNIVERSE + [BENCH_SPY]
-    raw = yf.download(tickers, start=(start - timedelta(days=WARMUP_DAYS)).strftime("%Y-%m-%d"),
-                      end=end, auto_adjust=False, actions=True, progress=False)
-    if raw.empty:
-        sys.exit("Download returned no data. Leaving the existing files alone.")
+    begin = (start - timedelta(days=WARMUP_DAYS)).strftime("%Y-%m-%d")
+    for attempt in range(1, DOWNLOAD_TRIES + 1):
+        try:
+            # threads=False: parallel downloads race on yfinance's shared cache ("database is locked").
+            raw = yf.download(tickers, start=begin, end=end, auto_adjust=False, actions=True,
+                              progress=False, threads=False)
+        except Exception as e:  # network or cache error: treat like a failed attempt and retry
+            raw, err = None, f"{type(e).__name__}: {e}"
+        else:
+            err = ""
+        missing = missing_tickers(raw, tickers)
+        if not missing:
+            break
+        print(f"Download attempt {attempt}/{DOWNLOAD_TRIES} missing {missing} {err}".rstrip(), file=sys.stderr)
+        if attempt < DOWNLOAD_TRIES:
+            time.sleep(DOWNLOAD_WAIT_S)
+    else:
+        sys.exit(f"Price download failed for {missing} after {DOWNLOAD_TRIES} attempts. Leaving the existing files alone.")
     px = {f: raw[f][tickers] for f in ("Open", "High", "Low", "Close")}
     divs = raw["Dividends"][tickers].fillna(0.0)
     return px, divs
