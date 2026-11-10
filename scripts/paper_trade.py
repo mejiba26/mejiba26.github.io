@@ -241,13 +241,27 @@ def fetch(start: pd.Timestamp, end=None):
         sys.exit(f"Price download failed for {missing} after {DOWNLOAD_TRIES} attempts. Leaving the existing files alone.")
     px = {f: raw[f][tickers] for f in ("Open", "High", "Low", "Close")}
     divs = raw["Dividends"][tickers].fillna(0.0)
-    return px, divs
+    splits = raw["Stock Splits"][tickers].fillna(0.0)
+    return px, divs, splits
 
 
-def run(px, divs, state, first, last):
+def check_splits(splits, days):
+    """Guard only: halt on any split in the days about to be processed. Yahoo restates past prices after a
+    split, but stored shares, entries and stops stay as they were, so continuing would book a fake loss in
+    the append only ledger. Nothing is adjusted here; Brian decides how to handle a split (Amendment 2)."""
+    for d in days:
+        for t, ratio in splits.loc[d].items():
+            if ratio and ratio != 0:
+                sys.exit(f"STOP: stock split in {t} on {d.date()}, ratio {ratio:g}. Nothing was written. "
+                         f"Stored shares and stops would be wrong. This run halts until a new dated amendment "
+                         f"says how to handle it (see docs/paper-trading-spec.md, Amendment 2).")
+
+
+def run(px, divs, splits, state, first, last):
     ind = build_indicators(px)
     idx = px["Close"].index
     todo = [(i, d) for i, d in enumerate(idx) if first <= d <= last and (state["last_date"] is None or d.strftime("%Y-%m-%d") > state["last_date"])]
+    check_splits(splits, [d for _, d in todo])
     ledger, rows, notes = [], [], []
     for i, d in todo:
         if i < 1 or any(px[f].loc[d].isna().any() for f in px):
@@ -312,7 +326,7 @@ def main():
         for f in ("ledger.csv", "equity.json", "state.json"):  # a replay always starts fresh
             (out / f).unlink(missing_ok=True)
         first, last = pd.Timestamp(a.replay[0]), pd.Timestamp(a.replay[1])
-        px, divs = fetch(first, (last + timedelta(days=1)).strftime("%Y-%m-%d"))
+        px, divs, splits = fetch(first, (last + timedelta(days=1)).strftime("%Y-%m-%d"))
         meta = dict(test=True, label="TEST REPLAY, NOT A TRACK RECORD", source="Yahoo Finance via yfinance, raw prices")
     else:
         if not START_DATE:
@@ -323,15 +337,16 @@ def main():
         if state["last_date"] is None and first < pd.Timestamp.now().normalize() - timedelta(days=5):
             sys.exit("START_DATE is in the past; a backfill would not be pre-registered. Refusing.")
         anchor = pd.Timestamp(state["last_date"]) if state["last_date"] else first
-        px, divs = fetch(anchor)
+        px, divs, splits = fetch(anchor)
         # Today's bar can be partial before the close; locking it into an append-only ledger would be wrong.
         now_et = pd.Timestamp.now(tz="America/New_York")
         if px["Close"].index[-1].date() == now_et.date() and now_et.hour * 60 + now_et.minute < 16 * 60 + 30:
             px = {k: v.iloc[:-1] for k, v in px.items()}
             divs = divs.iloc[:-1]
+            splits = splits.iloc[:-1]
         meta = dict(test=False, source="Yahoo Finance via yfinance, raw prices")
 
-    ledger, rows, notes = run(px, divs, state, first, last)
+    ledger, rows, notes = run(px, divs, splits, state, first, last)
     if not rows:
         print("Nothing new to process. No files changed.")
         return
