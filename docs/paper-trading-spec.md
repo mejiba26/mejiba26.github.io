@@ -154,3 +154,13 @@ This amendment supersedes the statements named below. The locked body above is u
    - A closed trade is a ticker and entry fill date, counted as closed once every tier that entered it has exited.
    - Profit factor is computed on the High tier as gross winning trade profit divided by gross losing trade loss, after costs, excluding `DIV` rows.
    - Return versus ITA is total return including dividends: High tier equity against the ITA benchmark series, on the same as of date.
+
+### Amendment 2 (2026-11-10, before START_DATE)
+
+This amendment adds a safety guard. The locked body and Amendment 1 are unchanged. No rule value changes.
+
+1. **Split guard** (adds to Implementation rules). Before processing any day, `scripts/paper_trade.py` checks Yahoo Finance's stock split data for every ticker in the universe and for SPY, on every day it is about to process. If any split ratio is nonzero, the run stops with a message naming the ticker, the date and the ratio, and writes nothing. The guard was added before START_DATE, in the commit titled "Halt paper trading on any stock split (guard only)".
+2. **Why.** Yahoo restates past prices after a split, but the simulator's stored shares, entry prices and stops stay as they were. Continuing would record a stop or a loss that never happened, in an append only ledger.
+3. **A split halts the run.** Every scheduled run after a split fails the same way, loudly in the Actions tab, until Brian decides how to handle it in a new dated amendment. The simulator does not adjust positions, stops, benchmarks or ledger rows on its own. Nothing is recorded for the halted days in the meantime.
+4. **Scope.** The guard applies to unheld tickers and to SPY, not only to held positions, and it also applies to test replays. It checks only days not yet processed, so a split before the last processed date does not halt a later run.
+5. **Disclosure.** Two splits already exist in the data, both before START_DATE and so outside the processed days: XLE 2 for 1 on 2025-12-05, and ITA 3 for 1 on 2026-11-05. Neither triggers the guard.
