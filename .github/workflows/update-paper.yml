@@ -25,6 +25,11 @@ jobs:
       - name: Process new trading days and update data/paper/
         run: python scripts/paper_trade.py
 
+      # Fails the run if data/paper/ lacks a key the page needs (the page hides
+      # quietly instead). Does nothing and exits 0 while data/paper does not exist.
+      - name: Check data/paper schema
+        run: python scripts/check_paper_schema.py
+
       - name: Commit if the data changed
         run: |
           git config user.name "github-actions[bot]"

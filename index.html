@@ -608,7 +608,10 @@
 
 <script>
   // Paper trading: reads data/paper/{ledger.csv,equity.json,state.json}, written
-  // by scripts/paper_trade.py (see docs/paper-trading-spec.md). The section and
+  // by scripts/paper_trade.py (see docs/paper-trading-spec.md).
+  // KEEP IN SYNC with scripts/check_paper_schema.py: the keys read below
+  // (as_of, series rows, ports.<tier>.pos, the ledger header) are the ones that
+  // script enforces in the workflow. Change one side, change the other. The section and
   // its nav link ship hidden and are unhidden only after every check passes.
   // Any failure (missing file, bad JSON, missing field, non-numeric value,
   // stale data, before the start date) leaves them hidden and silent.
