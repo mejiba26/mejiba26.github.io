@@ -43,6 +43,7 @@
       <a href="#resume">Resume</a>
       <a href="#work">Work</a>
       <a href="#market">Market View</a>
+      <a href="#paper-trading" id="nav-paper" hidden>Paper Trading</a>
       <!-- <a href="#notes">Market Notes</a>  (turn back on with the first post) -->
       <a href="#contact">Contact</a>
     </nav>
@@ -310,6 +311,48 @@
 
   </section>
 
+  <!-- PAPER TRADING
+       Filled by the script at the bottom of this file from data/paper/
+       (ledger.csv, equity.json, state.json), written by scripts/paper_trade.py.
+       Starts hidden, together with its nav link, and is only revealed when
+       every file parses, every figure is a real number, the data is recent
+       and today is on or after START_DATE. Anything else shows nothing. -->
+  <section id="paper-trading" class="market paper wrap" hidden>
+    <p class="eyebrow">Live simulation</p>
+    <h2>Paper trading, aerospace and defense and oil</h2>
+    <p class="paper-meta">Started <span id="paper-start"></span> · <span class="paper-asof">As of <span id="paper-asof"></span></span></p>
+    <p class="paper-disclaimer">Simulation only. No real money, no broker, not investment advice.</p>
+    <div id="paper-body"></div>
+
+    <div class="paper-block">
+      <h3 class="paper-h">The rules in plain language</h3>
+      <ul class="paper-list">
+        <li><strong>Universe.</strong> RTX, LMT, NOC, GD and ITA (aerospace and defense); XLE, USO and XOM (oil). Cash earns nothing. Long only, no leverage.</li>
+        <li><strong>Entry.</strong> Checked after each close. All four must hold: the close is above both its 50 day and 200 day average; the close is at least 1.5 times the 14 day ATR below the highest high of the last 10 trading days (ATR, average true range, is the typical daily price swing); today's close is above yesterday's high; and the portfolio has an open slot and has made fewer than 2 entries this week. The buy fills at the next day's open plus a 10 basis point cost.</li>
+        <li><strong>Exit.</strong> The first of: the close falls to entry minus 2 ATR (stop); the close reaches entry plus 3 ATR (target); the close drops below the 50 day average (trend break); or 20 trading days pass (time stop). The sale fills at the next day's open with the same cost.</li>
+        <li><strong>Sizing.</strong> Dollars at risk (the tier's risk per trade times equity) divided by the stop distance gives the shares, capped at the tier's maximum weight.</li>
+        <li><strong>Tiers.</strong> Safe risks 0.5% per trade, max 20% in one name, 3 positions, 50% invested. Medium: 1%, 30%, 4 positions, 80%. High: 2%, 40%, 3 positions, 100%. Each starts with $100,000 of hypothetical money.</li>
+      </ul>
+    </div>
+
+    <div class="paper-block">
+      <h3 class="paper-h">Honest limits</h3>
+      <ul class="paper-list">
+        <li>Swing trades in a small universe are infrequent. It will take months to collect enough trades to judge anything, and early results will be noisy.</li>
+        <li>Stops are checked on the close and filled at the next open, so a gap can lose more than the planned risk, and a trend break exit has no loss floor. Compare planned risk with the realized worst loss above.</li>
+        <li>A pullback can be the start of a bigger decline. The confirmation rule and the stop reduce that risk but do not remove it.</li>
+        <li>Fills at the open ignore slippage, and USO carries futures roll cost. Paper results do not predict real results.</li>
+      </ul>
+    </div>
+
+    <p class="paper-links">
+      <a href="https://github.com/mejiba26/mejiba26.github.io/blob/main/data/paper/ledger.csv" target="_blank" rel="noopener">Ledger on GitHub ↗</a>
+      <a href="https://github.com/mejiba26/mejiba26.github.io/commit/e22e6cb" target="_blank" rel="noopener">Locked spec, commit e22e6cb ↗</a>
+      <a href="https://github.com/mejiba26/mejiba26.github.io/commit/52d8b12" target="_blank" rel="noopener">Amendment 1, commit 52d8b12 ↗</a>
+      <a href="https://github.com/mejiba26/mejiba26.github.io/blob/main/docs/paper-trading-spec.md" target="_blank" rel="noopener">Full spec ↗</a>
+    </p>
+  </section>
+
   <!-- MARKET NOTES -->
   <!-- Hidden until the first post is ready: remove "hidden" below, turn the nav link back on,
        and change the Contact eyebrow back to 06. -->
@@ -560,6 +603,257 @@
         box.classList.add('is-visible');
       })
       .catch(() => { box.hidden = true; });
+  })();
+</script>
+
+<script>
+  // Paper trading: reads data/paper/{ledger.csv,equity.json,state.json}, written
+  // by scripts/paper_trade.py (see docs/paper-trading-spec.md). The section and
+  // its nav link ship hidden and are unhidden only after every check passes.
+  // Any failure (missing file, bad JSON, missing field, non-numeric value,
+  // stale data, before the start date) leaves them hidden and silent.
+  (function () {
+    const box = document.getElementById('paper-trading');
+    const nav = document.getElementById('nav-paper');
+    const body = document.getElementById('paper-body');
+    if (!box || !body) return;
+
+    const START_DATE = '2026-11-16';   // must match scripts/paper_trade.py and the spec
+    const STALE_DAYS = 6;              // weekdays only, so a long weekend plus a missed run
+    const START_CASH = 100000;
+    const MIN_CLOSED = 30;             // falsification: no judgment before this
+    const BASE = 'data/paper/';
+    const TIERS = [
+      { id: 'safe',   name: 'Safe',   risk: 0.5, dd: 6 },
+      { id: 'medium', name: 'Medium', risk: 1,   dd: 12 },
+      { id: 'high',   name: 'High',   risk: 2,   dd: 20 }
+    ];
+    const BENCH = [['ITA', 'ITA'], ['SPY', 'SPY'], ['EQW', 'Equal weight']];
+
+    const pad2 = n => String(n).padStart(2, '0');
+    const now = new Date();
+    const today = now.getFullYear() + '-' + pad2(now.getMonth() + 1) + '-' + pad2(now.getDate());
+    if (today < START_DATE) return;    // nothing to fetch before the start
+
+    const num = v => { if (typeof v !== 'number' || !isFinite(v)) throw new Error('bad value'); return v; };
+    const esc = t => String(t).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+    const dstr = s => {
+      if (typeof s !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(s)) throw new Error('bad date');
+      const d = new Date(s + 'T12:00:00'); if (isNaN(d.getTime())) throw new Error('bad date'); return d;
+    };
+    const longDate = s => dstr(s).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+    const money = (n, p) => (n < 0 ? '-$' : '$') + Math.abs(n).toLocaleString('en-US', { minimumFractionDigits: p === undefined ? 0 : p, maximumFractionDigits: p === undefined ? 0 : p });
+    const pct = (n, p) => (n > 0 ? '+' : n < 0 ? '-' : '') + Math.abs(n).toFixed(p === undefined ? 1 : p) + '%';
+    const dir = n => (n >= 0 ? 'up' : 'down');
+    const jget = f => fetch(BASE + f, { cache: 'no-cache' }).then(r => { if (!r.ok) throw new Error(r.status); return r.json(); });
+
+    // ledger.csv: date,portfolio,ticker,side,price,shares,cost,reason (no quoted fields)
+    function parseLedger(text) {
+      const lines = text.split(/\r?\n/).filter(l => l.length);
+      if (!lines.length || lines[0] !== 'date,portfolio,ticker,side,price,shares,cost,reason') throw new Error('bad header');
+      return lines.slice(1).map(l => {
+        const f = l.split(',');
+        if (f.length !== 8) throw new Error('bad row');
+        const r = { date: f[0], tier: f[1], ticker: f[2], side: f[3], price: +f[4], shares: +f[5], cost: +f[6], reason: f[7] };
+        dstr(r.date); num(r.price); num(r.shares); num(r.cost);
+        if (!TIERS.some(t => t.id === r.tier) || !['BUY', 'SELL', 'DIV'].includes(r.side)) throw new Error('bad row');
+        return r;
+      });
+    }
+
+    // Pair each BUY with the next SELL of the same ticker in the same tier.
+    function buildTrades(ledger) {
+      const open = {}, trades = [];
+      ledger.forEach(r => {
+        const k = r.tier + '|' + r.ticker;
+        if (r.side === 'BUY') open[k] = r;
+        else if (r.side === 'SELL' && open[k]) {
+          const b = open[k]; delete open[k];
+          trades.push({
+            tier: r.tier, ticker: r.ticker, entry: b.date, exit: r.date,
+            pnl: (r.price - b.price) * b.shares - b.cost - r.cost,
+            days: Math.round((dstr(r.date) - dstr(b.date)) / 86400000)
+          });
+        }
+      });
+      return { trades, stillOpen: Object.values(open) };
+    }
+
+    // Amendment 1: a closed trade is a ticker plus entry fill date, closed once
+    // every tier that entered it has exited.
+    function closedCount(trades, stillOpen) {
+      const all = new Set(trades.map(t => t.ticker + '|' + t.entry));
+      const openKeys = new Set(stillOpen.map(b => b.ticker + '|' + b.date));
+      let n = 0; all.forEach(k => { if (!openKeys.has(k)) n++; });
+      return n;
+    }
+
+    function eqBefore(series, tier, date) {
+      let v = START_CASH;
+      for (const row of series) { if (row.date < date) v = row[tier]; else break; }
+      return v;
+    }
+
+    function maxDrawdown(vals) {
+      let peak = vals[0], dd = 0;
+      vals.forEach(v => { if (v > peak) peak = v; dd = Math.max(dd, (peak - v) / peak * 100); });
+      return dd;
+    }
+
+    function tierCard(t, series, trades, positions, judged) {
+      const vals = [START_CASH].concat(series.map(r => r[t.id]));
+      const eq = vals[vals.length - 1];
+      const ret = (eq / START_CASH - 1) * 100;
+      const dd = maxDrawdown(vals);
+      const mine = trades.filter(x => x.tier === t.id);
+      let worst = 'n/a';
+      if (mine.length) {
+        const losses = mine.filter(x => x.pnl < 0).map(x => -x.pnl / eqBefore(series, t.id, x.entry) * 100);
+        worst = losses.length ? Math.max.apply(null, losses).toFixed(2) + '% of equity' : 'no losing trade yet';
+      }
+      const pos = Object.keys(positions).sort().map(k => {
+        const p = positions[k];
+        return `<li><span class="paper-tkr">${esc(k)}</span> ${num(p.shares)} sh · in ${money(num(p.entry), 2)} · stop ${money(num(p.stop), 2)}</li>`;
+      }).join('') || '<li class="paper-none">No open positions</li>';
+      const verdict = judged
+        ? `<p class="paper-verdict">${dd > t.dd ? 'Beyond the drawdown limit: flagged' : 'Within the drawdown limit'}</p>` : '';
+      return `
+        <li class="paper-tier">
+          <p class="paper-k">${t.name}</p>
+          <p class="paper-eq">${money(eq)} <span class="paper-d ${dir(ret)}">${pct(ret)}</span></p>
+          <p class="paper-line">Peak to trough drawdown <strong>${dd.toFixed(1)}%</strong> · limit ${t.dd}%</p>
+          <div class="paper-ddbar" aria-hidden="true"><span style="width:${Math.min(100, dd / t.dd * 100).toFixed(1)}%"></span></div>
+          ${verdict}
+          <p class="paper-line">Planned risk per trade <strong>${t.risk}%</strong><br>Realized worst loss <strong>${esc(worst)}</strong></p>
+          <p class="paper-k paper-k2">Open positions</p>
+          <ul class="paper-pos">${pos}</ul>
+        </li>`;
+    }
+
+    function chart(series) {
+      const W = Math.max(280, body.clientWidth || 320), small = W < 560;
+      const H = small ? 300 : 380, m = { l: 46, r: small ? 90 : 120, t: 14, b: 30 };
+      const lines = TIERS.map(t => ({ key: t.id, label: t.name, cls: 'c-' + t.id }))
+        .concat(BENCH.map(b => ({ key: b[0], label: b[1], cls: 'c-' + b[0].toLowerCase() })));
+      lines.forEach(l => { l.v = [0].concat(series.map(r => (r[l.key] / START_CASH - 1) * 100)); });
+      let lo = 0, hi = 0;
+      lines.forEach(l => l.v.forEach(v => { lo = Math.min(lo, v); hi = Math.max(hi, v); }));
+      const span = (hi - lo) || 1; lo -= span * 0.08; hi += span * 0.08;
+      const n = series.length;
+      const x = i => m.l + (W - m.l - m.r) * (n ? i / n : 0);
+      const y = v => m.t + (H - m.t - m.b) * (1 - (v - lo) / (hi - lo));
+      const step = [0.5, 1, 2, 5, 10, 20, 50].find(s => (hi - lo) / s <= 5) || 100;
+      let grid = '';
+      for (let g = Math.ceil(lo / step) * step; g <= hi; g += step) {
+        grid += `<line class="${Math.abs(g) < 1e-9 ? 'zero' : 'grid'}" x1="${m.l}" x2="${W - m.r}" y1="${y(g).toFixed(1)}" y2="${y(g).toFixed(1)}"/>`
+          + `<text class="ax" x="${m.l - 6}" y="${(y(g) + 4).toFixed(1)}" text-anchor="end">${pct(g, step < 1 ? 1 : 0)}</text>`;
+      }
+      const paths = lines.map(l =>
+        `<polyline class="ln ${l.cls}" fill="none" points="${l.v.map((v, i) => x(i).toFixed(1) + ',' + y(v).toFixed(1)).join(' ')}"/>`).join('');
+      // End labels, pushed apart so they never overlap.
+      const ends = lines.map(l => ({ l, y: y(l.v[n]), v: l.v[n] })).sort((a, b) => a.y - b.y);
+      for (let i = 1; i < ends.length; i++) ends[i].y = Math.max(ends[i].y, ends[i - 1].y + 13);
+      const labels = ends.map(e =>
+        `<text class="end ${e.l.cls}" x="${(W - m.r + 6).toFixed(1)}" y="${(e.y + 4).toFixed(1)}">${esc(small && e.l.key === 'EQW' ? 'Equal' : e.l.label)} ${pct(e.v, 1)}</text>`).join('');
+      const marker = n === 1 ? lines.map(l => `<circle class="dot ${l.cls}" cx="${x(1).toFixed(1)}" cy="${y(l.v[1]).toFixed(1)}" r="3"/>`).join('') : '';
+      const aria = 'Total return since the start for the Safe, Medium and High tiers against ITA, SPY and an equal weight of the universe. '
+        + lines.map(l => l.label + ' ' + pct(l.v[n], 1)).join(', ') + '.';
+      return `
+        <svg class="paper-svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(aria)}">
+          ${grid}${paths}${marker}${labels}
+          <text class="ax" x="${m.l}" y="${H - 8}">Start</text>
+          <text class="ax" x="${W - m.r}" y="${H - 8}" text-anchor="end">${esc(longDate(series[n - 1].date))}</text>
+        </svg>
+        <ul class="paper-legend">${lines.map(l => `<li><svg width="30" height="10" aria-hidden="true"><line class="ln ${l.cls}" x1="0" x2="30" y1="5" y2="5"/></svg>${esc(l.label)}</li>`).join('')}</ul>`;
+    }
+
+    function statsTable(trades) {
+      const cols = TIERS.map(t => {
+        const m = trades.filter(x => x.tier === t.id);
+        const w = m.filter(x => x.pnl > 0), l = m.filter(x => x.pnl < 0);
+        const avg = a => a.length ? a.reduce((s, x) => s + x.pnl, 0) / a.length : null;
+        return {
+          n: m.length,
+          win: m.length ? (w.length / m.length * 100).toFixed(0) + '%' : 'n/a',
+          aw: avg(w) === null ? 'n/a' : money(avg(w)),
+          al: avg(l) === null ? 'n/a' : money(avg(l)),
+          hold: m.length ? (m.reduce((s, x) => s + x.days, 0) / m.length).toFixed(1) : 'n/a'
+        };
+      });
+      const row = (label, k) => `<tr><th scope="row">${label}</th>${cols.map(c => `<td>${esc(c[k])}</td>`).join('')}</tr>`;
+      return `<div class="paper-scroll"><table class="paper-table">
+        <thead><tr><th></th>${TIERS.map(t => `<th scope="col">${t.name}</th>`).join('')}</tr></thead>
+        <tbody>${row('Closed trades', 'n')}${row('Win rate', 'win')}${row('Average win', 'aw')}${row('Average loss', 'al')}${row('Avg holding (calendar days)', 'hold')}</tbody>
+      </table></div>`;
+    }
+
+    function journal(ledger) {
+      if (!ledger.length) return '<p class="paper-empty">No trades yet. The rules only trade pullbacks in uptrends, and these are infrequent.</p>';
+      const rows = ledger.map((r, i) => ({ r, i })).sort((a, b) => b.r.date.localeCompare(a.r.date) || b.i - a.i)
+        .map(({ r }) => `<tr><td>${esc(r.date)}</td><td>${esc(r.tier)}</td><td>${esc(r.ticker)}</td><td>${esc(r.side)}</td><td class="n">${money(r.price, 2)}</td><td class="n">${r.shares.toLocaleString('en-US')}</td><td class="n">${money(r.cost, 2)}</td><td>${esc(r.reason)}</td></tr>`).join('');
+      return `<div class="paper-scroll paper-journal" tabindex="0" role="region" aria-label="Trade journal, scrollable"><table class="paper-table">
+        <thead><tr><th>Date</th><th>Tier</th><th>Ticker</th><th>Side</th><th class="n">Price</th><th class="n">Shares</th><th class="n">Cost</th><th>Reason</th></tr></thead>
+        <tbody>${rows}</tbody></table></div>`;
+    }
+
+    let model = null;
+    function render() {
+      const { series, trades, stillOpen, ledger, state, asOf, closed } = model;
+      const judged = closed >= MIN_CLOSED;
+      const high = trades.filter(x => x.tier === 'high');
+      const gw = high.filter(x => x.pnl > 0).reduce((s, x) => s + x.pnl, 0);
+      const gl = -high.filter(x => x.pnl < 0).reduce((s, x) => s + x.pnl, 0);
+      const pf = !judged ? 'not yet meaningful' : gl > 0 ? (gw / gl).toFixed(2) : 'no losing trades';
+      const days = Math.round((dstr(asOf) - dstr(START_DATE)) / 86400000);
+      body.innerHTML = `
+        <div class="paper-strip">
+          <p><span class="paper-k">Day</span> ${days} since start</p>
+          <p><span class="paper-k">Closed trades</span> ${closed} of ${MIN_CLOSED}</p>
+          <p class="paper-nojudge">${judged ? '30 closed trades reached: tier drawdown checks shown' : 'No judgment before 30 closed trades'}</p>
+        </div>
+        <ul class="paper-tiers">${TIERS.map(t => tierCard(t, series, trades, state.ports[t.id].pos, judged)).join('')}</ul>
+        <div class="paper-block">
+          <h3 class="paper-h">Total return since start, against benchmarks</h3>
+          <p class="paper-note">All lines start at zero on the start date with $100,000. Losing periods and periods behind the benchmarks are shown as they happened.</p>
+          <div id="paper-chart">${chart(series)}</div>
+        </div>
+        <div class="paper-block">
+          <h3 class="paper-h">Trade statistics</h3>
+          ${statsTable(trades)}
+          <p class="paper-note">Closed trades only, dividends excluded. Profit factor, High tier: <strong>${esc(pf)}</strong>.</p>
+        </div>
+        <div class="paper-block">
+          <h3 class="paper-h">Trade journal</h3>
+          ${journal(ledger)}
+        </div>`;
+    }
+
+    Promise.all([jget('equity.json'), jget('state.json'),
+                 fetch(BASE + 'ledger.csv', { cache: 'no-cache' }).then(r => { if (!r.ok) throw new Error(r.status); return r.text(); })])
+      .then(([eq, state, csv]) => {
+        const asOf = eq.as_of;
+        if ((now - dstr(asOf)) / 86400000 > STALE_DAYS) throw new Error('stale');
+        const series = eq.series;
+        if (!Array.isArray(series) || !series.length) throw new Error('no series');
+        series.forEach(r => { dstr(r.date); TIERS.forEach(t => num(r[t.id])); BENCH.forEach(b => num(r[b[0]])); });
+        if (series[series.length - 1].date !== asOf) throw new Error('as_of mismatch');
+        TIERS.forEach(t => { const p = state.ports[t.id].pos; if (!p || typeof p !== 'object') throw new Error('bad state'); });
+        const ledger = parseLedger(csv);
+        const bt = buildTrades(ledger);
+        model = { series, ledger, state, asOf, trades: bt.trades, stillOpen: bt.stillOpen, closed: closedCount(bt.trades, bt.stillOpen) };
+        render();   // throws on any bad number, before anything is revealed
+        document.getElementById('paper-start').textContent = longDate(START_DATE);
+        document.getElementById('paper-asof').textContent = longDate(asOf);
+        box.hidden = false;
+        if (nav) nav.hidden = false;
+        // The chart was sized while the section was hidden (width 0); redraw at the real width.
+        document.getElementById('paper-chart').innerHTML = chart(model.series);
+        let t; window.addEventListener('resize', () => {
+          clearTimeout(t);
+          t = setTimeout(() => { try { document.getElementById('paper-chart').innerHTML = chart(model.series); } catch (e) {} }, 150);
+        });
+      })
+      .catch(() => { box.hidden = true; if (nav) nav.hidden = true; body.innerHTML = ''; });
   })();
 </script>
 
