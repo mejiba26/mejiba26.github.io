@@ -257,11 +257,12 @@ def check_splits(splits, days):
                          f"says how to handle it (see docs/paper-trading-spec.md, Amendment 2).")
 
 
-def run(px, divs, splits, state, first, last):
+def run(px, divs, splits, state, first, last, guard=True):
     ind = build_indicators(px)
     idx = px["Close"].index
     todo = [(i, d) for i, d in enumerate(idx) if first <= d <= last and (state["last_date"] is None or d.strftime("%Y-%m-%d") > state["last_date"])]
-    check_splits(splits, [d for _, d in todo])
+    if guard:  # live run only; a replay restates all prices together, so a split cannot book a fake loss (Amendment 2)
+        check_splits(splits, [d for _, d in todo])
     ledger, rows, notes = [], [], []
     for i, d in todo:
         if i < 1 or any(px[f].loc[d].isna().any() for f in px):
@@ -346,7 +347,7 @@ def main():
             splits = splits.iloc[:-1]
         meta = dict(test=False, source="Yahoo Finance via yfinance, raw prices")
 
-    ledger, rows, notes = run(px, divs, splits, state, first, last)
+    ledger, rows, notes = run(px, divs, splits, state, first, last, guard=not a.replay)
     if not rows:
         print("Nothing new to process. No files changed.")
         return

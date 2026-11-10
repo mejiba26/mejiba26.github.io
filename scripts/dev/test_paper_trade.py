@@ -110,6 +110,38 @@ def test_split_run_equals_continuous_run():
         assert c_state == state, "state differs between the split run and the continuous run"
 
 
+def test_live_run_halts_on_split_and_writes_nothing():
+    with tempfile.TemporaryDirectory() as d, Sim(Path(d) / "paper") as s:
+        s.run_through(10)
+        before = s.snapshot()
+        s.splits.loc[s.day(12), "XOM"] = 2.0   # a split on a day not yet processed
+        try:
+            s.run_through(15)
+        except SystemExit as e:
+            assert "XOM" in str(e) and "ratio 2" in str(e), f"halt message should name ticker and ratio: {e}"
+        else:
+            raise AssertionError("live run did not halt on a split")
+        assert s.snapshot() == before, "a halted run wrote files"
+
+
+def test_replay_across_xle_split_does_not_halt():
+    # The real XLE 2 for 1 split date, on synthetic prices. A replay is exempt from the guard.
+    start = pd.Timestamp("2025-11-03")
+    px, divs, splits = synthetic(start, live=60)
+    assert pd.Timestamp("2025-12-05") in splits.index
+    splits.loc["2025-12-05", "XLE"] = 2.0
+    old = (P.fetch, sys.argv)
+    with tempfile.TemporaryDirectory() as d:
+        P.fetch = lambda a, b=None: (px, divs, splits)
+        sys.argv = ["paper_trade.py", "--replay", "2025-11-03", "2025-12-31", "--out", str(Path(d) / "replay")]
+        try:
+            P.main()   # SystemExit here would mean it halted
+        finally:
+            P.fetch, sys.argv = old
+        eq = json.loads((Path(d) / "replay" / "equity.json").read_text())
+        assert eq["as_of"] >= "2025-12-30", f"replay stopped early at {eq['as_of']}"
+
+
 if __name__ == "__main__":
     for name, fn in list(globals().items()):
         if name.startswith("test_"):

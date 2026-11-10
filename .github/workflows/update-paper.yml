@@ -20,7 +20,7 @@ jobs:
           python-version: "3.12"
 
       - name: Install dependencies
-        run: pip install yfinance==1.8.0 pandas==3.1.1
+        run: pip install yfinance==1.8.0 pandas==3.1.1 numpy==2.5.4
 
       - name: Process new trading days and update data/paper/
         run: python scripts/paper_trade.py
