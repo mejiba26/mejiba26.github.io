@@ -185,6 +185,7 @@ h2 {
   padding-top: 100px;
   padding-bottom: 100px;
   max-width: 100%;
+  overflow-x: clip; /* the photo halo (.hero-side::before) reaches 40px past the photo and caused sideways scroll on phones */
 }
 
 @media (max-width: 640px) {
