@@ -35,7 +35,9 @@ Energy data comes from `scripts/update_eia.py` (Python, standard library only), 
 
 The paper trading simulation follows a rule set locked before its start date in `docs/paper-trading-spec.md`. `scripts/paper_trade.py` is the simulator, a workflow (`update-paper.yml`) runs it every weekday after the close, and it appends to `data/paper/`. It is a simulation: no real money and not investment advice.
 
-`scripts/dev/` holds test helpers for the paper trading card (sample data and an offline simulator test). Nothing there runs in a workflow or on the site.
+The volatility forecast scorecard publishes next day range forecasts for SPY, QQQ, ITA and XLE from four models every weekday after the close, then grades them (`scripts/update_vol.py`, `update-vol.yml`, `data/vol/`). Its models, scores and test were fixed before the first forecast in `docs/vol-scorecard-spec.md`. It is a forecast evaluation, not trading advice.
+
+`scripts/dev/` holds test helpers for the paper trading card and the volatility scorecard (sample data and offline tests). Nothing there runs in a workflow or on the site.
 
 ## Contact
 
