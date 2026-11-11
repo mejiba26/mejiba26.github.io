@@ -289,9 +289,10 @@
         <p class="ticker-label">Trend</p>
         <p class="ticker-text">Sector rotation</p>
         <p class="ticker-note">Which S&amp;P 500 sectors are leading and lagging over the last three months, pulled from the SPDR sector ETFs and refreshed every weekday.</p>
-        <div id="sector-live" class="sector-live" aria-live="polite">
-          <p class="sector-status">Loading latest sector data…</p>
-        </div>
+        <!-- Starts hidden and is only revealed by the script at the bottom of
+             this file once data/sectors.json is present, well formed and
+             fresh. A missing or stale feed shows nothing. -->
+        <div id="sector-live" class="sector-live" aria-live="polite" hidden></div>
         <p class="ticker-note">Rotation like this is capital moving on rate and macro conditions. It reshapes both which companies look attractive to own and which ones are moving enough to trade.</p>
       </div>
     </div>
@@ -436,27 +437,47 @@
 <script>
   // Sector rotation: reads data/sectors.json (rebuilt each weekday by
   // .github/workflows/update-sectors.yml) and shows the top and bottom three.
+  // Same contract as the energy card below: the box ships hidden and is only
+  // unhidden once the file parses, every figure shown is a real number and the
+  // data is recent. Anything else leaves it hidden and silent.
   (function () {
     const box = document.getElementById('sector-live');
     if (!box) return;
-    const fmt = n => (n > 0 ? '+' : '') + n.toFixed(1) + '%';
+
+    // The file is rebuilt every weekday, so as_of is normally 0 to 3 days old
+    // (Friday's close read on a Monday). 6 days covers a long weekend plus a
+    // missed run, and matches the paper trading card.
+    const STALE_DAYS = 6;
+
+    const num = v => { if (typeof v !== 'number' || !isFinite(v)) throw new Error('bad value'); return v; };
+    const fmt = n => (num(n) > 0 ? '+' : '') + n.toFixed(1) + '%';
     const esc = t => String(t).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-    const row = d => `<li><span class="sector-name">${esc(d.name)} <span class="sector-tkr">${esc(d.ticker)}</span></span><span class="sector-ret ${d.r3m >= 0 ? 'up' : 'down'}">${fmt(d.r3m)}</span></li>`;
+    const row = d => {
+      if (!d || typeof d.name !== 'string' || typeof d.ticker !== 'string') throw new Error('bad row');
+      return `<li><span class="sector-name">${esc(d.name)} <span class="sector-tkr">${esc(d.ticker)}</span></span><span class="sector-ret ${num(d.r3m) >= 0 ? 'up' : 'down'}">${fmt(d.r3m)}</span></li>`;
+    };
 
     fetch('data/sectors.json', { cache: 'no-cache' })
       .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
       .then(data => {
+        if (typeof data.as_of !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(data.as_of)) throw new Error('bad date');
+        const asOf = new Date(data.as_of + 'T12:00:00');
+        if (isNaN(asOf.getTime())) throw new Error('bad date');
+        if ((Date.now() - asOf.getTime()) / 86400000 > STALE_DAYS) throw new Error('stale');
+
         const s = data.sectors;
-        if (!s || s.length < 6) throw new Error('bad data');
-        const asOf = new Date(data.as_of + 'T12:00:00').toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-        box.innerHTML = `
+        if (!Array.isArray(s) || s.length < 6) throw new Error('bad data');
+        const asOfText = asOf.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+        // Built in full before it touches the page, so a bad row throws here
+        // and nothing half rendered is ever shown.
+        const html = `
           <p class="sector-head">Leading (3 mo)</p><ul class="sector-list">${s.slice(0, 3).map(row).join('')}</ul>
           <p class="sector-head">Lagging (3 mo)</p><ul class="sector-list">${s.slice(-3).reverse().map(row).join('')}</ul>
-          <p class="sector-meta">S&amp;P 500 (SPY) ${fmt(data.benchmark.r3m)} over the same window. Data as of ${asOf}.</p>`;
+          <p class="sector-meta">S&amp;P 500 (SPY) ${fmt(data.benchmark.r3m)} over the same window. Data as of ${asOfText}.</p>`;
+        box.innerHTML = html;
+        box.hidden = false;
       })
-      .catch(() => {
-        box.innerHTML = '<p class="sector-status">Live sector data is unavailable right now.</p>';
-      });
+      .catch(() => { box.hidden = true; box.innerHTML = ''; });
   })();
 </script>
 

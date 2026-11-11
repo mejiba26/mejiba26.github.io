@@ -967,6 +967,8 @@ h2 {
    MARKET VIEW: live sector rotation
    ============================================ */
 .sector-live { margin: 18px 0; }
+/* When the live box is hidden, keep the gap between the two notes around it. */
+.sector-live[hidden] + .ticker-note { margin-top: 18px; }
 
 .sector-head {
   font-family: var(--mono);
