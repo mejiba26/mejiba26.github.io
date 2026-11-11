@@ -48,16 +48,18 @@ jobs:
             git push
           fi
 
-      # Scaffolds notes/draft-YYYY-MM-DD.md from the data just written. It
+      # Scaffolds _notes/draft-YYYY-MM-DD.md from the data just written. It
       # will not overwrite a draft that already exists, so a second run on
       # the same day cannot destroy prose written into one. If this step
       # fails the run goes red, but the data above is already pushed.
+      # _notes/ starts with an underscore so GitHub Pages (Jekyll) does not
+      # publish the drafts.
       - name: Draft this week's note
         run: python scripts/draft_note.py
 
       - name: Commit the draft if there is a new one
         run: |
-          git add notes/
+          git add _notes/
           if git diff --cached --quiet; then
             echo "No new draft."
           else
