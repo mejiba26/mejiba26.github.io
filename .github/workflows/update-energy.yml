@@ -46,5 +46,8 @@ jobs:
             echo "No change in energy data."
           else
             git commit -m "Update energy data and draft this week's note"
+            # Scheduled runs land hours late and can overlap the other data
+            # workflows, so rebase onto whatever was pushed in the meantime.
+            git pull --rebase origin main
             git push
           fi
