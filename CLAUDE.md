@@ -67,20 +67,25 @@ one, and copy their structure, error handling and commit step.
   verify the response is non-empty before wiring it into the page. A wrong
   series ID commonly returns an empty result rather than an error.
 
-## Current work: energy dashboard
+## Energy market card (live)
 
-Adding an energy market card to the Market View section, following the
+The energy card in the Market View section is finished and follows the
 pattern above:
 
-- `scripts/update_eia.py` → `data/energy.json`
-- Runs Wednesdays, after the EIA Weekly Petroleum Status Report
-  (released ~10:30am ET).
+- `scripts/update_eia.py` → `data/energy.json`, with a five year history
+  cache in `data/eia_history.json` for the percentile ranks.
+- `.github/workflows/update-energy.yml` runs Wednesdays at 17:00 UTC, after
+  the EIA Weekly Petroleum Status Report (released ~10:30am ET). It commits
+  the data first, then runs `scripts/draft_note.py`, which scaffolds a weekly
+  note in `_notes/` as a separate commit. `_notes/` is not published by Pages.
 
-Target metrics: commercial crude stocks excluding SPR (versus the five-year
+The card shows commercial crude stocks excluding SPR (versus the five-year
 band), Cushing stocks, US field production, distillate stocks and days of
-cover, the diesel crack (ULSD versus WTI), and the Brent–WTI spread.
+cover, the diesel crack (ULSD versus WTI), and the Brent–WTI spread. It
+starts hidden and is revealed only when the data is well formed and no more
+than 16 days old.
 
-Pull prices from EIA as well, so the whole card has a single upstream
+Prices come from EIA as well, so the whole card has a single upstream
 dependency.
 
 ## Paper trading (LOCKED)
