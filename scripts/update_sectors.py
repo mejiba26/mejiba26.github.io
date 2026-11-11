@@ -12,6 +12,7 @@ Sector Rotation card. Runs on a schedule via GitHub Actions
 
 import json
 import sys
+import time
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -37,6 +38,9 @@ BENCHMARK = "SPY"
 WINDOWS = {"r1m": 21, "r3m": 63}
 
 OUT = Path(__file__).resolve().parent.parent / "data" / "sectors.json"
+
+# Download mechanics, same as scripts/paper_trade.py.
+DOWNLOAD_TRIES, DOWNLOAD_WAIT_S = 3, 5
 
 
 def pct(new, old):
@@ -75,15 +79,36 @@ def compute(prices: pd.DataFrame) -> dict:
     }
 
 
+def missing_tickers(raw, tickers):
+    """Tickers with no usable Close data in a yfinance download (all of them if it is empty)."""
+    if raw is None or raw.empty:
+        return list(tickers)
+    close = raw["Close"]
+    return [t for t in tickers if t not in close or close[t].dropna().empty]
+
+
+def download(tickers):
+    """Up to DOWNLOAD_TRIES attempts. Exits non zero, naming the tickers, if any still has no data."""
+    for attempt in range(1, DOWNLOAD_TRIES + 1):
+        try:
+            # threads=False: parallel downloads race on yfinance's shared cache ("database is locked").
+            raw = yf.download(tickers, period="15mo", auto_adjust=True, progress=False, threads=False)
+        except Exception as e:  # network or cache error: treat like a failed attempt and retry
+            raw, err = None, f"{type(e).__name__}: {e}"
+        else:
+            err = ""
+        missing = missing_tickers(raw, tickers)
+        if not missing:
+            return raw
+        print(f"Download attempt {attempt}/{DOWNLOAD_TRIES} missing {missing} {err}".rstrip(), file=sys.stderr)
+        if attempt < DOWNLOAD_TRIES:
+            time.sleep(DOWNLOAD_WAIT_S)
+    sys.exit(f"Price download failed for {missing} after {DOWNLOAD_TRIES} attempts. Leaving the existing file alone.")
+
+
 def main():
     tickers = list(SECTORS) + [BENCHMARK]
-    data = yf.download(tickers, period="15mo", auto_adjust=True, progress=False)
-    if data.empty:
-        sys.exit("Download returned no data. Leaving the existing file alone.")
-    prices = data["Close"]
-    missing = [t for t in tickers if t not in prices or prices[t].dropna().empty]
-    if missing:
-        sys.exit(f"Missing data for {missing}. Leaving the existing file alone.")
+    prices = download(tickers)["Close"]
 
     result = compute(prices)
     OUT.parent.mkdir(parents=True, exist_ok=True)

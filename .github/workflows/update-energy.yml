@@ -28,23 +28,42 @@ jobs:
           EIA_API_KEY: ${{ secrets.EIA_API_KEY }}
         run: python scripts/update_eia.py
 
-      # Scaffolds notes/draft-YYYY-MM-DD.md from the data just written. It
-      # will not overwrite a draft that already exists, so a second run on
-      # the same day cannot destroy prose written into one.
-      - name: Draft this week's note
-        run: python scripts/draft_note.py
-
-      - name: Commit if the data changed
+      # The data is committed and pushed before the note is drafted, so a
+      # failure in the drafter cannot discard a fresh pull.
+      - name: Commit the data if it changed
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           # eia_history.json is the five year cache. It is committed so the
           # next run only has to fetch the tail instead of refetching five
           # years of all eight series against a slow API.
-          git add data/energy.json data/eia_history.json notes/
+          git add data/energy.json data/eia_history.json
           if git diff --cached --quiet; then
             echo "No change in energy data."
           else
-            git commit -m "Update energy data and draft this week's note"
+            git commit -m "Update energy data"
+            # Scheduled runs land hours late and can overlap the other data
+            # workflows, so rebase onto whatever was pushed in the meantime.
+            git pull --rebase origin main
+            git push
+          fi
+
+      # Scaffolds _notes/draft-YYYY-MM-DD.md from the data just written. It
+      # will not overwrite a draft that already exists, so a second run on
+      # the same day cannot destroy prose written into one. If this step
+      # fails the run goes red, but the data above is already pushed.
+      # _notes/ starts with an underscore so GitHub Pages (Jekyll) does not
+      # publish the drafts.
+      - name: Draft this week's note
+        run: python scripts/draft_note.py
+
+      - name: Commit the draft if there is a new one
+        run: |
+          git add _notes/
+          if git diff --cached --quiet; then
+            echo "No new draft."
+          else
+            git commit -m "Draft this week's note"
+            git pull --rebase origin main
             git push
           fi

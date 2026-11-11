@@ -185,6 +185,7 @@ h2 {
   padding-top: 100px;
   padding-bottom: 100px;
   max-width: 100%;
+  overflow-x: clip; /* the photo halo (.hero-side::before) reaches 40px past the photo and caused sideways scroll on phones */
 }
 
 @media (max-width: 640px) {
@@ -274,6 +275,7 @@ h2 {
 
 .hero-photo img {
   width: 100%;
+  height: auto; /* the img tag carries width and height; without this the height attribute would win over aspect-ratio */
   aspect-ratio: 4 / 5;
   object-fit: cover;
   object-position: center 15%;
@@ -965,6 +967,8 @@ h2 {
    MARKET VIEW: live sector rotation
    ============================================ */
 .sector-live { margin: 18px 0; }
+/* When the live box is hidden, keep the gap between the two notes around it. */
+.sector-live[hidden] + .ticker-note { margin-top: 18px; }
 
 .sector-head {
   font-family: var(--mono);

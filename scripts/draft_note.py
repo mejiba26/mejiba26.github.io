@@ -3,7 +3,8 @@ Builds a weekly markdown scaffold for a Market Note from the energy data.
 
 Reads data/energy.json for this week's figures and data/eia_history.json for
 the history behind them, compares the current week to the prior week in both
-level and percentile, and writes notes/draft-YYYY-MM-DD.md.
+level and percentile, and writes _notes/draft-YYYY-MM-DD.md. The folder starts
+with an underscore so GitHub Pages (Jekyll) does not publish the drafts.
 
 The numbers are filled in. The thinking is not: Thesis, Caveats and What
 would change my mind come through as empty headings with last week's text
@@ -38,7 +39,7 @@ import update_eia as ue
 
 ROOT = Path(__file__).resolve().parent.parent
 ENERGY = ROOT / "data" / "energy.json"
-NOTES = ROOT / "notes"
+NOTES = ROOT / "_notes"
 
 FLAG_POINTS = 5.0        # a percentile move bigger than this gets called out
 WEEK_DAYS = 7            # how far back "the prior week" is
