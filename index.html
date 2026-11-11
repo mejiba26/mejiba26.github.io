@@ -44,6 +44,7 @@
       <a href="#work">Work</a>
       <a href="#market">Market View</a>
       <a href="#paper-trading" id="nav-paper" hidden>Paper Trading</a>
+      <a href="#vol-scorecard" id="nav-vol" hidden>Vol Scorecard</a>
       <!-- <a href="#notes">Market Notes</a>  (turn back on with the first post) -->
       <a href="#contact">Contact</a>
     </nav>
@@ -352,6 +353,55 @@
       <a href="https://github.com/mejiba26/mejiba26.github.io/commit/e22e6cb" target="_blank" rel="noopener">Locked spec, commit e22e6cb ↗</a>
       <a href="https://github.com/mejiba26/mejiba26.github.io/commit/52d8b12" target="_blank" rel="noopener">Amendment 1, commit 52d8b12 ↗</a>
       <a href="https://github.com/mejiba26/mejiba26.github.io/blob/main/docs/paper-trading-spec.md" target="_blank" rel="noopener">Full spec ↗</a>
+    </p>
+  </section>
+
+  <!-- VOLATILITY SCORECARD
+       Filled by the script at the bottom of this file from data/vol/scores.json,
+       written by scripts/update_vol.py (rules in docs/vol-scorecard-spec.md).
+       Starts hidden, together with its nav link, and is only revealed when the
+       file parses, every figure is a real number, the data is recent and today
+       is on or after START_DATE. Anything else shows nothing. -->
+  <section id="vol-scorecard" class="market paper vol wrap" hidden>
+    <p class="eyebrow">Forecast evaluation</p>
+    <h2>Volatility forecast scorecard</h2>
+    <p class="paper-meta">Started <span id="vol-start"></span> · <span class="paper-asof">As of <span id="vol-asof"></span></span></p>
+    <p class="paper-disclaimer">Forecast evaluation only, not trading advice.</p>
+
+    <div class="paper-block">
+      <h3 class="paper-h">What this shows</h3>
+      <p class="paper-note vol-lede">Every weekday after the market closes, four models each predict how wide the next day's trading range will be for four funds, meaning the gap between the day's high and its low as a percent. Each prediction comes with a band the model expects to hold the actual range about 8 times out of 10. The forecasts are saved to GitHub with a timestamp before the next session opens, then graded against what happened. Two questions are being tested: are the bands honest, so that they really hold about 80% of the time, and does a more elaborate model predict better than a very simple one. Nothing here says what to buy or sell.</p>
+    </div>
+
+    <div id="vol-body"></div>
+
+    <div class="paper-block">
+      <h3 class="paper-h">How it works in plain language</h3>
+      <ul class="paper-list">
+        <li><strong>What is forecast.</strong> The next trading day's log range, ln(High / Low), for SPY, QQQ, ITA and XLE. For values this small that is almost exactly the high to low gap as a percent, which is how it is shown here.</li>
+        <li><strong>The four models.</strong> Naive: tomorrow looks like today. Rolling mean: the average of the last 22 days. EWMA: a weighted average that leans on recent days (lambda 0.94). HAR: a regression on yesterday, the last 5 days and the last 22 days, refit every Monday on all history up to the prior close.</li>
+        <li><strong>The band.</strong> Each model's own errors over the previous 500 days set its 10th, 50th and 90th percentile forecasts. That makes an 80% interval built only from what was known when the forecast was made.</li>
+        <li><strong>Grading.</strong> Mean absolute error is the average miss. Pinball loss scores the edges of the band. Coverage is how often the actual range landed inside the band, and it should sit near 80%.</li>
+        <li><strong>Timing.</strong> Every forecast carries the UTC time it was generated. One generated after the next session's open is marked late, kept in the file and never scored. Nothing before the start date counts.</li>
+        <li><strong>Fixed in advance.</strong> The models, their parameters and the test were written down before the first forecast. No ranking before 60 graded days. After 250, HAR is tested against the better simple baseline with a Diebold Mariano test, it only counts as better with a p value below 0.0125, and the result is published either way.</li>
+      </ul>
+    </div>
+
+    <div class="paper-block">
+      <h3 class="paper-h">Honest limits</h3>
+      <ul class="paper-list">
+        <li>The daily range is an imperfect stand in for risk. It ignores overnight gaps and says nothing about direction.</li>
+        <li>Four ETFs that tend to move together are not four independent tests, so agreement across them is weaker evidence than it looks.</li>
+        <li>Every model here learns from past ranges, which say little about a sudden change of regime. Expect the bands to be too narrow right after a shock.</li>
+        <li>Shortened holiday sessions are graded like any other day, and the data is Yahoo Finance daily bars as first published.</li>
+      </ul>
+    </div>
+
+    <p class="paper-links">
+      <a href="https://github.com/mejiba26/mejiba26.github.io/blob/main/data/vol/forecasts.csv" target="_blank" rel="noopener">Every forecast on GitHub ↗</a>
+      <a href="https://github.com/mejiba26/mejiba26.github.io/blob/main/data/vol/realized.csv" target="_blank" rel="noopener">What they were graded against ↗</a>
+      <a href="https://github.com/mejiba26/mejiba26.github.io/commits/main/docs/vol-scorecard-spec.md" target="_blank" rel="noopener">Spec history ↗</a>
+      <a href="https://github.com/mejiba26/mejiba26.github.io/blob/main/docs/vol-scorecard-spec.md" target="_blank" rel="noopener">Full spec ↗</a>
     </p>
   </section>
 
@@ -881,6 +931,250 @@
           clearTimeout(t);
           t = setTimeout(() => { try { document.getElementById('paper-chart').innerHTML = chart(model.series); } catch (e) {} }, 150);
         });
+      })
+      .catch(() => { box.hidden = true; if (nav) nav.hidden = true; body.innerHTML = ''; });
+  })();
+</script>
+
+<script>
+  // Volatility scorecard: reads data/vol/scores.json, written by
+  // scripts/update_vol.py (see docs/vol-scorecard-spec.md).
+  // KEEP IN SYNC with scripts/check_vol_schema.py: the keys read below are the
+  // ones that script enforces in the workflow. Change one side, change the other.
+  // The section and its nav link ship hidden and are unhidden only after every
+  // check passes. Any failure (missing file, bad JSON, missing field,
+  // non-numeric value, stale data, before the start date) leaves them hidden
+  // and silent.
+  (function () {
+    const box = document.getElementById('vol-scorecard');
+    const nav = document.getElementById('nav-vol');
+    const body = document.getElementById('vol-body');
+    if (!box || !body) return;
+
+    const START_DATE = '2026-11-23';   // must match scripts/update_vol.py and the spec
+    const STALE_DAYS = 6;              // weekdays only, so a long weekend plus a missed run
+    const VBASE = 'data/vol/';
+    const TICKERS = [['SPY', 'S&P 500'], ['QQQ', 'Nasdaq 100'], ['ITA', 'Aerospace and defense'], ['XLE', 'Energy']];
+    const MODELS = ['naive', 'roll22', 'ewma', 'har'];
+    const WINDOWS = ['since_start', 'rolling60'];
+
+    const pad2 = n => String(n).padStart(2, '0');
+    const vnow = new Date();
+    const today = vnow.getFullYear() + '-' + pad2(vnow.getMonth() + 1) + '-' + pad2(vnow.getDate());
+    if (today < START_DATE) return;    // nothing to fetch before the start
+
+    const bad = why => { throw new Error(why); };
+    const num = v => (typeof v !== 'number' || !isFinite(v)) ? bad('bad value') : v;
+    const cnt = v => (!Number.isInteger(v) || v < 0) ? bad('bad count') : v;
+    const esc = t => String(t).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+    const dstr = s => {
+      if (typeof s !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(s)) bad('bad date');
+      const d = new Date(s + 'T12:00:00'); if (isNaN(d.getTime())) bad('bad date'); return d;
+    };
+    const longDate = s => dstr(s).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+    const dayDate = s => dstr(s).toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
+    const asPct = v => (Math.exp(v) - 1) * 100;      // log range to high over low, minus 1, in percent
+    const p2 = n => n.toFixed(2) + '%';
+
+    // Throws on anything the page would otherwise render wrongly.
+    function validate(d) {
+      if (d.start_date !== START_DATE) bad('start date mismatch');
+      dstr(d.as_of);
+      if (!Array.isArray(d.tickers) || d.tickers.join() !== TICKERS.map(t => t[0]).join()) bad('tickers');
+      if (!Array.isArray(d.models) || d.models.map(m => m.id).join() !== MODELS.join()) bad('models');
+      d.models.forEach(m => { if (typeof m.name !== 'string' || !m.name) bad('model name'); });
+      if (num(d.interval_target) !== 0.8) bad('target');
+      cnt(d.min_days_for_ranking); cnt(d.dm_days); num(d.dm_alpha);
+      dstr(d.latest.forecast_for_date);
+      const latest = {};
+      d.latest.rows.forEach(r => {
+        num(r.median); num(r.p10); num(r.p90);
+        if (!(0 <= r.p10 && r.p10 <= r.median && r.median <= r.p90)) bad('interval');
+        if (r.status !== 'ok' && r.status !== 'late') bad('status');
+        latest[r.ticker + '|' + r.model] = r;
+      });
+      const all = TICKERS.map(t => t[0]);
+      all.forEach(t => {
+        MODELS.forEach(m => { if (!latest[t + '|' + m]) bad('latest row'); });
+        ['graded', 'late', 'void', 'pending'].forEach(k => cnt(d.counts[t][k]));
+        const r = d.dm_test[t];
+        if (r !== null) {
+          num(r.mae_har); num(r.mae_baseline); cnt(r.n);
+          if (typeof r.har_beats !== 'boolean' || !MODELS.includes(r.baseline)) bad('test');
+          if (r.p_value !== null) num(r.p_value);
+        }
+      });
+      all.concat('ALL').forEach(t => MODELS.forEach(m => WINDOWS.forEach(w => {
+        const c = d.scores[t][m][w];
+        cnt(c.n);
+        ['mae', 'pinball10', 'pinball90', 'coverage'].forEach(k => { if (c.n === 0 ? c[k] !== null : num(c[k]) < 0) bad('score'); });
+      })));
+      MODELS.forEach(m => {
+        const c = d.calibration[m];
+        cnt(c.n);
+        ['at_or_below_p10', 'at_or_below_median', 'at_or_below_p90'].forEach(k => {
+          if (c.n === 0 ? c[k] !== null : (num(c[k]) < 0 || c[k] > 1)) bad('calibration');
+        });
+      });
+      return latest;
+    }
+
+    function tickerCard(t, d, latest) {
+      const rows = MODELS.map(m => latest[t[0] + '|' + m]);
+      const top = Math.max.apply(null, rows.map(r => asPct(r.p90))) * 1.06 || 1;
+      const pos = v => Math.max(0, Math.min(100, asPct(v) / top * 100)).toFixed(1);
+      const items = d.models.map((m, i) => {
+        const r = rows[i];
+        return `
+          <li class="vol-row">
+            <span class="vol-model">${esc(m.name)}</span>
+            <span class="vol-med">${p2(asPct(r.median))}</span>
+            <span class="vol-bar" aria-hidden="true"><span class="vol-band" style="left:${pos(r.p10)}%;width:${(pos(r.p90) - pos(r.p10)).toFixed(1)}%"></span><span class="vol-tick" style="left:${pos(r.median)}%"></span></span>
+            <span class="vol-int">80% band ${p2(asPct(r.p10))} to ${p2(asPct(r.p90))}</span>
+          </li>`;
+      }).join('');
+      const late = rows.some(r => r.status === 'late')
+        ? '<p class="paper-verdict">Generated after the open: late, not scored</p>' : '';
+      return `
+        <li class="paper-tier">
+          <p class="paper-k">${esc(t[0])} <span class="vol-name">${esc(t[1])}</span></p>
+          <ul class="vol-rows">${items}</ul>
+          ${late}
+        </li>`;
+    }
+
+    function maeTable(d) {
+      const cols = TICKERS.map(t => t[0]).concat('ALL');
+      const cell = (t, m) => { const c = d.scores[t][m].rolling60; return c.n ? (c.mae * 100).toFixed(3) : 'n/a'; };
+      return `<div class="paper-scroll"><table class="paper-table">
+        <thead><tr><th scope="col">Model</th>${cols.map(t => `<th scope="col" class="n">${t === 'ALL' ? 'All four' : esc(t)}</th>`).join('')}</tr></thead>
+        <tbody>${d.models.map(m => `<tr><th scope="row">${esc(m.name)}</th>${cols.map(t => `<td class="n">${cell(t, m.id)}</td>`).join('')}</tr>`).join('')}</tbody>
+      </table></div>`;
+    }
+
+    function coverage(d) {
+      return `<ul class="vol-covs">${d.models.map(m => {
+        const v = d.scores.ALL[m.id].since_start.coverage * 100;
+        return `<li class="vol-cov"><span class="vol-model">${esc(m.name)}</span>
+          <span class="vol-covbar" aria-hidden="true"><span style="width:${Math.min(100, v).toFixed(1)}%"></span><i></i></span>
+          <span class="vol-covn">${v.toFixed(1)}%</span></li>`;
+      }).join('')}</ul>`;
+    }
+
+    // Reliability diagram: for each forecast level (10th, 50th, 90th percentile),
+    // the share of graded days where the actual came in at or below it. On the
+    // diagonal the forecast levels mean what they say.
+    function chart(d) {
+      const W = Math.max(260, Math.min(520, body.clientWidth || 320)), H = Math.round(W * 0.78);
+      const m = { l: 44, r: 14, t: 12, b: 44 };
+      const x = q => m.l + (W - m.l - m.r) * q / 100, y = v => m.t + (H - m.t - m.b) * (1 - v / 100);
+      let grid = '';
+      [0, 25, 50, 75, 100].forEach(g => {
+        grid += `<line class="grid" x1="${m.l}" x2="${W - m.r}" y1="${y(g).toFixed(1)}" y2="${y(g).toFixed(1)}"/>`
+          + `<text class="ax" x="${m.l - 6}" y="${(y(g) + 4).toFixed(1)}" text-anchor="end">${g}%</text>`;
+      });
+      [10, 50, 90].forEach(q => {
+        grid += `<line class="grid" x1="${x(q).toFixed(1)}" x2="${x(q).toFixed(1)}" y1="${m.t}" y2="${H - m.b}"/>`
+          + `<text class="ax" x="${x(q).toFixed(1)}" y="${H - m.b + 16}" text-anchor="middle">${q}th</text>`;
+      });
+      const levels = [[10, 'at_or_below_p10'], [50, 'at_or_below_median'], [90, 'at_or_below_p90']];
+      const lines = d.models.map(mo => {
+        const pts = levels.map(l => [x(l[0]), y(d.calibration[mo.id][l[1]] * 100)]);
+        return `<polyline class="ln v-${mo.id}" points="${pts.map(p => p[0].toFixed(1) + ',' + p[1].toFixed(1)).join(' ')}"/>`
+          + pts.map(p => `<circle class="dot v-${mo.id}" cx="${p[0].toFixed(1)}" cy="${p[1].toFixed(1)}" r="3.5"/>`).join('');
+      }).join('');
+      const aria = 'Calibration chart. Share of graded days where the actual range was at or below each forecast level. '
+        + d.models.map(mo => mo.name + ': ' + levels.map(l => (d.calibration[mo.id][l[1]] * 100).toFixed(0) + '% at the ' + l[0] + 'th percentile').join(', ')).join('. ') + '.';
+      return `
+        <svg class="paper-svg vol-svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(aria)}">
+          ${grid}
+          <line class="zero vol-diag" x1="${x(0)}" y1="${y(0)}" x2="${x(100)}" y2="${y(100)}"/>
+          ${lines}
+          <text class="ax" x="${((m.l + W - m.r) / 2).toFixed(1)}" y="${H - 6}" text-anchor="middle">Forecast level (percentile)</text>
+        </svg>
+        <ul class="paper-legend">${d.models.map(mo => `<li><svg width="30" height="10" aria-hidden="true"><line class="ln v-${mo.id}" x1="0" x2="30" y1="5" y2="5"/></svg>${esc(mo.name)}</li>`).join('')}
+          <li><svg width="30" height="10" aria-hidden="true"><line class="zero vol-diag" x1="0" x2="30" y1="5" y2="5"/></svg>Perfectly calibrated</li></ul>`;
+    }
+
+    function formalTest(d, graded) {
+      const done = TICKERS.filter(t => d.dm_test[t[0]] !== null);
+      if (!done.length) {
+        return `<p class="paper-note">The formal comparison of HAR against the better simple baseline runs once each ticker has ${d.dm_days} graded days (${graded} so far). The result will be published here whichever way it goes.</p>`;
+      }
+      const name = id => esc(d.models.find(m => m.id === id).name);
+      const rows = TICKERS.map(t => {
+        const r = d.dm_test[t[0]];
+        if (r === null) return `<tr><th scope="row">${esc(t[0])}</th><td colspan="5">Waiting for ${d.dm_days} graded days</td></tr>`;
+        const verdict = r.har_beats ? 'HAR beats the baseline'
+          : r.mae_har < r.mae_baseline ? 'HAR lower, not significant' : 'HAR does not beat the baseline';
+        return `<tr><th scope="row">${esc(t[0])}</th><td>${name(r.baseline)}</td><td class="n">${(r.mae_har * 100).toFixed(3)}</td><td class="n">${(r.mae_baseline * 100).toFixed(3)}</td><td class="n">${r.p_value === null ? 'n/a' : r.p_value < 0.0001 ? 'below 0.0001' : r.p_value.toFixed(4)}</td><td>${verdict}</td></tr>`;
+      }).join('');
+      return `<p class="paper-note">Diebold Mariano test on absolute errors over each ticker's first ${d.dm_days} graded days. HAR counts as better only if its error is lower and the p value is below ${d.dm_alpha}, a stricter bar because four tickers are tested at once.</p>
+        <div class="paper-scroll"><table class="paper-table">
+          <thead><tr><th scope="col">Ticker</th><th scope="col">Baseline</th><th scope="col" class="n">HAR error</th><th scope="col" class="n">Baseline error</th><th scope="col" class="n">p value</th><th scope="col">Result</th></tr></thead>
+          <tbody>${rows}</tbody></table></div>`;
+    }
+
+    let model = null;
+    function render() {
+      const { d, latest } = model;
+      const graded = Math.min.apply(null, TICKERS.map(t => d.counts[t[0]].graded));
+      const late = Math.max.apply(null, TICKERS.map(t => d.counts[t[0]].late));
+      const ranked = graded >= d.min_days_for_ranking;
+      const tested = TICKERS.every(t => d.dm_test[t[0]] !== null);
+      const scored = graded > 0;
+      const window = Math.min(graded, 60);
+      body.innerHTML = `
+        <div class="paper-strip">
+          <p><span class="paper-k">Graded days</span> ${graded}</p>
+          <p><span class="paper-k">Late, not scored</span> ${late}</p>
+          <p class="paper-nojudge">${tested ? 'Formal test complete, result below' : ranked ? d.min_days_for_ranking + ' graded days reached. Formal test at ' + d.dm_days : 'No ranking before ' + d.min_days_for_ranking + ' graded days'}</p>
+        </div>
+        <div class="paper-block">
+          <h3 class="paper-h">Latest forecast: high to low range for ${esc(dayDate(d.latest.forecast_for_date))}</h3>
+          <p class="paper-note">The number is each model's median forecast. The bar is its 80% band, with a mark at the median.</p>
+          <ul class="paper-tiers vol-cards">${TICKERS.map(t => tickerCard(t, d, latest)).join('')}</ul>
+        </div>
+        ${scored ? `
+        <div class="paper-block">
+          <h3 class="paper-h">Average miss, last ${window} graded ${window === 1 ? 'day' : 'days'}</h3>
+          <p class="paper-note">Mean absolute error of the median forecast, in percentage points of daily range. Lower is better. The window grows to 60 days and then rolls.</p>
+          ${maeTable(d)}
+        </div>
+        <div class="paper-block">
+          <h3 class="paper-h">Coverage against the 80% target</h3>
+          <p class="paper-note">Share of graded forecasts, all four tickers together, where the actual range landed inside the band. Near 80% means the band is honest. Well below means the model is overconfident.</p>
+          ${coverage(d)}
+        </div>
+        <div class="paper-block">
+          <h3 class="paper-h">Calibration</h3>
+          <p class="paper-note">For each forecast level, how often the actual range came in at or below it. A well calibrated model sits on the dashed line: 10% of days below its 10th percentile, half below its median, 90% below its 90th.</p>
+          <div id="vol-chart">${chart(d)}</div>
+        </div>` : `
+        <div class="paper-block">
+          <p class="paper-empty">No graded days yet. Scores, coverage and the calibration chart appear once the first forecasts have been graded.</p>
+        </div>`}
+        <div class="paper-block">
+          <h3 class="paper-h">Does the fancier model win?</h3>
+          ${formalTest(d, graded)}
+        </div>`;
+    }
+
+    fetch(VBASE + 'scores.json', { cache: 'no-cache' })
+      .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
+      .then(d => {
+        const latest = validate(d);
+        if ((vnow - dstr(d.as_of)) / 86400000 > STALE_DAYS) bad('stale');
+        model = { d, latest };
+        render();   // throws on any bad number, before anything is revealed
+        document.getElementById('vol-start').textContent = longDate(START_DATE);
+        document.getElementById('vol-asof').textContent = longDate(d.as_of);
+        box.hidden = false;
+        if (nav) nav.hidden = false;
+        // The chart was sized while the section was hidden (width 0); redraw at the real width.
+        const redraw = () => { const c = document.getElementById('vol-chart'); if (c) c.innerHTML = chart(model.d); };
+        redraw();
+        let t; window.addEventListener('resize', () => { clearTimeout(t); t = setTimeout(() => { try { redraw(); } catch (e) {} }, 150); });
       })
       .catch(() => { box.hidden = true; if (nav) nav.hidden = true; body.innerHTML = ''; });
   })();

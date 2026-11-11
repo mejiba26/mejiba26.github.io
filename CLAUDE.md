@@ -108,6 +108,29 @@ Rules that must not be broken:
 
 Site section (when built): follow the failure behavior above. Hide it if data is missing, malformed or stale. Show the START_DATE, an as of date, the simulation disclaimer, planned risk next to realized worst loss, and link the ledger and the locked spec commit.
 
+## Volatility scorecard (LOCKED)
+
+A forward tested forecast evaluation of the next trading day's log range, ln(High / Low), for SPY, QQQ, ITA and XLE. It makes no trading claims and nothing here is investment advice.
+
+Files:
+- docs/vol-scorecard-spec.md is the pre registered design, locked by the commit that merged it into main, with START_DATE 2026-11-23.
+- scripts/update_vol.py makes and grades the forecasts. update-vol.yml runs it weekdays, then scripts/check_vol_schema.py.
+- data/vol/ holds forecasts.csv, realized.csv, scores.json and state.json.
+
+Rules that must not be broken:
+- Never change a model, parameter, score or test in the body of the spec. Corrections go in a dated amendment at the bottom, as a separate commit, and the locked text stays as it was.
+- Constants in scripts/update_vol.py must match the spec. START_DATE must match in the spec, the script and index.html.
+- Never edit, delete or rewrite anything in data/vol/ by hand. forecasts.csv and realized.csv are append only. No backfill of target days before START_DATE.
+- Never change models mid test. A change is a new version with a new start date and a new spec.
+- Record every model or parameter variant tried in the trial log through an amendment, with the count. Never choose parameters by comparing performance on historical replays.
+- Any replay is test only. It writes to a scratch folder, is labeled TEST REPLAY, NOT A TRACK RECORD, and is never shown on the site as results.
+- A forecast generated after the target day's open is late. It stays in the file and is never scored.
+- No ranking claims before 60 graded days per ticker. The HAR test runs once at 250 graded days and is published whichever way it goes.
+
+Site section: follow the failure behavior above. Hide it if data is missing, malformed, stale or today is before START_DATE. Show START_DATE, an as of date and "Forecast evaluation only, not trading advice". Keep the keys the page reads in step with scripts/check_vol_schema.py.
+
+Tests: python scripts/dev/test_update_vol.py (offline, synthetic prices). Run it, and its --mutants mode, after any change to scripts/update_vol.py.
+
 ## Verify, don't assume
 
 Before reporting a data task complete: run the script, confirm the JSON is
