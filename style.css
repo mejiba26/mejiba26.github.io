@@ -1314,6 +1314,146 @@ h2 {
 .site-footer a { color: var(--teal-light); }
 
 /* ============================================
+   MEMO PAGE (memos/*.html)
+   A single research note, built to print cleanly.
+   ============================================ */
+.memo-doc { padding-top: 46px; padding-bottom: 70px; max-width: 980px; }
+
+.note-top {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 300px;
+  gap: 0;
+  border-top: 3px solid var(--navy);
+  border-bottom: 1px solid var(--rule);
+  margin: 0 0 0;
+}
+.note-title-block { padding: 24px 30px 26px 0; border-right: 1px solid var(--rule); }
+.doc-rate { align-self: start; margin-top: 0; }
+
+.doc-h1 {
+  font-family: var(--display);
+  font-size: clamp(2rem, 4vw, 2.85rem);
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: -0.012em;
+  margin: 0 0 12px;
+  max-width: none;
+}
+.doc-sub { font-size: 1.02rem; color: var(--ink-70); margin: 0; max-width: 52ch; }
+
+.doc-meta { margin-top: 0; border-top: none; }
+.memo-doc .purpose { margin-top: 22px; }
+
+.doc-sec { padding: 0; margin: 40px 0 0; }
+.doc-h2 {
+  font-family: var(--display);
+  font-size: 1.32rem;
+  font-weight: 500;
+  margin: 0 0 14px;
+  padding-bottom: 7px;
+  border-bottom: 2px solid var(--navy);
+}
+.doc-sec > p { font-size: 0.95rem; line-height: 1.65; margin: 0 0 14px; max-width: 78ch; color: var(--ink-70); }
+.doc-note {
+  font-size: 0.83rem !important;
+  color: var(--ink-55) !important;
+  border-left: 2px solid var(--line);
+  padding-left: 13px;
+  margin-top: 4px !important;
+}
+
+.doc-table { width: 100%; border-collapse: collapse; font-size: 0.87rem; margin: 0 0 20px; }
+.doc-table caption {
+  text-align: left;
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--brass);
+  padding: 0 0 8px;
+}
+.doc-table th, .doc-table td { padding: 8px 14px; border-bottom: 1px solid var(--line); text-align: left; }
+.doc-table thead th {
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 400;
+  color: var(--ink-55);
+  border-bottom: 1px solid var(--rule);
+  white-space: nowrap;
+}
+.doc-table tbody th { font-weight: 400; color: var(--ink); padding-left: 0; }
+.doc-table td { font-family: var(--body); }
+.doc-table td.n { font-family: var(--mono); }
+.doc-table .n { text-align: right; white-space: nowrap; }
+.doc-table thead th.n { text-align: right; }
+.doc-table td.up { color: var(--teal); }
+.doc-table td.down { color: var(--brick); }
+.doc-table .row-rule th, .doc-table .row-rule td { border-bottom: 1px solid var(--rule); }
+.doc-table .row-rule th { font-weight: 500; }
+.doc-table .row-total th, .doc-table .row-total td {
+  border-bottom: 2px solid var(--navy);
+  border-top: 1px solid var(--rule);
+  font-weight: 500;
+}
+.doc-table .row-total td { color: var(--navy); }
+
+.grid-table .row-base th, .grid-table .row-base td { background: rgba(173, 138, 78, 0.1); }
+.grid-table .cell-base { color: var(--navy); font-weight: 500; box-shadow: inset 0 0 0 1px var(--brass); }
+.star {
+  font-family: var(--mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--brass);
+  margin-left: 5px;
+}
+
+.revhead {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  flex-wrap: wrap;
+  border: 1px solid var(--rule);
+  background: var(--paper-dim);
+  padding: 18px 24px;
+  margin: 0 0 18px;
+}
+.rev-k {
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--ink-55);
+  margin: 0 0 4px;
+}
+.rev-v { font-family: var(--display); font-size: 1.95rem; font-weight: 600; line-height: 1; margin: 0 0 4px; }
+.rev-old { color: var(--ink-40); text-decoration: line-through; }
+.rev-n { font-family: var(--mono); font-size: 0.66rem; color: var(--ink-55); margin: 0; }
+.rev-arrow { font-size: 1.5rem; color: var(--brass); margin: 0; }
+
+.revlist { counter-reset: rev; list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--rule); }
+.revlist li {
+  counter-increment: rev;
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr);
+  gap: 0 16px;
+  padding: 14px 0 13px;
+  border-bottom: 1px solid var(--line);
+}
+.revlist li::before {
+  content: counter(rev, decimal-leading-zero);
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: var(--brass);
+  padding-top: 3px;
+  grid-row: 1 / span 2;
+}
+.rev-h { font-family: var(--mono); font-size: 0.64rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--navy); margin: 0 0 5px; }
+.revlist li p:not(.rev-h) { font-size: 0.9rem; line-height: 1.6; color: var(--ink-70); margin: 0; max-width: 78ch; }
+
+/* ============================================
    RESPONSIVE
    ============================================ */
 @media (max-width: 1040px) {
@@ -1329,6 +1469,8 @@ h2 {
   :root { --pad: 28px; }
   .memo { grid-template-columns: 1fr; }
   .memo-main { border-right: none; border-bottom: 1px solid var(--rule); }
+  .note-top { grid-template-columns: 1fr; }
+  .note-title-block { border-right: none; border-bottom: 1px solid var(--rule); padding-right: 0; }
   .bridge-grid { grid-template-columns: 1fr; }
   .bridge-span { border-left: none; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
   .bridge-deck { flex-direction: row; flex-wrap: wrap; justify-content: center; }
@@ -1417,4 +1559,31 @@ h2 {
   .sechd { border-bottom: 1.5pt solid #000; }
   a { text-decoration: none; }
   .memo-links a::after, .paper-links a::after { content: ""; }
+
+  /* Memo page: one clean research note per print job. */
+  @page { margin: 16mm 14mm; }
+  .memo-doc { max-width: none; padding: 0; }
+  .memo-page .mast { padding-top: 0; }
+  .memo-page .mast-in { padding-top: 6pt; padding-bottom: 6pt; }
+  .note-top { border-top: 2pt solid #000; }
+  .note-title-block { border-right: 1px solid #999; }
+  .doc-h1 { font-size: 22pt; }
+  .doc-sub { font-size: 10pt; }
+  .doc-h2 { font-size: 13pt; border-bottom: 1.5pt solid #000; }
+  .doc-sec { margin-top: 16pt; }
+  .doc-sec > p, .revlist li p:not(.rev-h) { font-size: 9.5pt; }
+  .doc-table { font-size: 8.5pt; page-break-inside: avoid; break-inside: avoid; }
+  .doc-table th, .doc-table td { padding: 4pt 8pt; }
+  .doc-table caption { color: #555; }
+  .doc-table .row-total th, .doc-table .row-total td { border-bottom: 1.5pt solid #000; }
+  .doc-table td.up, .doc-table td.down { color: #000; font-weight: 600; }
+  .grid-table .row-base th, .grid-table .row-base td { background: #efe9dc; }
+  .grid-table .cell-base { box-shadow: none; text-decoration: underline; }
+  .note-top, .revhead, .revlist li, .doc-rate, .mind { break-inside: avoid; page-break-inside: avoid; }
+  .doc-rate, .ratebox { background: #f4f1ea; border: 1px solid #999; }
+  .rev-old { color: #777; }
+  .mind { background: none; border-left: 2pt solid #000; }
+  .mind-k, .rev-h, .doc-table caption, .kicker, .cred dt { color: #555 !important; }
+  .memo-page .site-footer { padding: 10pt 0 0; }
+  .paper-scroll { overflow: visible; }
 }
