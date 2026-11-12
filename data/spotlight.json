@@ -1,0 +1,430 @@
+{
+  "as_of": "2026-11-11",
+  "generated_utc": "2026-11-12T05:31:26Z",
+  "source": "Yahoo Finance via yfinance, unadjusted closes (price return)",
+  "month": "2026-10",
+  "start_date": "2026-09-30",
+  "end_date": "2026-10-30",
+  "rule": "Largest absolute price move versus SPY over the previous full calendar month. A rule about what moved most, not a view on what to buy.",
+  "benchmark": {
+    "ticker": "SPY",
+    "start": 762.63,
+    "end": 755.72,
+    "month_ret": -0.91,
+    "now": 759.81,
+    "since": 0.54
+  },
+  "spotlight_stock": {
+    "ticker": "LMT",
+    "name": "Lockheed Martin",
+    "group": "Aerospace & Defense",
+    "start": 509.25,
+    "end": 636.95,
+    "month_ret": 25.08,
+    "excess": 25.99,
+    "now": 610.05,
+    "since": -4.22,
+    "why": "Government budgets and contract timing set demand. Energy and metals costs can reach margins through suppliers, a link I am testing rather than assuming.",
+    "drivers": [
+      {
+        "key": "wti",
+        "label": "WTI crude oil",
+        "unit": "pct",
+        "start": 90.42,
+        "end": 104.12,
+        "now": 85.66,
+        "month_chg": 15.15,
+        "since_chg": -17.73
+      },
+      {
+        "key": "copper",
+        "label": "Copper",
+        "unit": "pct",
+        "start": 6.559,
+        "end": 6.458,
+        "now": 6.235,
+        "month_chg": -1.53,
+        "since_chg": -3.45
+      }
+    ]
+  },
+  "spotlight_market": {
+    "ticker": "XLE",
+    "name": "Energy",
+    "group": "Energy",
+    "start": 61.5,
+    "end": 70.02,
+    "month_ret": 13.85,
+    "excess": 14.76,
+    "now": 63.37,
+    "since": -9.5,
+    "why": "Earnings follow crude and refined product prices, which respond to supply decisions, inventories and demand.",
+    "drivers": [
+      {
+        "key": "wti",
+        "label": "WTI crude oil",
+        "unit": "pct",
+        "start": 90.42,
+        "end": 104.12,
+        "now": 85.66,
+        "month_chg": 15.15,
+        "since_chg": -17.73
+      },
+      {
+        "key": "brent",
+        "label": "Brent crude oil",
+        "unit": "pct",
+        "start": 103.53,
+        "end": 117.64,
+        "now": 91.66,
+        "month_chg": 13.63,
+        "since_chg": -22.08
+      }
+    ]
+  },
+  "stocks": [
+    {
+      "ticker": "LMT",
+      "name": "Lockheed Martin",
+      "group": "Aerospace & Defense",
+      "start": 509.25,
+      "end": 636.95,
+      "month_ret": 25.08,
+      "excess": 25.99,
+      "now": 610.05,
+      "since": -4.22
+    },
+    {
+      "ticker": "LLY",
+      "name": "Eli Lilly",
+      "group": "Health Care",
+      "start": 1157.08,
+      "end": 1417.54,
+      "month_ret": 22.51,
+      "excess": 23.42,
+      "now": 1437.29,
+      "since": 1.39
+    },
+    {
+      "ticker": "WMT",
+      "name": "Walmart",
+      "group": "Consumer Staples",
+      "start": 103.92,
+      "end": 123.51,
+      "month_ret": 18.85,
+      "excess": 19.76,
+      "now": 125.67,
+      "since": 1.75
+    },
+    {
+      "ticker": "HD",
+      "name": "Home Depot",
+      "group": "Consumer Discretionary",
+      "start": 284.49,
+      "end": 329.2,
+      "month_ret": 15.72,
+      "excess": 16.63,
+      "now": 351.31,
+      "since": 6.72
+    },
+    {
+      "ticker": "CVX",
+      "name": "Chevron",
+      "group": "Energy",
+      "start": 204.21,
+      "end": 235.52,
+      "month_ret": 15.33,
+      "excess": 16.24,
+      "now": 213.28,
+      "since": -9.44
+    },
+    {
+      "ticker": "NOC",
+      "name": "Northrop Grumman",
+      "group": "Aerospace & Defense",
+      "start": 483.48,
+      "end": 557.54,
+      "month_ret": 15.32,
+      "excess": 16.23,
+      "now": 550.96,
+      "since": -1.18
+    },
+    {
+      "ticker": "XOM",
+      "name": "Exxon Mobil",
+      "group": "Energy",
+      "start": 162.75,
+      "end": 187.25,
+      "month_ret": 15.05,
+      "excess": 15.96,
+      "now": 166.71,
+      "since": -10.97
+    },
+    {
+      "ticker": "GD",
+      "name": "General Dynamics",
+      "group": "Aerospace & Defense",
+      "start": 331.83,
+      "end": 372.59,
+      "month_ret": 12.28,
+      "excess": 13.19,
+      "now": 367.22,
+      "since": -1.44
+    },
+    {
+      "ticker": "PG",
+      "name": "Procter & Gamble",
+      "group": "Consumer Staples",
+      "start": 145.28,
+      "end": 161.57,
+      "month_ret": 11.21,
+      "excess": 12.12,
+      "now": 167.67,
+      "since": 3.78
+    },
+    {
+      "ticker": "UNH",
+      "name": "UnitedHealth",
+      "group": "Health Care",
+      "start": 367.08,
+      "end": 406.97,
+      "month_ret": 10.87,
+      "excess": 11.78,
+      "now": 402.94,
+      "since": -0.99
+    },
+    {
+      "ticker": "RTX",
+      "name": "RTX",
+      "group": "Aerospace & Defense",
+      "start": 185.65,
+      "end": 199.8,
+      "month_ret": 7.62,
+      "excess": 8.53,
+      "now": 201.29,
+      "since": 0.75
+    },
+    {
+      "ticker": "AAPL",
+      "name": "Apple",
+      "group": "Technology",
+      "start": 333.02,
+      "end": 344.63,
+      "month_ret": 3.49,
+      "excess": 4.4,
+      "now": 355.63,
+      "since": 3.19
+    },
+    {
+      "ticker": "JPM",
+      "name": "JPMorgan Chase",
+      "group": "Financials",
+      "start": 330.83,
+      "end": 337.04,
+      "month_ret": 1.88,
+      "excess": 2.79,
+      "now": 343.39,
+      "since": 1.88
+    },
+    {
+      "ticker": "MSFT",
+      "name": "Microsoft",
+      "group": "Technology",
+      "start": 512.9,
+      "end": 521.91,
+      "month_ret": 1.76,
+      "excess": 2.67,
+      "now": 521.13,
+      "since": -0.15
+    },
+    {
+      "ticker": "GE",
+      "name": "GE Aerospace",
+      "group": "Aerospace & Defense",
+      "start": 312.29,
+      "end": 301.8,
+      "month_ret": -3.36,
+      "excess": -2.45,
+      "now": 342.75,
+      "since": 13.57
+    },
+    {
+      "ticker": "AMZN",
+      "name": "Amazon",
+      "group": "Consumer Discretionary",
+      "start": 249.15,
+      "end": 240.35,
+      "month_ret": -3.53,
+      "excess": -2.62,
+      "now": 266.17,
+      "since": 10.74
+    },
+    {
+      "ticker": "NVDA",
+      "name": "NVIDIA",
+      "group": "Technology",
+      "start": 228.38,
+      "end": 204.64,
+      "month_ret": -10.39,
+      "excess": -9.48,
+      "now": 173.73,
+      "since": -15.1
+    },
+    {
+      "ticker": "META",
+      "name": "Meta Platforms",
+      "group": "Communication Services",
+      "start": 725.18,
+      "end": 614.99,
+      "month_ret": -15.19,
+      "excess": -14.28,
+      "now": 628.77,
+      "since": 2.24
+    },
+    {
+      "ticker": "GOOGL",
+      "name": "Alphabet",
+      "group": "Communication Services",
+      "start": 344.08,
+      "end": 279.84,
+      "month_ret": -18.67,
+      "excess": -17.76,
+      "now": 293.45,
+      "since": 4.86
+    },
+    {
+      "ticker": "CAT",
+      "name": "Caterpillar",
+      "group": "Industrials",
+      "start": 810.79,
+      "end": 622.75,
+      "month_ret": -23.19,
+      "excess": -22.28,
+      "now": 601.61,
+      "since": -3.39
+    }
+  ],
+  "sectors": [
+    {
+      "ticker": "XLE",
+      "name": "Energy",
+      "group": "Energy",
+      "start": 61.5,
+      "end": 70.02,
+      "month_ret": 13.85,
+      "excess": 14.76,
+      "now": 63.37,
+      "since": -9.5
+    },
+    {
+      "ticker": "XLP",
+      "name": "Consumer Staples",
+      "group": "Consumer Staples",
+      "start": 80.6,
+      "end": 89.42,
+      "month_ret": 10.94,
+      "excess": 11.85,
+      "now": 91.45,
+      "since": 2.27
+    },
+    {
+      "ticker": "XLU",
+      "name": "Utilities",
+      "group": "Utilities",
+      "start": 39.44,
+      "end": 43.43,
+      "month_ret": 10.12,
+      "excess": 11.03,
+      "now": 43.82,
+      "since": 0.9
+    },
+    {
+      "ticker": "XLV",
+      "name": "Health Care",
+      "group": "Health Care",
+      "start": 168.42,
+      "end": 184.87,
+      "month_ret": 9.77,
+      "excess": 10.68,
+      "now": 188.95,
+      "since": 2.21
+    },
+    {
+      "ticker": "XLB",
+      "name": "Materials",
+      "group": "Materials",
+      "start": 48.7,
+      "end": 52.74,
+      "month_ret": 8.3,
+      "excess": 9.21,
+      "now": 53.02,
+      "since": 0.53
+    },
+    {
+      "ticker": "XLY",
+      "name": "Consumer Discretionary",
+      "group": "Consumer Discretionary",
+      "start": 108.84,
+      "end": 115.38,
+      "month_ret": 6.01,
+      "excess": 6.92,
+      "now": 120.99,
+      "since": 4.86
+    },
+    {
+      "ticker": "XLF",
+      "name": "Financials",
+      "group": "Financials",
+      "start": 53.4,
+      "end": 56.51,
+      "month_ret": 5.82,
+      "excess": 6.73,
+      "now": 58.63,
+      "since": 3.75
+    },
+    {
+      "ticker": "XLRE",
+      "name": "Real Estate",
+      "group": "Real Estate",
+      "start": 40.91,
+      "end": 43.17,
+      "month_ret": 5.52,
+      "excess": 6.43,
+      "now": 44.59,
+      "since": 3.29
+    },
+    {
+      "ticker": "XLI",
+      "name": "Industrials",
+      "group": "Industrials",
+      "start": 166.98,
+      "end": 167.4,
+      "month_ret": 0.25,
+      "excess": 1.16,
+      "now": 170.97,
+      "since": 2.13
+    },
+    {
+      "ticker": "XLK",
+      "name": "Technology",
+      "group": "Technology",
+      "start": 195.75,
+      "end": 179.51,
+      "month_ret": -8.3,
+      "excess": -7.39,
+      "now": 174.36,
+      "since": -2.87
+    },
+    {
+      "ticker": "XLC",
+      "name": "Communication Services",
+      "group": "Communication Services",
+      "start": 110.97,
+      "end": 99.9,
+      "month_ret": -9.98,
+      "excess": -9.07,
+      "now": 108.6,
+      "since": 8.71
+    }
+  ]
+}
