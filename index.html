@@ -44,18 +44,21 @@
   </div>
 </header>
 
-<!-- SECTION NAV, organized by type of work -->
-<nav class="deskbar" aria-label="Sections">
+<!-- SECTION NAV, organized by type of work. With JavaScript on, these switch
+     between the views below so the page reads as a page instead of one long
+     scroll. With JavaScript off they stay plain anchor links and every view
+     stays on screen, so nothing is ever unreachable. -->
+<nav class="deskbar" id="viewbar" aria-label="Sections">
   <div class="wrap deskbar-in">
-    <a href="#memos">Memos</a>
-    <a href="#work">Models</a>
-    <a href="#market">Live Desk</a>
-    <a href="#paper-trading" id="nav-paper" hidden>Paper Trading</a>
-    <a href="#vol-scorecard" id="nav-vol" hidden>Vol Scorecard</a>
-    <!-- <a href="#notes">Market Notes</a>  (turn back on with the first post) -->
-    <a href="#methods">Methods</a>
-    <a href="#about">About</a>
-    <a href="#contact">Contact</a>
+    <a href="#memos" data-view="memos">Memos</a>
+    <a href="#work" data-view="work">Models</a>
+    <a href="#market" data-view="market">Live Desk</a>
+    <a href="#paper-trading" id="nav-paper" class="subtab" hidden>Paper Trading</a>
+    <a href="#vol-scorecard" id="nav-vol" class="subtab" hidden>Vol Scorecard</a>
+    <!-- <a href="#notes" data-view="notes">Market Notes</a>  (turn back on with the first post) -->
+    <a href="#methods" data-view="methods">Methods</a>
+    <a href="#about" data-view="about">About</a>
+    <a href="#contact" data-view="contact">Contact</a>
   </div>
 </nav>
 
@@ -63,14 +66,30 @@
 
   <!-- CREDENTIALS FIRST -->
   <section class="lede-sec wrap">
-    <p class="kicker">MSBA Candidate <span class="sep">/</span> Wake Forest University <span class="sep">/</span> May 2027</p>
-    <h1>Value first, then price. <span class="accent">Test the assumption before you trust the model.</span></h1>
-    <p class="hero-sub">
-      Six years of evaluating companies from both sides, what they're worth and
-      how they trade, meets a year of licensed, client facing experience. I'm
-      Brian Mejia-Lopez, and together those experiences point toward a future
-      building a career as a markets analyst.
-    </p>
+    <div class="lede-top">
+      <div class="lede-text">
+        <p class="kicker">MSBA Candidate <span class="sep">/</span> Wake Forest University <span class="sep">/</span> May 2027</p>
+        <h1>Value first, then price. <span class="accent">Test the assumption before you trust the model.</span></h1>
+        <p class="hero-sub">
+          Six years of evaluating companies from both sides, what they're worth and
+          how they trade, meets a year of licensed, client facing experience. I'm
+          Brian Mejia-Lopez, and together those experiences point toward a future
+          building a career as a markets analyst.
+        </p>
+        <p class="lede-cta">
+          <a href="resume.pdf" class="btn btn-solid" download>Download resume</a>
+          <a href="#memos" class="btn">Read a memo</a>
+          <a href="https://github.com/mejiba26/mejiba26.github.io" class="btn" target="_blank" rel="noopener">Repository</a>
+        </p>
+      </div>
+
+      <figure class="hero-side">
+        <div class="hero-photo">
+          <img src="headshot.jpg" alt="Brian Mejia-Lopez" width="1200" height="800">
+        </div>
+        <figcaption class="hero-photo-cap">Brian Mejia-Lopez</figcaption>
+      </figure>
+    </div>
 
     <dl class="cred">
       <div class="cred-cell">
@@ -106,16 +125,10 @@
       <b>Disclaimer</b> Nothing here is investment advice. The paper trading and the
       volatility scorecard are simulations. No real money and no broker connection.
     </p>
-
-    <p class="lede-cta">
-      <a href="resume.pdf" class="btn btn-solid" download>Download resume</a>
-      <a href="#memos" class="btn">Read a memo</a>
-      <a href="https://github.com/mejiba26/mejiba26.github.io" class="btn" target="_blank" rel="noopener">Repository</a>
-    </p>
   </section>
 
   <!-- 01 MEMOS -->
-  <section id="memos" class="memos wrap">
+  <section id="memos" class="view memos wrap">
     <header class="sechd"><span class="secno">01</span><h2>Memos</h2></header>
     <p class="section-lede">Long form valuation work. Each memo opens as its own page and prints to a clean PDF.</p>
 
@@ -162,7 +175,7 @@
   </section>
 
   <!-- 02 MODELS  (id kept as #work so existing links still resolve) -->
-  <section id="work" class="models wrap">
+  <section id="work" class="view models wrap">
     <header class="sechd"><span class="secno">02</span><h2>Models</h2></header>
     <p class="section-lede">Context, contribution, outcome. In that order, with the numbers that back each one.</p>
 
@@ -259,7 +272,7 @@
   </section>
 
   <!-- 03 LIVE DESK  (id kept as #market so existing links still resolve) -->
-  <section id="market" class="desk wrap">
+  <section id="market" class="view desk wrap">
     <header class="sechd"><span class="secno">03</span><h2>Live Desk</h2></header>
     <p class="section-lede">What I'm tracking right now, and why it matters to the roles I want. Every card here is written by a scheduled script, carries its own as of date, and hides itself when the data is missing, malformed or stale.</p>
 
@@ -369,8 +382,8 @@
       <p class="paper-disclaimer">Simulation only. No real money, no broker, not investment advice.</p>
       <div id="paper-body"></div>
 
-      <div class="paper-block">
-        <h3 class="paper-h">The rules in plain language</h3>
+      <details class="paper-block paper-fold">
+        <summary class="paper-h">The rules in plain language</summary>
         <ul class="paper-list">
           <li><strong>Universe.</strong> RTX, LMT, NOC, GD and ITA (aerospace and defense); XLE, USO and XOM (oil). Cash earns nothing. Long only, no leverage.</li>
           <li><strong>Entry.</strong> Checked after each close. All four must hold: the close is above both its 50 day and 200 day average; the close is at least 1.5 times the 14 day ATR below the highest high of the last 10 trading days (ATR, average true range, is the typical daily price swing); today's close is above yesterday's high; and the portfolio has an open slot and has made fewer than 2 entries this week. The buy fills at the next day's open plus a 10 basis point cost.</li>
@@ -378,22 +391,22 @@
           <li><strong>Sizing.</strong> Dollars at risk (the tier's risk per trade times equity) divided by the stop distance gives the shares, capped at the tier's maximum weight.</li>
           <li><strong>Tiers.</strong> Safe risks 0.5% per trade, max 20% in one name, 3 positions, 50% invested. Medium: 1%, 30%, 4 positions, 80%. High: 2%, 40%, 3 positions, 100%. Each starts with $100,000 of hypothetical money.</li>
         </ul>
-      </div>
+      </details>
 
-      <div class="paper-block">
-        <h3 class="paper-h">How to read the trade log</h3>
+      <details class="paper-block paper-fold">
+        <summary class="paper-h">How to read the trade log</summary>
         <p class="paper-note">The Reason column in the journal above is not a story written after the fact. It is the rule that fired, as the simulator logged it at the time: <strong>stop</strong>, <strong>target</strong>, <strong>trend break</strong> or <strong>time stop</strong> on the way out, and the entry rule on the way in. No discretionary commentary is added, and no language model writes or edits a trade reason. The same rows are in <a href="https://github.com/mejiba26/mejiba26.github.io/blob/main/data/paper/ledger.csv" target="_blank" rel="noopener">ledger.csv</a>, which is append only, so the commit history shows when each row appeared.</p>
-      </div>
+      </details>
 
-      <div class="paper-block">
-        <h3 class="paper-h">Honest limits</h3>
+      <details class="paper-block paper-fold">
+        <summary class="paper-h">Honest limits</summary>
         <ul class="paper-list">
           <li>Swing trades in a small universe are infrequent. It will take months to collect enough trades to judge anything, and early results will be noisy.</li>
           <li>Stops are checked on the close and filled at the next open, so a gap can lose more than the planned risk, and a trend break exit has no loss floor. Compare planned risk with the realized worst loss above.</li>
           <li>A pullback can be the start of a bigger decline. The confirmation rule and the stop reduce that risk but do not remove it.</li>
           <li>Fills at the open ignore slippage, and USO carries futures roll cost. Paper results do not predict real results.</li>
         </ul>
-      </div>
+      </details>
 
       <p class="paper-links">
         <a href="https://github.com/mejiba26/mejiba26.github.io/blob/main/data/paper/ledger.csv" target="_blank" rel="noopener">Ledger on GitHub</a>
@@ -422,8 +435,8 @@
 
       <div id="vol-body"></div>
 
-      <div class="paper-block">
-        <h3 class="paper-h">How it works in plain language</h3>
+      <details class="paper-block paper-fold">
+        <summary class="paper-h">How it works in plain language</summary>
         <ul class="paper-list">
           <li><strong>What is forecast.</strong> The next trading day's log range, ln(High / Low), for SPY, QQQ, ITA and XLE. For values this small that is almost exactly the high to low gap as a percent, which is how it is shown here.</li>
           <li><strong>The four models.</strong> Naive: tomorrow looks like today. Rolling mean: the average of the last 22 days. EWMA: a weighted average that leans on recent days (lambda 0.94). HAR: a regression on yesterday, the last 5 days and the last 22 days, refit every Monday on all history up to the prior close.</li>
@@ -432,17 +445,17 @@
           <li><strong>Timing.</strong> Every forecast carries the UTC time it was generated. One generated after the next session's open is marked late, kept in the file and never scored. Nothing before the start date counts.</li>
           <li><strong>Fixed in advance.</strong> The models, their parameters and the test were written down before the first forecast. No ranking before 60 graded days. After 250, HAR is tested against the better simple baseline with a Diebold Mariano test, it only counts as better with a p value below 0.0125, and the result is published either way.</li>
         </ul>
-      </div>
+      </details>
 
-      <div class="paper-block">
-        <h3 class="paper-h">Honest limits</h3>
+      <details class="paper-block paper-fold">
+        <summary class="paper-h">Honest limits</summary>
         <ul class="paper-list">
           <li>The daily range is an imperfect stand in for risk. It ignores overnight gaps and says nothing about direction.</li>
           <li>Four ETFs that tend to move together are not four independent tests, so agreement across them is weaker evidence than it looks.</li>
           <li>Every model here learns from past ranges, which say little about a sudden change of regime. Expect the bands to be too narrow right after a shock.</li>
           <li>Shortened holiday sessions are graded like any other day, and the data is Yahoo Finance daily bars as first published.</li>
         </ul>
-      </div>
+      </details>
 
       <p class="paper-links">
         <a href="https://github.com/mejiba26/mejiba26.github.io/blob/main/data/vol/forecasts.csv" target="_blank" rel="noopener">Every forecast on GitHub</a>
@@ -475,7 +488,7 @@
   </section>
 
   <!-- 04 METHODS -->
-  <section id="methods" class="methods wrap">
+  <section id="methods" class="view methods wrap">
     <header class="sechd"><span class="secno">04</span><h2>Methods</h2></header>
     <p class="section-lede">Every number on the Live Desk is produced by one of these files and committed to the repository. Nothing on this page is typed in by hand.</p>
 
@@ -538,7 +551,7 @@ python scripts/dev/test_update_vol.py</code></pre>
 
   <!-- MARKET NOTES -->
   <!-- Hidden until the first post is ready: remove "hidden" below and turn the nav link back on. -->
-  <section id="notes" class="notes wrap" hidden>
+  <section id="notes" class="view notes wrap" hidden>
     <header class="sechd"><span class="secno">05</span><h2>Market Notes</h2></header>
     <p class="section-lede">A short post each month: one macro read, one stock idea, and what my portfolio model is holding. Newest first.</p>
 
@@ -583,7 +596,7 @@ python scripts/dev/test_update_vol.py</code></pre>
   </section>
 
   <!-- 05 ABOUT -->
-  <section id="about" class="about wrap">
+  <section id="about" class="view about wrap">
     <header class="sechd"><span class="secno">05</span><h2>About</h2></header>
     <p class="section-lede">Who I am, where I've been, and where I'm headed.</p>
 
@@ -660,7 +673,7 @@ python scripts/dev/test_update_vol.py</code></pre>
   </section>
 
   <!-- 06 CONTACT -->
-  <section id="contact" class="contact wrap">
+  <section id="contact" class="view contact wrap">
     <header class="sechd"><span class="secno">06</span><h2>Let's talk</h2></header>
     <p class="section-lede">Open to full-time markets analyst and equity research roles starting Summer 2027. Happy to talk sooner.</p>
     <div class="contact-links">
@@ -679,6 +692,94 @@ python scripts/dev/test_update_vol.py</code></pre>
     <p class="footer-note">Built as plain HTML and CSS. Data written by scheduled scripts in <a href="https://github.com/mejiba26/mejiba26.github.io" target="_blank" rel="noopener">this repository</a>. Nothing here is investment advice.</p>
   </div>
 </footer>
+
+<script>
+  // Views. The bar at the top switches between the sections of this page
+  // instead of scrolling to them, so each one reads as its own page.
+  //
+  // Progressive enhancement on purpose: the stylesheet only hides a view
+  // once this script has added .js-views to <html>. With JavaScript off the
+  // bar stays a set of plain anchor links and every section is on screen, so
+  // nothing here can make content unreachable.
+  //
+  // Any in page link opens whichever view holds its target, which is how the
+  // Paper Trading and Vol Scorecard links keep working once their data
+  // exists. After a switch this fires a resize event: the two chart scripts
+  // further down already listen for one, so a chart first drawn while its
+  // view was hidden, and therefore zero width, redraws at the real width.
+  (function () {
+    const views = Array.prototype.slice.call(document.querySelectorAll('main > .view'));
+    if (!views.length || !document.querySelector) return;
+    const bar = document.getElementById('viewbar');
+    const tabs = bar ? Array.prototype.slice.call(bar.querySelectorAll('a[data-view]')) : [];
+    document.documentElement.classList.add('js-views');
+
+    function show(id, scrollTo) {
+      let found = null;
+      views.forEach(v => {
+        const on = v.id === id;
+        v.classList.toggle('is-open', on);
+        if (on) found = v;
+      });
+      if (!found) return false;
+      tabs.forEach(a => {
+        if (a.dataset.view === id) a.setAttribute('aria-current', 'page');
+        else a.removeAttribute('aria-current');
+      });
+      window.dispatchEvent(new Event('resize'));
+      if (scrollTo && scrollTo !== found) scrollTo.scrollIntoView();
+      else window.scrollTo(0, 0);
+      return true;
+    }
+
+    function viewOf(el) {
+      while (el && el !== document.body) {
+        if (el.classList && el.classList.contains('view')) return el;
+        el = el.parentNode;
+      }
+      return null;
+    }
+
+    function open(hash, scroll) {
+      if (!hash || hash.length < 2) return false;
+      let target = null;
+      try { target = document.querySelector(hash); } catch (e) { return false; }
+      if (!target) return false;
+      const v = viewOf(target);
+      if (!v || v.hidden) return false;
+      return show(v.id, scroll ? target : null);
+    }
+
+    document.addEventListener('click', function (e) {
+      if (e.defaultPrevented || e.button || e.metaKey || e.ctrlKey || e.shiftKey) return;
+      const a = e.target && e.target.closest ? e.target.closest('a[href^="#"]') : null;
+      if (!a) return;
+      const hash = a.getAttribute('href');
+      if (open(hash, true)) {
+        e.preventDefault();
+        if (window.history && history.replaceState) history.replaceState(null, '', hash);
+      }
+    });
+
+    window.addEventListener('hashchange', function () { open(location.hash, true); });
+
+    // Printing gives the whole page. The stylesheet can show every view, but
+    // a closed <details> is folded by the browser itself and no print rule
+    // reaches inside it, so open them here and put them back afterwards.
+    let folded = [];
+    window.addEventListener('beforeprint', function () {
+      folded = Array.prototype.slice.call(document.querySelectorAll('details:not([open])'));
+      folded.forEach(d => { d.open = true; });
+    });
+    window.addEventListener('afterprint', function () {
+      folded.forEach(d => { d.open = false; });
+      folded = [];
+    });
+
+    // Land on the first view unless the address bar asks for another one.
+    if (!open(location.hash, true)) show(views[0].id, null);
+  })();
+</script>
 
 <script>
   const revealEls = document.querySelectorAll('.reveal');
