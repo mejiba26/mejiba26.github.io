@@ -33,22 +33,32 @@ One landing page plus a separate page for each long write up. Nothing else.
 
 `index.html`, in order:
 
-1. Masthead and a bar organized by **type of work**: Memos, Models, Live
-   Desk, Methods, About, Contact. The paper trading and volatility links sit
+1. Masthead and a bar organized by **type of work**: About, Memos, Models,
+   Live Desk, Methods, Contact. The paper trading and volatility links sit
    in the same bar and stay hidden until their data exists.
 2. Credentials first, and always on screen: the kicker, the headline, the
    headshot, the credentials grid (which carries the visible contact
    address), and a purpose and disclaimer line.
-3. `#memos` — memo cards. Each links out to its own page.
-4. `#work` — Models. Keeps the old `#work` id so existing links resolve.
+3. `#about` — the front door, and the first view the site lands on. Holds
+   `#intro` (a written introduction; the 60 second video is kept as a
+   commented out block inside it, ready to switch back on), `#bridge` and
+   `#resume`.
+4. `#memos` — memo cards. Each links out to its own page.
+5. `#work` — Models. Keeps the old `#work` id so existing links resolve.
    Holds `#ecg`, `#portfolio` and `#futures`.
-5. `#market` — Live Desk. Keeps the old `#market` id. Holds the desk index,
+6. `#market` — Live Desk. Keeps the old `#market` id. Holds the desk index,
    every data card, the two locked simulations, and the bias statements.
-6. `#methods` — numbered items, each linking to the exact file in this repo,
+7. `#methods` — numbered items, each linking to the exact file in this repo,
    plus the clone and run block.
-7. `#notes` — Market Notes, still hidden until the first post.
-8. `#about` — holds `#intro`, `#bridge` and `#resume`.
+8. `#notes` — Market Notes, still hidden until the first post.
 9. `#contact`.
+
+The Bridge is one row per job: the role, what it drilled, and the thing on
+this site that shows it, with a link. Keep it that way. It is the only part
+of the page that could drift into unevidenced claims about Brian, so every
+row has to point at something a reader can open. The copy in `#about` is
+drawn from `resume.pdf` and from claims already made elsewhere on the site;
+hold any new sentence to that same standard.
 
 `memos/rtx.html` is the first memo page and the pattern for the rest: a note
 header with a rating style panel, ruled tables sourced to the paper, a
