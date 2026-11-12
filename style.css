@@ -85,12 +85,11 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
   * { animation: none !important; transition: none !important; }
 }
 
-.reveal {
-  opacity: 0;
-  transform: translateY(18px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
-}
-.reveal.is-visible { opacity: 1; transform: translateY(0); }
+/* Content appears at once. The .reveal class and the observer that sets
+   .is-visible are still in index.html, because one of the card scripts adds
+   .is-visible itself and its comment refers to it, but neither one moves
+   anything now: nothing fades or slides in on scroll. */
+.reveal, .reveal.is-visible { opacity: 1; transform: none; transition: none; }
 
 /* ============================================
    MASTHEAD AND SECTION NAV
@@ -165,6 +164,22 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
   color: var(--navy);
   box-shadow: inset 0 -3px 0 var(--brass);
 }
+.deskbar a[aria-current="page"] {
+  color: var(--navy);
+  font-weight: 500;
+  background: var(--card);
+  box-shadow: inset 0 -3px 0 var(--brass);
+}
+.deskbar a.subtab { color: var(--teal); }
+
+/* ============================================
+   VIEWS
+   One section on screen at a time. The hiding rule only applies once the
+   script at the bottom of index.html has added .js-views, so with
+   JavaScript off every section stays visible and reachable.
+   ============================================ */
+.js-views main > .view { display: none; }
+.js-views main > .view.is-open { display: block; }
 
 /* ============================================
    SHARED SECTION FURNITURE
@@ -197,7 +212,41 @@ h1 .accent { color: var(--teal); }
   max-width: 58ch;
   font-size: 1.04rem;
   color: var(--ink-70);
-  margin: 0 0 32px;
+  margin: 0 0 26px;
+}
+
+.lede-top {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 260px;
+  gap: 44px;
+  align-items: start;
+  margin: 0 0 30px;
+}
+.lede-text { min-width: 0; }
+
+.hero-side { margin: 0; }
+.hero-photo {
+  border: 1px solid var(--rule);
+  background: var(--paper-dim);
+  padding: 7px;
+}
+.hero-photo img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  object-position: 50% 22%;
+  filter: saturate(0.94);
+}
+.hero-photo-cap {
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-55);
+  margin: 9px 0 0;
+  text-align: right;
 }
 
 .sechd {
@@ -960,6 +1009,31 @@ h2 {
   padding-bottom: 6px;
   border-bottom: 1px solid var(--line);
 }
+
+/* Reference prose folds away so the Live Desk opens short. Everything is one
+   click from view and nothing that carries an as of date or a disclaimer is
+   ever folded. */
+.paper-fold > summary {
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+.paper-fold > summary::-webkit-details-marker { display: none; }
+.paper-fold > summary::after {
+  content: "Show";
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--teal);
+  white-space: nowrap;
+}
+.paper-fold[open] > summary::after { content: "Hide"; }
+.paper-fold > summary:hover { color: var(--navy); }
+.paper-fold[open] > summary { margin-bottom: 12px; }
 .paper-note { font-size: 0.86rem; line-height: 1.62; color: var(--ink-70); margin: 0 0 10px; max-width: 86ch; }
 .paper-note:last-child { margin-bottom: 0; }
 .paper-note strong { font-weight: 500; color: var(--ink); }
@@ -1485,6 +1559,16 @@ h2 {
   .vol-cards .paper-tier:nth-child(-n + 2) { border-bottom: 1px solid var(--line); }
 }
 
+@media (max-width: 860px) {
+  .lede-top { grid-template-columns: minmax(0, 1fr) 200px; gap: 28px; }
+}
+
+@media (max-width: 680px) {
+  .lede-top { grid-template-columns: 1fr; gap: 24px; }
+  .hero-side { max-width: 230px; }
+  .hero-photo-cap { text-align: left; }
+}
+
 @media (max-width: 760px) {
   .mast-in { flex-direction: column; align-items: flex-start; gap: 4px; }
   .mast-tag { text-align: left; font-size: 0.62rem; letter-spacing: 0.16em; }
@@ -1543,6 +1627,12 @@ h2 {
   :root { --paper: #fff; --card: #fff; --paper-dim: #f4f1ea; }
   body { background: #fff; color: #000; font-size: 10.5pt; line-height: 1.45; }
   .deskbar, .skiplink, .lede-cta, .contact-links, .video-frame, .resume-preview, .run-code { display: none !important; }
+  /* Printing gives the whole page, not just the view that happens to be open. */
+  .js-views main > .view { display: block !important; }
+  .js-views main > .view[hidden] { display: none !important; }
+  .paper-fold > summary::after { content: ""; }
+  .lede-top { grid-template-columns: 1fr 150px; gap: 24px; }
+  .hero-photo { padding: 3px; }
   .mast { background: #fff; color: #000; border-bottom: 2px solid #000; }
   .mast-name { color: #000; }
   .mast-tag { color: #444; }

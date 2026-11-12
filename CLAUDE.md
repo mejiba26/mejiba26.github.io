@@ -33,12 +33,12 @@ One landing page plus a separate page for each long write up. Nothing else.
 
 `index.html`, in order:
 
-1. Masthead and a section nav organized by **type of work**: Memos, Models,
-   Live Desk, Methods, About, Contact. The paper trading and volatility nav
-   links sit in the same bar and stay hidden until their data exists.
-2. Credentials first: a short kicker, the headline, the credentials grid
-   (which carries the visible contact address), and a purpose and disclaimer
-   line.
+1. Masthead and a bar organized by **type of work**: Memos, Models, Live
+   Desk, Methods, About, Contact. The paper trading and volatility links sit
+   in the same bar and stay hidden until their data exists.
+2. Credentials first, and always on screen: the kicker, the headline, the
+   headshot, the credentials grid (which carries the visible contact
+   address), and a purpose and disclaimer line.
 3. `#memos` — memo cards. Each links out to its own page.
 4. `#work` — Models. Keeps the old `#work` id so existing links resolve.
    Holds `#ecg`, `#portfolio` and `#futures`.
@@ -54,6 +54,41 @@ One landing page plus a separate page for each long write up. Nothing else.
 header with a rating style panel, ruled tables sourced to the paper, a
 revision log, the case against, and a "what would change my mind" line. Memo
 pages link `../style.css` and print to a clean PDF without further work.
+
+## Views, not a long scroll
+
+Sections 3 to 9 above are **views**: each carries `class="view"` and only one
+is on screen at a time. The bar at the top switches between them, so the site
+reads as a page rather than one long scroll. The credentials block above them
+never moves.
+
+How it works, and what to keep working:
+
+- The script at the top of the block at the bottom of `index.html` adds
+  `.js-views` to `<html>`, and only then does the stylesheet hide a view.
+  **This is deliberate progressive enhancement.** With JavaScript off the bar
+  is a set of plain anchor links and every section is on screen, so no
+  content is ever unreachable. Do not move the hiding rule out from under
+  `.js-views`.
+- Any in page link opens whichever view holds its target. That is what keeps
+  `#paper-trading`, `#vol-scorecard`, `#rtx` and the rest working.
+- After a switch the script fires a `resize` event. The two chart scripts
+  already listen for one, and a chart first drawn while its view was hidden
+  has zero width, so **this is the only thing redrawing it at the real
+  width.** If you change the view script, keep that event.
+- Before printing, the script opens every view and every `<details>`, and
+  puts them back afterwards. A print rule cannot reach inside a closed
+  `<details>`, so the JavaScript has to do it.
+
+Long reference prose inside the two locked sections is folded into
+`<details class="paper-block paper-fold">` so the Live Desk opens short.
+**Never fold anything that carries an "as of" date, a disclaimer or a live
+figure.** Those stay in the open.
+
+Nothing fades or slides in on scroll. `.reveal` and the observer that sets
+`.is-visible` are still in `index.html`, because one of the card scripts adds
+`.is-visible` itself and refers to it in a comment, but the stylesheet
+neutralises both. Content appears at once.
 
 Rules that go with this structure:
 
@@ -231,7 +266,11 @@ mark something working on the strength of the code looking correct.
 Before reporting a layout or markup change complete: render the page in a
 headless browser twice, once with sample data for every card and once with
 `data/` absent, and confirm each card shows correctly, hides quietly and
-logs no JS errors. Check desktop and a 390px phone width, and check that the
-page does not scroll sideways. `scripts/dev/make_paper_sample.py` and
+logs no JS errors. **Open the Live Desk view first**, or every card will
+report as hidden simply because its view is not the one on screen. Click
+through every view, and check that the equity chart redraws at full width
+once the Live Desk is open rather than staying at its 320px fallback. Check
+desktop and a 390px phone width, and check that the page does not scroll
+sideways. `scripts/dev/make_paper_sample.py` and
 `scripts/dev/make_vol_sample.py` generate the sample data for the two locked
 sections, including the stale, malformed and missing cases.
