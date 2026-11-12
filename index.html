@@ -50,6 +50,7 @@
      stays on screen, so nothing is ever unreachable. -->
 <nav class="deskbar" id="viewbar" aria-label="Sections">
   <div class="wrap deskbar-in">
+    <a href="#about" data-view="about">About</a>
     <a href="#memos" data-view="memos">Memos</a>
     <a href="#work" data-view="work">Models</a>
     <a href="#market" data-view="market">Live Desk</a>
@@ -57,7 +58,6 @@
     <a href="#vol-scorecard" id="nav-vol" class="subtab" hidden>Vol Scorecard</a>
     <!-- <a href="#notes" data-view="notes">Market Notes</a>  (turn back on with the first post) -->
     <a href="#methods" data-view="methods">Methods</a>
-    <a href="#about" data-view="about">About</a>
     <a href="#contact" data-view="contact">Contact</a>
   </div>
 </nav>
@@ -127,9 +127,115 @@
     </p>
   </section>
 
-  <!-- 01 MEMOS -->
+  <!-- 01 ABOUT -->
+  <section id="about" class="view about wrap">
+    <header class="sechd"><span class="secno">01</span><h2>About</h2></header>
+    <p class="section-lede">Who I am, how I work, and what the last six years actually taught me.</p>
+
+    <div id="intro" class="about-part intro">
+      <p class="part-k">In my own words</p>
+      <!-- The 60 second video lives here when it is wanted. Uncomment this block
+           and drop the written introduction below, or keep both.
+      <div class="video-frame">
+        <div class="video-frame-inner">
+          <iframe
+            src="https://www.youtube.com/embed/NBy-WyKixRs"
+            title="Brian Mejia-Lopez, professional introduction"
+            loading="lazy"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen>
+          </iframe>
+        </div>
+        <p class="video-caption">Recorded August 2026. Professional introduction and career pitch.</p>
+      </div>
+      -->
+      <div class="intro-body">
+        <p class="intro-lead">I am an MSBA candidate at Wake Forest with a Finance and Economics degree from UNC Greensboro, and I build investment research and quantitative models designed to hold up under scrutiny.</p>
+        <p>Since March 2020 I have traded MNQ and MES index futures with my own money, a defined stop on every trade and 2 to 5% of the account at risk on each one. I log entry, exit and outcome for every trade, whether or not it worked. For a year I was a licensed North Carolina property and casualty representative, quoting and advising clients and explaining what coverage costs against what it protects.</p>
+        <p>The way I work shows up more clearly in what I got wrong than in what I got right. I valued RTX with a DCF and peer comps in 2024, then audited my own model two years later and found that my discount rate rested on a 1.22% equity risk premium and that I had subtracted total liabilities instead of net debt. My estimate fell from $175 to $128 per share, and the rebuild is published with all nine changes listed. I backtested a moving average crossover and found it lost to buy and hold on AAPL, 31.4% against 56.9%, so I wrote that down too. I backtested five allocation strategies from 2008 to 2026 and the plain 60/40 beat every one of them after costs.</p>
+        <p>That is the habit I want to bring to a desk. Value first, then price, and test the assumption before trusting the model. I am looking for full time markets analyst and equity research work starting Summer 2027, and I work in English and Spanish.</p>
+      </div>
+    </div>
+
+    <div id="bridge" class="about-part bridge">
+      <p class="part-k">The Bridge</p>
+      <p class="part-lede">Three jobs that look unrelated on a resume. Each one drilled something this work needs, and every row points at where that shows up on this site, so none of it has to be taken on trust.</p>
+
+      <div class="bridge-table">
+        <div class="bridge-head" aria-hidden="true">
+          <span>The role</span>
+          <span>What it drilled</span>
+          <span>Where it shows up here</span>
+        </div>
+
+        <article class="bridge-row">
+          <div class="bridge-role">
+            <p class="br-title">Independent futures trader</p>
+            <p class="br-when">March 2020 to present</p>
+            <p class="br-what">MNQ and MES index futures, my own money, a defined stop on every trade and 2 to 5% of the account at risk.</p>
+          </div>
+          <div class="bridge-skill">
+            <p>Sizing a position before taking it, and logging entry, exit and outcome whether or not the trade worked.</p>
+          </div>
+          <div class="bridge-proof">
+            <p>The paper trading simulation is pre registered. Its rules were locked in a commit before the first trade can happen, planned risk is shown next to the realized worst loss, and the ledger is append only.</p>
+            <p class="br-links"><a href="#market">Live Desk</a><a href="#futures">Futures and Python tools</a></p>
+          </div>
+        </article>
+
+        <article class="bridge-row">
+          <div class="bridge-role">
+            <p class="br-title">Client services representative, State Farm</p>
+            <p class="br-when">July 2025 to July 2026</p>
+            <p class="br-what">Quoted and advised clients after earning my NC property and casualty license, working inside State Farm and North Carolina regulation alongside a five person team.</p>
+          </div>
+          <div class="bridge-skill">
+            <p>Explaining what something costs against what it protects, to someone who did not ask for jargon, and owning the recommendation afterwards.</p>
+          </div>
+          <div class="bridge-proof">
+            <p>Every card here states what it does not know. The volatility scorecard grades its own forecasts and publishes whether its bands really hold 80% of the time, and the RTX memo ends on the case against rather than the case for.</p>
+            <p class="br-links"><a href="#memos">RTX memo</a><a href="#market">Live Desk</a></p>
+          </div>
+        </article>
+
+        <article class="bridge-row">
+          <div class="bridge-role">
+            <p class="br-title">Service assistant, Ruth's Chris Steak House</p>
+            <p class="br-when">October 2023 to February 2025</p>
+            <p class="br-what">Coordinated ticket timing between kitchen and front of house for 250+ guests a shift, up to 900 at peak, and trained new runners.</p>
+          </div>
+          <div class="bridge-skill">
+            <p>Holding a process together when the volume spikes, and handing it to someone else in steps they can actually follow.</p>
+          </div>
+          <div class="bridge-proof">
+            <p>Methods lists every script behind every number on this site, each linked to the exact file, with a clone and run block so a stranger can reproduce the numbers rather than believe them.</p>
+            <p class="br-links"><a href="#methods">Methods</a></p>
+          </div>
+        </article>
+      </div>
+    </div>
+
+    <div id="resume" class="about-part resume">
+      <p class="part-k">Resume</p>
+      <p class="part-lede">Updated September 2026. Full detail on request. The short version lives below.</p>
+
+      <div class="resume-card">
+        <div class="resume-card-text">
+          <p><strong>Brian Mejia-Lopez</strong></p>
+          <p>Finance and Economics graduate pursuing an MSBA at Wake Forest University, building a career as a markets analyst.</p>
+        </div>
+        <a class="btn btn-solid" href="resume.pdf" download>Download PDF</a>
+      </div>
+
+      <div class="resume-preview">
+        <iframe src="resume.pdf" title="Brian Mejia-Lopez Resume" loading="lazy" width="100%" height="600px" style="border:0;"></iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 MEMOS -->
   <section id="memos" class="view memos wrap">
-    <header class="sechd"><span class="secno">01</span><h2>Memos</h2></header>
+    <header class="sechd"><span class="secno">02</span><h2>Memos</h2></header>
     <p class="section-lede">Long form valuation work. Each memo opens as its own page and prints to a clean PDF.</p>
 
     <article id="rtx" class="memo reveal">
@@ -176,7 +282,7 @@
 
   <!-- 02 MODELS  (id kept as #work so existing links still resolve) -->
   <section id="work" class="view models wrap">
-    <header class="sechd"><span class="secno">02</span><h2>Models</h2></header>
+    <header class="sechd"><span class="secno">03</span><h2>Models</h2></header>
     <p class="section-lede">Context, contribution, outcome. In that order, with the numbers that back each one.</p>
 
     <div class="model-list">
@@ -273,7 +379,7 @@
 
   <!-- 03 LIVE DESK  (id kept as #market so existing links still resolve) -->
   <section id="market" class="view desk wrap">
-    <header class="sechd"><span class="secno">03</span><h2>Live Desk</h2></header>
+    <header class="sechd"><span class="secno">04</span><h2>Live Desk</h2></header>
     <p class="section-lede">What I'm tracking right now, and why it matters to the roles I want. Every card here is written by a scheduled script, carries its own as of date, and hides itself when the data is missing, malformed or stale.</p>
 
     <!-- Desk index: what each feed is, how often it runs and where it comes from.
@@ -487,9 +593,9 @@
     </div>
   </section>
 
-  <!-- 04 METHODS -->
+  <!-- 05 METHODS -->
   <section id="methods" class="view methods wrap">
-    <header class="sechd"><span class="secno">04</span><h2>Methods</h2></header>
+    <header class="sechd"><span class="secno">05</span><h2>Methods</h2></header>
     <p class="section-lede">Every number on the Live Desk is produced by one of these files and committed to the repository. Nothing on this page is typed in by hand.</p>
 
     <ol class="methodlist">
@@ -592,83 +698,6 @@ python scripts/dev/test_update_vol.py</code></pre>
         </div>
       </article>
 
-    </div>
-  </section>
-
-  <!-- 05 ABOUT -->
-  <section id="about" class="view about wrap">
-    <header class="sechd"><span class="secno">05</span><h2>About</h2></header>
-    <p class="section-lede">Who I am, where I've been, and where I'm headed.</p>
-
-    <div id="intro" class="about-part intro">
-      <p class="part-k">60 seconds, in my own words</p>
-      <div class="video-frame reveal">
-        <div class="video-frame-inner">
-          <iframe
-            src="https://www.youtube.com/embed/NBy-WyKixRs"
-            title="Brian Mejia-Lopez — Professional Introduction"
-            loading="lazy"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen>
-          </iframe>
-        </div>
-        <p class="video-caption">Recorded August 2026. Professional introduction and career pitch.</p>
-      </div>
-    </div>
-
-    <div id="bridge" class="about-part bridge">
-      <p class="part-k">The Bridge</p>
-      <p class="part-lede">
-        Six years of evaluating companies from both sides, what they're worth and how
-        they trade, meets a year of licensed, client facing experience. Together they
-        point toward one thing: analyzing markets for a living.
-      </p>
-
-      <div class="bridge-grid reveal">
-        <div class="ledger ledger-past">
-          <h3>Where I've Been</h3>
-          <ul class="ledger-list">
-            <li><span class="lline">Independent Equity &amp; Futures Trader (2020 to Present)</span><span class="ldetail">Fundamental valuation paired with price action trading, 2 to 5% risk per position</span></li>
-            <li><span class="lline">Client Services Rep, State Farm (2025 to 2026)</span><span class="ldetail">Licensed NC agent, advised &amp; retained clients</span></li>
-            <li><span class="lline">Service Assistant, Ruth's Chris (2023 to 2025)</span><span class="ldetail">Ran 250+ covers/shift, trained new hires</span></li>
-          </ul>
-        </div>
-
-        <div class="bridge-span" aria-hidden="true">
-          <p class="bridge-connector-label">translates to</p>
-          <div class="bridge-deck">
-            <span class="deck-item">valuation + trading discipline</span>
-            <span class="deck-item">client trust &amp; compliance</span>
-            <span class="deck-item">performing under pressure</span>
-          </div>
-        </div>
-
-        <div class="ledger ledger-future">
-          <h3>Where I'm Going</h3>
-          <ul class="ledger-list">
-            <li><span class="lline">Markets Analyst / Equity Research</span><span class="ldetail">Full time, after the MSBA</span></li>
-            <li><span class="lline">MSBA, Wake Forest</span><span class="ldetail">Expected May 2027</span></li>
-            <li><span class="lline">Target start</span><span class="ldetail">Summer 2027</span></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <div id="resume" class="about-part resume">
-      <p class="part-k">Resume</p>
-      <p class="part-lede">Updated September 2026. Full detail on request. The short version lives below.</p>
-
-      <div class="resume-card reveal">
-        <div class="resume-card-text">
-          <p><strong>Brian Mejia-Lopez</strong></p>
-          <p>Finance and Economics graduate pursuing an MSBA at Wake Forest University, building a career as a markets analyst.</p>
-        </div>
-        <a class="btn btn-solid" href="resume.pdf" download>Download PDF</a>
-      </div>
-
-      <div class="resume-preview reveal">
-        <iframe src="resume.pdf" title="Brian Mejia-Lopez Resume" loading="lazy" width="100%" height="600px" style="border:0;"></iframe>
-      </div>
     </div>
   </section>
 
