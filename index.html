@@ -34,178 +34,97 @@
 </head>
 <body>
 
-<header class="site-header">
-  <div class="wrap header-inner">
-    <span class="mark">BM</span>
-    <nav class="nav">
-      <a href="#intro">Intro</a>
-      <a href="#bridge">The Bridge</a>
-      <a href="#resume">Resume</a>
-      <a href="#work">Work</a>
-      <a href="#market">Market View</a>
-      <a href="#paper-trading" id="nav-paper" hidden>Paper Trading</a>
-      <a href="#vol-scorecard" id="nav-vol" hidden>Vol Scorecard</a>
-      <!-- <a href="#notes">Market Notes</a>  (turn back on with the first post) -->
-      <a href="#contact">Contact</a>
-    </nav>
+<a class="skiplink" href="#main">Skip to content</a>
+
+<!-- MASTHEAD -->
+<header class="mast">
+  <div class="wrap mast-in">
+    <p class="mast-name">Brian Mejia-Lopez</p>
+    <p class="mast-tag">Markets research <span class="sep">/</span> Greensboro and Winston Salem, NC</p>
   </div>
 </header>
 
-<main>
+<!-- SECTION NAV, organized by type of work -->
+<nav class="deskbar" aria-label="Sections">
+  <div class="wrap deskbar-in">
+    <a href="#memos">Memos</a>
+    <a href="#work">Models</a>
+    <a href="#market">Live Desk</a>
+    <a href="#paper-trading" id="nav-paper" hidden>Paper Trading</a>
+    <a href="#vol-scorecard" id="nav-vol" hidden>Vol Scorecard</a>
+    <!-- <a href="#notes">Market Notes</a>  (turn back on with the first post) -->
+    <a href="#methods">Methods</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
 
-  <!-- HERO -->
-  <section class="hero wrap">
-    <div class="hero-top">
+<main id="main">
 
-      <div class="hero-text">
-        <p class="eyebrow">Hybrid Track — Business &amp; Finance</p>
-        <h1>My path from aspiring trader to <span class="accent">markets analyst</span>.</h1>
-        <p class="hero-sub">
-          Six years of evaluating companies from both sides, what they're worth and
-          how they trade, meets a year of licensed, client facing experience. I'm
-          Brian Mejia-Lopez, and together those experiences point toward a future
-          building a career as a markets analyst.
-        </p>
-        <div class="hero-cta">
-          <a href="#work" class="hero-btn-brass">See my work ↘</a>
-          <a href="resume.pdf" class="hero-btn-outline" download>Download resume</a>
-        </div>
-        <div class="highlight-bar">
-          <div class="highlight-item">
-            <p class="highlight-label">Track record</p>
-            <p class="highlight-value">Trading my own book since 2020</p>
-          </div>
-          <div class="highlight-item">
-            <p class="highlight-label">Credential</p>
-            <p class="highlight-value">MSBA Candidate, Wake Forest, May 2027</p>
-          </div>
-          <div class="highlight-item">
-            <p class="highlight-label">Philosophy</p>
-            <p class="highlight-value">Models built to be questioned</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="hero-side">
-        <div class="hero-photo">
-          <img src="headshot.jpg" alt="Brian Mejia-Lopez" width="1200" height="800">
-        </div>
-        <div class="hero-photo-panel">
-          <p class="panel-label">What I bring</p>
-          <div class="panel-stats">
-            <div>
-              <p class="panel-num">6</p>
-              <p class="panel-desc">years trading equities &amp; futures independently</p>
-            </div>
-            <div>
-              <p class="panel-num">3</p>
-              <p class="panel-desc">sectors I follow closely: Defense/Aerospace, Energy, Tech</p>
-            </div>
-          </div>
-          <div class="panel-approach">
-            <p class="panel-label">How I approach the work</p>
-            <p class="panel-approach-text">Value first, then price. Test the assumption before you trust the model.</p>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- INTRODUCTION : video gets its own moment -->
-  <section id="intro" class="intro wrap">
-    <p class="eyebrow">00 — Introduction</p>
-    <h2>60 seconds, in my own words.</h2>
-    <p class="section-lede">Who I am, where I've been, and where I'm headed, before you read another line.</p>
-
-    <div class="video-frame reveal">
-      <div class="video-frame-inner">
-        <iframe
-          src="https://www.youtube.com/embed/NBy-WyKixRs"
-          title="Brian Mejia-Lopez — Professional Introduction"
-          loading="lazy"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen>
-        </iframe>
-      </div>
-      <p class="video-caption">Recorded August 2026. Professional introduction and career pitch.</p>
-    </div>
-  </section>
-
-  <!-- THE BRIDGE : track alignment / narrative -->
-  <section id="bridge" class="bridge wrap">
-    <p class="eyebrow">01 — Track Alignment</p>
-    <h2>The Bridge</h2>
-    <p class="section-lede">
-      Six years of evaluating companies from both sides, what they're worth and how
-      they trade, meets a year of licensed, client facing experience. Together they
-      point toward one thing: analyzing markets for a living.
+  <!-- CREDENTIALS FIRST -->
+  <section class="lede-sec wrap">
+    <p class="kicker">MSBA Candidate <span class="sep">/</span> Wake Forest University <span class="sep">/</span> May 2027</p>
+    <h1>Value first, then price. <span class="accent">Test the assumption before you trust the model.</span></h1>
+    <p class="hero-sub">
+      Six years of evaluating companies from both sides, what they're worth and
+      how they trade, meets a year of licensed, client facing experience. I'm
+      Brian Mejia-Lopez, and together those experiences point toward a future
+      building a career as a markets analyst.
     </p>
 
-    <div class="bridge-grid reveal">
-
-      <div class="ledger ledger-past">
-        <h3>Where I've Been</h3>
-        <ul class="ledger-list">
-          <li><span class="lline">Independent Equity &amp; Futures Trader (2020 to Present)</span><span class="ldetail">Fundamental valuation paired with price action trading, 2 to 5% risk per position</span></li>
-          <li><span class="lline">Client Services Rep, State Farm (2025 to 2026)</span><span class="ldetail">Licensed NC agent, advised &amp; retained clients</span></li>
-          <li><span class="lline">Service Assistant, Ruth's Chris (2023 to 2025)</span><span class="ldetail">Ran 250+ covers/shift, trained new hires</span></li>
-        </ul>
+    <dl class="cred">
+      <div class="cred-cell">
+        <dt>Credential</dt>
+        <dd>MSBA Candidate, Wake Forest, May 2027</dd>
       </div>
-
-      <div class="bridge-span" aria-hidden="true">
-        <p class="bridge-connector-label">translates to</p>
-        <div class="bridge-deck">
-          <span class="deck-item">valuation + trading discipline</span>
-          <span class="deck-item">client trust &amp; compliance</span>
-          <span class="deck-item">performing under pressure</span>
-        </div>
+      <div class="cred-cell">
+        <dt>Track record</dt>
+        <dd>Trading my own book since 2020</dd>
       </div>
-
-      <div class="ledger ledger-future">
-        <h3>Where I'm Going</h3>
-        <ul class="ledger-list">
-          <li><span class="lline">Markets Analyst / Equity Research</span><span class="ldetail">Full time, after the MSBA</span></li>
-          <li><span class="lline">MSBA, Wake Forest</span><span class="ldetail">Expected May 2027</span></li>
-          <li><span class="lline">Target start</span><span class="ldetail">Summer 2027</span></li>
-        </ul>
+      <div class="cred-cell">
+        <dt>Coverage</dt>
+        <dd>Defense and Aerospace, Energy, Tech</dd>
       </div>
+      <div class="cred-cell">
+        <dt>Licensed</dt>
+        <dd>Licensed NC agent, property and casualty</dd>
+      </div>
+      <div class="cred-cell">
+        <dt>Contact</dt>
+        <dd><a href="mailto:Brian_m25@yahoo.com">Brian_m25@yahoo.com</a></dd>
+      </div>
+      <div class="cred-cell">
+        <dt>Available</dt>
+        <dd>Full time, Summer 2027</dd>
+      </div>
+    </dl>
 
-    </div>
+    <p class="purpose">
+      <b>Purpose</b> A research portfolio for markets analyst, equity research and
+      trading roles. Every live number on this page is written by a script in this
+      repository and committed, so the file behind it can be opened and checked.
+      <b>Disclaimer</b> Nothing here is investment advice. The paper trading and the
+      volatility scorecard are simulations. No real money and no broker connection.
+    </p>
+
+    <p class="lede-cta">
+      <a href="resume.pdf" class="btn btn-solid" download>Download resume</a>
+      <a href="#memos" class="btn">Read a memo</a>
+      <a href="https://github.com/mejiba26/mejiba26.github.io" class="btn" target="_blank" rel="noopener">Repository</a>
+    </p>
   </section>
 
-  <!-- RESUME -->
-  <section id="resume" class="resume wrap">
-    <p class="eyebrow">02 — Documentation</p>
-    <h2>Resume</h2>
-    <p class="section-lede">Updated September 2026. Full detail on request. The short version lives below.</p>
+  <!-- 01 MEMOS -->
+  <section id="memos" class="memos wrap">
+    <header class="sechd"><span class="secno">01</span><h2>Memos</h2></header>
+    <p class="section-lede">Long form valuation work. Each memo opens as its own page and prints to a clean PDF.</p>
 
-    <div class="resume-card reveal">
-      <div class="resume-card-text">
-        <p><strong>Brian Mejia-Lopez</strong></p>
-        <p>Finance and Economics graduate pursuing an MSBA at Wake Forest University, building a career as a markets analyst.</p>
-      </div>
-      <a class="btn" href="resume.pdf" download>Download PDF</a>
-    </div>
-
-    <div class="resume-preview reveal">
-      <iframe src="resume.pdf" title="Brian Mejia-Lopez Resume" loading="lazy" width="100%" height="600px" style="border:0;"></iframe>
-    </div>
-  </section>
-
-  <!-- WORK EVIDENCE -->
-  <section id="work" class="work wrap">
-    <p class="eyebrow">03 — Work Evidence</p>
-    <h2>Projects</h2>
-    <p class="section-lede">Context, contribution, outcome. In that order.</p>
-
-    <div class="project-grid">
-
-      <!-- Project 01 -->
-      <article id="rtx" class="project-card reveal">
-        <p class="project-num">Project 01</p>
+    <article id="rtx" class="memo reveal">
+      <div class="memo-main">
+        <p class="memo-tag">Equity research <span class="sep">/</span> Large cap defense</p>
         <h3>RTX Corporation Equity Valuation</h3>
-        <p class="project-meta">Fall 2024, revised 2026</p>
+        <p class="memo-meta">Fall 2024, revised 2026 <span class="sep">/</span> DCF, peer multiples, sensitivity grid</p>
+
         <p class="project-field">Context</p>
         <p>Independent equity research on a large cap defense contractor, built to answer one question: what is RTX actually worth per share?</p>
         <p class="project-field">My role</p>
@@ -214,53 +133,124 @@
         <p>Fair value of $125 to $133 per share (DCF about $128, adjusted P/E about $125, EV/EBITDA about $133) vs. $122 at the time of analysis, so modestly undervalued.</p>
         <p class="project-field">What changed</p>
         <p>Models built to be questioned, including my own. I used Claude to audit my original 2024 model and rebuilt it. The two biggest fixes: my discount rate rested on a 1.22% equity risk premium, and I subtracted total liabilities instead of net debt. My DCF estimate dropped from $175 to $128 per share, and every change is documented in a new Revision Notes appendix.</p>
-        <p class="project-link"><a href="rtx-valuation.pdf" target="_blank" rel="noopener">Read the paper (PDF) ↗</a></p>
-      </article>
 
-      <!-- Project 02 -->
-      <article id="ecg" class="project-card reveal">
-        <p class="project-num">Project 02</p>
-        <h3>ECG Patient Matching Model</h3>
-        <p class="project-meta">Wake Forest School of Medicine Build-A-Thon · Sept 2026 to present</p>
-        <p class="project-field">Context</p>
-        <p>A Build-A-Thon hosted by the Center for Artificial Intelligence Research (CAIR). The task: score whether two Lead I ECGs belong to the same patient.</p>
-        <p class="project-field">My role</p>
-        <p>Led the modeling for a three person team. Built a Siamese CNN and feature neural net ensemble in Python (TensorFlow/Keras), trained on 37,000+ ECGs from 10,000 MIMIC-IV patients plus St. Jude paired hospital and Apple Watch ECGs.</p>
-        <p class="project-field">Outcome <span class="tag-prelim">Preliminary</span></p>
-        <p>Improved AUROC on held out patients from 0.948 (v1) to 0.984 (v3) for hospital vs. Apple Watch matching. Every setting was tuned on a separate practice set so the locked test stayed clean.</p>
-        <p class="project-note">0.984 is our own held out test, not the official competition score. Final submission is October 13, 2026.</p>
-        <p class="project-link"><a href="https://github.com/npotisit/Build-a-thon_MBNA" target="_blank" rel="noopener">View on GitHub ↗</a></p>
-      </article>
-
-      <!-- Project 03 -->
-      <article id="portfolio" class="project-card reveal">
-        <p class="project-num">Project 03</p>
-        <h3>iShares Multi-Asset Portfolio Model</h3>
-        <p class="project-meta">Mar 2008 to Aug 2026, out of sample</p>
-        <p class="project-field">Context</p>
-        <p>A Python walk forward backtest of five allocation strategies (60/40, equal weight, inverse volatility, minimum variance, and max Sharpe with a 40% cap) across nine iShares ETFs: IVV, IJR, EFA, EEM, AGG, TLT, TIP, LQD, IAU.</p>
-        <p class="project-field">My role</p>
-        <p>Each month, weights use only the prior 36 months of data. Costs are 10 bps on turnover. Stress tests cover the 2008 crisis, the COVID crash, and the 2022 rate shock.</p>
-        <p class="project-field">Outcome</p>
-        <p>After costs, the plain 60/40 beat every other strategy: 8.4% a year with a 0.72 Sharpe, vs. 7.3% and 0.64 for Max Sharpe, the best of the rest. The optimizers earned their keep in crashes. In the 2008 crisis, Min Variance lost 1.2% and Max Sharpe 3.9%, vs. 29.6% for 60/40. But in the 2022 rate shock, when stocks and bonds fell together, every strategy lost between 13.9% and 15.9%, so diversification didn't help. Max Sharpe also traded heavily, with annual turnover of about 244% (buys plus sells).</p>
-        <div class="project-figs">
-          <a href="growth.png" target="_blank" rel="noopener"><img src="growth.png" alt="Growth of $10,000 by strategy, March 2008 to August 2026, after costs"></a>
-          <a href="drawdowns.png" target="_blank" rel="noopener"><img src="drawdowns.png" alt="Drawdown from prior peak by strategy"></a>
+        <div class="mind">
+          <p class="mind-k">What would change my mind</p>
+          <p>The range rests on a 6.15% WACC, and the audit showed how far a wrong discount rate can move it: correcting a 1.22% equity risk premium took the DCF from $175 to $128 per share. A defensible WACC materially different from 6.15% would move the range again.</p>
         </div>
-        <p class="project-link"><span class="link-soon">Code coming soon</span></p>
+
+        <p class="memo-links">
+          <a class="go" href="memos/rtx.html">Read the memo</a>
+          <a href="rtx-valuation.pdf" target="_blank" rel="noopener">Original paper (PDF)</a>
+        </p>
+      </div>
+
+      <aside class="ratebox">
+        <p class="rate-k">Fair value range</p>
+        <p class="rate-v">$125 to $133</p>
+        <p class="rate-n">Versus $122 at the time of analysis</p>
+        <dl class="rate-rows">
+          <div><dt>DCF</dt><dd>$128</dd></div>
+          <div><dt>Adjusted P/E</dt><dd>$125</dd></div>
+          <div><dt>EV/EBITDA</dt><dd>$133</dd></div>
+          <div><dt>WACC</dt><dd>6.15%</dd></div>
+          <div><dt>Gross margin</dt><dd>19.21%</dd></div>
+        </dl>
+        <p class="rate-rev">Revision log: the DCF estimate fell from $175 to $128 after the 2026 audit.</p>
+      </aside>
+    </article>
+  </section>
+
+  <!-- 02 MODELS  (id kept as #work so existing links still resolve) -->
+  <section id="work" class="models wrap">
+    <header class="sechd"><span class="secno">02</span><h2>Models</h2></header>
+    <p class="section-lede">Context, contribution, outcome. In that order, with the numbers that back each one.</p>
+
+    <div class="model-list">
+
+      <article id="ecg" class="model reveal">
+        <div class="model-head">
+          <p class="memo-tag">Machine learning <span class="sep">/</span> Competition</p>
+          <h3>ECG Patient Matching Model</h3>
+          <p class="memo-meta">Wake Forest School of Medicine Build-A-Thon <span class="sep">/</span> Sept 2026 to present</p>
+        </div>
+        <ul class="statpanel">
+          <li><span class="sp-k">AUROC, v1</span><span class="sp-v">0.948</span></li>
+          <li><span class="sp-k">AUROC, v3</span><span class="sp-v">0.984</span></li>
+          <li><span class="sp-k">ECGs trained on</span><span class="sp-v">37,000+</span></li>
+          <li><span class="sp-k">Patients</span><span class="sp-v">10,000</span></li>
+        </ul>
+        <div class="model-body">
+          <p class="project-field">Context</p>
+          <p>A Build-A-Thon hosted by the Center for Artificial Intelligence Research (CAIR). The task: score whether two Lead I ECGs belong to the same patient.</p>
+          <p class="project-field">My role</p>
+          <p>Led the modeling for a three person team. Built a Siamese CNN and feature neural net ensemble in Python (TensorFlow/Keras), trained on 37,000+ ECGs from 10,000 MIMIC-IV patients plus St. Jude paired hospital and Apple Watch ECGs.</p>
+          <p class="project-field">Outcome <span class="tag-prelim">Preliminary</span></p>
+          <p>Improved AUROC on held out patients from 0.948 (v1) to 0.984 (v3) for hospital vs. Apple Watch matching. Every setting was tuned on a separate practice set so the locked test stayed clean.</p>
+          <p class="project-note">0.984 is our own held out test, not the official competition score. Final submission is October 13, 2026.</p>
+          <div class="mind">
+            <p class="mind-k">What would change my mind</p>
+            <p>0.984 is our own held out test, not the official competition score. A competition score well below it would mean our held out patients were an easier test than the real one.</p>
+          </div>
+          <p class="memo-links"><a class="go" href="https://github.com/npotisit/Build-a-thon_MBNA" target="_blank" rel="noopener">View on GitHub</a></p>
+        </div>
       </article>
 
-      <!-- Project 04 -->
-      <article id="futures" class="project-card reveal">
-        <p class="project-num">Project 04</p>
-        <h3>Independent Futures Trading and Python Market Tools</h3>
-        <p class="project-meta">March 2020 to present</p>
-        <p class="project-field">Context</p>
-        <p>Self directed trading of MNQ and MES index futures, with a defined stop loss on every trade.</p>
-        <p class="project-field">My role</p>
-        <p>Risk 2 to 5% of the account per trade, and log entry, exit, and outcome data for every trade. Built Python tools (pandas, yfinance) to screen for momentum and backtest a moving average crossover.</p>
-        <p class="project-field">Outcome</p>
-        <p>On AAPL, the crossover underperformed buy and hold (31.4% vs. 56.9%). Learning that from data instead of real money was the point.</p>
+      <article id="portfolio" class="model reveal">
+        <div class="model-head">
+          <p class="memo-tag">Backtest <span class="sep">/</span> Multi asset allocation</p>
+          <h3>iShares Multi-Asset Portfolio Model</h3>
+          <p class="memo-meta">Mar 2008 to Aug 2026, out of sample</p>
+        </div>
+        <ul class="statpanel">
+          <li><span class="sp-k">60/40 after costs</span><span class="sp-v">8.4% a yr</span></li>
+          <li><span class="sp-k">60/40 Sharpe</span><span class="sp-v">0.72</span></li>
+          <li><span class="sp-k">Best of the rest</span><span class="sp-v">7.3%, 0.64</span></li>
+          <li><span class="sp-k">Strategies tested</span><span class="sp-v">5</span></li>
+        </ul>
+        <div class="model-body">
+          <p class="project-field">Context</p>
+          <p>A Python walk forward backtest of five allocation strategies (60/40, equal weight, inverse volatility, minimum variance, and max Sharpe with a 40% cap) across nine iShares ETFs: IVV, IJR, EFA, EEM, AGG, TLT, TIP, LQD, IAU.</p>
+          <p class="project-field">My role</p>
+          <p>Each month, weights use only the prior 36 months of data. Costs are 10 bps on turnover. Stress tests cover the 2008 crisis, the COVID crash, and the 2022 rate shock.</p>
+          <p class="project-field">Outcome</p>
+          <p>After costs, the plain 60/40 beat every other strategy: 8.4% a year with a 0.72 Sharpe, vs. 7.3% and 0.64 for Max Sharpe, the best of the rest. The optimizers earned their keep in crashes. In the 2008 crisis, Min Variance lost 1.2% and Max Sharpe 3.9%, vs. 29.6% for 60/40. But in the 2022 rate shock, when stocks and bonds fell together, every strategy lost between 13.9% and 15.9%, so diversification didn't help. Max Sharpe also traded heavily, with annual turnover of about 244% (buys plus sells).</p>
+          <div class="project-figs">
+            <a href="growth.png" target="_blank" rel="noopener"><img src="growth.png" alt="Growth of $10,000 by strategy, March 2008 to August 2026, after costs" loading="lazy"></a>
+            <a href="drawdowns.png" target="_blank" rel="noopener"><img src="drawdowns.png" alt="Drawdown from prior peak by strategy" loading="lazy"></a>
+          </div>
+          <div class="mind">
+            <p class="mind-k">What would change my mind</p>
+            <p>The plain 60/40 won after costs, but every strategy lost between 13.9% and 15.9% in the 2022 rate shock. A longer sample where the optimizers keep their 2008 advantage without Max Sharpe's 244% annual turnover would change the conclusion.</p>
+          </div>
+          <p class="memo-links"><span class="link-soon">Code coming soon</span></p>
+        </div>
+      </article>
+
+      <article id="futures" class="model reveal">
+        <div class="model-head">
+          <p class="memo-tag">Trading <span class="sep">/</span> Index futures and Python tools</p>
+          <h3>Independent Futures Trading and Python Market Tools</h3>
+          <p class="memo-meta">March 2020 to present</p>
+        </div>
+        <ul class="statpanel">
+          <li><span class="sp-k">Crossover, AAPL</span><span class="sp-v">31.4%</span></li>
+          <li><span class="sp-k">Buy and hold</span><span class="sp-v">56.9%</span></li>
+          <li><span class="sp-k">Risk per trade</span><span class="sp-v">2 to 5%</span></li>
+          <li><span class="sp-k">Trading since</span><span class="sp-v">2020</span></li>
+        </ul>
+        <div class="model-body">
+          <p class="project-field">Context</p>
+          <p>Self directed trading of MNQ and MES index futures, with a defined stop loss on every trade.</p>
+          <p class="project-field">My role</p>
+          <p>Risk 2 to 5% of the account per trade, and log entry, exit, and outcome data for every trade. Built Python tools (pandas, yfinance) to screen for momentum and backtest a moving average crossover.</p>
+          <p class="project-field">Outcome</p>
+          <p>On AAPL, the crossover underperformed buy and hold (31.4% vs. 56.9%). Learning that from data instead of real money was the point.</p>
+          <div class="mind">
+            <p class="mind-k">What would change my mind</p>
+            <p>One name and one rule. The crossover lost to buy and hold on AAPL, 31.4% against 56.9%. The same test across many names and periods could point the other way, which is why the paper trading simulation below is pre registered and run forward instead.</p>
+          </div>
+        </div>
       </article>
 
     </div>
@@ -268,11 +258,47 @@
     <p class="coursework-line"><span class="coursework-label">Coursework</span> Housing Price Regression Model: multiple regression on 545 home sales, final model explains 68% of price variation (R² = 0.680).</p>
   </section>
 
-  <!-- COMMERCIAL AWARENESS -->
-  <section id="market" class="market wrap">
-    <p class="eyebrow">04 — Commercial Awareness</p>
-    <h2>Market View</h2>
-    <p class="section-lede">What I'm tracking right now, and why it matters to the roles I want.</p>
+  <!-- 03 LIVE DESK  (id kept as #market so existing links still resolve) -->
+  <section id="market" class="desk wrap">
+    <header class="sechd"><span class="secno">03</span><h2>Live Desk</h2></header>
+    <p class="section-lede">What I'm tracking right now, and why it matters to the roles I want. Every card here is written by a scheduled script, carries its own as of date, and hides itself when the data is missing, malformed or stale.</p>
+
+    <!-- Desk index: what each feed is, how often it runs and where it comes from.
+         Static on purpose. The live numbers live in the cards below, which are the
+         only things on this page allowed to print a figure. -->
+    <ul class="feedindex">
+      <li>
+        <p class="fi-k">Fed policy</p>
+        <p class="fi-v">Weekly</p>
+        <p class="fi-n">FRED series DFEDTARU and DFEDTARL</p>
+      </li>
+      <li>
+        <p class="fi-k">Sector rotation</p>
+        <p class="fi-v">Weekdays</p>
+        <p class="fi-n">SPDR sector ETFs, trailing three months</p>
+      </li>
+      <li>
+        <p class="fi-k">Monthly spotlight</p>
+        <p class="fi-v">Weekdays</p>
+        <p class="fi-n">Fixed rule over large caps and sector ETFs</p>
+      </li>
+      <li>
+        <p class="fi-k">Energy market</p>
+        <p class="fi-v">Wednesdays</p>
+        <p class="fi-n">EIA Weekly Petroleum Status Report</p>
+      </li>
+      <li>
+        <p class="fi-k">Paper trading</p>
+        <p class="fi-v">Nov 16, 2026</p>
+        <p class="fi-n">Start date, locked in commit e22e6cb</p>
+      </li>
+      <li>
+        <p class="fi-k">Vol scorecard</p>
+        <p class="fi-v">Nov 23, 2026</p>
+        <p class="fi-n">Start date, locked on merge of the spec</p>
+      </li>
+    </ul>
+
     <p class="asof" id="market-asof" hidden>Policy rate as of <span id="market-asof-date"></span></p>
 
     <div class="ticker-row reveal">
@@ -330,105 +356,190 @@
       <div id="energy-body"></div>
     </div>
 
+    <!-- PAPER TRADING
+         Filled by the script at the bottom of this file from data/paper/
+         (ledger.csv, equity.json, state.json), written by scripts/paper_trade.py.
+         Starts hidden, together with its nav link, and is only revealed when
+         every file parses, every figure is a real number, the data is recent
+         and today is on or after START_DATE. Anything else shows nothing. -->
+    <section id="paper-trading" class="paper deskpart" hidden>
+      <p class="eyebrow">Live simulation</p>
+      <h2>Paper trading, aerospace and defense and oil</h2>
+      <p class="paper-meta">Started <span id="paper-start"></span> · <span class="paper-asof">As of <span id="paper-asof"></span></span></p>
+      <p class="paper-disclaimer">Simulation only. No real money, no broker, not investment advice.</p>
+      <div id="paper-body"></div>
+
+      <div class="paper-block">
+        <h3 class="paper-h">The rules in plain language</h3>
+        <ul class="paper-list">
+          <li><strong>Universe.</strong> RTX, LMT, NOC, GD and ITA (aerospace and defense); XLE, USO and XOM (oil). Cash earns nothing. Long only, no leverage.</li>
+          <li><strong>Entry.</strong> Checked after each close. All four must hold: the close is above both its 50 day and 200 day average; the close is at least 1.5 times the 14 day ATR below the highest high of the last 10 trading days (ATR, average true range, is the typical daily price swing); today's close is above yesterday's high; and the portfolio has an open slot and has made fewer than 2 entries this week. The buy fills at the next day's open plus a 10 basis point cost.</li>
+          <li><strong>Exit.</strong> The first of: the close falls to entry minus 2 ATR (stop); the close reaches entry plus 3 ATR (target); the close drops below the 50 day average (trend break); or 20 trading days pass (time stop). The sale fills at the next day's open with the same cost.</li>
+          <li><strong>Sizing.</strong> Dollars at risk (the tier's risk per trade times equity) divided by the stop distance gives the shares, capped at the tier's maximum weight.</li>
+          <li><strong>Tiers.</strong> Safe risks 0.5% per trade, max 20% in one name, 3 positions, 50% invested. Medium: 1%, 30%, 4 positions, 80%. High: 2%, 40%, 3 positions, 100%. Each starts with $100,000 of hypothetical money.</li>
+        </ul>
+      </div>
+
+      <div class="paper-block">
+        <h3 class="paper-h">How to read the trade log</h3>
+        <p class="paper-note">The Reason column in the journal above is not a story written after the fact. It is the rule that fired, as the simulator logged it at the time: <strong>stop</strong>, <strong>target</strong>, <strong>trend break</strong> or <strong>time stop</strong> on the way out, and the entry rule on the way in. No discretionary commentary is added, and no language model writes or edits a trade reason. The same rows are in <a href="https://github.com/mejiba26/mejiba26.github.io/blob/main/data/paper/ledger.csv" target="_blank" rel="noopener">ledger.csv</a>, which is append only, so the commit history shows when each row appeared.</p>
+      </div>
+
+      <div class="paper-block">
+        <h3 class="paper-h">Honest limits</h3>
+        <ul class="paper-list">
+          <li>Swing trades in a small universe are infrequent. It will take months to collect enough trades to judge anything, and early results will be noisy.</li>
+          <li>Stops are checked on the close and filled at the next open, so a gap can lose more than the planned risk, and a trend break exit has no loss floor. Compare planned risk with the realized worst loss above.</li>
+          <li>A pullback can be the start of a bigger decline. The confirmation rule and the stop reduce that risk but do not remove it.</li>
+          <li>Fills at the open ignore slippage, and USO carries futures roll cost. Paper results do not predict real results.</li>
+        </ul>
+      </div>
+
+      <p class="paper-links">
+        <a href="https://github.com/mejiba26/mejiba26.github.io/blob/main/data/paper/ledger.csv" target="_blank" rel="noopener">Ledger on GitHub</a>
+        <a href="https://github.com/mejiba26/mejiba26.github.io/commit/e22e6cb" target="_blank" rel="noopener">Locked spec, commit e22e6cb</a>
+        <a href="https://github.com/mejiba26/mejiba26.github.io/commit/52d8b12" target="_blank" rel="noopener">Amendment 1, commit 52d8b12</a>
+        <a href="https://github.com/mejiba26/mejiba26.github.io/blob/main/docs/paper-trading-spec.md" target="_blank" rel="noopener">Full spec</a>
+      </p>
+    </section>
+
+    <!-- VOLATILITY SCORECARD
+         Filled by the script at the bottom of this file from data/vol/scores.json,
+         written by scripts/update_vol.py (rules in docs/vol-scorecard-spec.md).
+         Starts hidden, together with its nav link, and is only revealed when the
+         file parses, every figure is a real number, the data is recent and today
+         is on or after START_DATE. Anything else shows nothing. -->
+    <section id="vol-scorecard" class="paper vol deskpart" hidden>
+      <p class="eyebrow">Forecast evaluation</p>
+      <h2>Volatility forecast scorecard</h2>
+      <p class="paper-meta">Started <span id="vol-start"></span> · <span class="paper-asof">As of <span id="vol-asof"></span></span></p>
+      <p class="paper-disclaimer">Forecast evaluation only, not trading advice.</p>
+
+      <div class="paper-block">
+        <h3 class="paper-h">What this shows</h3>
+        <p class="paper-note vol-lede">Every weekday after the market closes, four models each predict how wide the next day's trading range will be for four funds, meaning the gap between the day's high and its low as a percent. Each prediction comes with a band the model expects to hold the actual range about 8 times out of 10. The forecasts are saved to GitHub with a timestamp before the next session opens, then graded against what happened. Two questions are being tested: are the bands honest, so that they really hold about 80% of the time, and does a more elaborate model predict better than a very simple one. Nothing here says what to buy or sell.</p>
+      </div>
+
+      <div id="vol-body"></div>
+
+      <div class="paper-block">
+        <h3 class="paper-h">How it works in plain language</h3>
+        <ul class="paper-list">
+          <li><strong>What is forecast.</strong> The next trading day's log range, ln(High / Low), for SPY, QQQ, ITA and XLE. For values this small that is almost exactly the high to low gap as a percent, which is how it is shown here.</li>
+          <li><strong>The four models.</strong> Naive: tomorrow looks like today. Rolling mean: the average of the last 22 days. EWMA: a weighted average that leans on recent days (lambda 0.94). HAR: a regression on yesterday, the last 5 days and the last 22 days, refit every Monday on all history up to the prior close.</li>
+          <li><strong>The band.</strong> Each model's own errors over the previous 500 days set its 10th, 50th and 90th percentile forecasts. That makes an 80% interval built only from what was known when the forecast was made.</li>
+          <li><strong>Grading.</strong> Mean absolute error is the average miss. Pinball loss scores the edges of the band. Coverage is how often the actual range landed inside the band, and it should sit near 80%.</li>
+          <li><strong>Timing.</strong> Every forecast carries the UTC time it was generated. One generated after the next session's open is marked late, kept in the file and never scored. Nothing before the start date counts.</li>
+          <li><strong>Fixed in advance.</strong> The models, their parameters and the test were written down before the first forecast. No ranking before 60 graded days. After 250, HAR is tested against the better simple baseline with a Diebold Mariano test, it only counts as better with a p value below 0.0125, and the result is published either way.</li>
+        </ul>
+      </div>
+
+      <div class="paper-block">
+        <h3 class="paper-h">Honest limits</h3>
+        <ul class="paper-list">
+          <li>The daily range is an imperfect stand in for risk. It ignores overnight gaps and says nothing about direction.</li>
+          <li>Four ETFs that tend to move together are not four independent tests, so agreement across them is weaker evidence than it looks.</li>
+          <li>Every model here learns from past ranges, which say little about a sudden change of regime. Expect the bands to be too narrow right after a shock.</li>
+          <li>Shortened holiday sessions are graded like any other day, and the data is Yahoo Finance daily bars as first published.</li>
+        </ul>
+      </div>
+
+      <p class="paper-links">
+        <a href="https://github.com/mejiba26/mejiba26.github.io/blob/main/data/vol/forecasts.csv" target="_blank" rel="noopener">Every forecast on GitHub</a>
+        <a href="https://github.com/mejiba26/mejiba26.github.io/blob/main/data/vol/realized.csv" target="_blank" rel="noopener">What they were graded against</a>
+        <a href="https://github.com/mejiba26/mejiba26.github.io/commits/main/docs/vol-scorecard-spec.md" target="_blank" rel="noopener">Spec history</a>
+        <a href="https://github.com/mejiba26/mejiba26.github.io/blob/main/docs/vol-scorecard-spec.md" target="_blank" rel="noopener">Full spec</a>
+      </p>
+    </section>
+
+    <!-- Bias statements and the desk's own limits. Static copy, drawn from the
+         two locked specs in docs/. -->
+    <div class="deskrules">
+      <div class="deskrule">
+        <h3 class="paper-h">How the locked specs avoid lookahead bias</h3>
+        <p class="paper-note">Both simulations were written down and committed before they began. The paper trading rules were locked on November 9, 2026 and the first trade can only happen on or after November 16, 2026. The volatility models, their parameters and the test were locked when the spec was merged, and the first forecast is for November 23, 2026. Neither file is edited again except through a dated amendment at the bottom, and the original text stays exactly as it was.</p>
+        <p class="paper-note">Inside each run, nothing uses data from after the moment of the decision. Paper trading decides after the close on daily bars only and fills at the next day's open plus a 10 basis point cost. The scorecard forecasts after the close of one day for the next, refits HAR on data through the prior close, and builds each 80% band from that model's own errors over the previous 500 days. A forecast generated after the target day's open is marked late and is never scored.</p>
+        <p class="paper-note">The record is append only. Only days after the last processed date are ever added, so a later restatement by the data provider cannot rewrite a recorded trade, and each day's high and low are kept as first seen. No day before the start date is backfilled. The commit history is the time stamp.</p>
+      </div>
+      <div class="deskrule">
+        <h3 class="paper-h">How they avoid survivorship bias</h3>
+        <p class="paper-note">Both universes are fixed, named lists written into the spec before the start. Paper trading trades RTX, LMT, NOC, GD, ITA, XLE, USO and XOM, and nothing outside that list. The scorecard forecasts SPY, QQQ, ITA and XLE, and nothing else. A name is never added after the fact because it did well, and never dropped because it did badly. Changing the universe is a new version with a new start date and a new spec, not an edit to this one.</p>
+        <p class="paper-note"><strong>The honest limit.</strong> A fixed list avoids the bias you get from choosing winners after the fact, but it does not make the list representative. Both universes are small and hand picked, and they are made of names that are listed today, so they say nothing about companies that failed before 2026. Four correlated ETFs are also not four independent tests.</p>
+      </div>
+      <div class="deskrule">
+        <h3 class="paper-h">Lessons and limits so far</h3>
+        <p class="paper-note">Three things this work has already taught me, each from being wrong. My RTX discount rate rested on a 1.22% equity risk premium and the equity bridge subtracted total liabilities instead of net debt, which was a $47 per share error in one model. In the iShares backtest the plain 60/40 beat four optimizers after costs, and in the 2022 rate shock every strategy lost between 13.9% and 15.9%, so diversification did not help when it was needed most. On AAPL the moving average crossover lost to buy and hold, 31.4% against 56.9%.</p>
+        <p class="paper-note">The limits of this desk are the same shape. Both live simulations begin with almost no data, swing trades are infrequent, and early results will be noisy for months. Neither one is a track record, and neither one is advice.</p>
+      </div>
+    </div>
   </section>
 
-  <!-- PAPER TRADING
-       Filled by the script at the bottom of this file from data/paper/
-       (ledger.csv, equity.json, state.json), written by scripts/paper_trade.py.
-       Starts hidden, together with its nav link, and is only revealed when
-       every file parses, every figure is a real number, the data is recent
-       and today is on or after START_DATE. Anything else shows nothing. -->
-  <section id="paper-trading" class="market paper wrap" hidden>
-    <p class="eyebrow">Live simulation</p>
-    <h2>Paper trading, aerospace and defense and oil</h2>
-    <p class="paper-meta">Started <span id="paper-start"></span> · <span class="paper-asof">As of <span id="paper-asof"></span></span></p>
-    <p class="paper-disclaimer">Simulation only. No real money, no broker, not investment advice.</p>
-    <div id="paper-body"></div>
+  <!-- 04 METHODS -->
+  <section id="methods" class="methods wrap">
+    <header class="sechd"><span class="secno">04</span><h2>Methods</h2></header>
+    <p class="section-lede">Every number on the Live Desk is produced by one of these files and committed to the repository. Nothing on this page is typed in by hand.</p>
 
-    <div class="paper-block">
-      <h3 class="paper-h">The rules in plain language</h3>
-      <ul class="paper-list">
-        <li><strong>Universe.</strong> RTX, LMT, NOC, GD and ITA (aerospace and defense); XLE, USO and XOM (oil). Cash earns nothing. Long only, no leverage.</li>
-        <li><strong>Entry.</strong> Checked after each close. All four must hold: the close is above both its 50 day and 200 day average; the close is at least 1.5 times the 14 day ATR below the highest high of the last 10 trading days (ATR, average true range, is the typical daily price swing); today's close is above yesterday's high; and the portfolio has an open slot and has made fewer than 2 entries this week. The buy fills at the next day's open plus a 10 basis point cost.</li>
-        <li><strong>Exit.</strong> The first of: the close falls to entry minus 2 ATR (stop); the close reaches entry plus 3 ATR (target); the close drops below the 50 day average (trend break); or 20 trading days pass (time stop). The sale fills at the next day's open with the same cost.</li>
-        <li><strong>Sizing.</strong> Dollars at risk (the tier's risk per trade times equity) divided by the stop distance gives the shares, capped at the tier's maximum weight.</li>
-        <li><strong>Tiers.</strong> Safe risks 0.5% per trade, max 20% in one name, 3 positions, 50% invested. Medium: 1%, 30%, 4 positions, 80%. High: 2%, 40%, 3 positions, 100%. Each starts with $100,000 of hypothetical money.</li>
-      </ul>
+    <ol class="methodlist">
+      <li>
+        <p class="me-h">Sector rotation</p>
+        <p class="me-d">Pulls the SPDR sector ETFs and ranks them over three months, then writes the file the card reads.</p>
+        <p class="me-f"><a href="https://github.com/mejiba26/mejiba26.github.io/blob/main/scripts/update_sectors.py" target="_blank" rel="noopener">scripts/update_sectors.py</a> <a href="https://github.com/mejiba26/mejiba26.github.io/blob/main/data/sectors.json" target="_blank" rel="noopener">data/sectors.json</a> <a href="https://github.com/mejiba26/mejiba26.github.io/blob/main/.github/workflows/update-sectors.yml" target="_blank" rel="noopener">update-sectors.yml</a></p>
+      </li>
+      <li>
+        <p class="me-h">Fed policy item</p>
+        <p class="me-d">Reads the FRED series for the upper and lower bound of the federal funds target. Standard library only, no scraping.</p>
+        <p class="me-f"><a href="https://github.com/mejiba26/mejiba26.github.io/blob/main/scripts/update_market.py" target="_blank" rel="noopener">scripts/update_market.py</a> <a href="https://github.com/mejiba26/mejiba26.github.io/blob/main/data/market.json" target="_blank" rel="noopener">data/market.json</a> <a href="https://github.com/mejiba26/mejiba26.github.io/blob/main/.github/workflows/update-market.yml" target="_blank" rel="noopener">update-market.yml</a></p>
+      </li>
+      <li>
+        <p class="me-h">Monthly spotlight</p>
+        <p class="me-d">Picks the name with the largest absolute move against SPY over the previous full calendar month. It is a rule about what moved most, never a recommendation.</p>
+        <p class="me-f"><a href="https://github.com/mejiba26/mejiba26.github.io/blob/main/scripts/update_spotlight.py" target="_blank" rel="noopener">scripts/update_spotlight.py</a> <a href="https://github.com/mejiba26/mejiba26.github.io/blob/main/data/spotlight.json" target="_blank" rel="noopener">data/spotlight.json</a> <a href="https://github.com/mejiba26/mejiba26.github.io/blob/main/.github/workflows/update-spotlight.yml" target="_blank" rel="noopener">update-spotlight.yml</a></p>
+      </li>
+      <li>
+        <p class="me-h">Energy market</p>
+        <p class="me-d">Reads the EIA Open Data API after the Weekly Petroleum Status Report and keeps a five year history cache for the percentile ranks.</p>
+        <p class="me-f"><a href="https://github.com/mejiba26/mejiba26.github.io/blob/main/scripts/update_eia.py" target="_blank" rel="noopener">scripts/update_eia.py</a> <a href="https://github.com/mejiba26/mejiba26.github.io/blob/main/data/energy.json" target="_blank" rel="noopener">data/energy.json</a> <a href="https://github.com/mejiba26/mejiba26.github.io/blob/main/data/eia_history.json" target="_blank" rel="noopener">data/eia_history.json</a></p>
+      </li>
+      <li>
+        <p class="me-h">Paper trading simulator</p>
+        <p class="me-d">The pre registered rule set and the simulator that runs it. The spec was locked before the start date and is only amended by a dated note at the bottom.</p>
+        <p class="me-f"><a href="https://github.com/mejiba26/mejiba26.github.io/blob/main/docs/paper-trading-spec.md" target="_blank" rel="noopener">docs/paper-trading-spec.md</a> <a href="https://github.com/mejiba26/mejiba26.github.io/blob/main/scripts/paper_trade.py" target="_blank" rel="noopener">scripts/paper_trade.py</a> <a href="https://github.com/mejiba26/mejiba26.github.io/tree/main/data/paper" target="_blank" rel="noopener">data/paper/</a></p>
+      </li>
+      <li>
+        <p class="me-h">Volatility scorecard</p>
+        <p class="me-d">Makes four forecasts a day for four ETFs, timestamps them, then grades them. The models and the test were fixed before the first forecast.</p>
+        <p class="me-f"><a href="https://github.com/mejiba26/mejiba26.github.io/blob/main/docs/vol-scorecard-spec.md" target="_blank" rel="noopener">docs/vol-scorecard-spec.md</a> <a href="https://github.com/mejiba26/mejiba26.github.io/blob/main/scripts/update_vol.py" target="_blank" rel="noopener">scripts/update_vol.py</a> <a href="https://github.com/mejiba26/mejiba26.github.io/tree/main/data/vol" target="_blank" rel="noopener">data/vol/</a></p>
+      </li>
+      <li>
+        <p class="me-h">Schema checks</p>
+        <p class="me-d">Run in the workflow after every write. If the shape of a data file drifts from what the page reads, the run fails loudly instead of publishing a broken card.</p>
+        <p class="me-f"><a href="https://github.com/mejiba26/mejiba26.github.io/blob/main/scripts/check_paper_schema.py" target="_blank" rel="noopener">scripts/check_paper_schema.py</a> <a href="https://github.com/mejiba26/mejiba26.github.io/blob/main/scripts/check_vol_schema.py" target="_blank" rel="noopener">scripts/check_vol_schema.py</a></p>
+      </li>
+      <li>
+        <p class="me-h">Offline tests</p>
+        <p class="me-d">Synthetic prices, no network. They check that a rerun changes nothing, that a run split across days equals one continuous run, and that no forecast uses later data.</p>
+        <p class="me-f"><a href="https://github.com/mejiba26/mejiba26.github.io/blob/main/scripts/dev/test_update_vol.py" target="_blank" rel="noopener">test_update_vol.py</a> <a href="https://github.com/mejiba26/mejiba26.github.io/blob/main/scripts/dev/test_paper_trade.py" target="_blank" rel="noopener">test_paper_trade.py</a> <a href="https://github.com/mejiba26/mejiba26.github.io/blob/main/scripts/dev/test_update_market.py" target="_blank" rel="noopener">test_update_market.py</a> <a href="https://github.com/mejiba26/mejiba26.github.io/blob/main/scripts/dev/test_update_spotlight.py" target="_blank" rel="noopener">test_update_spotlight.py</a></p>
+      </li>
+    </ol>
+
+    <div class="runbox">
+      <p class="run-h">Clone it, run it, get my numbers</p>
+      <p class="run-d">The tests need Python 3 and no network. The update scripts need network access and, for energy, an EIA API key in the environment.</p>
+      <pre class="run-code"><code>git clone https://github.com/mejiba26/mejiba26.github.io
+cd mejiba26.github.io
+
+python scripts/dev/test_update_market.py
+python scripts/dev/test_update_spotlight.py
+python scripts/dev/test_paper_trade.py
+python scripts/dev/test_update_vol.py</code></pre>
+      <p class="run-n">Then open index.html from a local server. Every card checks its own data and stays hidden if that data is missing, so a fresh clone with no feeds shows the page with the Live Desk cards absent rather than empty.</p>
     </div>
-
-    <div class="paper-block">
-      <h3 class="paper-h">Honest limits</h3>
-      <ul class="paper-list">
-        <li>Swing trades in a small universe are infrequent. It will take months to collect enough trades to judge anything, and early results will be noisy.</li>
-        <li>Stops are checked on the close and filled at the next open, so a gap can lose more than the planned risk, and a trend break exit has no loss floor. Compare planned risk with the realized worst loss above.</li>
-        <li>A pullback can be the start of a bigger decline. The confirmation rule and the stop reduce that risk but do not remove it.</li>
-        <li>Fills at the open ignore slippage, and USO carries futures roll cost. Paper results do not predict real results.</li>
-      </ul>
-    </div>
-
-    <p class="paper-links">
-      <a href="https://github.com/mejiba26/mejiba26.github.io/blob/main/data/paper/ledger.csv" target="_blank" rel="noopener">Ledger on GitHub ↗</a>
-      <a href="https://github.com/mejiba26/mejiba26.github.io/commit/e22e6cb" target="_blank" rel="noopener">Locked spec, commit e22e6cb ↗</a>
-      <a href="https://github.com/mejiba26/mejiba26.github.io/commit/52d8b12" target="_blank" rel="noopener">Amendment 1, commit 52d8b12 ↗</a>
-      <a href="https://github.com/mejiba26/mejiba26.github.io/blob/main/docs/paper-trading-spec.md" target="_blank" rel="noopener">Full spec ↗</a>
-    </p>
-  </section>
-
-  <!-- VOLATILITY SCORECARD
-       Filled by the script at the bottom of this file from data/vol/scores.json,
-       written by scripts/update_vol.py (rules in docs/vol-scorecard-spec.md).
-       Starts hidden, together with its nav link, and is only revealed when the
-       file parses, every figure is a real number, the data is recent and today
-       is on or after START_DATE. Anything else shows nothing. -->
-  <section id="vol-scorecard" class="market paper vol wrap" hidden>
-    <p class="eyebrow">Forecast evaluation</p>
-    <h2>Volatility forecast scorecard</h2>
-    <p class="paper-meta">Started <span id="vol-start"></span> · <span class="paper-asof">As of <span id="vol-asof"></span></span></p>
-    <p class="paper-disclaimer">Forecast evaluation only, not trading advice.</p>
-
-    <div class="paper-block">
-      <h3 class="paper-h">What this shows</h3>
-      <p class="paper-note vol-lede">Every weekday after the market closes, four models each predict how wide the next day's trading range will be for four funds, meaning the gap between the day's high and its low as a percent. Each prediction comes with a band the model expects to hold the actual range about 8 times out of 10. The forecasts are saved to GitHub with a timestamp before the next session opens, then graded against what happened. Two questions are being tested: are the bands honest, so that they really hold about 80% of the time, and does a more elaborate model predict better than a very simple one. Nothing here says what to buy or sell.</p>
-    </div>
-
-    <div id="vol-body"></div>
-
-    <div class="paper-block">
-      <h3 class="paper-h">How it works in plain language</h3>
-      <ul class="paper-list">
-        <li><strong>What is forecast.</strong> The next trading day's log range, ln(High / Low), for SPY, QQQ, ITA and XLE. For values this small that is almost exactly the high to low gap as a percent, which is how it is shown here.</li>
-        <li><strong>The four models.</strong> Naive: tomorrow looks like today. Rolling mean: the average of the last 22 days. EWMA: a weighted average that leans on recent days (lambda 0.94). HAR: a regression on yesterday, the last 5 days and the last 22 days, refit every Monday on all history up to the prior close.</li>
-        <li><strong>The band.</strong> Each model's own errors over the previous 500 days set its 10th, 50th and 90th percentile forecasts. That makes an 80% interval built only from what was known when the forecast was made.</li>
-        <li><strong>Grading.</strong> Mean absolute error is the average miss. Pinball loss scores the edges of the band. Coverage is how often the actual range landed inside the band, and it should sit near 80%.</li>
-        <li><strong>Timing.</strong> Every forecast carries the UTC time it was generated. One generated after the next session's open is marked late, kept in the file and never scored. Nothing before the start date counts.</li>
-        <li><strong>Fixed in advance.</strong> The models, their parameters and the test were written down before the first forecast. No ranking before 60 graded days. After 250, HAR is tested against the better simple baseline with a Diebold Mariano test, it only counts as better with a p value below 0.0125, and the result is published either way.</li>
-      </ul>
-    </div>
-
-    <div class="paper-block">
-      <h3 class="paper-h">Honest limits</h3>
-      <ul class="paper-list">
-        <li>The daily range is an imperfect stand in for risk. It ignores overnight gaps and says nothing about direction.</li>
-        <li>Four ETFs that tend to move together are not four independent tests, so agreement across them is weaker evidence than it looks.</li>
-        <li>Every model here learns from past ranges, which say little about a sudden change of regime. Expect the bands to be too narrow right after a shock.</li>
-        <li>Shortened holiday sessions are graded like any other day, and the data is Yahoo Finance daily bars as first published.</li>
-      </ul>
-    </div>
-
-    <p class="paper-links">
-      <a href="https://github.com/mejiba26/mejiba26.github.io/blob/main/data/vol/forecasts.csv" target="_blank" rel="noopener">Every forecast on GitHub ↗</a>
-      <a href="https://github.com/mejiba26/mejiba26.github.io/blob/main/data/vol/realized.csv" target="_blank" rel="noopener">What they were graded against ↗</a>
-      <a href="https://github.com/mejiba26/mejiba26.github.io/commits/main/docs/vol-scorecard-spec.md" target="_blank" rel="noopener">Spec history ↗</a>
-      <a href="https://github.com/mejiba26/mejiba26.github.io/blob/main/docs/vol-scorecard-spec.md" target="_blank" rel="noopener">Full spec ↗</a>
-    </p>
   </section>
 
   <!-- MARKET NOTES -->
-  <!-- Hidden until the first post is ready: remove "hidden" below, turn the nav link back on,
-       and change the Contact eyebrow back to 06. -->
+  <!-- Hidden until the first post is ready: remove "hidden" below and turn the nav link back on. -->
   <section id="notes" class="notes wrap" hidden>
-    <p class="eyebrow">05 — Market Notes</p>
-    <h2>Market Notes</h2>
+    <header class="sechd"><span class="secno">05</span><h2>Market Notes</h2></header>
     <p class="section-lede">A short post each month: one macro read, one stock idea, and what my portfolio model is holding. Newest first.</p>
 
     <div class="notes-list">
@@ -471,22 +582,102 @@
     </div>
   </section>
 
-  <!-- CONTACT -->
+  <!-- 05 ABOUT -->
+  <section id="about" class="about wrap">
+    <header class="sechd"><span class="secno">05</span><h2>About</h2></header>
+    <p class="section-lede">Who I am, where I've been, and where I'm headed.</p>
+
+    <div id="intro" class="about-part intro">
+      <p class="part-k">60 seconds, in my own words</p>
+      <div class="video-frame reveal">
+        <div class="video-frame-inner">
+          <iframe
+            src="https://www.youtube.com/embed/NBy-WyKixRs"
+            title="Brian Mejia-Lopez — Professional Introduction"
+            loading="lazy"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen>
+          </iframe>
+        </div>
+        <p class="video-caption">Recorded August 2026. Professional introduction and career pitch.</p>
+      </div>
+    </div>
+
+    <div id="bridge" class="about-part bridge">
+      <p class="part-k">The Bridge</p>
+      <p class="part-lede">
+        Six years of evaluating companies from both sides, what they're worth and how
+        they trade, meets a year of licensed, client facing experience. Together they
+        point toward one thing: analyzing markets for a living.
+      </p>
+
+      <div class="bridge-grid reveal">
+        <div class="ledger ledger-past">
+          <h3>Where I've Been</h3>
+          <ul class="ledger-list">
+            <li><span class="lline">Independent Equity &amp; Futures Trader (2020 to Present)</span><span class="ldetail">Fundamental valuation paired with price action trading, 2 to 5% risk per position</span></li>
+            <li><span class="lline">Client Services Rep, State Farm (2025 to 2026)</span><span class="ldetail">Licensed NC agent, advised &amp; retained clients</span></li>
+            <li><span class="lline">Service Assistant, Ruth's Chris (2023 to 2025)</span><span class="ldetail">Ran 250+ covers/shift, trained new hires</span></li>
+          </ul>
+        </div>
+
+        <div class="bridge-span" aria-hidden="true">
+          <p class="bridge-connector-label">translates to</p>
+          <div class="bridge-deck">
+            <span class="deck-item">valuation + trading discipline</span>
+            <span class="deck-item">client trust &amp; compliance</span>
+            <span class="deck-item">performing under pressure</span>
+          </div>
+        </div>
+
+        <div class="ledger ledger-future">
+          <h3>Where I'm Going</h3>
+          <ul class="ledger-list">
+            <li><span class="lline">Markets Analyst / Equity Research</span><span class="ldetail">Full time, after the MSBA</span></li>
+            <li><span class="lline">MSBA, Wake Forest</span><span class="ldetail">Expected May 2027</span></li>
+            <li><span class="lline">Target start</span><span class="ldetail">Summer 2027</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div id="resume" class="about-part resume">
+      <p class="part-k">Resume</p>
+      <p class="part-lede">Updated September 2026. Full detail on request. The short version lives below.</p>
+
+      <div class="resume-card reveal">
+        <div class="resume-card-text">
+          <p><strong>Brian Mejia-Lopez</strong></p>
+          <p>Finance and Economics graduate pursuing an MSBA at Wake Forest University, building a career as a markets analyst.</p>
+        </div>
+        <a class="btn btn-solid" href="resume.pdf" download>Download PDF</a>
+      </div>
+
+      <div class="resume-preview reveal">
+        <iframe src="resume.pdf" title="Brian Mejia-Lopez Resume" loading="lazy" width="100%" height="600px" style="border:0;"></iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06 CONTACT -->
   <section id="contact" class="contact wrap">
-    <p class="eyebrow">05 — Get in Touch</p>
-    <h2>Let's talk</h2>
+    <header class="sechd"><span class="secno">06</span><h2>Let's talk</h2></header>
     <p class="section-lede">Open to full-time markets analyst and equity research roles starting Summer 2027. Happy to talk sooner.</p>
     <div class="contact-links">
-      <a href="mailto:Brian_m25@yahoo.com" class="hero-btn-brass">Email me ↘</a>
-      <a href="https://www.linkedin.com/in/brian-mejia-lopez" target="_blank" rel="noopener" class="hero-btn-outline-dark">LinkedIn</a>
-      <a href="https://github.com/mejiba26" target="_blank" rel="noopener" class="hero-btn-outline-dark">GitHub</a>
+      <a href="mailto:Brian_m25@yahoo.com" class="btn btn-solid">Email me</a>
+      <a href="https://www.linkedin.com/in/brian-mejia-lopez" target="_blank" rel="noopener" class="btn">LinkedIn</a>
+      <a href="https://github.com/mejiba26" target="_blank" rel="noopener" class="btn">GitHub</a>
+      <a href="resume.pdf" class="btn" download>Resume</a>
     </div>
   </section>
 
 </main>
 
-<footer class="site-footer wrap">
-  <p>&copy; 2026 Brian Mejia-Lopez</p>
+<footer class="site-footer">
+  <div class="wrap footer-in">
+    <p>&copy; 2026 Brian Mejia-Lopez</p>
+    <p class="footer-note">Built as plain HTML and CSS. Data written by scheduled scripts in <a href="https://github.com/mejiba26/mejiba26.github.io" target="_blank" rel="noopener">this repository</a>. Nothing here is investment advice.</p>
+  </div>
 </footer>
 
 <script>

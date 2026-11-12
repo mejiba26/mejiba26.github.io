@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RTX Corporation Equity Valuation | Brian Mejia-Lopez</title>
+
+<link rel="icon" href="../favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+
+<meta name="description" content="Equity valuation memo on RTX Corporation by Brian Mejia-Lopez. DCF at a 6.15% WACC, peer multiples, sensitivity grid and a full revision log.">
+
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://mejiba26.github.io/memos/rtx.html">
+<meta property="og:title" content="RTX Corporation Equity Valuation">
+<meta property="og:description" content="Fair value of $125 to $133 per share against $122 at the time of analysis. DCF at a 6.15% WACC, cross checked against peer multiples, with every revision documented.">
+<meta property="og:image" content="https://mejiba26.github.io/og-image.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body class="memo-page">
+
+<a class="skiplink" href="#memo-main">Skip to content</a>
+
+<header class="mast">
+  <div class="wrap mast-in">
+    <p class="mast-name">Brian Mejia-Lopez</p>
+    <p class="mast-tag">Equity research memo <span class="sep">/</span> No. 01</p>
+  </div>
+</header>
+
+<nav class="deskbar" aria-label="Sections">
+  <div class="wrap deskbar-in">
+    <a href="../index.html">Back to the desk</a>
+    <a href="../index.html#memos">Memos</a>
+    <a href="../index.html#work">Models</a>
+    <a href="../index.html#market">Live Desk</a>
+    <a href="../index.html#methods">Methods</a>
+    <a href="../index.html#contact">Contact</a>
+  </div>
+</nav>
+
+<main id="memo-main" class="wrap memo-doc">
+
+  <!-- NOTE HEADER -->
+  <div class="note-top">
+    <div class="note-title-block">
+      <p class="kicker">Equity research <span class="sep">/</span> Aerospace and defense <span class="sep">/</span> Large cap</p>
+      <h1 class="doc-h1">RTX Corporation</h1>
+      <p class="doc-sub">Equity valuation. Free cash flow model at a 6.15% WACC, cross checked against peer P/E and EV/EBITDA multiples.</p>
+    </div>
+
+    <aside class="ratebox doc-rate">
+      <p class="rate-k">Fair value range</p>
+      <p class="rate-v">$125 to $133</p>
+      <p class="rate-n">Versus $122.14 on Oct 30, 2024</p>
+      <dl class="rate-rows">
+        <div><dt>DCF</dt><dd>$128.16</dd></div>
+        <div><dt>EV/EBITDA cross check</dt><dd>$133.10</dd></div>
+        <div><dt>Adjusted P/E cross check</dt><dd>$125.37</dd></div>
+        <div><dt>WACC</dt><dd>6.15%</dd></div>
+        <div><dt>Terminal growth</dt><dd>3.0%</dd></div>
+        <div><dt>Implied upside</dt><dd>About 5%</dd></div>
+      </dl>
+      <p class="rate-rev">Conclusion: fairly valued to modestly undervalued.</p>
+    </aside>
+  </div>
+
+  <dl class="cred doc-meta">
+    <div class="cred-cell"><dt>Analyst</dt><dd>Brian Mejia-Lopez</dd></div>
+    <div class="cred-cell"><dt>First written</dt><dd>Fall 2024</dd></div>
+    <div class="cred-cell"><dt>Revised</dt><dd>2026, audit and rebuild</dd></div>
+    <div class="cred-cell"><dt>Price date</dt><dd>October 30, 2024</dd></div>
+    <div class="cred-cell"><dt>Peers used</dt><dd>LMT, GD, NOC, BA</dd></div>
+    <div class="cred-cell"><dt>Source</dt><dd><a href="../rtx-valuation.pdf" target="_blank" rel="noopener">Full paper (PDF)</a></dd></div>
+  </dl>
+
+  <p class="purpose">
+    <b>Scope</b> An independent student valuation, written as coursework and rebuilt in 2026 after an audit of the original model. Every figure below is taken from the paper linked above.
+    <b>Disclaimer</b> Not investment advice, not a recommendation, and not a current price target. The price date is October 30, 2024.
+  </p>
+
+  <!-- SUMMARY -->
+  <section class="doc-sec">
+    <h2 class="doc-h2">Summary</h2>
+    <p>The question the model was built to answer is a narrow one: what is RTX actually worth per share? The free cash flow model discounts four years of projected cash flow and a terminal value at a 6.15% weighted average cost of capital, then bridges from enterprise value to equity value with net debt. That produces $128.16 per share against a price of $122.14 on October 30, 2024, an implied upside of about 5%.</p>
+    <p>Two independent cross checks bracket that figure. Applying the peer median EV/EBITDA of 17.05 times implies $133.10 per share. Applying the peer median P/E of 22.63 times to management's adjusted EPS guidance midpoint implies $125.37 per share. The three methods give a range of $125 to $133, which is why the conclusion is stated as a range rather than a point.</p>
+    <p>On profitability RTX led the peer set it was benchmarked against. Its 19.21% gross margin compared with 12.22% for Lockheed Martin and 3.13% for Boeing. On liquidity it trailed both, with a current ratio of 0.99 and a quick ratio of 0.60.</p>
+  </section>
+
+  <!-- VALUATION SUMMARY -->
+  <section class="doc-sec">
+    <h2 class="doc-h2">Valuation summary</h2>
+    <div class="paper-scroll">
+      <table class="doc-table">
+        <caption>Per share, all methods. Source: paper, Appendix E.</caption>
+        <thead><tr><th scope="col">Method</th><th scope="col" class="n">Value per share</th><th scope="col">Basis</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Free cash flow model</th><td class="n">$128.16</td><td>Four year projection plus terminal value, discounted at a 6.15% WACC, less net debt</td></tr>
+          <tr><th scope="row">EV/EBITDA cross check</th><td class="n">$133.10</td><td>Peer median 17.05 times trailing EBITDA of about $12.47 billion, less net debt</td></tr>
+          <tr><th scope="row">Adjusted P/E cross check</th><td class="n">$125.37</td><td>Peer median 22.63 times the 2024 adjusted EPS guidance midpoint of $5.54</td></tr>
+          <tr class="row-rule"><th scope="row">Market price</th><td class="n">$122.14</td><td>Close on October 30, 2024</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- DISCOUNT RATE -->
+  <section class="doc-sec">
+    <h2 class="doc-h2">Discount rate</h2>
+    <p>Because the model values the whole firm rather than the equity claim alone, the discount rate is the weighted average cost of capital rather than the cost of equity. The cost of equity comes from CAPM. RTX's low beta reflects a defensive, low volatility profile backed by steady government contracts.</p>
+    <div class="paper-scroll">
+      <table class="doc-table">
+        <caption>WACC build. Source: paper, Appendix B.</caption>
+        <tbody>
+          <tr><th scope="row">Beta</th><td class="n">0.54</td></tr>
+          <tr><th scope="row">Risk free rate, 10 year Treasury, Oct 30, 2024</th><td class="n">4.28%</td></tr>
+          <tr><th scope="row">Equity risk premium, Damodaran implied, Oct 2024</th><td class="n">4.29%</td></tr>
+          <tr class="row-rule"><th scope="row">Cost of equity, CAPM</th><td class="n">6.60%</td></tr>
+          <tr><th scope="row">Pre tax cost of debt</th><td class="n">5.30%</td></tr>
+          <tr><th scope="row">Effective tax rate, TTM</th><td class="n">16.8%</td></tr>
+          <tr class="row-rule"><th scope="row">After tax cost of debt</th><td class="n">4.41%</td></tr>
+          <tr><th scope="row">Market value of equity</th><td class="n">$162.6 bn</td></tr>
+          <tr><th scope="row">Total debt</th><td class="n">$42.2 bn</td></tr>
+          <tr><th scope="row">Weight of equity, weight of debt</th><td class="n">79.4%, 20.6%</td></tr>
+          <tr class="row-total"><th scope="row">WACC</th><td class="n">6.15%</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- CASH FLOW MODEL -->
+  <section class="doc-sec">
+    <h2 class="doc-h2">Free cash flow model</h2>
+    <p>Free cash flow of $4.7 billion in 2024 is grown through 2028 as defense spending and commercial aftermarket demand recover, then settled into a terminal rate of 3.0%, roughly long run nominal GDP growth and comfortably below the 6.15% discount rate.</p>
+    <div class="paper-scroll">
+      <table class="doc-table">
+        <caption>Projected free cash flow, in billions. Source: paper, Appendix C.</caption>
+        <thead><tr><th scope="col">Year</th><th scope="col" class="n">2025</th><th scope="col" class="n">2026</th><th scope="col" class="n">2027</th><th scope="col" class="n">2028</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Growth rate</th><td class="n">7%</td><td class="n">12%</td><td class="n">14%</td><td class="n">12%</td></tr>
+          <tr><th scope="row">Free cash flow</th><td class="n">5.029</td><td class="n">5.632</td><td class="n">6.421</td><td class="n">7.192</td></tr>
+          <tr><th scope="row">Present value at 6.15%</th><td class="n">4.739</td><td class="n">4.999</td><td class="n">5.369</td><td class="n">5.665</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="paper-scroll">
+      <table class="doc-table">
+        <caption>Bridge from enterprise value to value per share, in billions unless stated. Source: paper, Appendix C.</caption>
+        <tbody>
+          <tr><th scope="row">Terminal value at end of year four, 3.0% growth</th><td class="n">235.16</td></tr>
+          <tr><th scope="row">Present value of the terminal value</th><td class="n">185.28</td></tr>
+          <tr class="row-rule"><th scope="row">Enterprise value</th><td class="n">206.05</td></tr>
+          <tr><th scope="row">Less net debt, $42.16 bn of debt less $6.68 bn of cash</th><td class="n">35.47</td></tr>
+          <tr class="row-rule"><th scope="row">Equity value</th><td class="n">170.58</td></tr>
+          <tr><th scope="row">Shares outstanding</th><td class="n">1.331</td></tr>
+          <tr class="row-total"><th scope="row">Intrinsic value per share</th><td class="n">$128.16</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- SENSITIVITY -->
+  <section class="doc-sec">
+    <h2 class="doc-h2">Sensitivity</h2>
+    <p>The conclusion is a modest single digit one, and it is highly sensitive to the two inputs it rests on. The grid below is the reason this memo reports a range instead of a confident price target. The starred row is the base case.</p>
+    <div class="paper-scroll">
+      <table class="doc-table grid-table">
+        <caption>Intrinsic value per share, by WACC and terminal growth. Source: paper, Appendix C.</caption>
+        <thead>
+          <tr><th scope="col">WACC</th><th scope="col" class="n">g = 2.0%</th><th scope="col" class="n">2.5%</th><th scope="col" class="n">3.0%</th><th scope="col" class="n">3.5%</th><th scope="col" class="n">4.0%</th></tr>
+        </thead>
+        <tbody>
+          <tr><th scope="row">5.50%</th><td class="n">116.31</td><td class="n">138.22</td><td class="n">168.89</td><td class="n">214.91</td><td class="n">291.60</td></tr>
+          <tr><th scope="row">6.00%</th><td class="n">98.14</td><td class="n">114.35</td><td class="n">135.95</td><td class="n">166.19</td><td class="n">211.56</td></tr>
+          <tr class="row-base"><th scope="row">6.15% <span class="star">base</span></th><td class="n">93.55</td><td class="n">108.46</td><td class="n cell-base">128.10</td><td class="n">155.16</td><td class="n">194.81</td></tr>
+          <tr><th scope="row">6.50%</th><td class="n">84.02</td><td class="n">96.44</td><td class="n">112.42</td><td class="n">133.72</td><td class="n">163.54</td></tr>
+          <tr><th scope="row">7.00%</th><td class="n">72.72</td><td class="n">82.53</td><td class="n">94.78</td><td class="n">110.53</td><td class="n">131.53</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="doc-note">The grid is computed without rounding the intermediate steps, so its base case reads $128.10 where the bridge above, built from rounded figures, reads $128.16. The difference is rounding only.</p>
+  </section>
+
+  <!-- RELATIVE VALUATION -->
+  <section class="doc-sec">
+    <h2 class="doc-h2">Relative valuation</h2>
+    <p>EV/EBITDA is the better of the two relative checks here because it is less affected by differences in capital structure, tax rates and non cash amortization. Boeing is excluded from both multiples because negative earnings and EBITDA make the ratios meaningless.</p>
+    <div class="paper-scroll">
+      <table class="doc-table">
+        <caption>Comparable companies, fiscal third quarter 2024 quarter end. Source: paper, Appendix E.</caption>
+        <thead><tr><th scope="col">Company</th><th scope="col" class="n">Market cap, $bn</th><th scope="col" class="n">Enterprise value, $bn</th><th scope="col" class="n">EV/EBITDA, TTM</th><th scope="col" class="n">P/E, TTM</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">RTX</th><td class="n">160.9</td><td class="n">200.2</td><td class="n">16.05</td><td class="n">34.11</td></tr>
+          <tr><th scope="row">Lockheed Martin</th><td class="n">138.8</td><td class="n">155.5</td><td class="n">15.30</td><td class="n">20.80</td></tr>
+          <tr><th scope="row">General Dynamics</th><td class="n">82.3</td><td class="n">92.1</td><td class="n">17.05</td><td class="n">22.63</td></tr>
+          <tr><th scope="row">Northrop Grumman</th><td class="n">77.2</td><td class="n">91.8</td><td class="n">20.59</td><td class="n">32.52</td></tr>
+          <tr><th scope="row">Boeing</th><td class="n">n/m</td><td class="n">n/m</td><td class="n">n/m</td><td class="n">n/m</td></tr>
+          <tr class="row-total"><th scope="row">Peer median, excluding RTX</th><td class="n"></td><td class="n"></td><td class="n">17.05</td><td class="n">22.63</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="doc-note">Trailing GAAP earnings understate run rate profitability here, because they absorb the 2024 legal settlements, the Raytheon contract termination charge and acquisition related amortization. On the raised 2024 adjusted EPS guidance midpoint of $5.54 the stock traded at about 22.0 times, roughly in line with the peer median. A second note on the source data: Appendix A reports a trailing P/E of 34.50 from price divided by basic EPS, while the comparison table above reports 34.11 from the comparison data source. Both figures are in the paper.</p>
+  </section>
+
+  <!-- FINANCIAL COMPARISON -->
+  <section class="doc-sec">
+    <h2 class="doc-h2">Financial statement comparison</h2>
+    <div class="paper-scroll">
+      <table class="doc-table">
+        <caption>RTX against Boeing and Lockheed Martin. Source: paper, Financial Statement Analysis.</caption>
+        <thead><tr><th scope="col">Metric</th><th scope="col" class="n">RTX</th><th scope="col" class="n">Boeing</th><th scope="col" class="n">Lockheed Martin</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Current ratio</th><td class="n">0.99</td><td class="n">1.12</td><td class="n">1.30</td></tr>
+          <tr><th scope="row">Quick ratio</th><td class="n">0.60</td><td class="n">0.24</td><td class="n">1.10</td></tr>
+          <tr><th scope="row">Gross profit margin</th><td class="n up">19.21</td><td class="n">3.13</td><td class="n">12.22</td></tr>
+          <tr><th scope="row">Debt to equity</th><td class="n">0.70</td><td class="n">Negative equity</td><td class="n">2.68</td></tr>
+          <tr><th scope="row">Return on equity</th><td class="n">7.35</td><td class="n down">-2.67</td><td class="n">81.04</td></tr>
+          <tr><th scope="row">Operating margin</th><td class="n">10.52</td><td class="n down">-1.90</td><td class="n">12.58</td></tr>
+          <tr><th scope="row">EBITDA margin</th><td class="n">15.94</td><td class="n">n/a</td><td class="n">14.34</td></tr>
+          <tr><th scope="row">Free cash flow yield</th><td class="n">4.86</td><td class="n down">-7.68</td><td class="n">5.02</td></tr>
+          <tr><th scope="row">Interest coverage ratio</th><td class="n">4.14</td><td class="n">n/a</td><td class="n">8.74</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="paper-scroll">
+      <table class="doc-table">
+        <caption>Income statement, in millions except earnings per share. Source: paper, Appendix D.</caption>
+        <thead><tr><th scope="col">Line</th><th scope="col" class="n">2023</th><th scope="col" class="n">2024 TTM</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Revenues</th><td class="n">68,920</td><td class="n">79,042</td></tr>
+          <tr><th scope="row">Cost of goods sold</th><td class="n">56,831</td><td class="n">63,858</td></tr>
+          <tr class="row-rule"><th scope="row">Gross profit</th><td class="n">12,089</td><td class="n">15,184</td></tr>
+          <tr><th scope="row">Operating expenses</th><td class="n">8,528</td><td class="n">8,980</td></tr>
+          <tr class="row-rule"><th scope="row">Operating income, EBIT</th><td class="n">3,561</td><td class="n">6,204</td></tr>
+          <tr><th scope="row">Non operating expense, net</th><td class="n">(275)</td><td class="n">284</td></tr>
+          <tr class="row-rule"><th scope="row">Earnings before taxes</th><td class="n">3,836</td><td class="n">5,920</td></tr>
+          <tr><th scope="row">Income taxes</th><td class="n">456</td><td class="n">994</td></tr>
+          <tr><th scope="row">Net income, consolidated</th><td class="n">3,380</td><td class="n">4,926</td></tr>
+          <tr><th scope="row">Less noncontrolling interest</th><td class="n">185</td><td class="n">208</td></tr>
+          <tr class="row-rule"><th scope="row">Net income to common shareowners</th><td class="n">3,195</td><td class="n">4,718</td></tr>
+          <tr><th scope="row">Shares outstanding</th><td class="n">1,426</td><td class="n">1,331</td></tr>
+          <tr class="row-total"><th scope="row">Basic earnings per share</th><td class="n">2.24</td><td class="n">3.54</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- REVISION LOG -->
+  <section class="doc-sec">
+    <h2 class="doc-h2">Revision log</h2>
+    <div class="revhead">
+      <div>
+        <p class="rev-k">Original, Fall 2024</p>
+        <p class="rev-v rev-old">$175</p>
+        <p class="rev-n">About 43% implied upside</p>
+      </div>
+      <p class="rev-arrow" aria-hidden="true">&#8594;</p>
+      <div>
+        <p class="rev-k">Revised, 2026 audit</p>
+        <p class="rev-v">$128</p>
+        <p class="rev-n">About 5% implied upside</p>
+      </div>
+    </div>
+    <p>In 2026 I audited the original Fall 2024 model with the help of an AI assistant and rebuilt the valuation. Every change is listed so a reader can see exactly what moved and why. The two that did most of the work are the first two.</p>
+
+    <ol class="revlist">
+      <li>
+        <p class="rev-h">Discount rate</p>
+        <p>The original entered a 5.5% expected market return, which produced a required return of 4.94% and an implied equity risk premium of only 1.22%. That cost of equity was then used to discount free cash flow to the whole firm. The revision uses the Damodaran implied equity risk premium of 4.29% for a cost of equity of 6.60%, blended with a 4.41% after tax cost of debt into a WACC of 6.15%.</p>
+      </li>
+      <li>
+        <p class="rev-h">Equity bridge</p>
+        <p>The original subtracted total liabilities of about $102 billion from enterprise value. The revision subtracts net debt of $35.47 billion, since operating liabilities are already reflected in free cash flow.</p>
+      </li>
+      <li>
+        <p class="rev-h">Terminal value</p>
+        <p>The original reported a year four value of $381.02 billion without showing the calculation. The revision shows the Gordon growth formula with a 3.0% terminal growth rate, which sits below the 6.15% WACC.</p>
+      </li>
+      <li>
+        <p class="rev-h">Growth assumptions</p>
+        <p>The original text described a single 5% growth rate while the model itself used 7%, 12%, 14% and 12% for 2025 through 2028. The text now matches the model.</p>
+      </li>
+      <li>
+        <p class="rev-h">Share count</p>
+        <p>Updated from 1,333,200,000 to 1,331,016,397 shares, per the 10-Q cover page as of September 30, 2024.</p>
+      </li>
+      <li>
+        <p class="rev-h">P/E ratio</p>
+        <p>The body cited a 2023 P/E of 37.06 while Appendix A showed 34.98. Both were replaced with a trailing twelve month P/E of 34.50.</p>
+      </li>
+      <li>
+        <p class="rev-h">Income statement</p>
+        <p>Operating expenses, EBIT and earnings before taxes were restated. The interest expense line was replaced with net non operating expense. Noncontrolling interest was broken out so net income ties to earnings per share. The 2024 gross profit entry was corrected to 15,184, and the decline in shares outstanding was corrected from 6.5% to 6.7%.</p>
+      </li>
+      <li>
+        <p class="rev-h">Peer data</p>
+        <p>Boeing's gross profit margin was corrected from 3.62% to 3.13%.</p>
+      </li>
+      <li>
+        <p class="rev-h">Relative valuation</p>
+        <p>Appendix E is new. It compares RTX with Lockheed Martin, General Dynamics and Northrop Grumman on EV/EBITDA and P/E, and it is the source of the two cross checks in the valuation summary above.</p>
+      </li>
+    </ol>
+  </section>
+
+  <!-- RISKS AND WHAT WOULD CHANGE MY MIND -->
+  <section class="doc-sec">
+    <h2 class="doc-h2">The case against</h2>
+    <p>Stated plainly rather than only the bull case. The valuation is sensitive to near term growth assumptions that may not materialize if commercial aerospace deliveries or defense budgets disappoint. RTX carries real interest rate and execution risk on Pratt and Whitney's engine issues. The regulatory and export control matters could recur: RTX was fined $200 million in 2024 for export compliance violations. The sensitivity grid above is there to make that uncertainty explicit rather than implying a single confident price target.</p>
+
+    <div class="mind">
+      <p class="mind-k">What would change my mind</p>
+      <p>The range rests on a 6.15% WACC, and the audit showed how far a wrong discount rate can move it: correcting a 1.22% equity risk premium took the DCF from $175 to $128 per share. A defensible WACC materially different from 6.15% would move the range again. At a 7.00% WACC with the same 3.0% terminal growth, the grid above gives $94.78 per share, well below the market price on the valuation date.</p>
+    </div>
+
+    <p class="memo-links">
+      <a href="../rtx-valuation.pdf" target="_blank" rel="noopener">Full paper with all appendices (PDF)</a>
+      <a class="go" href="../index.html#memos">Back to the desk</a>
+    </p>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-in">
+    <p>&copy; 2026 Brian Mejia-Lopez</p>
+    <p class="footer-note">Student research written as coursework and revised in 2026. Prices and multiples are as of the dates stated. Nothing here is investment advice.</p>
+  </div>
+</footer>
+
+</body>
+</html>
