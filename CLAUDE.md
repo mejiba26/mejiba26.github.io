@@ -18,13 +18,94 @@ roles. He has traded equity index futures independently since 2020.
 
 - Plain HTML and CSS. **No framework, no build step, no bundler.** Do not
   introduce React, Tailwind, npm, or a static site generator.
-- `index.html` is the whole site. Sections are anchored (`#rtx`, `#ecg`,
-  `#portfolio`, `#futures`).
-- `style.css` holds all styling. Match the existing visual language rather
-  than inventing a new one.
+- `index.html` is the landing page and holds every data card. Long write ups
+  get their own page under `memos/` (see Site structure below).
+- `style.css` holds all styling for every page, including the memo pages and
+  the print rules. Do not add a second stylesheet. Match the existing visual
+  language rather than inventing a new one.
 - Python lives in `scripts/`. Generated data lives in `data/`.
 - Generated data files **are committed** to the repo. That is intentional:
   the commit history is the time series.
+
+## Site structure
+
+One landing page plus a separate page for each long write up. Nothing else.
+
+`index.html`, in order:
+
+1. Masthead and a section nav organized by **type of work**: Memos, Models,
+   Live Desk, Methods, About, Contact. The paper trading and volatility nav
+   links sit in the same bar and stay hidden until their data exists.
+2. Credentials first: a short kicker, the headline, the credentials grid
+   (which carries the visible contact address), and a purpose and disclaimer
+   line.
+3. `#memos` — memo cards. Each links out to its own page.
+4. `#work` — Models. Keeps the old `#work` id so existing links resolve.
+   Holds `#ecg`, `#portfolio` and `#futures`.
+5. `#market` — Live Desk. Keeps the old `#market` id. Holds the desk index,
+   every data card, the two locked simulations, and the bias statements.
+6. `#methods` — numbered items, each linking to the exact file in this repo,
+   plus the clone and run block.
+7. `#notes` — Market Notes, still hidden until the first post.
+8. `#about` — holds `#intro`, `#bridge` and `#resume`.
+9. `#contact`.
+
+`memos/rtx.html` is the first memo page and the pattern for the rest: a note
+header with a rating style panel, ruled tables sourced to the paper, a
+revision log, the case against, and a "what would change my mind" line. Memo
+pages link `../style.css` and print to a clean PDF without further work.
+
+Rules that go with this structure:
+
+- **Never remove or rename an element id.** `#rtx`, `#ecg`, `#portfolio`,
+  `#futures`, `#work`, `#market`, `#intro`, `#bridge`, `#resume`, `#contact`
+  and `#notes` are all linked from somewhere. The data card ids are load
+  bearing for the scripts at the bottom of `index.html`.
+- **No empty sections.** A section ships when it has real content in it. No
+  Pitch Decks section until a real deck exists.
+- **Every project carries a stats panel and a "what would change my mind"
+  line**, and both use only claims already made elsewhere on the site.
+- **No invented facts, figures or credentials.** Anything that cannot be
+  supported from existing site copy or a committed file is a clearly marked
+  placeholder, never filler.
+- **No hyphens or dashes in new site copy.** Existing copy and proper names
+  keep theirs.
+
+## Visual language
+
+A cream research document, not a dashboard. Navy masthead over `--paper`,
+hairline rules, square corners, no shadows and no gradients. Fraunces for
+display, IBM Plex Sans for body, IBM Plex Mono for every number, label and
+piece of furniture. Tabular figures are on globally. Teal reads positive,
+brick reads negative, brass marks structure and section numbers. The palette
+tokens live at the top of `style.css`; use them rather than literal colors.
+
+Two things in the stylesheet are load bearing:
+
+- `[hidden] { display: none !important; }` near the top. Every data card
+  ships with the `hidden` attribute, and without this guard a later
+  `display: grid` would reveal a card that has no data.
+- The classes the inline card scripts emit (`.sector-*`, `.spot-*`,
+  `.energy-*`, `.paper-*`, `.vol-*`, `.up`, `.down`, and the line colors
+  `.c-safe` through `.c-eqw` and `.v-naive` through `.v-har`) are a contract
+  with those scripts. Renaming one in the stylesheet breaks a card silently.
+
+## Do not break the dev sample generators
+
+`scripts/dev/make_paper_sample.py` and `scripts/dev/make_vol_sample.py` each
+copy `index.html` and swap two exact strings, and they exit if a string is
+not found exactly once. Keep these four verbatim and unique:
+
+```
+const now = new Date();
+const BASE = 'data/paper/';
+const vnow = new Date();
+const VBASE = 'data/vol/';
+```
+
+They also insert a banner after a literal `<body>` tag and copy only
+`index.html` and `style.css`, which is the other reason all styling stays in
+one file.
 
 ## The data pattern (follow this)
 
@@ -146,3 +227,11 @@ Tests (offline, no network): `python scripts/dev/test_update_market.py` and `pyt
 Before reporting a data task complete: run the script, confirm the JSON is
 written with real non-empty values, and confirm the page renders it. Do not
 mark something working on the strength of the code looking correct.
+
+Before reporting a layout or markup change complete: render the page in a
+headless browser twice, once with sample data for every card and once with
+`data/` absent, and confirm each card shows correctly, hides quietly and
+logs no JS errors. Check desktop and a 390px phone width, and check that the
+page does not scroll sideways. `scripts/dev/make_paper_sample.py` and
+`scripts/dev/make_vol_sample.py` generate the sample data for the two locked
+sections, including the stale, malformed and missing cases.

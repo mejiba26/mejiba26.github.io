@@ -1569,7 +1569,8 @@ h2 {
   .note-title-block { border-right: 1px solid #999; }
   .doc-h1 { font-size: 22pt; }
   .doc-sub { font-size: 10pt; }
-  .doc-h2 { font-size: 13pt; border-bottom: 1.5pt solid #000; }
+  .doc-h2 { font-size: 13pt; border-bottom: 1.5pt solid #000; break-after: avoid; page-break-after: avoid; }
+  .doc-table caption, .paper-h, .sechd { break-after: avoid; page-break-after: avoid; }
   .doc-sec { margin-top: 16pt; }
   .doc-sec > p, .revlist li p:not(.rev-h) { font-size: 9.5pt; }
   .doc-table { font-size: 8.5pt; page-break-inside: avoid; break-inside: avoid; }
