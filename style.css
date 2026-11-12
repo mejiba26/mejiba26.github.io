@@ -702,6 +702,8 @@ h2 {
   margin: 0 0 16px;
 }
 
+.ticker-item[hidden] { display: none; }
+
 .ticker-note {
   font-size: 0.92rem;
   line-height: 1.6;

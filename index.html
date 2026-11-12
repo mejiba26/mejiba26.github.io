@@ -273,18 +273,22 @@
     <p class="eyebrow">04 — Commercial Awareness</p>
     <h2>Market View</h2>
     <p class="section-lede">Three things I'm tracking right now, and why they matter to the roles I want.</p>
-    <p class="asof">As of September 2026</p>
+    <p class="asof">Commentary reviewed November 2026<span id="market-asof-rates" hidden> · Policy rate as of <span id="market-asof-date"></span></span></p>
 
     <div class="ticker-row reveal">
-      <div class="ticker-item">
+      <!-- Starts hidden and is only revealed by the market script at the bottom
+           of this file once data/market.json (rebuilt weekly by
+           .github/workflows/update-market.yml) is present, well formed and
+           fresh. A missing or stale feed hides the whole item. -->
+      <div class="ticker-item" id="fed-item" hidden>
         <p class="ticker-label">Trend</p>
         <p class="ticker-text">Fed rate policy &amp; equity valuations</p>
-        <p class="ticker-note">On September 16, 2026, the FOMC raised the federal funds target range by a quarter point, from 3.50 to 3.75% up to 3.75 to 4.00%. Rate changes flow straight into the discount rate in every DCF I build. A higher rate, all else equal, lowers what a company is worth before the stock even moves.</p>
+        <p class="ticker-note"><span id="fed-live"></span> Rate changes flow straight into the discount rate in every DCF I build. A higher rate, all else equal, lowers what a company is worth before the stock even moves.</p>
       </div>
       <div class="ticker-item">
         <p class="ticker-label">Trend</p>
         <p class="ticker-text">Earnings season: valuation checkpoint &amp; trading catalyst</p>
-        <p class="ticker-note">Coca-Cola's Q2 (reported July 28) grew organic revenue 6%, and more of that came from volume (unit cases up 5%) than from price/mix (up 2%). Comparable EPS rose 11% to $0.97, and management raised full year guidance to about 5% organic revenue growth and 9 to 10% comparable EPS growth. What it told me: growth that comes from people buying more holds up better than growth from raising prices, so it deserves more weight when I project revenue. On the trading side, earnings prints are some of the highest volatility moments I watch in NQ and ES. Research and trading meet at the same moment: the numbers update my fundamental view, and the reaction is what I'm positioned for.</p>
+        <p class="ticker-note">Coca-Cola's Q3 (reported October 27) grew organic revenue 7%. Unit case volume rose 5% while price/mix added 1%, so volume did most of the work, though concentrate sales ran 2 points ahead of volume on shipment timing. Comparable EPS rose 11% to $0.91, and management raised full year guidance to at least 5% organic revenue growth and at least 11% comparable EPS growth. What it told me: growth that comes from people buying more holds up better than growth from raising prices, so it deserves more weight when I project revenue. On the trading side, earnings prints are some of the highest volatility moments I watch in NQ and ES. Research and trading meet at the same moment: the numbers update my fundamental view, and the reaction is what I'm positioned for.</p>
       </div>
       <div class="ticker-item">
         <p class="ticker-label">Trend</p>
@@ -482,6 +486,51 @@
     });
   }, { threshold: 0.15 });
   revealEls.forEach(el => observer.observe(el));
+</script>
+
+<script>
+  // Fed policy item: reads data/market.json (rebuilt weekly by
+  // .github/workflows/update-market.yml). Same contract as the cards below: the
+  // item ships hidden and is only revealed once the file parses, every figure
+  // is a real number and the data is recent. Anything else leaves it hidden.
+  (function () {
+    const item = document.getElementById('fed-item');
+    const slot = document.getElementById('fed-live');
+    if (!item || !slot) return;
+
+    // Rebuilt weekly and the newest observation is normally 0 to 3 days old.
+    // 14 days covers a missed run without showing a stale rate.
+    const STALE_DAYS = 14;
+
+    const isDate = v => typeof v === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(v) && !isNaN(new Date(v + 'T12:00:00').getTime());
+    const rate = v => { if (typeof v !== 'number' || !isFinite(v) || v < 0 || v > 15) throw new Error('bad rate'); return v.toFixed(2); };
+    const long = d => new Date(d + 'T12:00:00').toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+    const short = d => new Date(d + 'T12:00:00').toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+
+    fetch('data/market.json', { cache: 'no-cache' })
+      .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
+      .then(data => {
+        if (!isDate(data.as_of)) throw new Error('bad date');
+        if ((Date.now() - new Date(data.as_of + 'T12:00:00').getTime()) / 86400000 > STALE_DAYS) throw new Error('stale');
+        const f = data.fed;
+        if (!f || typeof f !== 'object') throw new Error('bad data');
+
+        let text = `The FOMC's target range for the federal funds rate is ${rate(f.lower)} to ${rate(f.upper)}%.`;
+        const c = f.last_change;
+        if (c) {
+          if (!isDate(c.date) || (c.direction !== 'increase' && c.direction !== 'cut')) throw new Error('bad change');
+          if (typeof c.bp !== 'number' || !isFinite(c.bp) || c.bp <= 0) throw new Error('bad change');
+          const size = c.bp === 25 ? 'quarter point' : c.bp + ' basis point';
+          text += ` The last move was a ${size} ${c.direction} on ${long(c.date)}, from ${rate(c.prior_lower)} to ${rate(c.prior_upper)}%.`;
+        }
+        // Built in full before it touches the page, so a bad field throws above.
+        slot.textContent = text;
+        document.getElementById('market-asof-date').textContent = short(data.as_of);
+        document.getElementById('market-asof-rates').hidden = false;
+        item.hidden = false;
+      })
+      .catch(() => { item.hidden = true; slot.textContent = ''; });
+  })();
 </script>
 
 <script>
