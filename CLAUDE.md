@@ -131,6 +131,16 @@ Site section: follow the failure behavior above. Hide it if data is missing, mal
 
 Tests: python scripts/dev/test_update_vol.py (offline, synthetic prices). Run it, and its --mutants mode, after any change to scripts/update_vol.py.
 
+## Market View refresh (live)
+
+Nothing in the Market View section should be hand dated. Three automated pieces:
+
+- Fed policy item: `scripts/update_market.py` (stdlib only, FRED series DFEDTARU and DFEDTARL) writes `data/market.json`. `update-market.yml` runs Thursdays. The page hides the item if the file is missing, malformed or older than 14 days.
+- Monthly spotlight: `scripts/update_spotlight.py` writes `data/spotlight.json`; `update-spotlight.yml` runs weekdays. The previous full calendar month is analyzed. The spotlight stock (from the large cap list) and spotlight market (from the 11 sector ETFs) are the names with the largest ABSOLUTE price move versus SPY, ties to the alphabetically first ticker. It is a rule about what moved most, never a recommendation. The page hides the card if the file is missing, malformed or older than 10 days.
+- External factors are live driver numbers (oil, 10 year yield, dollar, VIX, copper) next to the evergreen `EXPOSURES` sentences in `scripts/update_spotlight.py`. Those sentences say what a group is sensitive to, never which way it will move. No LLM writes page text and nothing is scraped.
+
+Tests (offline, no network): `python scripts/dev/test_update_market.py` and `python scripts/dev/test_update_spotlight.py`. Run them after any change to those scripts. Change the pick rule or universe only on purpose and say so in the commit.
+
 ## Verify, don't assume
 
 Before reporting a data task complete: run the script, confirm the JSON is

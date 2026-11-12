@@ -669,7 +669,7 @@ h2 {
 
 .ticker-row {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 1px;
   background: var(--line-on-navy);
   border: 1px solid var(--line-on-navy);
@@ -701,6 +701,8 @@ h2 {
   line-height: 1.4;
   margin: 0 0 16px;
 }
+
+.ticker-item[hidden] { display: none; }
 
 .ticker-note {
   font-size: 0.92rem;
@@ -1298,3 +1300,24 @@ h2 {
   .vol-cards { grid-template-columns: 1fr; }
   .vol-cov { grid-template-columns: 96px 1fr 52px; gap: 8px; }
 }
+
+/* ============================================
+   MARKET VIEW: monthly spotlight
+   ============================================ */
+.spot-picks { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 32px; margin: 22px 0; }
+.spot-kind { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--teal); margin: 0 0 10px; }
+.spot-move, .spot-px { font-size: 0.92rem; line-height: 1.6; margin: 0 0 8px; color: rgba(243, 239, 230, 0.78); }
+.spot-px { font-family: var(--mono); font-size: 0.8rem; }
+.spot-now { font-family: var(--mono); font-size: 0.72rem; color: rgba(243, 239, 230, 0.55); margin-left: 6px; }
+.spot-pick .sector-list { margin-bottom: 14px; }
+.spot-all { margin: 8px 0 18px; }
+.spot-all summary { cursor: pointer; font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.06em; color: var(--teal-light); }
+.spot-table { width: 100%; border-collapse: collapse; margin-top: 16px; font-size: 0.85rem; }
+.spot-table caption { text-align: left; font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--teal); padding-bottom: 8px; }
+.spot-table th { font-family: var(--mono); font-size: 0.7rem; font-weight: 400; text-align: right; color: rgba(243, 239, 230, 0.55); padding: 6px 8px; border-bottom: 1px solid var(--line-on-navy); }
+.spot-table th:first-child, .spot-table td:first-child { text-align: left; }
+.spot-table td { font-family: var(--mono); text-align: right; padding: 6px 8px; border-bottom: 1px dashed var(--line-on-navy); color: rgba(243, 239, 230, 0.85); }
+.spot-table td:first-child { font-family: inherit; }
+.spot-table td.up { color: var(--teal-light); }
+.spot-table td.down { color: #E0957A; }
+@media (max-width: 640px) { .spot-table th, .spot-table td { padding: 5px 4px; font-size: 0.74rem; } }

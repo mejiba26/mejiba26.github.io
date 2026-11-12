@@ -1,0 +1,44 @@
+name: Update market spotlight
+
+on:
+  schedule:
+    # 22:50 UTC on weekdays, after the US market close. The spotlight month only
+    # changes on the first run of a new month; every other run refreshes the
+    # latest prices and drivers.
+    - cron: "50 22 * * 1-5"
+  workflow_dispatch: {}   # lets you run it by hand from the Actions tab
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install yfinance==1.8.0 pandas==3.1.1 numpy==2.5.4
+
+      - name: Offline self test
+        run: python scripts/dev/test_update_spotlight.py
+
+      - name: Pick the spotlight and rebuild data/spotlight.json
+        run: python scripts/update_spotlight.py
+
+      - name: Commit if the data changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/spotlight.json
+          if git diff --cached --quiet; then
+            echo "No change in spotlight data."
+          else
+            git commit -m "Update market spotlight"
+            git pull --rebase origin main
+            git push
+          fi

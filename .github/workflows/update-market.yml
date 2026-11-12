@@ -1,0 +1,43 @@
+name: Update market overview data
+
+on:
+  schedule:
+    # Thursdays 14:40 UTC. FOMC decisions land on Wednesdays at 2pm ET and FRED
+    # posts the new target range by the next morning, so a rate change shows up
+    # on the site within a day. A no change run commits nothing.
+    - cron: "40 14 * * 4"
+  workflow_dispatch: {}   # lets you run it by hand from the Actions tab
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      # Standard library only, so there is nothing to pip install.
+      - name: Offline self test
+        run: python scripts/dev/test_update_market.py
+
+      - name: Pull the Fed target range and rebuild data/market.json
+        run: python scripts/update_market.py
+
+      - name: Commit if the data changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/market.json
+          if git diff --cached --quiet; then
+            echo "No change in market overview data."
+          else
+            git commit -m "Update market overview data"
+            # Can overlap the other data workflows, so rebase onto whatever was pushed in the meantime.
+            git pull --rebase origin main
+            git push
+          fi
