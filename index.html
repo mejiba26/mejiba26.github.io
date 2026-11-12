@@ -272,8 +272,8 @@
   <section id="market" class="market wrap">
     <p class="eyebrow">04 — Commercial Awareness</p>
     <h2>Market View</h2>
-    <p class="section-lede">Three things I'm tracking right now, and why they matter to the roles I want.</p>
-    <p class="asof">Commentary reviewed November 2026<span id="market-asof-rates" hidden> · Policy rate as of <span id="market-asof-date"></span></span></p>
+    <p class="section-lede">What I'm tracking right now, and why it matters to the roles I want.</p>
+    <p class="asof" id="market-asof" hidden>Policy rate as of <span id="market-asof-date"></span></p>
 
     <div class="ticker-row reveal">
       <!-- Starts hidden and is only revealed by the market script at the bottom
@@ -287,11 +287,6 @@
       </div>
       <div class="ticker-item">
         <p class="ticker-label">Trend</p>
-        <p class="ticker-text">Earnings season: valuation checkpoint &amp; trading catalyst</p>
-        <p class="ticker-note">Coca-Cola's Q3 (reported October 27) grew organic revenue 7%. Unit case volume rose 5% while price/mix added 1%, so volume did most of the work, though concentrate sales ran 2 points ahead of volume on shipment timing. Comparable EPS rose 11% to $0.91, and management raised full year guidance to at least 5% organic revenue growth and at least 11% comparable EPS growth. What it told me: growth that comes from people buying more holds up better than growth from raising prices, so it deserves more weight when I project revenue. On the trading side, earnings prints are some of the highest volatility moments I watch in NQ and ES. Research and trading meet at the same moment: the numbers update my fundamental view, and the reaction is what I'm positioned for.</p>
-      </div>
-      <div class="ticker-item">
-        <p class="ticker-label">Trend</p>
         <p class="ticker-text">Sector rotation</p>
         <p class="ticker-note">Which S&amp;P 500 sectors are leading and lagging over the last three months, pulled from the SPDR sector ETFs and refreshed every weekday.</p>
         <!-- Starts hidden and is only revealed by the script at the bottom of
@@ -300,6 +295,25 @@
         <div id="sector-live" class="sector-live" aria-live="polite" hidden></div>
         <p class="ticker-note">Rotation like this is capital moving on rate and macro conditions. It reshapes both which companies look attractive to own and which ones are moving enough to trade.</p>
       </div>
+    </div>
+
+    <!-- Monthly spotlight: filled by the script at the bottom of this file from
+         data/spotlight.json, rebuilt weekdays by
+         .github/workflows/update-spotlight.yml. The picks come from a fixed rule
+         (see scripts/update_spotlight.py), not from judgment. Starts hidden and
+         is only revealed once the file is present, complete and fresh. -->
+    <div id="spot-live" class="energy spot reveal" hidden>
+      <div class="energy-top">
+        <p class="ticker-label">Monthly spotlight</p>
+        <p class="energy-asof">Prices as of <span id="spot-asof"></span></p>
+      </div>
+      <p class="ticker-note energy-lede" id="spot-lede"></p>
+      <div class="spot-picks" id="spot-picks"></div>
+      <details class="spot-all">
+        <summary>Every name tracked: last month and since</summary>
+        <div id="spot-table"></div>
+      </details>
+      <p class="paper-disclaimer" id="spot-disclaimer"></p>
     </div>
 
     <!-- Energy market: filled by the script at the bottom of this file from
@@ -526,10 +540,94 @@
         // Built in full before it touches the page, so a bad field throws above.
         slot.textContent = text;
         document.getElementById('market-asof-date').textContent = short(data.as_of);
-        document.getElementById('market-asof-rates').hidden = false;
+        document.getElementById('market-asof').hidden = false;
         item.hidden = false;
       })
       .catch(() => { item.hidden = true; slot.textContent = ''; });
+  })();
+</script>
+
+<script>
+  // Monthly spotlight: reads data/spotlight.json (rebuilt weekdays by
+  // .github/workflows/update-spotlight.yml). Same contract as the other cards:
+  // the box ships hidden and is only unhidden once the file parses, every figure
+  // shown is a real number and the data is recent. Anything else leaves it
+  // hidden and silent.
+  (function () {
+    const box = document.getElementById('spot-live');
+    if (!box) return;
+
+    // Rebuilt every weekday, so as_of is normally 0 to 3 days old.
+    const STALE_DAYS = 10;
+
+    const isDate = v => typeof v === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(v) && !isNaN(new Date(v + 'T12:00:00').getTime());
+    const num = v => { if (typeof v !== 'number' || !isFinite(v)) throw new Error('bad value'); return v; };
+    const str = v => { if (typeof v !== 'string' || !v) throw new Error('bad text'); return v; };
+    const esc = t => String(t).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+    const sgn = (n, d) => (num(n) > 0 ? '+' : '') + n.toFixed(d);
+    const pc = n => sgn(n, 1) + '%';
+    const usd = n => '$' + num(n).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    const cls = n => (num(n) >= 0 ? 'up' : 'down');
+    const day = d => { if (!isDate(d)) throw new Error('bad date'); return new Date(d + 'T12:00:00').toLocaleDateString('en-US', { month: 'short', day: 'numeric' }); };
+    const full = d => { if (!isDate(d)) throw new Error('bad date'); return new Date(d + 'T12:00:00').toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }); };
+    const monthName = m => {
+      if (typeof m !== 'string' || !/^\d{4}-\d{2}$/.test(m)) throw new Error('bad month');
+      return new Date(m + '-15T12:00:00').toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+    };
+    const monthOnly = m => monthName(m).split(' ')[0];
+
+    const driver = d => {
+      const bp = d.unit === 'bp';
+      if (!bp && d.unit !== 'pct') throw new Error('bad unit');
+      const chg = bp ? sgn(d.month_chg, 0) + ' bp' : pc(d.month_chg);
+      const now = bp ? num(d.now).toFixed(2) + '%' : num(d.now).toFixed(2);
+      return `<li><span class="sector-name">${esc(str(d.label))}</span><span class="sector-ret ${cls(d.month_chg)}">${chg} <span class="spot-now">now ${now}</span></span></li>`;
+    };
+
+    const pickBlock = (kind, p, mon) => {
+      if (!p || !Array.isArray(p.drivers) || p.drivers.length < 1) throw new Error('bad pick');
+      return `<div class="spot-pick">
+        <p class="spot-kind">${esc(kind)}</p>
+        <p class="ticker-text">${esc(str(p.name))} <span class="sector-tkr">${esc(str(p.ticker))}</span></p>
+        <p class="spot-move"><span class="sector-ret ${cls(p.month_ret)}">${pc(p.month_ret)}</span> in ${esc(mon)}, ${sgn(p.excess, 1)} points versus SPY</p>
+        <p class="spot-px">${esc(p.__s)} ${usd(p.start)} to ${esc(p.__e)} ${usd(p.end)} to now ${usd(p.now)} <span class="sector-ret ${cls(p.since)}">${pc(p.since)} since</span></p>
+        <p class="sector-head">External drivers, same month</p>
+        <ul class="sector-list">${p.drivers.map(driver).join('')}</ul>
+        <p class="ticker-note">${esc(str(p.why))}</p>
+      </div>`;
+    };
+
+    const table = (title, rows, s, e) => {
+      if (!Array.isArray(rows) || rows.length < 5) throw new Error('bad rows');
+      const body = rows.map(r => `<tr><td>${esc(str(r.name))} <span class="sector-tkr">${esc(str(r.ticker))}</span></td><td class="${cls(r.month_ret)}">${pc(r.month_ret)}</td><td>${usd(r.end)}</td><td>${usd(r.now)}</td><td class="${cls(r.since)}">${pc(r.since)}</td></tr>`).join('');
+      return `<table class="spot-table"><caption>${esc(title)}</caption><thead><tr><th></th><th>${esc(s)} to ${esc(e)}</th><th>${esc(e)} close</th><th>Now</th><th>Since</th></tr></thead><tbody>${body}</tbody></table>`;
+    };
+
+    fetch('data/spotlight.json', { cache: 'no-cache' })
+      .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
+      .then(d => {
+        if (!isDate(d.as_of)) throw new Error('bad date');
+        if ((Date.now() - new Date(d.as_of + 'T12:00:00').getTime()) / 86400000 > STALE_DAYS) throw new Error('stale');
+        const mon = monthOnly(d.month), s = day(d.start_date), e = day(d.end_date);
+        for (const k of ['spotlight_stock', 'spotlight_market']) { d[k].__s = s; d[k].__e = e; }
+        const b = d.benchmark;
+        if (!b) throw new Error('bad benchmark');
+
+        // Everything is built in full before it touches the page, so a bad field
+        // throws here and nothing half rendered is ever shown.
+        const lede = `${esc(monthName(d.month))}'s spotlight, chosen by rule from the large caps and sector ETFs I track. Rule: ${esc(str(d.rule))} SPY moved ${pc(b.month_ret)} over the month and is ${pc(b.since)} since ${esc(e)}.`;
+        const picks = pickBlock('Stock', d.spotlight_stock, mon) + pickBlock('Market', d.spotlight_market, mon);
+        const tables = table('Large caps', d.stocks, s, e) + table('Sector ETFs', d.sectors, s, e);
+        const disc = 'Selected by a fixed rule, not a recommendation. Price returns without dividends. Not investment advice.';
+
+        document.getElementById('spot-lede').innerHTML = lede;
+        document.getElementById('spot-picks').innerHTML = picks;
+        document.getElementById('spot-table').innerHTML = tables;
+        document.getElementById('spot-disclaimer').textContent = disc;
+        document.getElementById('spot-asof').textContent = full(d.as_of);
+        box.hidden = false;
+      })
+      .catch(() => { box.hidden = true; });
   })();
 </script>
 
