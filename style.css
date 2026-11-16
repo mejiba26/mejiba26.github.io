@@ -31,6 +31,7 @@
 
   --wrap: 1180px;
   --pad: 44px;
+  --tabpad: 20px;
 }
 
 * { box-sizing: border-box; }
@@ -136,6 +137,12 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
   border-bottom: 1px solid var(--rule);
 }
 
+/* The bar gives back the first tab's own left padding, so the first label
+   still lines up with the headline and the masthead name while every tab keeps
+   symmetric padding. Without this the active tab's background sits flush
+   against its first letter and reads as clipped. */
+.deskbar .wrap { padding-left: calc(var(--pad) - var(--tabpad)); }
+
 .deskbar-in {
   display: flex;
   overflow-x: auto;
@@ -152,13 +159,12 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
   text-transform: uppercase;
   text-decoration: none;
   color: var(--ink-70);
-  padding: 12px 20px 11px;
+  padding: 12px var(--tabpad) 11px;
   border-right: 1px solid var(--line);
   box-shadow: inset 0 -3px 0 transparent;
   transition: color 0.15s ease, box-shadow 0.15s ease;
   white-space: nowrap;
 }
-.deskbar a:first-child { padding-left: 0; }
 .deskbar a:last-child { border-right: none; }
 .deskbar a:hover {
   color: var(--navy);
@@ -1622,7 +1628,7 @@ h2 {
 }
 
 @media (max-width: 560px) {
-  :root { --pad: 20px; }
+  :root { --pad: 20px; --tabpad: 14px; }
   body { font-size: 16px; }
   section { padding-bottom: 54px; }
   .lede-sec { padding-top: 36px; }
@@ -1643,7 +1649,7 @@ h2 {
   .vol-row { grid-template-columns: 64px 54px minmax(40px, 1fr); gap: 8px; }
   .vol-cov { grid-template-columns: 86px minmax(50px, 1fr) 50px; gap: 9px; }
   .methodlist li { grid-template-columns: 34px minmax(0, 1fr); gap: 0 12px; }
-  .deskbar a { padding: 11px 14px 10px; font-size: 0.68rem; }
+  .deskbar a { padding: 11px var(--tabpad) 10px; font-size: 0.68rem; }
   .rate-v { font-size: 1.5rem; }
   .footer-in { flex-direction: column; }
 }

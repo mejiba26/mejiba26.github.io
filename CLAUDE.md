@@ -23,6 +23,12 @@ roles. He has traded equity index futures independently since 2020.
 - `style.css` holds all styling for every page, including the memo pages and
   the print rules. Do not add a second stylesheet. Match the existing visual
   language rather than inventing a new one.
+- **Bump the stylesheet version whenever you change `style.css`.** Both pages
+  link it as `style.css?v=YYYYMMDD`. Pages serves the stylesheet with a short
+  cache lifetime but serves the HTML fresh, so without a version bump a
+  returning visitor gets new markup against their cached CSS and the page
+  renders unstyled. This has happened twice. Set the date in `index.html` and
+  `memos/rtx.html` together, in the same commit as the CSS change.
 - Python lives in `scripts/`. Generated data lives in `data/`.
 - Generated data files **are committed** to the repo. That is intentional:
   the commit history is the time series.
