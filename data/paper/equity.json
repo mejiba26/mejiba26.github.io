@@ -1,8 +1,8 @@
 {
  "test": false,
  "source": "Yahoo Finance via yfinance, raw prices",
- "as_of": "2026-11-16",
- "generated_utc": "2026-11-17T04:47:08Z",
+ "as_of": "2026-11-17",
+ "generated_utc": "2026-11-18T03:51:18Z",
  "start_date": "2026-11-16",
  "portfolios": [
   "safe",
@@ -23,6 +23,15 @@
    "ITA": 98362.96,
    "SPY": 98606.15,
    "EQW": 98162.25
+  },
+  {
+   "date": "2026-11-17",
+   "safe": 100000.0,
+   "medium": 100000.0,
+   "high": 100000.0,
+   "ITA": 98151.43,
+   "SPY": 97605.36,
+   "EQW": 98449.08
   }
  ]
 }
