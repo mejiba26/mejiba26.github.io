@@ -1,6 +1,6 @@
 {
-  "as_of": "2026-11-18",
-  "generated_utc": "2026-11-19T03:52:53Z",
+  "as_of": "2026-11-19",
+  "generated_utc": "2026-11-20T03:44:57Z",
   "source": "Yahoo Finance via yfinance, unadjusted closes (price return)",
   "month": "2026-10",
   "start_date": "2026-09-30",
@@ -11,8 +11,8 @@
     "start": 762.63,
     "end": 755.72,
     "month_ret": -0.91,
-    "now": 730.2,
-    "since": -3.38
+    "now": 715.87,
+    "since": -5.27
   },
   "spotlight_stock": {
     "ticker": "LMT",
@@ -22,8 +22,8 @@
     "end": 636.95,
     "month_ret": 25.08,
     "excess": 25.99,
-    "now": 578.19,
-    "since": -9.23,
+    "now": 571.85,
+    "since": -10.22,
     "why": "Government budgets and contract timing set demand. Energy and metals costs can reach margins through suppliers, a link I am testing rather than assuming.",
     "drivers": [
       {
@@ -32,9 +32,9 @@
         "unit": "pct",
         "start": 90.42,
         "end": 104.12,
-        "now": 81.93,
+        "now": 82.64,
         "month_chg": 15.15,
-        "since_chg": -21.31
+        "since_chg": -20.63
       },
       {
         "key": "copper",
@@ -42,9 +42,9 @@
         "unit": "pct",
         "start": 6.559,
         "end": 6.458,
-        "now": 5.648,
+        "now": 5.499,
         "month_chg": -1.53,
-        "since_chg": -12.55
+        "since_chg": -14.86
       }
     ]
   },
@@ -56,8 +56,8 @@
     "end": 70.02,
     "month_ret": 13.85,
     "excess": 14.76,
-    "now": 61.29,
-    "since": -12.47,
+    "now": 60.89,
+    "since": -13.04,
     "why": "Earnings follow crude and refined product prices, which respond to supply decisions, inventories and demand.",
     "drivers": [
       {
@@ -66,9 +66,9 @@
         "unit": "pct",
         "start": 90.42,
         "end": 104.12,
-        "now": 81.93,
+        "now": 82.64,
         "month_chg": 15.15,
-        "since_chg": -21.31
+        "since_chg": -20.63
       },
       {
         "key": "brent",
@@ -76,9 +76,9 @@
         "unit": "pct",
         "start": 103.53,
         "end": 117.64,
-        "now": 89.1,
+        "now": 89.77,
         "month_chg": 13.63,
-        "since_chg": -24.26
+        "since_chg": -23.69
       }
     ]
   },
@@ -91,8 +91,8 @@
       "end": 636.95,
       "month_ret": 25.08,
       "excess": 25.99,
-      "now": 578.19,
-      "since": -9.23
+      "now": 571.85,
+      "since": -10.22
     },
     {
       "ticker": "LLY",
@@ -102,8 +102,8 @@
       "end": 1417.54,
       "month_ret": 22.51,
       "excess": 23.42,
-      "now": 1382.75,
-      "since": -2.45
+      "now": 1351.12,
+      "since": -4.69
     },
     {
       "ticker": "WMT",
@@ -113,8 +113,8 @@
       "end": 123.51,
       "month_ret": 18.85,
       "excess": 19.76,
-      "now": 127.36,
-      "since": 3.12
+      "now": 126.04,
+      "since": 2.05
     },
     {
       "ticker": "HD",
@@ -124,8 +124,8 @@
       "end": 329.2,
       "month_ret": 15.72,
       "excess": 16.63,
-      "now": 337.64,
-      "since": 2.56
+      "now": 336.68,
+      "since": 2.27
     },
     {
       "ticker": "CVX",
@@ -135,8 +135,8 @@
       "end": 235.52,
       "month_ret": 15.33,
       "excess": 16.24,
-      "now": 205.88,
-      "since": -12.58
+      "now": 206.5,
+      "since": -12.32
     },
     {
       "ticker": "NOC",
@@ -146,8 +146,8 @@
       "end": 557.54,
       "month_ret": 15.32,
       "excess": 16.23,
-      "now": 542.99,
-      "since": -2.61
+      "now": 542.31,
+      "since": -2.73
     },
     {
       "ticker": "XOM",
@@ -157,8 +157,8 @@
       "end": 187.25,
       "month_ret": 15.05,
       "excess": 15.96,
-      "now": 160.58,
-      "since": -14.24
+      "now": 158.93,
+      "since": -15.12
     },
     {
       "ticker": "GD",
@@ -168,8 +168,8 @@
       "end": 372.59,
       "month_ret": 12.28,
       "excess": 13.19,
-      "now": 349.04,
-      "since": -6.32
+      "now": 347.34,
+      "since": -6.78
     },
     {
       "ticker": "PG",
@@ -179,8 +179,8 @@
       "end": 161.57,
       "month_ret": 11.21,
       "excess": 12.12,
-      "now": 170.29,
-      "since": 5.4
+      "now": 167.85,
+      "since": 3.89
     },
     {
       "ticker": "UNH",
@@ -190,8 +190,8 @@
       "end": 406.97,
       "month_ret": 10.87,
       "excess": 11.78,
-      "now": 349.91,
-      "since": -14.02
+      "now": 330.48,
+      "since": -18.79
     },
     {
       "ticker": "RTX",
@@ -201,8 +201,8 @@
       "end": 199.8,
       "month_ret": 7.62,
       "excess": 8.53,
-      "now": 197.45,
-      "since": -1.18
+      "now": 193.44,
+      "since": -3.18
     },
     {
       "ticker": "AAPL",
@@ -212,8 +212,8 @@
       "end": 344.63,
       "month_ret": 3.49,
       "excess": 4.4,
-      "now": 352.45,
-      "since": 2.27
+      "now": 349.21,
+      "since": 1.33
     },
     {
       "ticker": "JPM",
@@ -223,8 +223,8 @@
       "end": 337.04,
       "month_ret": 1.88,
       "excess": 2.79,
-      "now": 324.11,
-      "since": -3.84
+      "now": 320.22,
+      "since": -4.99
     },
     {
       "ticker": "MSFT",
@@ -234,8 +234,8 @@
       "end": 521.91,
       "month_ret": 1.76,
       "excess": 2.67,
-      "now": 508.29,
-      "since": -2.61
+      "now": 498.3,
+      "since": -4.52
     },
     {
       "ticker": "GE",
@@ -245,8 +245,8 @@
       "end": 301.8,
       "month_ret": -3.36,
       "excess": -2.45,
-      "now": 328.1,
-      "since": 8.71
+      "now": 318.88,
+      "since": 5.66
     },
     {
       "ticker": "AMZN",
@@ -256,8 +256,8 @@
       "end": 240.35,
       "month_ret": -3.53,
       "excess": -2.62,
-      "now": 267.74,
-      "since": 11.4
+      "now": 257.37,
+      "since": 7.08
     },
     {
       "ticker": "NVDA",
@@ -267,8 +267,8 @@
       "end": 204.64,
       "month_ret": -10.39,
       "excess": -9.48,
-      "now": 150.96,
-      "since": -26.23
+      "now": 145.98,
+      "since": -28.66
     },
     {
       "ticker": "META",
@@ -289,8 +289,8 @@
       "end": 279.84,
       "month_ret": -18.67,
       "excess": -17.76,
-      "now": 282.44,
-      "since": 0.93
+      "now": 272.66,
+      "since": -2.57
     },
     {
       "ticker": "CAT",
@@ -300,8 +300,8 @@
       "end": 622.75,
       "month_ret": -23.19,
       "excess": -22.28,
-      "now": 558.77,
-      "since": -10.27
+      "now": 537.37,
+      "since": -13.71
     }
   ],
   "sectors": [
@@ -313,8 +313,8 @@
       "end": 70.02,
       "month_ret": 13.85,
       "excess": 14.76,
-      "now": 61.29,
-      "since": -12.47
+      "now": 60.89,
+      "since": -13.04
     },
     {
       "ticker": "XLP",
@@ -324,8 +324,8 @@
       "end": 89.42,
       "month_ret": 10.94,
       "excess": 11.85,
-      "now": 91.18,
-      "since": 1.97
+      "now": 89.86,
+      "since": 0.49
     },
     {
       "ticker": "XLU",
@@ -335,8 +335,8 @@
       "end": 43.43,
       "month_ret": 10.12,
       "excess": 11.03,
-      "now": 43.55,
-      "since": 0.28
+      "now": 43.01,
+      "since": -0.97
     },
     {
       "ticker": "XLV",
@@ -346,8 +346,8 @@
       "end": 184.87,
       "month_ret": 9.77,
       "excess": 10.68,
-      "now": 181.17,
-      "since": -2.0
+      "now": 177.46,
+      "since": -4.01
     },
     {
       "ticker": "XLB",
@@ -357,8 +357,8 @@
       "end": 52.74,
       "month_ret": 8.3,
       "excess": 9.21,
-      "now": 50.46,
-      "since": -4.32
+      "now": 49.42,
+      "since": -6.3
     },
     {
       "ticker": "XLY",
@@ -368,8 +368,8 @@
       "end": 115.38,
       "month_ret": 6.01,
       "excess": 6.92,
-      "now": 119.2,
-      "since": 3.31
+      "now": 115.88,
+      "since": 0.43
     },
     {
       "ticker": "XLF",
@@ -379,8 +379,8 @@
       "end": 56.51,
       "month_ret": 5.82,
       "excess": 6.73,
-      "now": 56.42,
-      "since": -0.16
+      "now": 55.58,
+      "since": -1.65
     },
     {
       "ticker": "XLRE",
@@ -401,8 +401,8 @@
       "end": 167.4,
       "month_ret": 0.25,
       "excess": 1.16,
-      "now": 164.66,
-      "since": -1.64
+      "now": 161.36,
+      "since": -3.61
     },
     {
       "ticker": "XLK",
@@ -412,8 +412,8 @@
       "end": 179.51,
       "month_ret": -8.3,
       "excess": -7.39,
-      "now": 163.81,
-      "since": -8.75
+      "now": 160.69,
+      "since": -10.48
     },
     {
       "ticker": "XLC",
