@@ -1,0 +1,560 @@
+{
+ "version": 1,
+ "start_date": "2026-11-23",
+ "as_of": "2026-11-20",
+ "generated_utc": "2026-11-21T03:54:30Z",
+ "source": "Yahoo Finance via yfinance, raw daily High and Low",
+ "target": "ln(High / Low) of the next trading day",
+ "tickers": [
+  "SPY",
+  "QQQ",
+  "ITA",
+  "XLE"
+ ],
+ "models": [
+  {
+   "id": "naive",
+   "name": "Naive"
+  },
+  {
+   "id": "roll22",
+   "name": "Rolling mean"
+  },
+  {
+   "id": "ewma",
+   "name": "EWMA"
+  },
+  {
+   "id": "har",
+   "name": "HAR"
+  }
+ ],
+ "interval_target": 0.8,
+ "min_days_for_ranking": 60,
+ "dm_days": 250,
+ "dm_alpha": 0.0125,
+ "latest": {
+  "forecast_for_date": "2026-11-23",
+  "generated_utc": "2026-11-21T03:54:30Z",
+  "rows": [
+   {
+    "ticker": "SPY",
+    "model": "naive",
+    "median": 0.044852,
+    "p10": 0.037858,
+    "p90": 0.051963,
+    "status": "ok"
+   },
+   {
+    "ticker": "SPY",
+    "model": "roll22",
+    "median": 0.014615,
+    "p10": 0.009908,
+    "p90": 0.02256,
+    "status": "ok"
+   },
+   {
+    "ticker": "SPY",
+    "model": "ewma",
+    "median": 0.014193,
+    "p10": 0.009821,
+    "p90": 0.022274,
+    "status": "ok"
+   },
+   {
+    "ticker": "SPY",
+    "model": "har",
+    "median": 0.02881,
+    "p10": 0.024518,
+    "p90": 0.035759,
+    "status": "ok"
+   },
+   {
+    "ticker": "QQQ",
+    "model": "naive",
+    "median": 0.059236,
+    "p10": 0.050595,
+    "p90": 0.06864,
+    "status": "ok"
+   },
+   {
+    "ticker": "QQQ",
+    "model": "roll22",
+    "median": 0.021653,
+    "p10": 0.01532,
+    "p90": 0.031474,
+    "status": "ok"
+   },
+   {
+    "ticker": "QQQ",
+    "model": "ewma",
+    "median": 0.020965,
+    "p10": 0.015533,
+    "p90": 0.030698,
+    "status": "ok"
+   },
+   {
+    "ticker": "QQQ",
+    "model": "har",
+    "median": 0.035183,
+    "p10": 0.029742,
+    "p90": 0.044266,
+    "status": "ok"
+   },
+   {
+    "ticker": "ITA",
+    "model": "naive",
+    "median": 0.044549,
+    "p10": 0.033639,
+    "p90": 0.056447,
+    "status": "ok"
+   },
+   {
+    "ticker": "ITA",
+    "model": "roll22",
+    "median": 0.025396,
+    "p10": 0.017897,
+    "p90": 0.036267,
+    "status": "ok"
+   },
+   {
+    "ticker": "ITA",
+    "model": "ewma",
+    "median": 0.023146,
+    "p10": 0.015961,
+    "p90": 0.034238,
+    "status": "ok"
+   },
+   {
+    "ticker": "ITA",
+    "model": "har",
+    "median": 0.028162,
+    "p10": 0.021292,
+    "p90": 0.039268,
+    "status": "ok"
+   },
+   {
+    "ticker": "XLE",
+    "model": "naive",
+    "median": 0.018567,
+    "p10": 0.008856,
+    "p90": 0.030153,
+    "status": "ok"
+   },
+   {
+    "ticker": "XLE",
+    "model": "roll22",
+    "median": 0.022839,
+    "p10": 0.016279,
+    "p90": 0.034402,
+    "status": "ok"
+   },
+   {
+    "ticker": "XLE",
+    "model": "ewma",
+    "median": 0.020508,
+    "p10": 0.014352,
+    "p90": 0.032359,
+    "status": "ok"
+   },
+   {
+    "ticker": "XLE",
+    "model": "har",
+    "median": 0.020327,
+    "p10": 0.014187,
+    "p90": 0.031223,
+    "status": "ok"
+   }
+  ]
+ },
+ "counts": {
+  "SPY": {
+   "graded": 0,
+   "late": 0,
+   "void": 0,
+   "pending": 1
+  },
+  "QQQ": {
+   "graded": 0,
+   "late": 0,
+   "void": 0,
+   "pending": 1
+  },
+  "ITA": {
+   "graded": 0,
+   "late": 0,
+   "void": 0,
+   "pending": 1
+  },
+  "XLE": {
+   "graded": 0,
+   "late": 0,
+   "void": 0,
+   "pending": 1
+  }
+ },
+ "scores": {
+  "SPY": {
+   "naive": {
+    "since_start": {
+     "n": 0,
+     "mae": null,
+     "pinball10": null,
+     "pinball90": null,
+     "coverage": null
+    },
+    "rolling60": {
+     "n": 0,
+     "mae": null,
+     "pinball10": null,
+     "pinball90": null,
+     "coverage": null
+    }
+   },
+   "roll22": {
+    "since_start": {
+     "n": 0,
+     "mae": null,
+     "pinball10": null,
+     "pinball90": null,
+     "coverage": null
+    },
+    "rolling60": {
+     "n": 0,
+     "mae": null,
+     "pinball10": null,
+     "pinball90": null,
+     "coverage": null
+    }
+   },
+   "ewma": {
+    "since_start": {
+     "n": 0,
+     "mae": null,
+     "pinball10": null,
+     "pinball90": null,
+     "coverage": null
+    },
+    "rolling60": {
+     "n": 0,
+     "mae": null,
+     "pinball10": null,
+     "pinball90": null,
+     "coverage": null
+    }
+   },
+   "har": {
+    "since_start": {
+     "n": 0,
+     "mae": null,
+     "pinball10": null,
+     "pinball90": null,
+     "coverage": null
+    },
+    "rolling60": {
+     "n": 0,
+     "mae": null,
+     "pinball10": null,
+     "pinball90": null,
+     "coverage": null
+    }
+   }
+  },
+  "QQQ": {
+   "naive": {
+    "since_start": {
+     "n": 0,
+     "mae": null,
+     "pinball10": null,
+     "pinball90": null,
+     "coverage": null
+    },
+    "rolling60": {
+     "n": 0,
+     "mae": null,
+     "pinball10": null,
+     "pinball90": null,
+     "coverage": null
+    }
+   },
+   "roll22": {
+    "since_start": {
+     "n": 0,
+     "mae": null,
+     "pinball10": null,
+     "pinball90": null,
+     "coverage": null
+    },
+    "rolling60": {
+     "n": 0,
+     "mae": null,
+     "pinball10": null,
+     "pinball90": null,
+     "coverage": null
+    }
+   },
+   "ewma": {
+    "since_start": {
+     "n": 0,
+     "mae": null,
+     "pinball10": null,
+     "pinball90": null,
+     "coverage": null
+    },
+    "rolling60": {
+     "n": 0,
+     "mae": null,
+     "pinball10": null,
+     "pinball90": null,
+     "coverage": null
+    }
+   },
+   "har": {
+    "since_start": {
+     "n": 0,
+     "mae": null,
+     "pinball10": null,
+     "pinball90": null,
+     "coverage": null
+    },
+    "rolling60": {
+     "n": 0,
+     "mae": null,
+     "pinball10": null,
+     "pinball90": null,
+     "coverage": null
+    }
+   }
+  },
+  "ITA": {
+   "naive": {
+    "since_start": {
+     "n": 0,
+     "mae": null,
+     "pinball10": null,
+     "pinball90": null,
+     "coverage": null
+    },
+    "rolling60": {
+     "n": 0,
+     "mae": null,
+     "pinball10": null,
+     "pinball90": null,
+     "coverage": null
+    }
+   },
+   "roll22": {
+    "since_start": {
+     "n": 0,
+     "mae": null,
+     "pinball10": null,
+     "pinball90": null,
+     "coverage": null
+    },
+    "rolling60": {
+     "n": 0,
+     "mae": null,
+     "pinball10": null,
+     "pinball90": null,
+     "coverage": null
+    }
+   },
+   "ewma": {
+    "since_start": {
+     "n": 0,
+     "mae": null,
+     "pinball10": null,
+     "pinball90": null,
+     "coverage": null
+    },
+    "rolling60": {
+     "n": 0,
+     "mae": null,
+     "pinball10": null,
+     "pinball90": null,
+     "coverage": null
+    }
+   },
+   "har": {
+    "since_start": {
+     "n": 0,
+     "mae": null,
+     "pinball10": null,
+     "pinball90": null,
+     "coverage": null
+    },
+    "rolling60": {
+     "n": 0,
+     "mae": null,
+     "pinball10": null,
+     "pinball90": null,
+     "coverage": null
+    }
+   }
+  },
+  "XLE": {
+   "naive": {
+    "since_start": {
+     "n": 0,
+     "mae": null,
+     "pinball10": null,
+     "pinball90": null,
+     "coverage": null
+    },
+    "rolling60": {
+     "n": 0,
+     "mae": null,
+     "pinball10": null,
+     "pinball90": null,
+     "coverage": null
+    }
+   },
+   "roll22": {
+    "since_start": {
+     "n": 0,
+     "mae": null,
+     "pinball10": null,
+     "pinball90": null,
+     "coverage": null
+    },
+    "rolling60": {
+     "n": 0,
+     "mae": null,
+     "pinball10": null,
+     "pinball90": null,
+     "coverage": null
+    }
+   },
+   "ewma": {
+    "since_start": {
+     "n": 0,
+     "mae": null,
+     "pinball10": null,
+     "pinball90": null,
+     "coverage": null
+    },
+    "rolling60": {
+     "n": 0,
+     "mae": null,
+     "pinball10": null,
+     "pinball90": null,
+     "coverage": null
+    }
+   },
+   "har": {
+    "since_start": {
+     "n": 0,
+     "mae": null,
+     "pinball10": null,
+     "pinball90": null,
+     "coverage": null
+    },
+    "rolling60": {
+     "n": 0,
+     "mae": null,
+     "pinball10": null,
+     "pinball90": null,
+     "coverage": null
+    }
+   }
+  },
+  "ALL": {
+   "naive": {
+    "since_start": {
+     "n": 0,
+     "mae": null,
+     "pinball10": null,
+     "pinball90": null,
+     "coverage": null
+    },
+    "rolling60": {
+     "n": 0,
+     "mae": null,
+     "pinball10": null,
+     "pinball90": null,
+     "coverage": null
+    }
+   },
+   "roll22": {
+    "since_start": {
+     "n": 0,
+     "mae": null,
+     "pinball10": null,
+     "pinball90": null,
+     "coverage": null
+    },
+    "rolling60": {
+     "n": 0,
+     "mae": null,
+     "pinball10": null,
+     "pinball90": null,
+     "coverage": null
+    }
+   },
+   "ewma": {
+    "since_start": {
+     "n": 0,
+     "mae": null,
+     "pinball10": null,
+     "pinball90": null,
+     "coverage": null
+    },
+    "rolling60": {
+     "n": 0,
+     "mae": null,
+     "pinball10": null,
+     "pinball90": null,
+     "coverage": null
+    }
+   },
+   "har": {
+    "since_start": {
+     "n": 0,
+     "mae": null,
+     "pinball10": null,
+     "pinball90": null,
+     "coverage": null
+    },
+    "rolling60": {
+     "n": 0,
+     "mae": null,
+     "pinball10": null,
+     "pinball90": null,
+     "coverage": null
+    }
+   }
+  }
+ },
+ "calibration": {
+  "naive": {
+   "n": 0,
+   "at_or_below_p10": null,
+   "at_or_below_median": null,
+   "at_or_below_p90": null
+  },
+  "roll22": {
+   "n": 0,
+   "at_or_below_p10": null,
+   "at_or_below_median": null,
+   "at_or_below_p90": null
+  },
+  "ewma": {
+   "n": 0,
+   "at_or_below_p10": null,
+   "at_or_below_median": null,
+   "at_or_below_p90": null
+  },
+  "har": {
+   "n": 0,
+   "at_or_below_p10": null,
+   "at_or_below_median": null,
+   "at_or_below_p90": null
+  }
+ },
+ "dm_test": {
+  "SPY": null,
+  "QQQ": null,
+  "ITA": null,
+  "XLE": null
+ }
+}
