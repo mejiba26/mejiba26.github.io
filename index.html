@@ -30,7 +30,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=20261123">
+<link rel="stylesheet" href="style.css?v=20261123b">
 </head>
 <body>
 
@@ -668,6 +668,7 @@
       <p class="run-d">The tests need Python 3 and no network. The update scripts need network access and, for energy, an EIA API key in the environment.</p>
       <pre class="run-code"><code>git clone https://github.com/mejiba26/mejiba26.github.io
 cd mejiba26.github.io
+pip install pandas==3.1.1 numpy==2.5.4 scipy==1.18.1 scikit-learn==1.9.1
 
 python scripts/dev/test_update_market.py
 python scripts/dev/test_update_spotlight.py

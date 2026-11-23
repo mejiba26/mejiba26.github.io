@@ -194,6 +194,36 @@ def test_crash_episodes():
     assert flag.sum() == 18
 
 
+
+def test_reproduction_compare():
+    """The workflow gate: within 0.0005 or 0.05% passes; a bigger drift, a missing key or a nested drift fails."""
+    import copy
+    import check_portfolio_schema as C
+    ref = {"as_of": "2026-10-31", "strategies": [{"name": "60/40", "sharpe": 0.71, "sharpe_ci95": [0.23, 1.26]}],
+           "decomposition": {"rule": {"point": 0.915, "ci95": [0.56, 0.99]}}, "series": {"growth": {"60/40": [1.0, 2.0, 3.5]}}}
+
+    def drift(edit):
+        r = copy.deepcopy(ref)
+        edit(r)
+        return r
+
+    def fails(r, label):
+        try:
+            C.compare(ref, r)
+        except SystemExit as e:
+            assert str(e).startswith("SCHEMA CHECK FAILED"), e
+            return
+        raise AssertionError(f"{label} passed the comparison")
+
+    assert C.compare(ref, copy.deepcopy(ref)) == 0
+    near = drift(lambda r: r["strategies"][0].__setitem__("sharpe", 0.71 + 0.0003))
+    assert abs(C.compare(ref, near) - 0.0003) < 1e-12
+    fails(drift(lambda r: r["strategies"][0].__setitem__("sharpe", 0.71 + 0.003)), "a 0.003 drift")
+    fails(drift(lambda r: r["decomposition"].pop("rule")), "a missing key")
+    fails(drift(lambda r: r["decomposition"]["rule"]["ci95"].__setitem__(1, 0.99 + 0.003)), "a nested drift")
+    fails(drift(lambda r: r["series"]["growth"]["60/40"].__setitem__(2, 3.5 + 0.01)), "a drift deep in a series")
+
+
 def main():
     tests = [v for k, v in globals().items() if k.startswith("test_")]
     failed = 0

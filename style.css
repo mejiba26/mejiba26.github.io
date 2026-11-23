@@ -1724,7 +1724,6 @@ h2 {
    ============================================ */
 #portfolio { min-width: 0; } /* grid item: lets the wide tables scroll inside the card instead of widening it */
 #portfolio .pf-question { font-family: var(--display); font-size: 1.12rem; line-height: 1.45; margin-bottom: 10px; }
-.pf-answer[hidden], .pf-v2[hidden] { display: none; }
 .pf-answer { margin: 12px 0 4px; padding: 14px 16px; border-left: 3px solid var(--teal); background: var(--paper); }
 #portfolio .pf-answer p { font-size: 0.93rem; margin: 0 0 8px; }
 #portfolio .pf-answer p:last-child { margin-bottom: 0; }

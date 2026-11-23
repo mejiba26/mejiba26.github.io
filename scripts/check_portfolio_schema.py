@@ -48,12 +48,25 @@ def check(r):
     for k in ("start", "end"):
         need(period, k, "period")
     need(period, "months", "period", "num")
-    stress_periods = need(need(r, "settings", "results"), "stress_periods", "settings")
+    settings = need(r, "settings", "results")
+    stress_periods = need(settings, "stress_periods", "settings")
+    for k in ("n_trials", "cost_bps", "ewma_half_life"):
+        need(settings, k, "settings", "num")
 
     v1 = need(r, "v1_replication", "results")
     need(v1, "period", "v1_replication")
-    for side in ("published", "rerun"):
-        need(need(need(v1, side, "v1_replication"), "Max Sharpe", f"v1_replication.{side}"), "Sharpe", f"{side}.Max Sharpe", "num")
+    published, rerun = need(v1, "published", "v1_replication"), need(v1, "rerun", "v1_replication")
+    need(need(published, "Max Sharpe", "v1_replication.published"), "Sharpe", "published.Max Sharpe", "num")
+    for n, figs in published.items():          # the card compares every published figure with its rerun
+        rr = need(rerun, n, "v1_replication.rerun")
+        for k, v in figs.items():
+            if k == "stress":
+                for q in v:
+                    need(v, q, f"published.{n}.stress", "num")
+                    need(need(rr, "stress", f"rerun.{n}"), q, f"rerun.{n}.stress", "num")
+            else:
+                need(figs, k, f"published.{n}", "num")
+                need(rr, k, f"rerun.{n}", "num")
 
     strategies = need(r, "strategies", "results")
     if not isinstance(strategies, list) or len(strategies) != 13:
@@ -65,12 +78,16 @@ def check(r):
         for k in STRATEGY_NUMS:
             need(s, k, n, "num")
         need(s, "sharpe_ci95", n, "pair")
+        need(s, "dsr", n, "num")
         st = need(s, "stress", n)
         for p in stress_periods:
             need(st, p, f"{n}.stress", "num")
         cr = need(s, "crash", n)
         need(cr, "compounded", f"{n}.crash", "num")
+        need(cr, "avg_diff_vs_6040", f"{n}.crash", "num")
         if n != "60/40":
+            if need(cr, "avg_diff_ci95", f"{n}.crash") is not None:     # null when fewer than 3 episodes
+                need(cr, "avg_diff_ci95", f"{n}.crash", "pair")
             vs = need(s, "vs_6040", n)
             need(vs, "sharpe_diff", f"{n}.vs_6040", "num")
             need(vs, "ci95", f"{n}.vs_6040", "pair")
@@ -82,6 +99,13 @@ def check(r):
     for k in ("rule", "estimator", "interaction"):
         need(need(dec, k, "decomposition"), "point", f"decomposition.{k}", "num")
         need(dec[k], "ci95", f"decomposition.{k}", "pair")
+    rows, cols = need(dec, "rows", "decomposition"), need(dec, "columns", "decomposition")
+    table = need(dec, "sharpe_table", "decomposition")
+    if not (isinstance(rows, list) and isinstance(cols, list) and len(rows) == len(cols) == 3):
+        fail("decomposition rows and columns are not lists of 3")
+    if not (isinstance(table, list) and len(table) == 3 and all(
+            isinstance(row, list) and len(row) == 3 and all(isinstance(v, (int, float)) and not isinstance(v, bool) for v in row) for row in table)):
+        fail("decomposition.sharpe_table is not a 3 by 3 table of numbers")
 
     ct = need(r, "crash_test", "results")
     need(ct, "months", "crash_test", "num")
