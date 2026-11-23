@@ -144,14 +144,54 @@ def test_bad_data_fails():
     gap.loc["2008-05-01":"2008-05-31", "IVV"] = np.nan
     neg = px.copy()
     neg.loc["2009-03-31":, "IVV"] = -1.0
-    cases = {"missing ticker": px.drop(columns="IAU"), "missing month": gap, "bad price": neg}
+    stale = px.copy()
+    stale.loc["2009-06-26":"2009-06-30", "EEM"] = np.nan        # last 3 trading days of June missing
+    cases = {"missing ticker": px.drop(columns="IAU"), "missing month": gap, "bad price": neg, "stale month end": stale}
     for label, bad in cases.items():
         try:
             r, _ = P.monthly_returns(bad)
             P.validate(bad, r)
-        except (SystemExit, KeyError):
+        except SystemExit as e:
+            assert str(e).startswith("PORTFOLIO MODEL FAILED"), f"{label}: unexpected message {e}"
             continue
         raise AssertionError(f"{label} was not caught")
+
+
+def test_month_end_holiday_keeps_month():
+    px = synth_prices()
+    cut = px[px.index < "2011-12-30"]                      # data ends the day before the last weekday
+    assert P.monthly_returns(cut, drop_partial=False)[0].index[-1] == pd.Timestamp("2011-12-31")
+    assert P.monthly_returns(cut)[0].index[-1] == pd.Timestamp("2011-11-30")   # v1 rule, kept for replication
+
+
+def test_trend_direction():
+    idx = pd.date_range("2005-03-31", periods=P.LOOKBACK, freq="ME")
+    h = pd.DataFrame(0.005, idx, T)
+    h["IVV"], h["AGG"] = 0.02, -0.02                       # IVV only rises, AGG only falls
+    w, _ = P.w_trend(h, pd.Series(0.0, idx))
+    assert np.isclose(w[T.index("IVV")], 1 / 9) and w[T.index("AGG")] == 0, w
+
+
+def test_psr_and_dsr_known_values():
+    # Two point symmetric returns: skew 0, raw kurtosis 1, so PSR reduces to Phi(SR * sqrt(n - 1)).
+    x = 0.01 + 0.04 * np.tile([1.0, -1.0], 60)
+    sr = x.mean() / x.std(ddof=1)
+    assert np.isclose(P.psr(x), P.norm.cdf(sr * np.sqrt(len(x) - 1)))
+    # DSR threshold with unit variance across trials approximates the expected max of N standard normals.
+    mc = np.random.default_rng(8).standard_normal((4000, 1000)).max(1).mean()
+    thr = P.dsr_threshold(np.array([-1, 1]) / np.sqrt(2), 1000)
+    assert abs(thr - mc) < 0.1, (thr, mc)
+
+
+def test_crash_episodes():
+    idx = pd.date_range("2005-01-31", periods=68, freq="ME")
+    rets = pd.DataFrame(0.01, idx, T)
+    rets.iloc[32, :] = rets.iloc[62, :] = -0.30            # each makes 12 months of negative trailing returns
+    dates = idx[12:]
+    flag, ep = P.crash_months(rets, dates)
+    assert ep == [{"start": "2007-09", "end": "2008-08", "months": 12},
+                  {"start": "2010-03", "end": "2010-08", "months": 6}], ep   # second runs to the last month
+    assert flag.sum() == 18
 
 
 def main():

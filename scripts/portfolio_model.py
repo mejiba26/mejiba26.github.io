@@ -16,7 +16,7 @@ import argparse
 import json
 import math
 import sys
-from datetime import date, datetime, timezone
+from datetime import date
 from pathlib import Path
 
 import numpy as np
@@ -77,10 +77,16 @@ def fetch_prices(today=None):
     return px.loc[px.index < first_of_month, cols]
 
 
-def monthly_returns(prices):
-    """v1's monthly_returns, unchanged: month end total returns and the monthly risk free rate."""
+def monthly_returns(prices, drop_partial=True):
+    """v1's monthly_returns: month end total returns and the monthly risk free rate.
+    drop_partial=True is v1's partial month rule, kept for the v1 replication only: it ignores market
+    holidays, so data ending before a month end holiday (Memorial Day 2027-05-31) would lose a full month.
+    v2 data never needs it, because fetch_prices already cuts prices to complete months."""
+    missing = [t for t in TICKERS + [RATE_TICKER] if t not in prices.columns]
+    if missing:
+        fail(f"missing columns {missing}")
     last_day = prices.index[-1]
-    if last_day < last_day + pd.offsets.BMonthEnd(0):
+    if drop_partial and last_day < last_day + pd.offsets.BMonthEnd(0):
         prices = prices[prices.index < last_day.to_period("M").to_timestamp()]
     etf = prices[TICKERS].resample("ME").last()
     rets = etf.pct_change().dropna(how="all").dropna()
@@ -91,15 +97,21 @@ def monthly_returns(prices):
 
 def validate(prices, rets):
     """Fail loudly on anything the backtest would otherwise silently absorb."""
-    missing = [t for t in TICKERS + [RATE_TICKER] if t not in prices.columns]
-    if missing:
-        fail(f"missing columns {missing}")
     months = pd.period_range(rets.index[0], rets.index[-1], freq="M")
     if len(months) != len(rets):
         fail(f"{len(months) - len(rets)} month(s) missing inside {months[0]} to {months[-1]}")
     etf = prices[TICKERS].resample("ME").last().loc[rets.index[0] - pd.offsets.MonthEnd(1):rets.index[-1]]
     if not np.isfinite(etf.values).all() or (etf.values <= 0).any():
         fail("missing, non finite or non positive month end ETF price")
+    # Every ETF must have a price on each month's last trading day, or .last() silently uses a stale one.
+    days = prices[TICKERS].dropna(how="all")
+    last_rows = days.groupby(days.index.to_period("M")).tail(1)
+    lo = (rets.index[0] - pd.offsets.MonthEnd(1)).to_period("M").start_time
+    last_rows = last_rows[(last_rows.index >= lo) & (last_rows.index <= rets.index[-1])]
+    stale = last_rows.isna()
+    if stale.values.any():
+        d = stale.index[stale.any(axis=1)][0]
+        fail(f"{list(stale.columns[stale.loc[d]])} missing on the last trading day of {d:%Y-%m} ({d:%Y-%m-%d})")
     big = rets.abs() > MAX_ABS_MONTH_RET
     if big.values.any():
         r, c = np.argwhere(big.values)[0]
@@ -376,7 +388,7 @@ def rnd(x, d=6):
 
 
 def run(prices):
-    rets, rf = monthly_returns(prices)
+    rets, rf = monthly_returns(prices, drop_partial=False)
     validate(prices, rets)
     repl = replicate_v1()
 
@@ -453,7 +465,6 @@ def run(prices):
     roll = excess.rolling(36).mean() / excess.rolling(36).std() * np.sqrt(12)
     result = {
         "as_of": f"{dates[-1]:%Y-%m-%d}",
-        "generated_utc": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
         "spec": "docs/portfolio-spec.md",
         "source": "Yahoo Finance via yfinance, adjusted closes (total return); ^IRX for the risk free rate",
         "period": {"start": f"{dates[0]:%Y-%m}", "end": f"{dates[-1]:%Y-%m}", "months": len(dates)},

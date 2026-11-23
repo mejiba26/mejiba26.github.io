@@ -60,7 +60,7 @@ def main():
     if version("skfolio") != SKFOLIO_VERSION:
         sys.exit(f"Expected skfolio {SKFOLIO_VERSION}, found {version('skfolio')}")
     prices = pd.read_csv(P.OUT / "prices.csv", index_col=0, parse_dates=True)
-    rets, rf = P.monthly_returns(prices)
+    rets, rf = P.monthly_returns(prices, drop_partial=False)
     oos = np.arange(P.LOOKBACK, len(rets))
     picks = oos[np.linspace(0, len(oos) - 1, 14).round().astype(int)]
 
