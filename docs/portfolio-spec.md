@@ -116,4 +116,9 @@ A forward, live monthly portfolio would be a separate spec with its own start da
 
 ## Amendments
 
-None.
+### Amendment 1 (2026-11-23)
+
+The body above is unchanged. No rule value changes.
+
+1. **Crash test interval** (fills a gap in evidence item (e), which said an interval is attached with 3 or more episodes but did not say how). The 95% interval for a strategy's average crash month return minus 60/40's uses the same 10,000 stationary bootstrap resamples as (a): in each resample, average the difference over the resampled months that are crash months; resamples with no crash month are skipped; take the 2.5 and 97.5 percentiles.
+2. **Disclosure.** This was written after the first full run, so the crash month count (13 months in 3 episodes: 2008-10, 2016-01, 2022-05 to 2023-03) and the point estimates of every strategy had been seen. The method is the most direct reuse of (a) and was not chosen by comparing alternatives. With two of the three episodes one month long, the interval mostly reflects 2022 to 2023.
