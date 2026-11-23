@@ -122,3 +122,11 @@ The body above is unchanged. No rule value changes.
 
 1. **Crash test interval** (fills a gap in evidence item (e), which said an interval is attached with 3 or more episodes but did not say how). The 95% interval for a strategy's average crash month return minus 60/40's uses the same 10,000 stationary bootstrap resamples as (a): in each resample, average the difference over the resampled months that are crash months; resamples with no crash month are skipped; take the 2.5 and 97.5 percentiles.
 2. **Disclosure.** This was written after the first full run, so the crash month count (13 months in 3 episodes: 2008-10, 2016-01, 2022-05 to 2023-03) and the point estimates of every strategy had been seen. The method is the most direct reuse of (a) and was not chosen by comparing alternatives. With two of the three episodes one month long, the interval mostly reflects 2022 to 2023.
+
+### Amendment 2 (2026-11-23)
+
+The body above is unchanged. No rule value or method changes.
+
+1. **Canonical numbers.** The first run of `.github/workflows/run-portfolio.yml` (Python 3.12 on Linux, exact package pins) is the canonical source of the v2 numbers. Until then, `data/portfolio/results.json` is the local run (Python 3.14 on Windows, same package pins). The workflow re-runs the analysis on the committed `data/portfolio/prices.csv` without downloading anything, and fails if any number differs from the committed file by more than 0.0005 or 0.05%, whichever is larger (`scripts/check_portfolio_schema.py`); text, dates, counts and structure must be identical. If it passes, it commits its own output, and later runs must reproduce that.
+2. **Why.** Optimizer results can differ in the sixth decimal between platforms and library builds. The v1 rerun showed this: 40 of v1's 45 published figures were identical at six decimals, and the other five (optimizer outputs) differed by at most 0.000007.
+3. **Labels.** The stress window called "2008 Financial Crisis" in v1 is shown on the site as "Jun 2008 to Feb 2009", its actual dates. The window itself is unchanged.
