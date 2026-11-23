@@ -19,7 +19,7 @@ I've been trading futures independently since 2020, which shaped how I think abo
 - **Projects**
   - [RTX Corporation Equity Valuation](https://mejiba26.github.io/#rtx): DCF with sensitivity analysis, peer P/E and EV/EBITDA cross-checks, and a documented model audit ([paper](rtx-valuation.pdf))
   - [ECG Patient Matching Model](https://mejiba26.github.io/#ecg): Wake Forest School of Medicine Build-A-Thon, Siamese CNN ensemble in TensorFlow/Keras
-  - [iShares Multi-Asset Portfolio Model](https://mejiba26.github.io/#portfolio): walk forward backtest of five allocation strategies (in progress)
+  - [iShares Multi-Asset Portfolio Model](https://mejiba26.github.io/#portfolio): does sophisticated portfolio optimization beat a plain 60/40 mix? v1 (five strategies, Mar 2008 to Aug 2026, as published, in `portfolio/v1/`) and a pre registered v2 (13 strategies with bootstrap confidence intervals, Mar 2008 to Oct 2026)
   - [Independent Futures Trading and Python Market Tools](https://mejiba26.github.io/#futures): MNQ/MES trading with defined risk, plus Python screening and backtesting tools
   - Coursework: housing price regression model
 - **Market View:** trends I'm actively tracking and why they matter, with an "as of" date. The sector rotation card updates itself from live ETF data.
@@ -37,7 +37,9 @@ The paper trading simulation follows a rule set locked before its start date in 
 
 The volatility forecast scorecard publishes next day range forecasts for SPY, QQQ, ITA and XLE from four models every weekday after the close, then grades them (`scripts/update_vol.py`, `update-vol.yml`, `data/vol/`). Its models, scores and test were fixed before the first forecast in `docs/vol-scorecard-spec.md`. It is a forecast evaluation, not trading advice.
 
-`scripts/dev/` holds test helpers for the paper trading card and the volatility scorecard (sample data and offline tests). Nothing there runs in a workflow or on the site.
+The portfolio model v2 is pre registered in `docs/portfolio-spec.md`. `scripts/portfolio_model.py` writes `data/portfolio/`, and a manual workflow (`run-portfolio.yml`) reruns it and must reproduce the committed numbers within a stated tolerance; its first run is the canonical source. The optimizer weights are checked against skfolio in `docs/portfolio-verification.md`. The stress window labelled "2008 crisis" in v1 is Jun 2008 to Feb 2009.
+
+`scripts/dev/` holds test helpers for the paper trading card, the volatility scorecard and the portfolio model (sample data and offline tests). Nothing there runs in a workflow or on the site.
 
 ## Contact
 

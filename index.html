@@ -30,7 +30,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=20261116b">
+<link rel="stylesheet" href="style.css?v=20261123">
 </head>
 <body>
 
@@ -319,30 +319,47 @@
         <div class="model-head">
           <p class="memo-tag">Backtest <span class="sep">/</span> Multi asset allocation</p>
           <h3>iShares Multi-Asset Portfolio Model</h3>
-          <p class="memo-meta">Mar 2008 to Aug 2026, out of sample</p>
+          <p class="memo-meta">v1: Mar 2008 to Aug 2026, out of sample<span id="pf-meta-v2" hidden></span></p>
         </div>
         <ul class="statpanel">
-          <li><span class="sp-k">60/40 after costs</span><span class="sp-v">8.4% a yr</span></li>
-          <li><span class="sp-k">60/40 Sharpe</span><span class="sp-v">0.72</span></li>
-          <li><span class="sp-k">Best of the rest</span><span class="sp-v">7.3%, 0.64</span></li>
-          <li><span class="sp-k">Strategies tested</span><span class="sp-v">5</span></li>
+          <li><span class="sp-k">60/40 after costs, v1</span><span class="sp-v">8.4% a yr</span></li>
+          <li><span class="sp-k">60/40 Sharpe, v1</span><span class="sp-v">0.72</span></li>
+          <li><span class="sp-k">Best of the rest, v1</span><span class="sp-v">7.3%, 0.64</span></li>
+          <li><span class="sp-k">Strategies tested, v1</span><span class="sp-v">5</span></li>
         </ul>
         <div class="model-body">
+          <p class="project-field">The question</p>
+          <p class="pf-question">Does sophisticated portfolio optimization beat a plain 60/40 mix, and what happens in a crash like 2022?</p>
+          <!-- Filled from data/portfolio/results.json by the "Portfolio model v2:" script below. Stays hidden if the file is missing or malformed. -->
+          <div id="pf-answer" class="pf-answer" hidden></div>
           <p class="project-field">Context</p>
-          <p>A Python walk forward backtest of five allocation strategies (60/40, equal weight, inverse volatility, minimum variance, and max Sharpe with a 40% cap) across nine iShares ETFs: IVV, IJR, EFA, EEM, AGG, TLT, TIP, LQD, IAU.</p>
+          <p>A Python walk forward backtest of allocation strategies across nine iShares ETFs: IVV, IJR, EFA, EEM, AGG, TLT, TIP, LQD, IAU. Version 1 compared five (60/40, equal weight, inverse volatility, minimum variance, and max Sharpe with a 40% cap). Version 2 is a pre registered follow up with 13 strategies and confidence intervals.</p>
           <p class="project-field">My role</p>
-          <p>Each month, weights use only the prior 36 months of data. Costs are 10 bps on turnover. Stress tests cover the 2008 crisis, the COVID crash, and the 2022 rate shock.</p>
-          <p class="project-field">Outcome</p>
-          <p>After costs, the plain 60/40 beat every other strategy: 8.4% a year with a 0.72 Sharpe, vs. 7.3% and 0.64 for Max Sharpe, the best of the rest. The optimizers earned their keep in crashes. In the 2008 crisis, Min Variance lost 1.2% and Max Sharpe 3.9%, vs. 29.6% for 60/40. But in the 2022 rate shock, when stocks and bonds fell together, every strategy lost between 13.9% and 15.9%, so diversification didn't help. Max Sharpe also traded heavily, with annual turnover of about 244% (buys plus sells).</p>
+          <p>Each month, weights use only the prior 36 months of data. Costs are 10 bps on turnover. Stress tests cover Jun 2008 to Feb 2009, the COVID crash, and the 2022 rate shock.</p>
+          <p class="project-field">Outcome, v1 (Mar 2008 to Aug 2026)</p>
+          <p>After costs, the plain 60/40 had the highest point estimates: 8.4% a year with a 0.72 Sharpe, vs. 7.3% and 0.64 for Max Sharpe, the best of the rest. None of these gaps was statistically reliable.<span id="pf-v1-ci" hidden></span> The optimizers earned their keep in crashes. From Jun 2008 to Feb 2009, Min Variance lost 1.2% and Max Sharpe 3.9%, vs. 29.6% for 60/40. But in the 2022 rate shock, when stocks and bonds fell together, every strategy lost between 13.9% and 15.9%, so diversification didn't help. Max Sharpe also traded heavily, with annual turnover of about 244% (buys plus sells).</p>
+          <p class="project-note">v1 is the original code and results, as published, rerun unchanged in November 2026 on its own prices.<span id="pf-v1-repl"></span></p>
           <div class="project-figs">
             <a href="growth.png" target="_blank" rel="noopener"><img src="growth.png" alt="Growth of $10,000 by strategy, March 2008 to August 2026, after costs" loading="lazy"></a>
             <a href="drawdowns.png" target="_blank" rel="noopener"><img src="drawdowns.png" alt="Drawdown from prior peak by strategy" loading="lazy"></a>
           </div>
+          <details id="pf-v2" class="pf-v2" hidden>
+            <summary>Version 2 in full: 13 strategies with confidence intervals</summary>
+            <div id="pf-v2-body"></div>
+          </details>
           <div class="mind">
             <p class="mind-k">What would change my mind</p>
-            <p>The plain 60/40 won after costs, but every strategy lost between 13.9% and 15.9% in the 2022 rate shock. A longer sample where the optimizers keep their 2008 advantage without Max Sharpe's 244% annual turnover would change the conclusion.</p>
+            <p>The plain 60/40 had the highest point estimates after costs, but every strategy lost between 13.9% and 15.9% in the 2022 rate shock. A longer sample where the optimizers keep their 2008 advantage without Max Sharpe's 244% annual turnover would change the conclusion.</p>
+            <ul id="pf-mind" class="pf-list" hidden></ul>
           </div>
-          <p class="memo-links"><span class="link-soon">Code coming soon</span></p>
+          <p class="memo-links">
+            <a href="https://github.com/mejiba26/mejiba26.github.io/blob/main/docs/portfolio-spec.md" target="_blank" rel="noopener">Pre registered spec</a>
+            <a href="https://github.com/mejiba26/mejiba26.github.io/blob/main/scripts/portfolio_model.py" target="_blank" rel="noopener">Code</a>
+            <a href="https://github.com/mejiba26/mejiba26.github.io/blob/main/docs/portfolio-verification.md" target="_blank" rel="noopener">Verification vs skfolio</a>
+            <a href="https://github.com/mejiba26/mejiba26.github.io/tree/main/data/portfolio" target="_blank" rel="noopener">Data</a>
+            <a href="https://github.com/mejiba26/mejiba26.github.io/tree/main/portfolio/v1" target="_blank" rel="noopener">v1 as published</a>
+            <a class="go" href="#methods">Method</a>
+          </p>
         </div>
       </article>
 
@@ -630,14 +647,19 @@
         <p class="me-f"><a href="https://github.com/mejiba26/mejiba26.github.io/blob/main/docs/vol-scorecard-spec.md" target="_blank" rel="noopener">docs/vol-scorecard-spec.md</a> <a href="https://github.com/mejiba26/mejiba26.github.io/blob/main/scripts/update_vol.py" target="_blank" rel="noopener">scripts/update_vol.py</a> <a href="https://github.com/mejiba26/mejiba26.github.io/tree/main/data/vol" target="_blank" rel="noopener">data/vol/</a></p>
       </li>
       <li>
+        <p class="me-h">Portfolio model, v2</p>
+        <p class="me-d">Thirteen allocation strategies on nine iShares ETFs, walk forward with a 36 month window and 10 bps costs, pre registered before any v2 result existed. Confidence intervals come from a stationary bootstrap that resamples the same months for every strategy. It refuses to write anything unless it first reproduces the published v1 figures on v1's own prices. Its optimizer weights were checked against skfolio, and the first GitHub Actions run is the canonical source of the numbers on the Models card.</p>
+        <p class="me-f"><a href="https://github.com/mejiba26/mejiba26.github.io/blob/main/docs/portfolio-spec.md" target="_blank" rel="noopener">docs/portfolio-spec.md</a> <a href="https://github.com/mejiba26/mejiba26.github.io/blob/main/scripts/portfolio_model.py" target="_blank" rel="noopener">scripts/portfolio_model.py</a> <a href="https://github.com/mejiba26/mejiba26.github.io/tree/main/data/portfolio" target="_blank" rel="noopener">data/portfolio/</a> <a href="https://github.com/mejiba26/mejiba26.github.io/blob/main/.github/workflows/run-portfolio.yml" target="_blank" rel="noopener">run-portfolio.yml</a> <a href="https://github.com/mejiba26/mejiba26.github.io/blob/main/docs/portfolio-verification.md" target="_blank" rel="noopener">docs/portfolio-verification.md</a> <a href="https://github.com/mejiba26/mejiba26.github.io/tree/main/portfolio/v1" target="_blank" rel="noopener">portfolio/v1/</a></p>
+      </li>
+      <li>
         <p class="me-h">Schema checks</p>
         <p class="me-d">Run in the workflow after every write. If the shape of a data file drifts from what the page reads, the run fails loudly instead of publishing a broken card.</p>
-        <p class="me-f"><a href="https://github.com/mejiba26/mejiba26.github.io/blob/main/scripts/check_paper_schema.py" target="_blank" rel="noopener">scripts/check_paper_schema.py</a> <a href="https://github.com/mejiba26/mejiba26.github.io/blob/main/scripts/check_vol_schema.py" target="_blank" rel="noopener">scripts/check_vol_schema.py</a></p>
+        <p class="me-f"><a href="https://github.com/mejiba26/mejiba26.github.io/blob/main/scripts/check_paper_schema.py" target="_blank" rel="noopener">scripts/check_paper_schema.py</a> <a href="https://github.com/mejiba26/mejiba26.github.io/blob/main/scripts/check_vol_schema.py" target="_blank" rel="noopener">scripts/check_vol_schema.py</a> <a href="https://github.com/mejiba26/mejiba26.github.io/blob/main/scripts/check_portfolio_schema.py" target="_blank" rel="noopener">scripts/check_portfolio_schema.py</a></p>
       </li>
       <li>
         <p class="me-h">Offline tests</p>
         <p class="me-d">Synthetic prices, no network. They check that a rerun changes nothing, that a run split across days equals one continuous run, and that no forecast uses later data.</p>
-        <p class="me-f"><a href="https://github.com/mejiba26/mejiba26.github.io/blob/main/scripts/dev/test_update_vol.py" target="_blank" rel="noopener">test_update_vol.py</a> <a href="https://github.com/mejiba26/mejiba26.github.io/blob/main/scripts/dev/test_paper_trade.py" target="_blank" rel="noopener">test_paper_trade.py</a> <a href="https://github.com/mejiba26/mejiba26.github.io/blob/main/scripts/dev/test_update_market.py" target="_blank" rel="noopener">test_update_market.py</a> <a href="https://github.com/mejiba26/mejiba26.github.io/blob/main/scripts/dev/test_update_spotlight.py" target="_blank" rel="noopener">test_update_spotlight.py</a></p>
+        <p class="me-f"><a href="https://github.com/mejiba26/mejiba26.github.io/blob/main/scripts/dev/test_update_vol.py" target="_blank" rel="noopener">test_update_vol.py</a> <a href="https://github.com/mejiba26/mejiba26.github.io/blob/main/scripts/dev/test_paper_trade.py" target="_blank" rel="noopener">test_paper_trade.py</a> <a href="https://github.com/mejiba26/mejiba26.github.io/blob/main/scripts/dev/test_update_market.py" target="_blank" rel="noopener">test_update_market.py</a> <a href="https://github.com/mejiba26/mejiba26.github.io/blob/main/scripts/dev/test_update_spotlight.py" target="_blank" rel="noopener">test_update_spotlight.py</a> <a href="https://github.com/mejiba26/mejiba26.github.io/blob/main/scripts/dev/test_portfolio_model.py" target="_blank" rel="noopener">test_portfolio_model.py</a></p>
       </li>
     </ol>
 
@@ -650,7 +672,8 @@ cd mejiba26.github.io
 python scripts/dev/test_update_market.py
 python scripts/dev/test_update_spotlight.py
 python scripts/dev/test_paper_trade.py
-python scripts/dev/test_update_vol.py</code></pre>
+python scripts/dev/test_update_vol.py
+python scripts/dev/test_portfolio_model.py</code></pre>
       <p class="run-n">Then open index.html from a local server. Every card checks its own data and stays hidden if that data is missing, so a fresh clone with no feeds shows the page with the Live Desk cards absent rather than empty.</p>
     </div>
   </section>
@@ -1645,6 +1668,234 @@ python scripts/dev/test_update_vol.py</code></pre>
         let t; window.addEventListener('resize', () => { clearTimeout(t); t = setTimeout(() => { try { redraw(); } catch (e) {} }, 150); });
       })
       .catch(() => { box.hidden = true; if (nav) nav.hidden = true; body.innerHTML = ''; });
+  })();
+</script>
+
+<script>
+  // Portfolio model v2: reads data/portfolio/results.json, written by scripts/portfolio_model.py
+  // (pre registered in docs/portfolio-spec.md). KEEP IN SYNC with scripts/check_portfolio_schema.py:
+  // the keys read here are the ones that script enforces in the workflow. Change one side, change the other.
+  // Every v2 number on the card comes from that file; nothing is typed by hand. Everything is built
+  // first and shown only if all of it succeeds. Any failure (missing file, bad JSON, missing field,
+  // non numeric value) leaves the static v1 text as it is and keeps every v2 part hidden.
+  // Charts redraw on the resize event the view script fires after a switch, so a chart drawn while the
+  // Models view was hidden is redrawn at its real width.
+  // No staleness rule: this is a fixed backtest through `as_of`, not a live feed, and the as of month is shown.
+  (function () {
+    const answer = document.getElementById('pf-answer');
+    const v2 = document.getElementById('pf-v2');
+    const body = document.getElementById('pf-v2-body');
+    const meta = document.getElementById('pf-meta-v2');
+    const v1ci = document.getElementById('pf-v1-ci');
+    const v1repl = document.getElementById('pf-v1-repl');
+    const mind = document.getElementById('pf-mind');
+    if (!answer || !v2 || !body || !meta || !v1ci || !v1repl || !mind) return;
+
+    // Chart series in fixed color order (validated palette, slots 1 to 5); colors follow the strategy, never its rank.
+    const SHOWN = [['60/40', '60/40'], ['Trend 10M', 'Trend 10M'], ['MS-Sample', 'Max Sharpe'], ['MV-Sample', 'Min Variance'], ['RP-Sample', 'Risk parity']];
+    const LABEL = { MV: 'Min Variance', MS: 'Max Sharpe', RP: 'Risk parity', Sample: 'sample', LW: 'Ledoit-Wolf', EWMA: 'EWMA' };
+    const num = v => { if (typeof v !== 'number' || !isFinite(v)) throw new Error('bad value'); return v; };
+    const pair = v => { if (!Array.isArray(v) || v.length !== 2) throw new Error('bad pair'); return [num(v[0]), num(v[1])]; };
+    const esc = t => String(t).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+    const month = s => {
+      if (typeof s !== 'string' || !/^\d{4}-\d{2}$/.test(s)) throw new Error('bad month');
+      return new Date(+s.slice(0, 4), +s.slice(5) - 1, 15).toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
+    };
+    const monthsBetween = (a, b) => (+b.slice(0, 4) - +a.slice(0, 4)) * 12 + (+b.slice(5) - +a.slice(5));
+    const p1 = x => (num(x) * 100).toFixed(1) + '%';
+    const p0 = x => Math.round(num(x) * 100) + '%';
+    const s2 = x => num(x).toFixed(2);
+    const sg = x => (num(x) > 0 ? '+' : x < 0 ? '−' : '') + Math.abs(x).toFixed(2);
+    const range = (v, f) => { const [a, b] = pair(v); return (f || s2)(a) + ' to ' + (f || s2)(b); };
+    const move = x => (num(x) < 0 ? 'lost ' : 'gained ') + (Math.abs(x) * 100).toFixed(1) + '%';
+    const nameOf = s => s.rule ? LABEL[s.rule] + ' · ' + LABEL[s.estimator] : s.name;
+    const includesZero = v => { const [a, b] = pair(v); return a <= 0 && b >= 0; };
+    const periodLabel = (a, b) => (a.slice(5) === '01' && b.slice(5) === '12' && a.slice(0, 4) === b.slice(0, 4))
+      ? a.slice(0, 4) : month(a) + ' to ' + month(b);
+
+    let charts = null;
+
+    function build(r) {
+      const per = r.period, start = month(per.start), end = month(per.end), months = num(per.months);
+      if (!Array.isArray(r.strategies) || r.strategies.length !== 13) throw new Error('strategies');
+      const S = {}; r.strategies.forEach(s => { S[s.name] = s; });
+      const base = S['60/40'], trend = S['Trend 10M'], ms = S['MS-Sample'];
+      if (!base || !trend || !ms) throw new Error('strategy missing');
+      const others = r.strategies.filter(s => s.name !== '60/40');
+      const better = others.filter(s => pair(s.vs_6040.ci95)[0] > 0);
+      const worse = others.filter(s => pair(s.vs_6040.ci95)[1] < 0);
+      const optim = r.strategies.filter(s => s.rule);
+      const dec = r.decomposition, ct = r.crash_test, eps = ct.episodes, set = r.settings;
+      if (!Array.isArray(eps) || !eps.length) throw new Error('episodes');
+      const longest = eps.reduce((a, e) => (num(e.months) > a.months ? e : a), eps[0]);
+      const crashSig = others.filter(s => s.crash.avg_diff_ci95 && !includesZero(s.crash.avg_diff_ci95));
+      const v1 = r.v1_replication, v1end = v1.period.split(' to ')[1];
+      const msV1 = num(v1.published['Max Sharpe'].Sharpe), msV2 = num(ms.sharpe);
+      const extra = monthsBetween(v1end, per.end);
+      const stressKeys = Object.keys(set.stress_periods);
+
+      // v1 replication: the largest gap between any published figure and the rerun
+      let nFig = 0, same = 0, maxGap = 0;
+      const flips = [];
+      Object.keys(v1.published).forEach(n => Object.entries(v1.published[n]).forEach(([k, v]) => {
+        const pairs = k === 'stress' ? Object.keys(v).map(q => [q, v[q], v1.rerun[n].stress[q]]) : [[k, v, v1.rerun[n][k]]];
+        pairs.forEach(([key, a, b]) => {
+          nFig++; maxGap = Math.max(maxGap, Math.abs(num(a) - num(b)));
+          if (a.toFixed(6) === b.toFixed(6)) same++;
+          const f = key === 'Sharpe' ? s2 : p1;     // the precision v1 printed
+          if (f(a) !== f(b)) flips.push(`${n} ${key === 'Annual Turnover' ? 'turnover' : key.toLowerCase()}, ${f(a)} published and ${f(b)} rerun`);
+        });
+      }));
+
+      const verdict = better.length === 0
+        ? `<strong>No.</strong> Over ${start} to ${end}, none of the 12 other strategies reliably beat 60/40.`
+        : `<strong>${better.length} of 12</strong> strategies reliably beat 60/40 over ${start} to ${end}: ${better.map(nameOf).map(esc).join(', ')}.`;
+      const ansHtml = `
+        <p>${verdict} The 60/40 Sharpe ratio was ${s2(base.sharpe)} (95% interval ${range(base.sharpe_ci95)}), and for ${others.length - better.length - worse.length === 12 ? 'all 12' : (others.length - better.length - worse.length) + ' of the 12'} the 95% interval for the gap to 60/40 includes zero${worse.length ? `; ${worse.length} were reliably worse (${worse.map(nameOf).map(esc).join(', ')})` : ''}.</p>
+        <p>Among the nine optimizer variants, the allocation rule explains about ${p0(dec.rule.point)} of the differences in Sharpe ratio, and the covariance estimator about ${p0(dec.estimator.point)}.</p>
+        <p>In the ${num(ct.months)} months when stocks and bonds were both down over the prior year, the trend rule ${move(trend.crash.compounded)} in total vs ${(Math.abs(base.crash.compounded) * 100).toFixed(1)}% ${base.crash.compounded < 0 ? 'lost' : 'gained'} by 60/40. But it earned ${p1(trend.cagr)} a year vs ${p1(base.cagr)} and traded about ${p0(trend.annual_turnover)} of the portfolio a year vs ${p0(base.annual_turnover)}. That crash evidence is mostly one episode: ${num(longest.months)} of the ${ct.months} months fall in ${month(longest.start)} to ${month(longest.end)}${crashSig.length ? '' : ', and no strategy’s crash month difference from 60/40 is reliable'}.</p>
+        <p class="pf-small">How noisy this is: Max Sharpe’s Sharpe ratio was ${s2(msV1)} through ${month(v1end)} (v1) and ${s2(msV2)} through ${end}. Adding ${extra} month${extra === 1 ? '' : 's'} of data moved it by ${Math.abs(msV2 - msV1).toFixed(2)}.</p>
+        <p class="pf-small">Disclosure: the crash test’s interval was defined in Amendment 1 to the spec, after the results had been seen, and the trend rule was added knowing how 2008 and 2022 turned out.</p>`;
+
+      const ciHtml = (better.length === 0 && worse.length === 0)
+        ? ` Over the longer v2 window (${start} to ${end}), the 60/40 Sharpe ratio was ${s2(base.sharpe)} with a 95% interval of ${range(base.sharpe_ci95)}, and every other strategy’s interval for the gap to it included zero.`
+        : ` Over the longer v2 window (${start} to ${end}), the 60/40 Sharpe ratio was ${s2(base.sharpe)} with a 95% interval of ${range(base.sharpe_ci95)}.`;
+      const replHtml = ` Of its ${nFig} published figures, ${same} are identical to 6 decimals and the other ${nFig - same} are within ${maxGap.toFixed(6)}`
+        + (flips.length ? `. ${flips.length === 1 ? 'One flips' : flips.length + ' flip'} at the printed rounding: ${flips.join('; ')}.` : '.');
+
+      const stressHead = stressKeys.map(k => { const [a, b] = set.stress_periods[k]; return `<th>${esc(periodLabel(a, b))}</th>`; }).join('');
+      const row = (s, cls) => `<tr class="${cls || ''}"><td>${esc(nameOf(s))}</td><td>${s2(s.sharpe)}</td><td>${range(s.sharpe_ci95)}</td>`
+        + `<td>${s.vs_6040 ? sg(s.vs_6040.sharpe_diff) + ' (' + range(s.vs_6040.ci95, sg) + ')' : 'base'}</td>`
+        + `<td>${p1(s.cagr)}</td><td>${p1(s.max_drawdown)}</td><td>${p0(s.annual_turnover)}</td>`
+        + stressKeys.map(k => `<td>${p1(s.stress[k])}</td>`).join('') + '</tr>';
+      const naive = r.strategies.filter(s => !s.rule);
+      const table = `<div class="pf-scroll"><table class="pf-table">
+          <thead><tr><th>Strategy</th><th>Sharpe</th><th>95% interval</th><th>Gap vs 60/40 (95% interval)</th><th>Return a year</th><th>Worst fall</th><th>Turnover a year</th>${stressHead}</tr></thead>
+          <tbody>${naive.map(s => row(s, s.name === '60/40' ? 'pf-base' : '')).join('')}${optim.map((s, i) => row(s, i === 0 ? 'pf-sep' : '')).join('')}</tbody>
+        </table></div>`;
+
+      const grid = `<div class="pf-scroll pf-narrow"><table class="pf-table">
+          <thead><tr><th>Sharpe ratio</th>${dec.columns.map(c => `<th>${esc(LABEL[c])}</th>`).join('')}</tr></thead>
+          <tbody>${dec.rows.map((rw, i) => `<tr><td>${esc(LABEL[rw])}</td>${dec.sharpe_table[i].map(v => `<td>${s2(v)}</td>`).join('')}</tr>`).join('')}</tbody>
+        </table></div>`;
+
+      const shown = SHOWN.map(([k]) => S[k]);
+      const crashTable = `<div class="pf-scroll"><table class="pf-table">
+          <thead><tr><th>Strategy</th><th>Total over crash months</th><th>Gap per month vs 60/40 (95% interval)</th></tr></thead>
+          <tbody>${shown.map((s, i) => `<tr class="${i === 0 ? 'pf-base' : ''}"><td>${esc(SHOWN[i][1])}</td><td>${p1(s.crash.compounded)}</td>`
+            + `<td>${s.crash.avg_diff_ci95 ? sg(s.crash.avg_diff_vs_6040 * 100) + ' pts (' + range(s.crash.avg_diff_ci95.map(x => x * 100), sg) + ')' : 'base'}</td></tr>`).join('')}</tbody>
+        </table></div>`;
+
+      const s3 = x => num(x).toFixed(3);
+      const skill = optim.filter(s => num(s.dsr) >= 0.95);
+      const topDsr = optim.reduce((a, s) => (num(s.dsr) > num(a.dsr) ? s : a), optim[0]);
+      const mindHtml = `
+        <li>A forward test, under its own spec, where an optimizer’s 95% interval for the Sharpe gap to 60/40 sits entirely above zero.</li>
+        <li>More stock and bond crash episodes. There are ${eps.length} so far, and ${num(longest.months)} of the ${ct.months} months are one episode.</li>
+        <li>A deflated Sharpe ratio of 0.95 or more for an optimizer after counting all ${num(set.n_trials)} trials. ${skill.length
+          ? skill.map(s => esc(nameOf(s)) + ' reaches ' + s3(s.dsr)).join(', ') + ' today'
+          : 'The highest today is ' + s3(topDsr.dsr) + ' (' + esc(nameOf(topDsr)) + ')'}, against ${s3(base.dsr)} for 60/40. That answers a different question from the interval against 60/40: whether a Sharpe ratio is credibly above zero after trying ${num(set.n_trials)} strategies, not whether it differs from 60/40, so both can be true at once.</li>`;
+      const legend = `<ul class="pf-legend">${SHOWN.map(([, l], i) => `<li><i class="pf-sw pf-c${i + 1}"></i>${esc(l)}</li>`).join('')}</ul>`;
+      const bodyHtml = `
+        <p class="pf-asof">Data through ${end} · ${months} months out of sample (${start} to ${end}) · ${num(set.cost_bps)} bps costs · as of ${esc(r.as_of)}</p>
+        <h4>All 13 strategies</h4>
+        ${table}
+        <p class="pf-small">Gap vs 60/40 is the difference in Sharpe ratio. An interval that includes zero means no reliable difference. MV, MS and RP use three covariance estimators: the plain sample, Ledoit-Wolf shrinkage, and an exponentially weighted (EWMA) version with a ${num(set.ewma_half_life)} month half life.</p>
+        <h4>Is it the rule or the risk estimate?</h4>
+        ${grid}
+        <p class="pf-small">Share of the differences among these nine explained by the rule: ${p0(dec.rule.point)} (95% interval ${range(dec.rule.ci95, p0)}); by the estimator: ${p0(dec.estimator.point)} (${range(dec.estimator.ci95, p0)}); by their interaction: ${p0(dec.interaction.point)} (${range(dec.interaction.ci95, p0)}).</p>
+        <h4>Growth of $10,000, after costs (log scale)</h4>
+        <div class="pf-chart" data-kind="growth"></div>
+        <h4>Drawdown from prior peak</h4>
+        <div class="pf-chart" data-kind="drawdown"></div>
+        ${legend}
+        <p class="pf-small">Five of the 13 strategies, each optimizer with the sample estimator. All 13 are in the table above.</p>
+        <h4>Stock and bond crash months</h4>
+        <p class="pf-small">Months when IVV and AGG both had a negative trailing 12 month return: ${num(ct.months)}, in ${eps.length} episode${eps.length === 1 ? '' : 's'} (${eps.map(e => e.start === e.end ? month(e.start) : month(e.start) + ' to ' + month(e.end)).join('; ')}).</p>
+        ${crashTable}
+`;
+
+      const ser = r.series, dates = ser.dates;
+      if (!Array.isArray(dates) || dates.length !== months) throw new Error('series');
+      const series = kind => SHOWN.map(([k], i) => {
+        const v = ser[kind][k];
+        if (!Array.isArray(v) || v.length !== dates.length) throw new Error('series ' + k);
+        return { label: SHOWN[i][1], cls: 'pf-c' + (i + 1), v: v.map(x => num(x) * (kind === 'growth' ? 10000 : 1)) };
+      });
+      return { ansHtml, ciHtml, replHtml, bodyHtml, mindHtml, metaText: ` · v2: ${start} to ${end}`, chartData: { dates, growth: series('growth'), drawdown: series('drawdown') } };
+    }
+
+    function drawChart(host, kind, d) {
+      const W = Math.max(260, host.clientWidth || 300), small = W < 480;
+      const H = small ? 210 : 250, m = { l: small ? 44 : 52, r: 8, t: 8, b: 22 };
+      const lines = d[kind], n = d.dates.length, log = kind === 'growth';
+      const tf = v => (log ? Math.log(v) : v);
+      let lo = Infinity, hi = -Infinity;
+      lines.forEach(l => l.v.forEach(v => { lo = Math.min(lo, v); hi = Math.max(hi, v); }));
+      if (!log) hi = 0;
+      const x = i => m.l + (W - m.l - m.r) * i / (n - 1);
+      const y = v => m.t + (H - m.t - m.b) * (1 - (tf(v) - tf(lo)) / ((tf(hi) - tf(lo)) || 1));
+      const ticks = log ? [5000, 7500, 10000, 15000, 20000, 30000, 40000].filter(v => v >= lo && v <= hi)
+                        : [0, -0.1, -0.2, -0.3, -0.4].filter(v => v >= lo);
+      const fmtY = v => (log ? '$' + (v / 1000) + 'k' : Math.round(v * 100) + '%');
+      let g = ticks.map(v => `<line class="${(log ? v === 10000 : v === 0) ? 'zero' : 'grid'}" x1="${m.l}" x2="${W - m.r}" y1="${y(v).toFixed(1)}" y2="${y(v).toFixed(1)}"/>`
+        + `<text class="ax" x="${m.l - 5}" y="${(y(v) + 3).toFixed(1)}" text-anchor="end">${fmtY(v)}</text>`).join('');
+      const step = small ? 6 : 4;
+      d.dates.forEach((s, i) => { if (s.slice(5) === '01' && +s.slice(0, 4) % step === 2) g += `<text class="ax" x="${x(i).toFixed(1)}" y="${H - 6}" text-anchor="middle">${s.slice(0, 4)}</text>`; });
+      const paths = lines.map(l => `<polyline class="ln ${l.cls}" points="${l.v.map((v, i) => x(i).toFixed(1) + ',' + y(v).toFixed(1)).join(' ')}"/>`).join('');
+      const aria = (log ? 'Growth of $10,000 after costs, log scale, ' : 'Drawdown from prior peak, ') + d.dates[0] + ' to ' + d.dates[n - 1] + '. Final values: '
+        + lines.map(l => l.label + ' ' + (log ? '$' + Math.round(l.v[n - 1]).toLocaleString('en-US') : Math.round(l.v[n - 1] * 100) + '%')).join(', ') + '.';
+      host.innerHTML = `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(aria)}">${g}${paths}`
+        + `<line class="xh" y1="${m.t}" y2="${H - m.b}" x1="-10" x2="-10"/>${lines.map(l => `<circle class="dot ${l.cls}" r="4" cx="-10" cy="-10"/>`).join('')}</svg>`
+        + `<div class="pf-tip" hidden></div>`;
+      const svg = host.querySelector('svg'), tip = host.querySelector('.pf-tip'), xh = svg.querySelector('.xh'), dots = svg.querySelectorAll('.dot');
+      const show = ev => {
+        const rect = svg.getBoundingClientRect(), px = (ev.clientX - rect.left) * W / rect.width;
+        const i = Math.max(0, Math.min(n - 1, Math.round((px - m.l) / (W - m.l - m.r) * (n - 1))));
+        xh.setAttribute('x1', x(i)); xh.setAttribute('x2', x(i));
+        lines.forEach((l, j) => { dots[j].setAttribute('cx', x(i)); dots[j].setAttribute('cy', y(l.v[i])); });
+        tip.innerHTML = `<b>${esc(month(d.dates[i]))}</b>` + lines.map(l => `<br><i class="pf-sw ${l.cls}"></i>${esc(l.label)} `
+          + (log ? '$' + Math.round(l.v[i]).toLocaleString('en-US') : (l.v[i] * 100).toFixed(1) + '%')).join('');
+        tip.hidden = false;
+        const tw = tip.offsetWidth, left = x(i) * rect.width / W;
+        tip.style.left = Math.max(0, Math.min(rect.width - tw, left < rect.width / 2 ? left + 12 : left - tw - 12)) + 'px';
+      };
+      const hide = () => { tip.hidden = true; xh.setAttribute('x1', -10); xh.setAttribute('x2', -10); dots.forEach(c => c.setAttribute('cx', -10)); };
+      svg.addEventListener('pointermove', show);
+      svg.addEventListener('pointerdown', show);
+      svg.addEventListener('pointerleave', hide);
+    }
+
+    function drawCharts() {
+      if (!charts || !v2.open) return;
+      body.querySelectorAll('.pf-chart').forEach(h => drawChart(h, h.dataset.kind, charts));
+    }
+
+    function hideAll() {
+      answer.hidden = true; answer.innerHTML = '';
+      v2.hidden = true; body.innerHTML = '';
+      meta.hidden = true; v1ci.hidden = true; v1repl.textContent = '';
+      mind.hidden = true; mind.innerHTML = '';
+      charts = null;
+    }
+
+    fetch('data/portfolio/results.json', { cache: 'no-cache' })
+      .then(res => { if (!res.ok) throw new Error(res.status); return res.json(); })
+      .then(r => {
+        const out = build(r);            // throws on anything malformed, before anything is shown
+        answer.innerHTML = out.ansHtml;
+        v1ci.textContent = out.ciHtml;
+        v1repl.textContent = out.replHtml;
+        meta.textContent = out.metaText;
+        body.innerHTML = out.bodyHtml;
+        mind.innerHTML = out.mindHtml;
+        charts = out.chartData;
+        answer.hidden = false; v1ci.hidden = false; meta.hidden = false; v2.hidden = false; mind.hidden = false;
+        v2.addEventListener('toggle', drawCharts);
+        let t; window.addEventListener('resize', () => { clearTimeout(t); t = setTimeout(drawCharts, 150); });
+        drawCharts();
+      })
+      .catch(hideAll);
   })();
 </script>
 

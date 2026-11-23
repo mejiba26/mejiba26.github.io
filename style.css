@@ -17,6 +17,12 @@
   --brick: #8C3A2E;
   --slate: #6B7A86;
   --plum: #6E5B8A;
+  /* Chart series for the portfolio card. Checked with a color blindness validator on --card; keep the order. */
+  --chart-1: #2a78d6;
+  --chart-2: #eb6834;
+  --chart-3: #1baf7a;
+  --chart-4: #eda100;
+  --chart-5: #e87ba4;
 
   --ink-70: rgba(27, 36, 48, 0.72);
   --ink-55: rgba(27, 36, 48, 0.56);
@@ -1711,4 +1717,55 @@ h2 {
   .mind-k, .rev-h, .doc-table caption, .kicker, .cred dt { color: #555 !important; }
   .memo-page .site-footer { padding: 10pt 0 0; }
   .paper-scroll { overflow: visible; }
+}
+/* ============================================
+   PROJECTS: portfolio card, v2 parts (filled from data/portfolio/results.json)
+   Series colors are --chart-1 to --chart-5 (validated for color blindness on --card, fixed order).
+   ============================================ */
+#portfolio { min-width: 0; } /* grid item: lets the wide tables scroll inside the card instead of widening it */
+#portfolio .pf-question { font-family: var(--display); font-size: 1.12rem; line-height: 1.45; margin-bottom: 10px; }
+.pf-answer[hidden], .pf-v2[hidden] { display: none; }
+.pf-answer { margin: 12px 0 4px; padding: 14px 16px; border-left: 3px solid var(--teal); background: var(--paper); }
+#portfolio .pf-answer p { font-size: 0.93rem; margin: 0 0 8px; }
+#portfolio .pf-answer p:last-child { margin-bottom: 0; }
+#portfolio .pf-small { font-size: 0.85rem; color: var(--ink-70); margin-top: 8px; }
+.pf-v2 { margin-top: 20px; padding-top: 14px; border-top: 1px solid var(--line); min-width: 0; }
+.pf-v2 summary { cursor: pointer; font-family: var(--mono); font-size: 0.85rem; color: var(--teal); }
+.pf-v2 h4 { font-family: var(--display); font-weight: 500; font-size: 1.05rem; margin: 24px 0 8px; }
+#portfolio .pf-asof { font-family: var(--mono); font-size: 0.78rem; color: var(--teal); margin-top: 12px; }
+.pf-scroll { overflow-x: auto; max-width: 100%; border: 1px solid var(--line); background: var(--paper); }
+.pf-narrow { max-width: 420px; }
+.pf-table { border-collapse: collapse; width: 100%; font-family: var(--mono); font-size: 0.74rem; white-space: nowrap; }
+.pf-table th, .pf-table td { padding: 7px 10px; text-align: right; border-bottom: 1px solid var(--line); }
+.pf-table th:first-child, .pf-table td:first-child { text-align: left; }
+.pf-table thead th { font-weight: 500; font-size: 0.72rem; letter-spacing: 0.04em; text-transform: uppercase; color: var(--ink-70); white-space: normal; vertical-align: bottom; min-width: 64px; }
+.pf-table tbody tr:last-child td { border-bottom: none; }
+.pf-table tr.pf-base td { font-weight: 600; }
+.pf-table tr.pf-sep td { border-top: 2px solid var(--line); }
+.pf-chart { position: relative; min-width: 0; }
+.pf-chart svg { display: block; max-width: 100%; touch-action: pan-y; }
+.pf-chart .grid { stroke: var(--line); stroke-width: 1; }
+.pf-chart .zero { stroke: var(--rule); stroke-width: 1; }
+.pf-chart .ax { font-family: var(--mono); font-size: 11px; fill: var(--ink-70); }
+.pf-chart .ln { fill: none; stroke-width: 2; stroke-linejoin: round; }
+.pf-chart .xh { stroke: var(--rule); stroke-width: 1; }
+.pf-chart .dot { stroke: var(--card); stroke-width: 2; }
+.pf-tip { position: absolute; top: 4px; pointer-events: none; padding: 6px 9px; background: var(--paper); border: 1px solid var(--line); font-family: var(--mono); font-size: 0.72rem; line-height: 1.55; white-space: nowrap; color: var(--ink); }
+.pf-tip[hidden] { display: none; }
+.pf-sw { display: inline-block; width: 14px; height: 3px; margin-right: 6px; vertical-align: middle; }
+.pf-legend { list-style: none; margin: 10px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px 18px; font-family: var(--mono); font-size: 0.74rem; color: var(--ink); }
+.pf-list { margin: 6px 0 0; padding-left: 18px; font-size: 0.9rem; line-height: 1.55; }
+.pf-list li { margin-bottom: 6px; }
+.pf-links { display: flex; flex-wrap: wrap; gap: 8px 20px; }
+.pf-c1 { stroke: var(--chart-1); fill: var(--chart-1); background: var(--chart-1); }
+.pf-c2 { stroke: var(--chart-2); fill: var(--chart-2); background: var(--chart-2); }
+.pf-c3 { stroke: var(--chart-3); fill: var(--chart-3); background: var(--chart-3); }
+.pf-c4 { stroke: var(--chart-4); fill: var(--chart-4); background: var(--chart-4); }
+.pf-c5 { stroke: var(--chart-5); fill: var(--chart-5); background: var(--chart-5); }
+.pf-chart .ln.pf-c1 { stroke-width: 2.5; }
+@media (max-width: 560px) {
+  .pf-answer { padding: 12px 12px; }
+}
+@media print {
+  .pf-scroll { overflow: visible; }
 }
