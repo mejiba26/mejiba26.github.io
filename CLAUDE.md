@@ -273,6 +273,24 @@ Nothing in the Market View section should be hand dated. Three automated pieces:
 
 Tests (offline, no network): `python scripts/dev/test_update_market.py` and `python scripts/dev/test_update_spotlight.py`. Run them after any change to those scripts. Change the pick rule or universe only on purpose and say so in the commit.
 
+## Portfolio model (v2)
+
+A pre registered follow up to the iShares portfolio model, shown on the `#portfolio` card in the Models view.
+
+Files:
+- `docs/portfolio-spec.md` is the pre registration. Same rules as the locked sections: the body is never edited; changes go in dated amendments as separate commits.
+- `portfolio/v1/` is the original project as published. Never edit it.
+- `scripts/portfolio_model.py` writes `data/portfolio/` (prices, monthly strategy returns, results.json). It refuses to write if the data is bad or if it cannot reproduce v1's published numbers on v1's own prices.
+- `.github/workflows/run-portfolio.yml` is manual only. It re-runs the model on the committed prices and fails if any number moves beyond 0.0005 or 0.05% (`scripts/check_portfolio_schema.py --against`). Its first run is the canonical source of the v2 numbers (Amendment 2).
+- `scripts/dev/test_portfolio_model.py` (offline tests), `verify_with_skfolio.py` (local only), `make_portfolio_sample.py` (page scenarios; refuses to write inside data/portfolio).
+
+Rules:
+- Every v2 number on the card comes from results.json. The card keeps its static v1 text and hides every v2 part if the file is missing or malformed. No staleness rule: it is a fixed backtest, and the card shows its as of month.
+- Keep `check_portfolio_schema.py` and the "Portfolio model v2:" script in index.html in sync.
+- Card wording must not claim more than the confidence intervals support. "No reliable difference" is the default reading. The deflated Sharpe bullet stays: it is part of the pre registered evidence plan.
+- The v2 charts redraw on the resize event the view script fires; keep it.
+- Keep `growth.png` and `drawdowns.png` (v1 charts) until v2 is verified on the live site.
+
 ## Verify, don't assume
 
 Before reporting a data task complete: run the script, confirm the JSON is
