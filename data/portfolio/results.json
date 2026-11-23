@@ -31,7 +31,21 @@
    "seed": 20261123
   },
   "n_trials": 13,
-  "dsr_monthly_sr_threshold": 0.059112
+  "dsr_monthly_sr_threshold": 0.059112,
+  "stress_periods": {
+   "2008 Financial Crisis": [
+    "2008-06",
+    "2009-02"
+   ],
+   "COVID Crash": [
+    "2020-02",
+    "2020-03"
+   ],
+   "2022 Rate Shock": [
+    "2022-01",
+    "2022-12"
+   ]
+  }
  },
  "v1_replication": {
   "source": "portfolio/v1 (original code, prices and results)",

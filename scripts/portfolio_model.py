@@ -471,7 +471,8 @@ def run(prices):
         "settings": {"tickers": TICKERS, "lookback_months": LOOKBACK, "cost_bps": COST_BPS, "max_weight_ms": MAX_WEIGHT,
                      "ewma_half_life": HALF_LIFE, "trend_months": TREND_MONTHS, "bootstrap": {
                          "method": "stationary", "mean_block": BLOCK, "resamples": N_BOOT, "seed": SEED},
-                     "n_trials": N_TRIALS, "dsr_monthly_sr_threshold": sr_star},
+                     "n_trials": N_TRIALS, "dsr_monthly_sr_threshold": sr_star,
+                     "stress_periods": {k: list(v) for k, v in STRESS_PERIODS.items()}},
         "v1_replication": repl,
         "strategies": strategies,
         "decomposition": decomposition,

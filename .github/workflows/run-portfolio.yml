@@ -1,0 +1,49 @@
+name: Run portfolio model
+
+# Manual only. Re-runs scripts/portfolio_model.py on the committed data/portfolio/prices.csv
+# (no download) and fails if the numbers differ from the committed results.json beyond the
+# tolerance in scripts/check_portfolio_schema.py (0.0005 or 0.05%, whichever is larger).
+# The committed results.json starts as a local run (Python 3.14, Windows). The first run of this
+# workflow commits its own output, which becomes the canonical v2 numbers; later runs must
+# reproduce those. See docs/portfolio-spec.md, Amendment 2.
+on:
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install yfinance==1.8.0 pandas==3.1.1 numpy==2.5.4 scipy==1.18.1 scikit-learn==1.9.1
+
+      - name: Keep the committed results as the reference
+        run: cp data/portfolio/results.json "$RUNNER_TEMP/reference_results.json"
+
+      # Stops without writing anything if the data is bad or v1's published numbers are not reproduced.
+      - name: Re-run the analysis on the committed prices
+        run: python scripts/portfolio_model.py
+
+      - name: Check the schema and compare with the committed results
+        run: python scripts/check_portfolio_schema.py --against "$RUNNER_TEMP/reference_results.json"
+
+      - name: Commit if the numbers changed within tolerance
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/portfolio/results.json data/portfolio/strategy_returns.csv
+          if git diff --cached --quiet; then
+            echo "Reproduced the committed portfolio results exactly."
+          else
+            git commit -m "Canonical portfolio results from GitHub Actions (Python 3.12)"
+            git pull --rebase origin main
+            git push
+          fi
