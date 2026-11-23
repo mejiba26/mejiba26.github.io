@@ -1823,7 +1823,7 @@ python scripts/dev/test_portfolio_model.py</code></pre>
         if (!Array.isArray(v) || v.length !== dates.length) throw new Error('series ' + k);
         return { label: SHOWN[i][1], cls: 'pf-c' + (i + 1), v: v.map(x => num(x) * (kind === 'growth' ? 10000 : 1)) };
       });
-      return { ansHtml, ciHtml, replHtml, bodyHtml, mindHtml, metaText: ` · v2: ${start} to ${end}`, chartData: { dates, growth: series('growth'), drawdown: series('drawdown') } };
+      return { ansHtml, ciHtml, replHtml, bodyHtml, mindHtml, metaText: ` · v2: ${start} to ${end}, as of ${esc(/^\d{4}-\d{2}-\d{2}$/.test(r.as_of) ? r.as_of : num(NaN))}`, chartData: { dates, growth: series('growth'), drawdown: series('drawdown') } };
     }
 
     function drawChart(host, kind, d) {
