@@ -1,8 +1,8 @@
 {
  "version": 1,
  "start_date": "2026-11-23",
- "as_of": "2026-11-20",
- "generated_utc": "2026-11-21T03:54:30Z",
+ "as_of": "2026-11-23",
+ "generated_utc": "2026-11-24T06:54:33Z",
  "source": "Yahoo Finance via yfinance, raw daily High and Low",
  "target": "ln(High / Low) of the next trading day",
  "tickers": [
@@ -34,160 +34,160 @@
  "dm_days": 250,
  "dm_alpha": 0.0125,
  "latest": {
-  "forecast_for_date": "2026-11-23",
-  "generated_utc": "2026-11-21T03:54:30Z",
+  "forecast_for_date": "2026-11-24",
+  "generated_utc": "2026-11-24T06:54:33Z",
   "rows": [
    {
     "ticker": "SPY",
     "model": "naive",
-    "median": 0.044852,
-    "p10": 0.037858,
-    "p90": 0.051963,
+    "median": 0.019998,
+    "p10": 0.013004,
+    "p90": 0.027109,
     "status": "ok"
    },
    {
     "ticker": "SPY",
     "model": "roll22",
-    "median": 0.014615,
-    "p10": 0.009908,
-    "p90": 0.02256,
+    "median": 0.015149,
+    "p10": 0.010431,
+    "p90": 0.023082,
     "status": "ok"
    },
    {
     "ticker": "SPY",
     "model": "ewma",
-    "median": 0.014193,
-    "p10": 0.009821,
-    "p90": 0.022274,
+    "median": 0.014481,
+    "p10": 0.010105,
+    "p90": 0.022558,
     "status": "ok"
    },
    {
     "ticker": "SPY",
     "model": "har",
-    "median": 0.02881,
-    "p10": 0.024518,
-    "p90": 0.035759,
+    "median": 0.019448,
+    "p10": 0.015156,
+    "p90": 0.026397,
     "status": "ok"
    },
    {
     "ticker": "QQQ",
     "model": "naive",
-    "median": 0.059236,
-    "p10": 0.050595,
-    "p90": 0.06864,
+    "median": 0.023896,
+    "p10": 0.015255,
+    "p90": 0.033299,
     "status": "ok"
    },
    {
     "ticker": "QQQ",
     "model": "roll22",
-    "median": 0.021653,
-    "p10": 0.01532,
-    "p90": 0.031474,
+    "median": 0.021899,
+    "p10": 0.015543,
+    "p90": 0.031696,
     "status": "ok"
    },
    {
     "ticker": "QQQ",
     "model": "ewma",
-    "median": 0.020965,
-    "p10": 0.015533,
-    "p90": 0.030698,
+    "median": 0.021088,
+    "p10": 0.01563,
+    "p90": 0.030795,
     "status": "ok"
    },
    {
     "ticker": "QQQ",
     "model": "har",
-    "median": 0.035183,
-    "p10": 0.029742,
-    "p90": 0.044266,
+    "median": 0.025329,
+    "p10": 0.019888,
+    "p90": 0.034412,
     "status": "ok"
    },
    {
     "ticker": "ITA",
     "model": "naive",
-    "median": 0.044549,
-    "p10": 0.033639,
-    "p90": 0.056447,
+    "median": 0.018251,
+    "p10": 0.007221,
+    "p90": 0.03015,
     "status": "ok"
    },
    {
     "ticker": "ITA",
     "model": "roll22",
-    "median": 0.025396,
-    "p10": 0.017897,
-    "p90": 0.036267,
+    "median": 0.025181,
+    "p10": 0.017682,
+    "p90": 0.036052,
     "status": "ok"
    },
    {
     "ticker": "ITA",
     "model": "ewma",
-    "median": 0.023146,
-    "p10": 0.015961,
-    "p90": 0.034238,
+    "median": 0.022799,
+    "p10": 0.015614,
+    "p90": 0.033891,
     "status": "ok"
    },
    {
     "ticker": "ITA",
     "model": "har",
-    "median": 0.028162,
-    "p10": 0.021292,
-    "p90": 0.039268,
+    "median": 0.021607,
+    "p10": 0.014694,
+    "p90": 0.032713,
     "status": "ok"
    },
    {
     "ticker": "XLE",
     "model": "naive",
-    "median": 0.018567,
-    "p10": 0.008856,
-    "p90": 0.030153,
+    "median": 0.020108,
+    "p10": 0.010354,
+    "p90": 0.031652,
     "status": "ok"
    },
    {
     "ticker": "XLE",
     "model": "roll22",
-    "median": 0.022839,
-    "p10": 0.016279,
-    "p90": 0.034402,
+    "median": 0.022097,
+    "p10": 0.015536,
+    "p90": 0.033659,
     "status": "ok"
    },
    {
     "ticker": "XLE",
     "model": "ewma",
-    "median": 0.020508,
-    "p10": 0.014352,
-    "p90": 0.032359,
+    "median": 0.02045,
+    "p10": 0.01426,
+    "p90": 0.032267,
     "status": "ok"
    },
    {
     "ticker": "XLE",
     "model": "har",
-    "median": 0.020327,
-    "p10": 0.014187,
-    "p90": 0.031223,
+    "median": 0.020811,
+    "p10": 0.014628,
+    "p90": 0.031664,
     "status": "ok"
    }
   ]
  },
  "counts": {
   "SPY": {
-   "graded": 0,
+   "graded": 1,
    "late": 0,
    "void": 0,
    "pending": 1
   },
   "QQQ": {
-   "graded": 0,
+   "graded": 1,
    "late": 0,
    "void": 0,
    "pending": 1
   },
   "ITA": {
-   "graded": 0,
+   "graded": 1,
    "late": 0,
    "void": 0,
    "pending": 1
   },
   "XLE": {
-   "graded": 0,
+   "graded": 1,
    "late": 0,
    "void": 0,
    "pending": 1
@@ -197,358 +197,358 @@
   "SPY": {
    "naive": {
     "since_start": {
-     "n": 0,
-     "mae": null,
-     "pinball10": null,
-     "pinball90": null,
-     "coverage": null
+     "n": 1,
+     "mae": 0.024803,
+     "pinball10": 0.016028,
+     "pinball90": 0.003191,
+     "coverage": 0.0
     },
     "rolling60": {
-     "n": 0,
-     "mae": null,
-     "pinball10": null,
-     "pinball90": null,
-     "coverage": null
+     "n": 1,
+     "mae": 0.024803,
+     "pinball10": 0.016028,
+     "pinball90": 0.003191,
+     "coverage": 0.0
     }
    },
    "roll22": {
     "since_start": {
-     "n": 0,
-     "mae": null,
-     "pinball10": null,
-     "pinball90": null,
-     "coverage": null
+     "n": 1,
+     "mae": 0.005434,
+     "pinball10": 0.001014,
+     "pinball90": 0.000251,
+     "coverage": 1.0
     },
     "rolling60": {
-     "n": 0,
-     "mae": null,
-     "pinball10": null,
-     "pinball90": null,
-     "coverage": null
+     "n": 1,
+     "mae": 0.005434,
+     "pinball10": 0.001014,
+     "pinball90": 0.000251,
+     "coverage": 1.0
     }
    },
    "ewma": {
     "since_start": {
-     "n": 0,
-     "mae": null,
-     "pinball10": null,
-     "pinball90": null,
-     "coverage": null
+     "n": 1,
+     "mae": 0.005856,
+     "pinball10": 0.001023,
+     "pinball90": 0.000222,
+     "coverage": 1.0
     },
     "rolling60": {
-     "n": 0,
-     "mae": null,
-     "pinball10": null,
-     "pinball90": null,
-     "coverage": null
+     "n": 1,
+     "mae": 0.005856,
+     "pinball10": 0.001023,
+     "pinball90": 0.000222,
+     "coverage": 1.0
     }
    },
    "har": {
     "since_start": {
-     "n": 0,
-     "mae": null,
-     "pinball10": null,
-     "pinball90": null,
-     "coverage": null
+     "n": 1,
+     "mae": 0.008761,
+     "pinball10": 0.004022,
+     "pinball90": 0.001571,
+     "coverage": 0.0
     },
     "rolling60": {
-     "n": 0,
-     "mae": null,
-     "pinball10": null,
-     "pinball90": null,
-     "coverage": null
+     "n": 1,
+     "mae": 0.008761,
+     "pinball10": 0.004022,
+     "pinball90": 0.001571,
+     "coverage": 0.0
     }
    }
   },
   "QQQ": {
    "naive": {
     "since_start": {
-     "n": 0,
-     "mae": null,
-     "pinball10": null,
-     "pinball90": null,
-     "coverage": null
+     "n": 1,
+     "mae": 0.035256,
+     "pinball10": 0.023953,
+     "pinball90": 0.004466,
+     "coverage": 0.0
     },
     "rolling60": {
-     "n": 0,
-     "mae": null,
-     "pinball10": null,
-     "pinball90": null,
-     "coverage": null
+     "n": 1,
+     "mae": 0.035256,
+     "pinball10": 0.023953,
+     "pinball90": 0.004466,
+     "coverage": 0.0
     }
    },
    "roll22": {
     "since_start": {
-     "n": 0,
-     "mae": null,
-     "pinball10": null,
-     "pinball90": null,
-     "coverage": null
+     "n": 1,
+     "mae": 0.002327,
+     "pinball10": 0.000866,
+     "pinball90": 0.000749,
+     "coverage": 1.0
     },
     "rolling60": {
-     "n": 0,
-     "mae": null,
-     "pinball10": null,
-     "pinball90": null,
-     "coverage": null
+     "n": 1,
+     "mae": 0.002327,
+     "pinball10": 0.000866,
+     "pinball90": 0.000749,
+     "coverage": 1.0
     }
    },
    "ewma": {
     "since_start": {
-     "n": 0,
-     "mae": null,
-     "pinball10": null,
-     "pinball90": null,
-     "coverage": null
+     "n": 1,
+     "mae": 0.003015,
+     "pinball10": 0.000845,
+     "pinball90": 0.000672,
+     "coverage": 1.0
     },
     "rolling60": {
-     "n": 0,
-     "mae": null,
-     "pinball10": null,
-     "pinball90": null,
-     "coverage": null
+     "n": 1,
+     "mae": 0.003015,
+     "pinball10": 0.000845,
+     "pinball90": 0.000672,
+     "coverage": 1.0
     }
    },
    "har": {
     "since_start": {
-     "n": 0,
-     "mae": null,
-     "pinball10": null,
-     "pinball90": null,
-     "coverage": null
+     "n": 1,
+     "mae": 0.011203,
+     "pinball10": 0.005186,
+     "pinball90": 0.002029,
+     "coverage": 0.0
     },
     "rolling60": {
-     "n": 0,
-     "mae": null,
-     "pinball10": null,
-     "pinball90": null,
-     "coverage": null
+     "n": 1,
+     "mae": 0.011203,
+     "pinball10": 0.005186,
+     "pinball90": 0.002029,
+     "coverage": 0.0
     }
    }
   },
   "ITA": {
    "naive": {
     "since_start": {
-     "n": 0,
-     "mae": null,
-     "pinball10": null,
-     "pinball90": null,
-     "coverage": null
+     "n": 1,
+     "mae": 0.026065,
+     "pinball10": 0.01364,
+     "pinball90": 0.003796,
+     "coverage": 0.0
     },
     "rolling60": {
-     "n": 0,
-     "mae": null,
-     "pinball10": null,
-     "pinball90": null,
-     "coverage": null
+     "n": 1,
+     "mae": 0.026065,
+     "pinball10": 0.01364,
+     "pinball90": 0.003796,
+     "coverage": 0.0
     }
    },
    "roll22": {
     "since_start": {
-     "n": 0,
-     "mae": null,
-     "pinball10": null,
-     "pinball90": null,
-     "coverage": null
+     "n": 1,
+     "mae": 0.006912,
+     "pinball10": 5.9e-05,
+     "pinball90": 0.001778,
+     "coverage": 1.0
     },
     "rolling60": {
-     "n": 0,
-     "mae": null,
-     "pinball10": null,
-     "pinball90": null,
-     "coverage": null
+     "n": 1,
+     "mae": 0.006912,
+     "pinball10": 5.9e-05,
+     "pinball90": 0.001778,
+     "coverage": 1.0
     }
    },
    "ewma": {
     "since_start": {
-     "n": 0,
-     "mae": null,
-     "pinball10": null,
-     "pinball90": null,
-     "coverage": null
+     "n": 1,
+     "mae": 0.004662,
+     "pinball10": 0.000252,
+     "pinball90": 0.001575,
+     "coverage": 1.0
     },
     "rolling60": {
-     "n": 0,
-     "mae": null,
-     "pinball10": null,
-     "pinball90": null,
-     "coverage": null
+     "n": 1,
+     "mae": 0.004662,
+     "pinball10": 0.000252,
+     "pinball90": 0.001575,
+     "coverage": 1.0
     }
    },
    "har": {
     "since_start": {
-     "n": 0,
-     "mae": null,
-     "pinball10": null,
-     "pinball90": null,
-     "coverage": null
+     "n": 1,
+     "mae": 0.009678,
+     "pinball10": 0.002527,
+     "pinball90": 0.002078,
+     "coverage": 0.0
     },
     "rolling60": {
-     "n": 0,
-     "mae": null,
-     "pinball10": null,
-     "pinball90": null,
-     "coverage": null
+     "n": 1,
+     "mae": 0.009678,
+     "pinball10": 0.002527,
+     "pinball90": 0.002078,
+     "coverage": 0.0
     }
    }
   },
   "XLE": {
    "naive": {
     "since_start": {
-     "n": 0,
-     "mae": null,
-     "pinball10": null,
-     "pinball90": null,
-     "coverage": null
+     "n": 1,
+     "mae": 0.001974,
+     "pinball10": 0.001169,
+     "pinball90": 0.000961,
+     "coverage": 1.0
     },
     "rolling60": {
-     "n": 0,
-     "mae": null,
-     "pinball10": null,
-     "pinball90": null,
-     "coverage": null
+     "n": 1,
+     "mae": 0.001974,
+     "pinball10": 0.001169,
+     "pinball90": 0.000961,
+     "coverage": 1.0
     }
    },
    "roll22": {
     "since_start": {
-     "n": 0,
-     "mae": null,
-     "pinball10": null,
-     "pinball90": null,
-     "coverage": null
+     "n": 1,
+     "mae": 0.002298,
+     "pinball10": 0.000426,
+     "pinball90": 0.001386,
+     "coverage": 1.0
     },
     "rolling60": {
-     "n": 0,
-     "mae": null,
-     "pinball10": null,
-     "pinball90": null,
-     "coverage": null
+     "n": 1,
+     "mae": 0.002298,
+     "pinball10": 0.000426,
+     "pinball90": 0.001386,
+     "coverage": 1.0
     }
    },
    "ewma": {
     "since_start": {
-     "n": 0,
-     "mae": null,
-     "pinball10": null,
-     "pinball90": null,
-     "coverage": null
+     "n": 1,
+     "mae": 3.3e-05,
+     "pinball10": 0.000619,
+     "pinball90": 0.001182,
+     "coverage": 1.0
     },
     "rolling60": {
-     "n": 0,
-     "mae": null,
-     "pinball10": null,
-     "pinball90": null,
-     "coverage": null
+     "n": 1,
+     "mae": 3.3e-05,
+     "pinball10": 0.000619,
+     "pinball90": 0.001182,
+     "coverage": 1.0
     }
    },
    "har": {
     "since_start": {
-     "n": 0,
-     "mae": null,
-     "pinball10": null,
-     "pinball90": null,
-     "coverage": null
+     "n": 1,
+     "mae": 0.000214,
+     "pinball10": 0.000635,
+     "pinball90": 0.001068,
+     "coverage": 1.0
     },
     "rolling60": {
-     "n": 0,
-     "mae": null,
-     "pinball10": null,
-     "pinball90": null,
-     "coverage": null
+     "n": 1,
+     "mae": 0.000214,
+     "pinball10": 0.000635,
+     "pinball90": 0.001068,
+     "coverage": 1.0
     }
    }
   },
   "ALL": {
    "naive": {
     "since_start": {
-     "n": 0,
-     "mae": null,
-     "pinball10": null,
-     "pinball90": null,
-     "coverage": null
+     "n": 4,
+     "mae": 0.022024,
+     "pinball10": 0.013697,
+     "pinball90": 0.003104,
+     "coverage": 0.25
     },
     "rolling60": {
-     "n": 0,
-     "mae": null,
-     "pinball10": null,
-     "pinball90": null,
-     "coverage": null
+     "n": 4,
+     "mae": 0.022024,
+     "pinball10": 0.013697,
+     "pinball90": 0.003104,
+     "coverage": 0.25
     }
    },
    "roll22": {
     "since_start": {
-     "n": 0,
-     "mae": null,
-     "pinball10": null,
-     "pinball90": null,
-     "coverage": null
+     "n": 4,
+     "mae": 0.004243,
+     "pinball10": 0.000591,
+     "pinball90": 0.001041,
+     "coverage": 1.0
     },
     "rolling60": {
-     "n": 0,
-     "mae": null,
-     "pinball10": null,
-     "pinball90": null,
-     "coverage": null
+     "n": 4,
+     "mae": 0.004243,
+     "pinball10": 0.000591,
+     "pinball90": 0.001041,
+     "coverage": 1.0
     }
    },
    "ewma": {
     "since_start": {
-     "n": 0,
-     "mae": null,
-     "pinball10": null,
-     "pinball90": null,
-     "coverage": null
+     "n": 4,
+     "mae": 0.003392,
+     "pinball10": 0.000685,
+     "pinball90": 0.000913,
+     "coverage": 1.0
     },
     "rolling60": {
-     "n": 0,
-     "mae": null,
-     "pinball10": null,
-     "pinball90": null,
-     "coverage": null
+     "n": 4,
+     "mae": 0.003392,
+     "pinball10": 0.000685,
+     "pinball90": 0.000913,
+     "coverage": 1.0
     }
    },
    "har": {
     "since_start": {
-     "n": 0,
-     "mae": null,
-     "pinball10": null,
-     "pinball90": null,
-     "coverage": null
+     "n": 4,
+     "mae": 0.007464,
+     "pinball10": 0.003093,
+     "pinball90": 0.001687,
+     "coverage": 0.25
     },
     "rolling60": {
-     "n": 0,
-     "mae": null,
-     "pinball10": null,
-     "pinball90": null,
-     "coverage": null
+     "n": 4,
+     "mae": 0.007464,
+     "pinball10": 0.003093,
+     "pinball90": 0.001687,
+     "coverage": 0.25
     }
    }
   }
  },
  "calibration": {
   "naive": {
-   "n": 0,
-   "at_or_below_p10": null,
-   "at_or_below_median": null,
-   "at_or_below_p90": null
+   "n": 4,
+   "at_or_below_p10": 0.75,
+   "at_or_below_median": 0.75,
+   "at_or_below_p90": 1.0
   },
   "roll22": {
-   "n": 0,
-   "at_or_below_p10": null,
-   "at_or_below_median": null,
-   "at_or_below_p90": null
+   "n": 4,
+   "at_or_below_p10": 0.0,
+   "at_or_below_median": 0.5,
+   "at_or_below_p90": 1.0
   },
   "ewma": {
-   "n": 0,
-   "at_or_below_p10": null,
-   "at_or_below_median": null,
-   "at_or_below_p90": null
+   "n": 4,
+   "at_or_below_p10": 0.0,
+   "at_or_below_median": 0.25,
+   "at_or_below_p90": 1.0
   },
   "har": {
-   "n": 0,
-   "at_or_below_p10": null,
-   "at_or_below_median": null,
-   "at_or_below_p90": null
+   "n": 4,
+   "at_or_below_p10": 0.75,
+   "at_or_below_median": 0.75,
+   "at_or_below_p90": 1.0
   }
  },
  "dm_test": {
