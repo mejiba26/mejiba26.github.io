@@ -1,6 +1,6 @@
 {
-  "as_of": "2026-11-19",
-  "generated_utc": "2026-11-19T22:27:30Z",
+  "as_of": "2026-11-26",
+  "generated_utc": "2026-11-26T23:18:25Z",
   "source": "Federal Reserve target range via FRED (DFEDTARU, DFEDTARL)",
   "fed": {
     "lower": 3.75,
