@@ -1,1 +1,7 @@
 date,portfolio,ticker,side,price,shares,cost,reason
+2026-11-25,safe,LMT,BUY,582.92,14,8.16,entry
+2026-11-25,safe,RTX,BUY,193.09,47,9.08,entry
+2026-11-25,medium,LMT,BUY,582.92,28,16.32,entry
+2026-11-25,medium,RTX,BUY,193.09,95,18.34,entry
+2026-11-25,high,LMT,BUY,582.92,57,33.23,entry
+2026-11-25,high,RTX,BUY,193.09,191,36.88,entry
