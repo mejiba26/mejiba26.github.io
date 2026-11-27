@@ -12,7 +12,7 @@ feature at all.
 
 Brian is an MSBA candidate at Wake Forest (May 2027) with a Finance and
 Economics background, targeting markets analyst, trading and equity research
-roles. He has traded equity index futures independently since 2020.
+roles. He has traded equities and index futures independently since 2020.
 
 ## Stack and conventions
 

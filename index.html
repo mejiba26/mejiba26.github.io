@@ -97,8 +97,8 @@
         <dd>MSBA Candidate, Wake Forest, May 2027</dd>
       </div>
       <div class="cred-cell">
-        <dt>Track record</dt>
-        <dd>Trading my own book since 2020</dd>
+        <dt>Trading</dt>
+        <dd>Equities and index futures since 2020, with defined risk</dd>
       </div>
       <div class="cred-cell">
         <dt>Coverage</dt>
@@ -120,8 +120,9 @@
 
     <p class="purpose">
       <b>Purpose</b> A research portfolio for markets analyst, equity research and
-      trading roles. Every live number on this page is written by a script in this
-      repository and committed, so the file behind it can be opened and checked.
+      trading roles. Every Live Desk number, and the portfolio model v2 figures, is
+      written by a script in this repository and committed, so the file behind it
+      can be opened and checked.
       <b>Disclaimer</b> Nothing here is investment advice. The paper trading and the
       volatility scorecard are simulations. No real money and no broker connection.
     </p>
@@ -151,8 +152,8 @@
       -->
       <div class="intro-body">
         <p class="intro-lead">I am an MSBA candidate at Wake Forest with a Finance and Economics degree from UNC Greensboro, and I build investment research and quantitative models designed to hold up under scrutiny.</p>
-        <p>Since March 2020 I have traded MNQ and MES index futures with my own money, a defined stop on every trade and 2 to 5% of the account at risk on each one. I log entry, exit and outcome for every trade, whether or not it worked. For a year I was a licensed North Carolina property and casualty representative, quoting and advising clients and explaining what coverage costs against what it protects.</p>
-        <p>The way I work shows up more clearly in what I got wrong than in what I got right. I valued RTX with a DCF and peer comps in 2024, then audited my own model two years later and found that my discount rate rested on a 1.22% equity risk premium and that I had subtracted total liabilities instead of net debt. My estimate fell from $175 to $128 per share, and the rebuild is published with all nine changes listed. I backtested a moving average crossover and found it lost to buy and hold on AAPL, 31.4% against 56.9%, so I wrote that down too. I backtested five allocation strategies from 2008 to 2026 and the plain 60/40 beat every one of them after costs.</p>
+        <p>Since March 2020 I have traded equities and MNQ and MES index futures with my own money, a defined stop on every trade and 2 to 5% of the account at risk on each one. For a year I was a licensed North Carolina property and casualty representative, quoting and advising clients and explaining what coverage costs against what it protects.</p>
+        <p>The way I work shows up more clearly in what I got wrong than in what I got right. I valued RTX with a DCF and peer comps in 2024, then audited my own model two years later and found that my discount rate rested on a 1.22% equity risk premium and that I had subtracted total liabilities instead of net debt. My estimate fell from $175 to $128 per share, and the rebuild is published with all nine changes listed. I backtested a moving average crossover and found it lost to buy and hold on AAPL, 31.4% against 56.9%, so I wrote that down too. I backtested five allocation strategies from 2008 to 2026, and the plain 60/40 did best after costs, though the gaps were not statistically reliable. A pre registered rerun with 13 strategies found none that reliably beat it either.</p>
         <p>That is the habit I want to bring to a desk. Value first, then price, and test the assumption before trusting the model. I am looking for full time markets analyst and equity research work starting Summer 2027, and I work in English and Spanish.</p>
       </div>
     </div>
@@ -170,16 +171,16 @@
 
         <article class="bridge-row">
           <div class="bridge-role">
-            <p class="br-title">Independent futures trader</p>
+            <p class="br-title">Independent trader, equities and index futures</p>
             <p class="br-when">March 2020 to present</p>
-            <p class="br-what">MNQ and MES index futures, my own money, a defined stop on every trade and 2 to 5% of the account at risk.</p>
+            <p class="br-what">Equities and MNQ and MES index futures, my own money, a defined stop on every trade and 2 to 5% of the account at risk.</p>
           </div>
           <div class="bridge-skill">
-            <p>Sizing a position before taking it, and logging entry, exit and outcome whether or not the trade worked.</p>
+            <p>Sizing a position and setting the stop before taking the trade, not after.</p>
           </div>
           <div class="bridge-proof">
-            <p>The paper trading simulation is pre registered. Its rules were locked in a commit before the first trade can happen, planned risk is shown next to the realized worst loss, and the ledger is append only.</p>
-            <p class="br-links"><a href="#market">Live Desk</a><a href="#futures">Futures and Python tools</a></p>
+            <p>The paper trading simulation is pre registered. Its rules were locked in a commit before its first trade could happen, planned risk is shown next to the realized worst loss, and the ledger is append only.</p>
+            <p class="br-links"><a href="#market">Live Desk</a><a href="#futures">Trading and Python tools</a></p>
           </div>
         </article>
 
@@ -217,7 +218,7 @@
 
     <div id="resume" class="about-part resume">
       <p class="part-k">Resume</p>
-      <p class="part-lede">Updated September 2026. Full detail on request. The short version lives below.</p>
+      <p class="part-lede">Updated October 2026. Full detail on request. The short version lives below.</p>
 
       <div class="resume-card">
         <div class="resume-card-text">
@@ -249,7 +250,7 @@
         <p class="project-field">My role</p>
         <p>Built a DCF at a 6.15% WACC with a sensitivity grid across WACC and terminal growth, then cross checked it against peer P/E and EV/EBITDA multiples (Lockheed Martin, General Dynamics, Northrop Grumman). Benchmarked RTX against Boeing and Lockheed Martin on profitability, liquidity, and leverage. RTX's 19.21% gross margin was the strongest in the peer set.</p>
         <p class="project-field">Outcome</p>
-        <p>Fair value of $125 to $133 per share (DCF about $128, adjusted P/E about $125, EV/EBITDA about $133) vs. $122 at the time of analysis, so modestly undervalued.</p>
+        <p>Fair value of $125 to $133 per share (DCF about $128, adjusted P/E about $125, EV/EBITDA about $133) vs. $122 at the time of analysis, so modestly undervalued. The $122 is the October 30, 2024 close from the original analysis, not a current price.</p>
         <p class="project-field">What changed</p>
         <p>Models built to be questioned, including my own. I used Claude to audit my original 2024 model and rebuilt it. The two biggest fixes: my discount rate rested on a 1.22% equity risk premium, and I subtracted total liabilities instead of net debt. My DCF estimate dropped from $175 to $128 per share, and every change is documented in a new Revision Notes appendix.</p>
 
@@ -267,7 +268,7 @@
       <aside class="ratebox">
         <p class="rate-k">Fair value range</p>
         <p class="rate-v">$125 to $133</p>
-        <p class="rate-n">Versus $122 at the time of analysis</p>
+        <p class="rate-n">Versus $122 on Oct 30, 2024, the analysis date, not a current price</p>
         <dl class="rate-rows">
           <div><dt>DCF</dt><dd>$128</dd></div>
           <div><dt>Adjusted P/E</dt><dd>$125</dd></div>
@@ -291,27 +292,28 @@
         <div class="model-head">
           <p class="memo-tag">Machine learning <span class="sep">/</span> Competition</p>
           <h3>ECG Patient Matching Model</h3>
-          <p class="memo-meta">Wake Forest School of Medicine Build-A-Thon <span class="sep">/</span> Sept 2026 to present</p>
+          <p class="memo-meta">Wake Forest School of Medicine Build-A-Thon <span class="sep">/</span> September to October 2026 <span class="sep">/</span> 2nd place</p>
         </div>
         <ul class="statpanel">
-          <li><span class="sp-k">AUROC, v1</span><span class="sp-v">0.948</span></li>
-          <li><span class="sp-k">AUROC, v3</span><span class="sp-v">0.984</span></li>
-          <li><span class="sp-k">ECGs trained on</span><span class="sp-v">37,000+</span></li>
-          <li><span class="sp-k">Patients</span><span class="sp-v">10,000</span></li>
+          <li><span class="sp-k">Starting AUROC</span> <span class="sp-v">0.948</span></li>
+          <li><span class="sp-k">Improved AUROC</span> <span class="sp-v">0.984</span></li>
+          <li><span class="sp-k">ECGs trained on</span> <span class="sp-v">37,000+</span></li>
+          <li><span class="sp-k">Placement</span> <span class="sp-v">2nd</span></li>
         </ul>
         <div class="model-body">
           <p class="project-field">Context</p>
           <p>A Build-A-Thon hosted by the Center for Artificial Intelligence Research (CAIR). The task: score whether two Lead I ECGs belong to the same patient.</p>
           <p class="project-field">My role</p>
-          <p>Led the modeling for a three person team. Built a Siamese CNN and feature neural net ensemble in Python (TensorFlow/Keras), trained on 37,000+ ECGs from 10,000 MIMIC-IV patients plus St. Jude paired hospital and Apple Watch ECGs.</p>
-          <p class="project-field">Outcome <span class="tag-prelim">Preliminary</span></p>
-          <p>Improved AUROC on held out patients from 0.948 (v1) to 0.984 (v3) for hospital vs. Apple Watch matching. Every setting was tuned on a separate practice set so the locked test stayed clean.</p>
-          <p class="project-note">0.984 is our own held out test, not the official competition score. Final submission is October 13, 2026.</p>
+          <p>Led the modeling for a team of three. We built a Siamese CNN and neural network ensemble in Python (TensorFlow/Keras), trained on 37,000+ ECGs from 10,000 MIMIC-IV patients plus St. Jude paired hospital and Apple Watch ECGs.</p>
+          <p class="project-field">Outcome</p>
+          <p>Our team of three placed second at the Wake Forest School of Medicine Build-A-Thon. On the team's held out test set, AUROC for hospital vs. Apple Watch matching improved from 0.948 to 0.984. Every setting was tuned on a separate practice set so the test set stayed clean.</p>
+          <p class="project-note">0.984 is the team's held out test set result, not the official holdout result. The final submission was made on October 13, 2026.</p>
           <div class="mind">
             <p class="mind-k">What would change my mind</p>
-            <p>0.984 is our own held out test, not the official competition score. A competition score well below it would mean our held out patients were an easier test than the real one.</p>
+            <p>0.984 is the team's held out test set result, not the official holdout result. A score well below it on genuinely new patients would mean our held out set was an easier test than the real one.</p>
           </div>
-          <p class="memo-links"><a class="go" href="https://github.com/npotisit/Build-a-thon_MBNA" target="_blank" rel="noopener">View on GitHub</a></p>
+          <p class="memo-links"><a class="go" href="https://github.com/npotisit/Build-a-thon_MBNA" target="_blank" rel="noopener">Team repository on GitHub</a></p>
+          <p class="project-note">A team repository, hosted on a teammate's account. I am a listed contributor.</p>
         </div>
       </article>
 
@@ -322,10 +324,10 @@
           <p class="memo-meta">v1: Mar 2008 to Aug 2026, out of sample<span id="pf-meta-v2" hidden></span></p>
         </div>
         <ul class="statpanel">
-          <li><span class="sp-k">60/40 after costs, v1</span><span class="sp-v">8.4% a yr</span></li>
-          <li><span class="sp-k">60/40 Sharpe, v1</span><span class="sp-v">0.72</span></li>
-          <li><span class="sp-k">Best of the rest, v1</span><span class="sp-v">7.3%, 0.64</span></li>
-          <li><span class="sp-k">Strategies tested, v1</span><span class="sp-v">5</span></li>
+          <li><span class="sp-k">60/40 after costs (v1)</span> <span class="sp-v">8.4% a yr</span></li>
+          <li><span class="sp-k">60/40 Sharpe (v1)</span> <span class="sp-v">0.72</span></li>
+          <li><span class="sp-k">Best of the rest (v1)</span> <span class="sp-v">7.3%, 0.64</span></li>
+          <li><span class="sp-k">Strategies in v1</span> <span class="sp-v">5</span></li>
         </ul>
         <div class="model-body">
           <p class="project-field">The question</p>
@@ -365,21 +367,21 @@
 
       <article id="futures" class="model reveal">
         <div class="model-head">
-          <p class="memo-tag">Trading <span class="sep">/</span> Index futures and Python tools</p>
-          <h3>Independent Futures Trading and Python Market Tools</h3>
+          <p class="memo-tag">Trading <span class="sep">/</span> Equities, index futures and Python tools</p>
+          <h3>Independent Equity and Futures Trading and Python Market Tools</h3>
           <p class="memo-meta">March 2020 to present</p>
         </div>
         <ul class="statpanel">
-          <li><span class="sp-k">Crossover, AAPL</span><span class="sp-v">31.4%</span></li>
-          <li><span class="sp-k">Buy and hold</span><span class="sp-v">56.9%</span></li>
-          <li><span class="sp-k">Risk per trade</span><span class="sp-v">2 to 5%</span></li>
-          <li><span class="sp-k">Trading since</span><span class="sp-v">2020</span></li>
+          <li><span class="sp-k">Crossover, AAPL</span> <span class="sp-v">31.4%</span></li>
+          <li><span class="sp-k">Buy and hold</span> <span class="sp-v">56.9%</span></li>
+          <li><span class="sp-k">Risk per trade</span> <span class="sp-v">2 to 5%</span></li>
+          <li><span class="sp-k">Trading since</span> <span class="sp-v">2020</span></li>
         </ul>
         <div class="model-body">
           <p class="project-field">Context</p>
-          <p>Self directed trading of MNQ and MES index futures, with a defined stop loss on every trade.</p>
+          <p>Self directed trading of equities and MNQ and MES index futures, with a defined stop loss on every trade.</p>
           <p class="project-field">My role</p>
-          <p>Risk 2 to 5% of the account per trade, and log entry, exit, and outcome data for every trade. Built Python tools (pandas, yfinance) to screen for momentum and backtest a moving average crossover.</p>
+          <p>Risk 2 to 5% of the account per trade. Built Python tools (pandas, yfinance) to screen for momentum and backtest a moving average crossover.</p>
           <p class="project-field">Outcome</p>
           <p>On AAPL, the crossover underperformed buy and hold (31.4% vs. 56.9%). Learning that from data instead of real money was the point.</p>
           <div class="mind">
@@ -391,7 +393,8 @@
 
     </div>
 
-    <p class="coursework-line"><span class="coursework-label">Coursework</span> Housing Price Regression Model: multiple regression on 545 home sales, final model explains 68% of price variation (R² = 0.680).</p>
+    <p class="coursework-line"><span class="coursework-label">Coursework</span> Housing Price Regression Model: multiple regression on 545 home sales, final model explains 68% of price variation (R² = 0.680). A course project; its code and data are not published in this repository.</p>
+    <!-- TODO(Brian): add the course and term this regression came from, and a link if the code or data is ever published. Not confirmed yet, so nothing is claimed above. -->
   </section>
 
   <!-- 03 LIVE DESK  (id kept as #market so existing links still resolve) -->
@@ -425,13 +428,13 @@
       </li>
       <li>
         <p class="fi-k">Paper trading</p>
-        <p class="fi-v">Nov 16, 2026</p>
-        <p class="fi-n">Start date, locked in commit e22e6cb</p>
+        <p class="fi-v">Weekdays</p>
+        <p class="fi-n">Started Nov 16, 2026. Rules locked in commit e22e6cb</p>
       </li>
       <li>
         <p class="fi-k">Vol scorecard</p>
-        <p class="fi-v">Nov 23, 2026</p>
-        <p class="fi-n">Start date, locked on merge of the spec</p>
+        <p class="fi-v">Weekdays</p>
+        <p class="fi-n">Started Nov 23, 2026. Models locked on merge of the spec</p>
       </li>
     </ul>
 
@@ -518,7 +521,7 @@
 
       <details class="paper-block paper-fold">
         <summary class="paper-h">How to read the trade log</summary>
-        <p class="paper-note">The Reason column in the journal above is not a story written after the fact. It is the rule that fired, as the simulator logged it at the time: <strong>stop</strong>, <strong>target</strong>, <strong>trend break</strong> or <strong>time stop</strong> on the way out, and the entry rule on the way in. No discretionary commentary is added, and no language model writes or edits a trade reason. The same rows are in <a href="https://github.com/mejiba26/mejiba26.github.io/blob/main/data/paper/ledger.csv" target="_blank" rel="noopener">ledger.csv</a>, which is append only, so the commit history shows when each row appeared.</p>
+        <p class="paper-note">The Reason column in the trade log above is not a story written after the fact. It is the rule that fired, as the simulator logged it at the time: <strong>stop</strong>, <strong>target</strong>, <strong>trend break</strong> or <strong>time stop</strong> on the way out, and the entry rule on the way in. No discretionary commentary is added, and no language model writes or edits a trade reason. The same rows are in <a href="https://github.com/mejiba26/mejiba26.github.io/blob/main/data/paper/ledger.csv" target="_blank" rel="noopener">ledger.csv</a>, which is append only, so the commit history shows when each row appeared.</p>
       </details>
 
       <details class="paper-block paper-fold">
@@ -593,7 +596,7 @@
     <div class="deskrules">
       <div class="deskrule">
         <h3 class="paper-h">How the locked specs avoid lookahead bias</h3>
-        <p class="paper-note">Both simulations were written down and committed before they began. The paper trading rules were locked on November 9, 2026 and the first trade can only happen on or after November 16, 2026. The volatility models, their parameters and the test were locked when the spec was merged, and the first forecast is for November 23, 2026. Neither file is edited again except through a dated amendment at the bottom, and the original text stays exactly as it was.</p>
+        <p class="paper-note">Both simulations were written down and committed before they began. The paper trading rules were locked on November 9, 2026, a week before the simulation started on November 16, 2026. The volatility models, their parameters and the test were locked when the spec was merged, before the first forecast, which was for November 23, 2026. Neither file is edited again except through a dated amendment at the bottom, and the original text stays exactly as it was.</p>
         <p class="paper-note">Inside each run, nothing uses data from after the moment of the decision. Paper trading decides after the close on daily bars only and fills at the next day's open plus a 10 basis point cost. The scorecard forecasts after the close of one day for the next, refits HAR on data through the prior close, and builds each 80% band from that model's own errors over the previous 500 days. A forecast generated after the target day's open is marked late and is never scored.</p>
         <p class="paper-note">The record is append only. Only days after the last processed date are ever added, so a later restatement by the data provider cannot rewrite a recorded trade, and each day's high and low are kept as first seen. No day before the start date is backfilled. The commit history is the time stamp.</p>
       </div>
@@ -604,8 +607,8 @@
       </div>
       <div class="deskrule">
         <h3 class="paper-h">Lessons and limits so far</h3>
-        <p class="paper-note">Three things this work has already taught me, each from being wrong. My RTX discount rate rested on a 1.22% equity risk premium and the equity bridge subtracted total liabilities instead of net debt, which was a $47 per share error in one model. In the iShares backtest the plain 60/40 beat four optimizers after costs, and in the 2022 rate shock every strategy lost between 13.9% and 15.9%, so diversification did not help when it was needed most. On AAPL the moving average crossover lost to buy and hold, 31.4% against 56.9%.</p>
-        <p class="paper-note">The limits of this desk are the same shape. Both live simulations begin with almost no data, swing trades are infrequent, and early results will be noisy for months. Neither one is a track record, and neither one is advice.</p>
+        <p class="paper-note">Three things this work has already taught me, each from being wrong. My RTX discount rate rested on a 1.22% equity risk premium and the equity bridge subtracted total liabilities instead of net debt, which was a $47 per share error in one model. In the iShares backtest the plain 60/40 did best after costs against four alternative strategies, though the gaps were not statistically reliable, and in the 2022 rate shock every strategy lost between 13.9% and 15.9%, so diversification did not help when it was needed most. On AAPL the moving average crossover lost to buy and hold, 31.4% against 56.9%.</p>
+        <p class="paper-note">The limits of this desk are the same shape. Both live simulations started in November 2026 and have only weeks of data, swing trades are infrequent, and early results will be noisy for months. Neither one is a track record, and neither one is advice.</p>
       </div>
     </div>
   </section>
@@ -613,7 +616,7 @@
   <!-- 05 METHODS -->
   <section id="methods" class="view methods wrap">
     <header class="sechd"><span class="secno">05</span><h2>Methods</h2></header>
-    <p class="section-lede">Every number on the Live Desk is produced by one of these files and committed to the repository. Nothing on this page is typed in by hand.</p>
+    <p class="section-lede">Every number on the Live Desk, and the portfolio model v2 figures, is produced by one of these files and committed to the repository. The RTX, ECG, moving average crossover and housing figures come from the original projects and have no script listed here.</p>
 
     <ol class="methodlist">
       <li>
@@ -648,7 +651,7 @@
       </li>
       <li>
         <p class="me-h">Portfolio model, v2</p>
-        <p class="me-d">Thirteen allocation strategies on nine iShares ETFs, walk forward with a 36 month window and 10 bps costs, pre registered before any v2 result existed. Confidence intervals come from a stationary bootstrap that resamples the same months for every strategy. It refuses to write anything unless it first reproduces the published v1 figures on v1's own prices. Its optimizer weights were checked against skfolio, and the first GitHub Actions run is the canonical source of the numbers on the Models card.</p>
+        <p class="me-d">Thirteen allocation strategies on nine iShares ETFs, walk forward with a 36 month window and 10 bps costs, pre registered before any v2 result existed. Confidence intervals come from a stationary bootstrap that resamples the same months for every strategy. It refuses to write anything unless it first reproduces the published v1 figures on v1's own prices. Its optimizer weights were checked against skfolio, and the first GitHub Actions run is the canonical source of the v2 numbers on the Models card. The v1 figures there are the original published run, kept in portfolio/v1/.</p>
         <p class="me-f"><a href="https://github.com/mejiba26/mejiba26.github.io/blob/main/docs/portfolio-spec.md" target="_blank" rel="noopener">docs/portfolio-spec.md</a> <a href="https://github.com/mejiba26/mejiba26.github.io/blob/main/scripts/portfolio_model.py" target="_blank" rel="noopener">scripts/portfolio_model.py</a> <a href="https://github.com/mejiba26/mejiba26.github.io/tree/main/data/portfolio" target="_blank" rel="noopener">data/portfolio/</a> <a href="https://github.com/mejiba26/mejiba26.github.io/blob/main/.github/workflows/run-portfolio.yml" target="_blank" rel="noopener">run-portfolio.yml</a> <a href="https://github.com/mejiba26/mejiba26.github.io/blob/main/docs/portfolio-verification.md" target="_blank" rel="noopener">docs/portfolio-verification.md</a> <a href="https://github.com/mejiba26/mejiba26.github.io/tree/main/portfolio/v1" target="_blank" rel="noopener">portfolio/v1/</a></p>
       </li>
       <li>
@@ -658,14 +661,14 @@
       </li>
       <li>
         <p class="me-h">Offline tests</p>
-        <p class="me-d">Synthetic prices, no network. They check that a rerun changes nothing, that a run split across days equals one continuous run, and that no forecast uses later data.</p>
+        <p class="me-d">Synthetic prices, run offline. They check that a rerun changes nothing, that a run split across days equals one continuous run, and that no forecast uses later data.</p>
         <p class="me-f"><a href="https://github.com/mejiba26/mejiba26.github.io/blob/main/scripts/dev/test_update_vol.py" target="_blank" rel="noopener">test_update_vol.py</a> <a href="https://github.com/mejiba26/mejiba26.github.io/blob/main/scripts/dev/test_paper_trade.py" target="_blank" rel="noopener">test_paper_trade.py</a> <a href="https://github.com/mejiba26/mejiba26.github.io/blob/main/scripts/dev/test_update_market.py" target="_blank" rel="noopener">test_update_market.py</a> <a href="https://github.com/mejiba26/mejiba26.github.io/blob/main/scripts/dev/test_update_spotlight.py" target="_blank" rel="noopener">test_update_spotlight.py</a> <a href="https://github.com/mejiba26/mejiba26.github.io/blob/main/scripts/dev/test_portfolio_model.py" target="_blank" rel="noopener">test_portfolio_model.py</a></p>
       </li>
     </ol>
 
     <div class="runbox">
       <p class="run-h">Clone it, run it, get my numbers</p>
-      <p class="run-d">The tests need Python 3 and no network. The update scripts need network access and, for energy, an EIA API key in the environment.</p>
+      <p class="run-d">The tests need Python 3 and run offline once the packages are installed; the pip step itself needs network access. The update scripts need network access and, for energy, an EIA API key in the environment.</p>
       <pre class="run-code"><code>git clone https://github.com/mejiba26/mejiba26.github.io
 cd mejiba26.github.io
 pip install pandas==3.1.1 numpy==2.5.4 scipy==1.18.1 scikit-learn==1.9.1
@@ -1362,7 +1365,7 @@ python scripts/dev/test_portfolio_model.py</code></pre>
       if (!ledger.length) return '<p class="paper-empty">No trades yet. The rules only trade pullbacks in uptrends, and these are infrequent.</p>';
       const rows = ledger.map((r, i) => ({ r, i })).sort((a, b) => b.r.date.localeCompare(a.r.date) || b.i - a.i)
         .map(({ r }) => `<tr><td>${esc(r.date)}</td><td>${esc(r.tier)}</td><td>${esc(r.ticker)}</td><td>${esc(r.side)}</td><td class="n">${money(r.price, 2)}</td><td class="n">${r.shares.toLocaleString('en-US')}</td><td class="n">${money(r.cost, 2)}</td><td>${esc(r.reason)}</td></tr>`).join('');
-      return `<div class="paper-scroll paper-journal" tabindex="0" role="region" aria-label="Trade journal, scrollable"><table class="paper-table">
+      return `<div class="paper-scroll paper-journal" tabindex="0" role="region" aria-label="Trade log, scrollable"><table class="paper-table">
         <thead><tr><th>Date</th><th>Tier</th><th>Ticker</th><th>Side</th><th class="n">Price</th><th class="n">Shares</th><th class="n">Cost</th><th>Reason</th></tr></thead>
         <tbody>${rows}</tbody></table></div>`;
     }
@@ -1394,7 +1397,7 @@ python scripts/dev/test_portfolio_model.py</code></pre>
           <p class="paper-note">Closed trades only, dividends excluded. Profit factor, High tier: <strong>${esc(pf)}</strong>.</p>
         </div>
         <div class="paper-block">
-          <h3 class="paper-h">Trade journal</h3>
+          <h3 class="paper-h">Trade log</h3>
           ${journal(ledger)}
         </div>`;
     }
