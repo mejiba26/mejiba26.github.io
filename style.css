@@ -577,6 +577,17 @@ h2 {
   line-height: 1;
   color: var(--navy);
 }
+/* Version tag sits on its own line under the value so "v1" never reads as part of the number. */
+.sp-ver {
+  align-self: flex-start;
+  font-family: var(--mono);
+  font-size: 0.55rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-55);
+  border: 1px solid var(--line);
+  padding: 1px 5px;
+}
 
 .project-figs {
   display: grid;
@@ -590,22 +601,6 @@ h2 {
   display: block;
   border: 1px solid var(--line);
   background: #fff;
-}
-
-.coursework-line {
-  margin: 30px 0 0;
-  padding: 14px 0 0;
-  border-top: 1px solid var(--line);
-  font-size: 0.88rem;
-  color: var(--ink-70);
-}
-.coursework-label {
-  font-family: var(--mono);
-  font-size: 0.6rem;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--brass);
-  margin-right: 10px;
 }
 
 /* ============================================

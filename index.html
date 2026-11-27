@@ -30,7 +30,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=20261123b">
+<link rel="stylesheet" href="style.css?v=20261127">
 </head>
 <body>
 
@@ -153,7 +153,7 @@
       <div class="intro-body">
         <p class="intro-lead">I am an MSBA candidate at Wake Forest with a Finance and Economics degree from UNC Greensboro, and I build investment research and quantitative models designed to hold up under scrutiny.</p>
         <p>Since March 2020 I have traded equities and MNQ and MES index futures with my own money, a defined stop on every trade and 2 to 5% of the account at risk on each one. For a year I was a licensed North Carolina property and casualty representative, quoting and advising clients and explaining what coverage costs against what it protects.</p>
-        <p>The way I work shows up more clearly in what I got wrong than in what I got right. I valued RTX with a DCF and peer comps in 2024, then audited my own model two years later and found that my discount rate rested on a 1.22% equity risk premium and that I had subtracted total liabilities instead of net debt. My estimate fell from $175 to $128 per share, and the rebuild is published with all nine changes listed. I backtested a moving average crossover and found it lost to buy and hold on AAPL, 31.4% against 56.9%, so I wrote that down too. I backtested five allocation strategies from 2008 to 2026, and the plain 60/40 did best after costs, though the gaps were not statistically reliable. A pre registered rerun with 13 strategies found none that reliably beat it either.</p>
+        <p>The way I work shows up more clearly in what I got wrong than in what I got right. I valued RTX with a DCF and peer comps in 2024, then audited my own model two years later and found that my discount rate rested on a 1.22% equity risk premium and that I had subtracted total liabilities instead of net debt. My estimate fell from $175 to $128 per share, and the rebuild is published with all nine changes listed. I backtested a moving average crossover and found it lost to buy and hold on AAPL in the backtest, 31.4% against 56.9%, so I wrote that down too. I backtested five allocation strategies from 2008 to 2026, and the plain 60/40 did best after costs, though the gaps were not statistically reliable. A pre registered rerun with 13 strategies found none that reliably beat it either.</p>
         <p>That is the habit I want to bring to a desk. Value first, then price, and test the assumption before trusting the model. I am looking for full time markets analyst and equity research work starting Summer 2027, and I work in English and Spanish.</p>
       </div>
     </div>
@@ -295,19 +295,19 @@
           <p class="memo-meta">Wake Forest School of Medicine Build-A-Thon <span class="sep">/</span> September to October 2026 <span class="sep">/</span> 2nd place</p>
         </div>
         <ul class="statpanel">
-          <li><span class="sp-k">Starting AUROC</span> <span class="sp-v">0.948</span></li>
-          <li><span class="sp-k">Improved AUROC</span> <span class="sp-v">0.984</span></li>
+          <li><span class="sp-k">AUROC</span> <span class="sp-v">0.948</span> <span class="sp-ver">v1</span></li>
+          <li><span class="sp-k">AUROC</span> <span class="sp-v">0.984</span> <span class="sp-ver">v3</span></li>
           <li><span class="sp-k">ECGs trained on</span> <span class="sp-v">37,000+</span></li>
-          <li><span class="sp-k">Placement</span> <span class="sp-v">2nd</span></li>
+          <li><span class="sp-k">Patients</span> <span class="sp-v">10,000</span></li>
         </ul>
         <div class="model-body">
           <p class="project-field">Context</p>
           <p>A Build-A-Thon hosted by the Center for Artificial Intelligence Research (CAIR). The task: score whether two Lead I ECGs belong to the same patient.</p>
           <p class="project-field">My role</p>
-          <p>Led the modeling for a team of three. We built a Siamese CNN and neural network ensemble in Python (TensorFlow/Keras), trained on 37,000+ ECGs from 10,000 MIMIC-IV patients plus St. Jude paired hospital and Apple Watch ECGs.</p>
+          <p>Led the modeling for a team of three. We built a Siamese CNN and feature neural net ensemble in Python (TensorFlow/Keras), trained on 37,000+ ECGs from 10,000 MIMIC-IV patients plus St. Jude paired hospital and Apple Watch ECGs.</p>
           <p class="project-field">Outcome</p>
-          <p>Our team of three placed second at the Wake Forest School of Medicine Build-A-Thon. On the team's held out test set, AUROC for hospital vs. Apple Watch matching improved from 0.948 to 0.984. Every setting was tuned on a separate practice set so the test set stayed clean.</p>
-          <p class="project-note">0.984 is the team's held out test set result, not the official holdout result. The final submission was made on October 13, 2026.</p>
+          <p>Our team of three placed second at the Wake Forest School of Medicine Build-A-Thon. On the team's held out test set, AUROC for hospital vs. Apple Watch matching improved from 0.948 with our first version (v1) to 0.984 with our third (v3). Every setting was tuned on a separate practice set so the test set stayed clean.</p>
+          <p class="project-note">0.984 is the team's held out test set result, not an official competition score.</p>
           <div class="mind">
             <p class="mind-k">What would change my mind</p>
             <p>0.984 is the team's held out test set result, not the official holdout result. A score well below it on genuinely new patients would mean our held out set was an easier test than the real one.</p>
@@ -324,10 +324,10 @@
           <p class="memo-meta">v1: Mar 2008 to Aug 2026, out of sample<span id="pf-meta-v2" hidden></span></p>
         </div>
         <ul class="statpanel">
-          <li><span class="sp-k">60/40 after costs (v1)</span> <span class="sp-v">8.4% a yr</span></li>
-          <li><span class="sp-k">60/40 Sharpe (v1)</span> <span class="sp-v">0.72</span></li>
-          <li><span class="sp-k">Best of the rest (v1)</span> <span class="sp-v">7.3%, 0.64</span></li>
-          <li><span class="sp-k">Strategies in v1</span> <span class="sp-v">5</span></li>
+          <li><span class="sp-k">60/40 after costs</span> <span class="sp-v">8.4% a yr</span> <span class="sp-ver">v1</span></li>
+          <li><span class="sp-k">60/40 Sharpe</span> <span class="sp-v">0.72</span> <span class="sp-ver">v1</span></li>
+          <li><span class="sp-k">Best of the rest</span> <span class="sp-v">7.3%, 0.64</span> <span class="sp-ver">v1</span></li>
+          <li><span class="sp-k">Strategies tested</span> <span class="sp-v">5</span> <span class="sp-ver">v1</span></li>
         </ul>
         <div class="model-body">
           <p class="project-field">The question</p>
@@ -372,8 +372,8 @@
           <p class="memo-meta">March 2020 to present</p>
         </div>
         <ul class="statpanel">
-          <li><span class="sp-k">Crossover, AAPL</span> <span class="sp-v">31.4%</span></li>
-          <li><span class="sp-k">Buy and hold</span> <span class="sp-v">56.9%</span></li>
+          <li><span class="sp-k">Crossover, AAPL backtest</span> <span class="sp-v">31.4%</span></li>
+          <li><span class="sp-k">Buy and hold, same backtest</span> <span class="sp-v">56.9%</span></li>
           <li><span class="sp-k">Risk per trade</span> <span class="sp-v">2 to 5%</span></li>
           <li><span class="sp-k">Trading since</span> <span class="sp-v">2020</span></li>
         </ul>
@@ -383,18 +383,16 @@
           <p class="project-field">My role</p>
           <p>Risk 2 to 5% of the account per trade. Built Python tools (pandas, yfinance) to screen for momentum and backtest a moving average crossover.</p>
           <p class="project-field">Outcome</p>
-          <p>On AAPL, the crossover underperformed buy and hold (31.4% vs. 56.9%). Learning that from data instead of real money was the point.</p>
+          <p>In a historical backtest on AAPL, the crossover underperformed buy and hold (31.4% vs. 56.9%). These are backtest figures, not trading results. Learning that from data instead of real money was the point.</p>
           <div class="mind">
             <p class="mind-k">What would change my mind</p>
-            <p>One name and one rule. The crossover lost to buy and hold on AAPL, 31.4% against 56.9%. The same test across many names and periods could point the other way, which is why the paper trading simulation below is pre registered and run forward instead.</p>
+            <p>One name and one rule. In the backtest the crossover lost to buy and hold on AAPL, 31.4% against 56.9%. The same test across many names and periods could point the other way, which is why the paper trading simulation below is pre registered and run forward instead.</p>
           </div>
         </div>
       </article>
 
     </div>
 
-    <p class="coursework-line"><span class="coursework-label">Coursework</span> Housing Price Regression Model: multiple regression on 545 home sales, final model explains 68% of price variation (R² = 0.680). A course project; its code and data are not published in this repository.</p>
-    <!-- TODO(Brian): add the course and term this regression came from, and a link if the code or data is ever published. Not confirmed yet, so nothing is claimed above. -->
   </section>
 
   <!-- 03 LIVE DESK  (id kept as #market so existing links still resolve) -->
@@ -607,7 +605,7 @@
       </div>
       <div class="deskrule">
         <h3 class="paper-h">Lessons and limits so far</h3>
-        <p class="paper-note">Three things this work has already taught me, each from being wrong. My RTX discount rate rested on a 1.22% equity risk premium and the equity bridge subtracted total liabilities instead of net debt, which was a $47 per share error in one model. In the iShares backtest the plain 60/40 did best after costs against four alternative strategies, though the gaps were not statistically reliable, and in the 2022 rate shock every strategy lost between 13.9% and 15.9%, so diversification did not help when it was needed most. On AAPL the moving average crossover lost to buy and hold, 31.4% against 56.9%.</p>
+        <p class="paper-note">Three things this work has already taught me, each from being wrong. My RTX discount rate rested on a 1.22% equity risk premium and the equity bridge subtracted total liabilities instead of net debt, which was a $47 per share error in one model. In the iShares backtest the plain 60/40 did best after costs against four alternative strategies, though the gaps were not statistically reliable, and in the 2022 rate shock every strategy lost between 13.9% and 15.9%, so diversification did not help when it was needed most. In a backtest on AAPL the moving average crossover lost to buy and hold, 31.4% against 56.9%.</p>
         <p class="paper-note">The limits of this desk are the same shape. Both live simulations started in November 2026 and have only weeks of data, swing trades are infrequent, and early results will be noisy for months. Neither one is a track record, and neither one is advice.</p>
       </div>
     </div>
@@ -616,7 +614,7 @@
   <!-- 05 METHODS -->
   <section id="methods" class="view methods wrap">
     <header class="sechd"><span class="secno">05</span><h2>Methods</h2></header>
-    <p class="section-lede">Every number on the Live Desk, and the portfolio model v2 figures, is produced by one of these files and committed to the repository. The RTX, ECG, moving average crossover and housing figures come from the original projects and have no script listed here.</p>
+    <p class="section-lede">Every number on the Live Desk, and the portfolio model v2 figures, is produced by one of these files and committed to the repository. The RTX, ECG and moving average crossover figures come from the original projects and have no script listed here.</p>
 
     <ol class="methodlist">
       <li>
