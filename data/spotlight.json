@@ -1,6 +1,6 @@
 {
   "as_of": "2026-11-25",
-  "generated_utc": "2026-11-26T04:27:12Z",
+  "generated_utc": "2026-11-27T04:35:16Z",
   "source": "Yahoo Finance via yfinance, unadjusted closes (price return)",
   "month": "2026-10",
   "start_date": "2026-09-30",
@@ -32,9 +32,9 @@
         "unit": "pct",
         "start": 90.42,
         "end": 104.12,
-        "now": 84.33,
+        "now": 85.77,
         "month_chg": 15.15,
-        "since_chg": -19.01
+        "since_chg": -17.62
       },
       {
         "key": "copper",
@@ -42,9 +42,9 @@
         "unit": "pct",
         "start": 6.559,
         "end": 6.458,
-        "now": 5.494,
+        "now": 5.637,
         "month_chg": -1.53,
-        "since_chg": -14.93
+        "since_chg": -12.72
       }
     ]
   },
@@ -66,9 +66,9 @@
         "unit": "pct",
         "start": 90.42,
         "end": 104.12,
-        "now": 84.33,
+        "now": 85.77,
         "month_chg": 15.15,
-        "since_chg": -19.01
+        "since_chg": -17.62
       },
       {
         "key": "brent",
@@ -76,9 +76,9 @@
         "unit": "pct",
         "start": 103.53,
         "end": 117.64,
-        "now": 91.14,
+        "now": 92.27,
         "month_chg": 13.63,
-        "since_chg": -22.53
+        "since_chg": -21.57
       }
     ]
   },
